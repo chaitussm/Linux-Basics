@@ -1,0 +1,6 @@
+linux
+unix
+shell
+grep
+awk
+sed
