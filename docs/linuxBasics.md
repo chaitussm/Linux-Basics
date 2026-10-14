@@ -82,6 +82,202 @@ graph TD
 3. **Shell** — interprets commands and scripts.
 4. **Utilities** — `ls`, `cat`, `grep`, `cp`, editors, etc.
 
+> **Durga Sir (Video 2)** stresses that the **operating system itself** has **two core parts**: **Shell** and **Kernel**. User and hardware sit outside; utilities run under the shell. See [Session 2](#session-2-video-2-unix-components-execution-flow--basic-commands) below.
+
+---
+
+## Session 2 (Video 2): Unix components, execution flow & basic commands
+
+**Video:** [Components of UNIX, Execution Flow, Basic Commands](https://www.youtube.com/watch?v=2zfh8eC7cY0&list=PLd3UqWTnYXOloH0vWBs4BtSbP84WcC2NY&index=2)  
+**Recap from Video 1:** Unix = OS from the 1960s; features (freeware, FOSS, multi-user, multitasking); many **flavors** — learn one, work on others easily.
+
+### 2.1 Two important components of Unix/Linux
+
+| Component | Role (Durga Sir) |
+| :--- | :--- |
+| **Shell** | **Outer layer** of the OS. Only part the **user talks to** directly (terminal). |
+| **Kernel** | **Heart** of the OS. Executes work using **hardware**. |
+
+```mermaid
+graph LR
+    U[User / Application / Shell script] -->|types command| S[Shell]
+    S -->|system calls| K[Kernel]
+    K --> H[Hardware]
+```
+
+- **Shell** = interface between **user** and **kernel** (like `javac` checking syntax before runtime).
+- **Kernel** = interface between **shell** and **hardware**.
+
+#### Shell responsibilities (step by step)
+
+1. **Read** the command the user typed in the terminal.
+2. **Check** whether the command **exists** (valid command name).
+   - Invalid example: `touch123` → `command not found` (**shell** prints the error).
+3. **Check** whether the command is **used correctly** (valid options/arguments).
+   - Valid command, wrong usage: e.g. `touch -da` → invalid option; `cal 99999` → invalid year (**shell** reports error).
+4. If everything is correct, **interpret** (convert) the command into a form the **kernel** understands and **pass it to the kernel**.
+
+#### Kernel responsibilities
+
+1. **Execute** the command and produce the required result.
+2. **Communicate** with hardware (disk, CPU, memory, I/O).
+3. **Allocate memory** and **CPU** needed to run the command.
+
+After the kernel finishes, a new **`$` prompt** appears on the terminal — meaning **ready for the next command**.
+
+### 2.2 Command execution flow (summary table)
+
+| Step | What happens |
+| :---: | :--- |
+| 1 | User types a command (e.g. `touch sunny.txt`) and presses **Enter**. |
+| 2 | Command is submitted to the **shell**. |
+| 3 | Shell checks: valid command? correct usage? |
+| 4 | If not → **error message** on the terminal (shell). |
+| 5 | If yes → shell **interprets** and sends to **kernel**. |
+| 6 | Kernel **executes** (e.g. creates `sunny.txt` on disk). |
+| 7 | **`$` prompt** returns — ready for next command. |
+
+**Demo command from class:**
+
+```bash
+touch abcdef.txt
+# After success, prompt returns; file is created in current directory
+```
+
+If a file with the same name already exists, `touch` updates its timestamp rather than failing (behavior may vary slightly by context; Durga Sir notes you may see errors in other delete/create scenarios).
+
+### 2.3 Shell script — first glimpse (Durga Sir’s `test.sh`)
+
+A **shell script** = a **file containing a group of commands** run together (like a Windows `.bat` batch file). The shell runs it **line by line** (interpreted language).
+
+**Example from the video** — create `test.sh`:
+
+```bash
+cal
+date
+echo "Hello Friends. Welcome to Unix World."
+```
+
+Make it executable and run (as shown in class):
+
+```bash
+chmod u+x test.sh    # grant execute permission to user (covered in detail later)
+./test.sh            # run all three commands in order
+```
+
+Same script is in this repo: [`scripts/test.sh`](../scripts/test.sh).
+
+### 2.4 User types and prompts
+
+Linux has **two main user types**:
+
+| User type | Also called | Typical prompt | Meaning |
+| :--- | :--- | :--- | :--- |
+| **Normal user** | Regular account | **`$`** (dollar prompt) | Limited privileges |
+| **Super user** | **root**, admin | **`#`** (hash prompt) | Full system control |
+
+**Examples from class:**
+
+```bash
+whoami          # normal user → e.g. durga
+sudo -i           # switch to root (enter password); prompt becomes #
+whoami          # root
+exit            # leave root session; back to $ prompt
+```
+
+Prompt text can vary by distro; **`$` ≈ normal**, **`#` ≈ root** is the rule Durga Sir gives.
+
+### 2.5 Practice: online Unix terminal (optional)
+
+For browser practice (commands like `clear`, `date`, `echo`, `exit`), Durga Sir uses the **JS/Linux-style online terminal** (e.g. [masswerk JS/UIX](https://www.masswerk.at/jsuix/)). Log in as **guest**, then use the same commands as on a real system. On your **Ubuntu machine**, use the built-in terminal instead — no website needed.
+
+### 2.6 Basic commands (Video 2 — with class examples)
+
+| Command | Meaning | Durga Sir usage / notes |
+| :--- | :--- | :--- |
+| **`pwd`** | **P**rint **w**orking **d**irectory | *Not* password. Shows current folder. Guest demo: `/home/guest` |
+| **`ls`** | **L**i**s**t files and directories | Empty output until you create files |
+| **`mkdir`** | **M**a**k**e **dir**ectory | `mkdir unixclasses` |
+| **`cd`** | **C**hange **d**irectory | `cd unixclasses`; `cd ..` = parent directory |
+| **`touch`** | Create **empty file** | `touch material.txt` — content needs other tools (later videos) |
+| **`rm`** | **R**e**m**ove file | `rm material.txt` — **permanent** (no Recycle Bin) |
+| **`rmdir`** | Remove **empty** directory | `rmdir unixclasses` |
+| **`cal`** | **Cal**endar (current month by default) | |
+| **`date`** | Current system **date and time** | Options later for date-only / time-only |
+| **`clear`** | Clear terminal screen | |
+| **`exit`** | End session / logout | |
+| **`help`** | List commands | Common on **online** emulator; on Ubuntu use `man cmd` |
+| **`hello`** | Brief system info | Emulator-specific; on Ubuntu try `uname -a` |
+
+**File vs directory:** **Directory** = folder (`mkdir`); **file** = ordinary file (`touch`, documents, scripts).
+
+**`rm` vs `rmdir`:** `rm` deletes **files** and is very powerful; `rmdir` only removes **empty** directories. Durga Sir warns: **never use `rm` carelessly** — deleted files are usually **not recoverable** at OS level; wrong `rm` can cause serious production incidents.
+
+**Case sensitivity:** Linux commands are **case-sensitive**. `cal` works; `CAL` may not.
+
+### 2.7 File system tree (as taught in Video 2)
+
+Hierarchy starts at **`/`** (root — the leading slash, not a special name beyond “root directory”).
+
+```text
+/                          ← root of the whole tree
+├── bin/                   ← essential commands (intro level)
+├── dev/                   ← device files
+├── home/                  ← per-user home folders
+│   ├── guest/             ← home for user "guest" (online lab)
+│   ├── durga/             ← home for user "durga"
+│   └── ravi/              ← /home/ravi
+└── ...                    ← other dirs (/etc, /var, … in later sessions)
+```
+
+**Class walkthrough (reproduce on Ubuntu):**
+
+```bash
+pwd                         # e.g. /home/yourname
+ls                          # often empty in a new home dir
+mkdir unixclasses           # create folder (video: "unix classes")
+ls                          # shows unixclasses
+cd unixclasses
+pwd                         # /home/yourname/unixclasses
+touch material.txt
+ls                          # material.txt
+rm material.txt
+ls                          # empty again
+cd ..                       # back to home
+pwd                         # /home/yourname
+rmdir unixclasses           # remove empty directory
+cal
+date
+clear
+```
+
+**Navigation with `cd ..`:**
+
+```bash
+cd ..                       # from /home/guest → /home
+cd ..                       # from /home → /
+```
+
+### 2.8 Invalid command examples (shell errors)
+
+```bash
+touch123                    # command not found — invalid command name
+touch -da abc.txt             # invalid option — command exists, wrong usage
+cal 99999                   # invalid argument — cal exists, year not valid
+```
+
+### 2.9 Session 2 checklist
+
+You should be able to explain:
+
+1. The **two OS components**: shell and kernel — and each one’s job.
+2. Full **command execution flow** from Enter key to `$` prompt.
+3. What a **shell script** is (`test.sh` with `cal`, `date`, `echo`).
+4. **`$` vs `#`** prompts and `sudo -i` / `exit`.
+5. Basic commands: **pwd, ls, mkdir, cd, touch, rm, rmdir, cal, date, clear, exit**.
+6. **`/home/username`** as the user’s home directory and **`/`** as filesystem root.
+7. Why **`rm`** is dangerous and commands are **case-sensitive**.
+
 ---
 
 ## 2. Linux installation (overview)
@@ -372,7 +568,7 @@ sudo apt remove package-name
 
 ---
 
-## 14. Quick reference — Session 1 checklist
+## 15. Quick reference — Session 1 checklist
 
 After the first video you should be able to explain:
 
@@ -381,6 +577,15 @@ After the first video you should be able to explain:
 3. Why CLI is powerful for automation (bulk `mkdir` / `touch` examples).
 4. Several **distros** and that commands are mostly portable.
 5. The **full course roadmap** (Parts 1–3) and where commands, scripting, sed/awk, and admin fit.
+
+---
+
+## 16. Video index (study order)
+
+| # | Topic | Link |
+| :---: | :--- | :--- |
+| 1 | Intro, features, flavors, curriculum | [txRD_bK062Y](https://www.youtube.com/watch?v=txRD_bK062Y&list=PLd3UqWTnYXOloH0vWBs4BtSbP84WcC2NY&index=1) |
+| 2 | Components, execution flow, basic commands | [2zfh8eC7cY0](https://www.youtube.com/watch?v=2zfh8eC7cY0&list=PLd3UqWTnYXOloH0vWBs4BtSbP84WcC2NY&index=2) — see [Session 2](#session-2-video-2-unix-components-execution-flow--basic-commands) |
 
 ---
 
