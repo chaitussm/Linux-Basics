@@ -46,10 +46,13 @@ Durga Sir teaches that Unix/Linux has **two important OS components**:
 | **Kernel** | **Heart of the OS** — runs commands and talks to **hardware**. |
 
 ```mermaid
+%%{init: {'theme': 'base', 'themeVariables': {'primaryColor': '#5c5c5c', 'primaryTextColor': '#ffffff', 'primaryBorderColor': '#3d3d3d', 'lineColor': '#b0b0b0', 'secondaryColor': '#5c5c5c', 'tertiaryColor': '#5c5c5c'}}}%%
 graph LR
     U[User / Application / Shell script] -->|command| S[Shell]
     S -->|system calls| K[Kernel]
     K --> H[Hardware]
+    classDef darkGrey fill:#5c5c5c,stroke:#3d3d3d,color:#ffffff,stroke-width:2px
+    class U,S,K,H darkGrey
 ```
 
 - **Shell** → interface between **user** and **kernel** (similar idea to `javac` checking syntax before running Java).
@@ -92,45 +95,37 @@ Durga Sir’s **Diagram-2 — Command Execution Flow** shows what happens **insi
 ### 3.1 Beautiful flowchart — complete path
 
 ```mermaid
+%%{init: {'theme': 'base', 'themeVariables': {'primaryColor': '#5c5c5c', 'primaryTextColor': '#ffffff', 'primaryBorderColor': '#3d3d3d', 'lineColor': '#b0b0b0', 'secondaryColor': '#5c5c5c', 'tertiaryColor': '#5c5c5c', 'clusterBkg': '#5c5c5c', 'clusterBorder': '#3d3d3d'}}}%%
 flowchart TB
-    subgraph input[" "]
-        A(["End user types a command on the terminal<br/><b>Example:</b> touch sunny.txt"])
-    end
-
-    B["Command will be submitted to the <b>Shell</b>"]
+    A(["End user types a command on the terminal<br/>Example: touch sunny.txt"])
+    B["Command will be submitted to the Shell"]
     C{"Shell checks whether this command is valid or not<br/>and whether it is properly used or not"}
-
-    D["If it is <b>not proper</b>:<br/>display error message to the terminal"]
-    E["If it is <b>proper</b>: shell interprets that command<br/>into kernel-understandable form"]
-    F["Hand over to the <b>Kernel</b>"]
+    D["If it is not proper:<br/>display error message to the terminal"]
+    E["If it is proper: shell interprets that command<br/>into kernel-understandable form"]
+    F["Hand over to the Kernel"]
     G["Kernel executes that command<br/>and performs the required action"]
-    H(["Again <b>$ prompt</b> will be displayed<br/>Ready for the next command"])
+    H(["Again $ prompt will be displayed<br/>Ready for the next command"])
 
     A --> B --> C
     C -->|Not proper| D
     C -->|Proper| E --> F --> G --> H
     D --> H
 
-    style A fill:#e3f2fd,stroke:#1565c0,stroke-width:2px
-    style C fill:#fff8e1,stroke:#f9a825,stroke-width:2px
-    style D fill:#ffebee,stroke:#c62828,stroke-width:2px
-    style E fill:#e8f5e9,stroke:#2e7d32,stroke-width:2px
-    style F fill:#e8f5e9,stroke:#2e7d32,stroke-width:1px
-    style G fill:#ede7f6,stroke:#4527a0,stroke-width:2px
-    style H fill:#e0f7fa,stroke:#00838f,stroke-width:2px
+    classDef darkGrey fill:#5c5c5c,stroke:#3d3d3d,color:#ffffff,stroke-width:2px
+    class A,B,C,D,E,F,G,H darkGrey
 ```
 
 ### 3.2 Architecture alongside the flow
 
 ```mermaid
+%%{init: {'theme': 'base', 'themeVariables': {'primaryColor': '#5c5c5c', 'primaryTextColor': '#ffffff', 'primaryBorderColor': '#3d3d3d', 'lineColor': '#b0b0b0', 'secondaryColor': '#5c5c5c', 'tertiaryColor': '#5c5c5c'}}}%%
 flowchart LR
     U[User / Application / Script] --> S[Shell<br/>read · validate · interpret]
     S --> K[Kernel<br/>execute · allocate resources]
     K --> HW[(Hardware)]
 
-    style S fill:#c8e6c9,stroke:#388e3c
-    style K fill:#bbdefb,stroke:#1976d2
-    style HW fill:#f5f5f5,stroke:#616161
+    classDef darkGrey fill:#5c5c5c,stroke:#3d3d3d,color:#ffffff,stroke-width:2px
+    class U,S,K,HW darkGrey
 ```
 
 | Phase | Component | Responsibility |
