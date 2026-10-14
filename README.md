@@ -6,7 +6,8 @@ Hands-on companion for **Durga Sir**'s Linux course ([YouTube playlist](https://
 
 | Path | Description |
 | :--- | :--- |
-| [`docs/linuxBasics.md`](docs/linuxBasics.md) | Full study guide aligned with Session 1 curriculum and Parts 1–3 |
+| [`docs/linuxBasics.md`](docs/linuxBasics.md) | Index to topic notes and scripts |
+| [`docs/topics/Components of Unix.md`](docs/topics/Components%20of%20Unix.md) | Video 2 — shell, kernel, execution flow |
 | [`exercises/`](exercises/) | Topic-based practice READMEs and sample data |
 | [`scripts/`](scripts/) | Example shell scripts from the scripting section |
 
