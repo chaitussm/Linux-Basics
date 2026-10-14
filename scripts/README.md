@@ -9,6 +9,7 @@ bash scripts/<script-name>.sh
 
 | Script | Topic doc |
 | :--- | :--- |
+| `command-execution-flow-trace.sh` | Components of Unix.md (Diagram-2 success + error) |
 | `command-execution-touch-demo.sh` | Components of Unix.md |
 | `invalid-command-demos.sh` | Components of Unix.md |
 | `test.sh` | Components of Unix.md |
