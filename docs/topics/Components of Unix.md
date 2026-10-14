@@ -5,6 +5,29 @@
 
 **Recap (Video 1):** Unix is an OS from the 1960s; features include freeware, open source, multi-user, multitasking; many **flavors** (Ubuntu, RHEL, …) share ~80–90% of the same commands.
 
+**Table of contents**
+
+- [1. Purpose of Unix/Linux](#1-purpose-of-unixlinux)
+- [2. Two core components of the OS](#2-two-core-components-of-the-os)
+  - [2.1 Shell responsibilities](#21-shell-responsibilities)
+  - [2.2 Kernel responsibilities](#22-kernel-responsibilities)
+- [3. Command execution flow (Diagram-2)](#3-command-execution-flow-diagram-2)
+  - [3.1 Beautiful flowchart — complete path](#31-beautiful-flowchart--complete-path)
+  - [3.2 Architecture alongside the flow](#32-architecture-alongside-the-flow)
+  - [3.3 Step-by-step explanation (each box in Diagram-2)](#33-step-by-step-explanation-each-box-in-diagram-2)
+    - [Box 1 — End user types a command](#box-1--end-user-types-a-command)
+    - [Box 2 — Command submitted to the shell](#box-2--command-submitted-to-the-shell)
+    - [Box 3 — Shell validation (two checks)](#box-3--shell-validation-two-checks)
+    - [Box 4 (right) — Not proper: error message](#box-4-right--not-proper-error-message)
+    - [Box 5 (down) — Proper: interpret and hand over](#box-5-down--proper-interpret-and-hand-over)
+    - [Box 6 — Kernel executes](#box-6--kernel-executes)
+    - [Box 7 — `$` prompt again](#box-7---prompt-again)
+  - [3.4 Success vs error](#34-success-vs-error)
+  - [3.5 Trace one session in the terminal](#35-trace-one-session-in-the-terminal)
+- [4. Shell script = group of commands](#4-shell-script--group-of-commands)
+- [5. User types and prompts (related to the shell)](#5-user-types-and-prompts-related-to-the-shell)
+- [6. Practice checklist](#6-practice-checklist)
+
 ---
 
 ## 1. Purpose of Unix/Linux
