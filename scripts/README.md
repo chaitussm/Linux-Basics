@@ -1,0 +1,19 @@
+# Shell script examples
+
+All course examples are **`.sh`** files in this folder. Run from the repo root:
+
+```bash
+chmod +x scripts/*.sh
+bash scripts/<script-name>.sh
+```
+
+| Script | Topic doc |
+| :--- | :--- |
+| `command-execution-touch-demo.sh` | Components of Unix.md |
+| `invalid-command-demos.sh` | Components of Unix.md |
+| `test.sh` | Components of Unix.md |
+| `run-test-script.sh` | Components of Unix.md |
+| `whoami-demo.sh` | Components of Unix.md |
+| `hello.sh` | shell scripting (general) |
+| `check-file.sh` | shell scripting (general) |
+| `backup-logs.sh` | tar / backup example |
