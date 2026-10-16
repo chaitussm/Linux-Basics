@@ -309,8 +309,7 @@ echo Hello Unix
 
 **Example:**
 ```bash
-printf 'Count=%d
-' 42
+printf 'Count=%d\n' 42
 ```
 
 ### `read`
