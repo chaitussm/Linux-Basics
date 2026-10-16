@@ -14,6 +14,10 @@ bash scripts/<script-name>.sh
 | `invalid-command-demos.sh` | Components of Unix.md |
 | `test.sh` | Components of Unix.md |
 | `run-test-script.sh` | Components of Unix.md |
+| `types-of-files-touch-file-demo.sh` | TypesOfFilesInLinux.md |
+| `file-command-content-demo.sh` | TypesOfFilesInLinux.md |
+| `types-of-files-ls-demo.sh` | TypesOfFilesInLinux.md |
+| `tty-and-dev-demo.sh` | TypesOfFilesInLinux.md |
 | `bash-builtin-examples.sh` | Bash Built-in Commands.md |
 | `whoami-demo.sh` | Components of Unix.md |
 | `hello.sh` | shell scripting (general) |
