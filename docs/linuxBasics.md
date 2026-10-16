@@ -20,6 +20,7 @@ Each topic has its own **`.md` file** under [`topics/`](topics/). **All runnable
 | File | Subject |
 | :--- | :--- |
 | [**Components of Unix.md**](topics/Components%20of%20Unix.md) | Shell, kernel, execution flow, first script (Video 2) |
+| [**Bash Built-in Commands.md**](topics/Bash%20Built-in%20Commands.md) | Full `help` list — each builtin with example |
 
 ---
 

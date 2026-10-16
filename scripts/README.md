@@ -14,6 +14,7 @@ bash scripts/<script-name>.sh
 | `invalid-command-demos.sh` | Components of Unix.md |
 | `test.sh` | Components of Unix.md |
 | `run-test-script.sh` | Components of Unix.md |
+| `bash-builtin-examples.sh` | Bash Built-in Commands.md |
 | `whoami-demo.sh` | Components of Unix.md |
 | `hello.sh` | shell scripting (general) |
 | `check-file.sh` | shell scripting (general) |
