@@ -15,6 +15,103 @@ bash scripts/bash-builtin-examples.sh
 
 ---
 
+**Table of contents**
+
+- [1. Built-in vs external command](#topic-1)
+- [2. Category overview (pie chart)](#topic-2)
+- [3. Command reference (from `help` screen)](#topic-3)
+- [Getting help and command information](#getting-help-and-command-information)
+  - [`help`](#help)
+  - [`type`](#type)
+  - [`command`](#command)
+  - [`builtin`](#builtin)
+  - [`enable`](#enable)
+  - [`hash`](#hash)
+- [Directories and navigation](#directories-and-navigation)
+  - [`cd`](#cd)
+  - [`pwd`](#pwd)
+  - [`pushd`](#pushd)
+  - [`popd`](#popd)
+  - [`dirs`](#dirs)
+- [Variables, environment, and names](#variables-environment-and-names)
+  - [`export`](#export)
+  - [`unset`](#unset)
+  - [`declare`](#declare)
+  - [`typeset`](#typeset)
+  - [`local`](#local)
+  - [`readonly`](#readonly)
+  - [`set`](#set)
+  - [`shift`](#shift)
+  - [`getopts`](#getopts)
+  - [`shopt`](#shopt)
+  - [`umask`](#umask)
+  - [`ulimit`](#ulimit)
+  - [`alias`](#alias)
+  - [`unalias`](#unalias)
+- [Input, output, and data](#input-output-and-data)
+  - [`echo`](#echo)
+  - [`printf`](#printf)
+  - [`read`](#read)
+  - [`mapfile`](#mapfile)
+  - [`readarray`](#readarray)
+- [Tests and conditions](#tests-and-conditions)
+  - [`[ arg... ]`](#topic-39)
+  - [`[[ expression ]]`](#topic-40)
+  - [`test`](#test)
+  - [`(( expression ))`](#topic-42)
+  - [`:`](#topic-43)
+  - [`true`](#true)
+  - [`false`](#false)
+- [Loops and branching](#loops-and-branching)
+  - [`if`](#if)
+  - [`case`](#case)
+  - [`for NAME in WORDS`](#for-name-in-words)
+  - [`for (( exp1; exp2; exp3 ))`](#topic-50)
+  - [`while`](#while)
+  - [`until`](#until)
+  - [`select`](#select)
+  - [`break`](#break)
+  - [`continue`](#continue)
+- [Functions, grouping, and sourcing](#functions-grouping-and-sourcing)
+  - [`function / name()`](#topic-57)
+  - [`return`](#return)
+  - [`caller`](#caller)
+  - [`. filename [arguments]`](#topic-60)
+  - [`source`](#source)
+  - [`{ COMMANDS ; }`](#topic-62)
+  - [`eval`](#eval)
+  - [`exec`](#exec)
+- [Job control and processes](#job-control-and-processes)
+  - [`job_spec [&]`](#topic-66)
+  - [`bg`](#bg)
+  - [`fg`](#fg)
+  - [`jobs`](#jobs)
+  - [`kill`](#kill)
+  - [`wait`](#wait)
+  - [`disown`](#disown)
+  - [`suspend`](#suspend)
+  - [`coproc`](#coproc)
+- [History and editing](#history-and-editing)
+  - [`history`](#history)
+  - [`fc`](#fc)
+  - [`bind`](#bind)
+- [Programmable completion](#programmable-completion)
+  - [`compgen`](#compgen)
+  - [`complete`](#complete)
+  - [`compopt`](#compopt)
+- [Timing, signals, and shell control](#timing-signals-and-shell-control)
+  - [`exit`](#exit)
+  - [`logout`](#logout)
+  - [`trap`](#trap)
+  - [`times`](#times)
+  - [`time`](#time)
+  - [`let`](#let)
+  - [`variables`](#variables)
+
+---
+
+<a id="topic-1"></a>
+
 ## 1. Built-in vs external command
 
 ```mermaid
@@ -41,6 +138,8 @@ flowchart TB
 
 ---
 
+<a id="topic-2"></a>
+
 ## 2. Category overview (pie chart)
 
 ```mermaid
@@ -58,6 +157,8 @@ pie title Bash help list by category
 ```
 
 ---
+
+<a id="topic-3"></a>
 
 ## 3. Command reference (from `help` screen)
 
@@ -342,6 +443,8 @@ readarray -t lines < /etc/os-release; echo ${lines[0]}
 
 ## Tests and conditions
 
+<a id="topic-39"></a>
+
 ### `[ arg... ]`
 
 **Explanation:** POSIX test command built into Bash (same as test).
@@ -350,6 +453,8 @@ readarray -t lines < /etc/os-release; echo ${lines[0]}
 ```bash
 [ -f /etc/hosts ] && echo exists
 ```
+
+<a id="topic-40"></a>
 
 ### `[[ expression ]]`
 
@@ -369,6 +474,8 @@ readarray -t lines < /etc/os-release; echo ${lines[0]}
 test -w /tmp && echo writable
 ```
 
+<a id="topic-42"></a>
+
 ### `(( expression ))`
 
 **Explanation:** Evaluate arithmetic in C-style syntax.
@@ -377,6 +484,8 @@ test -w /tmp && echo writable
 ```bash
 (( total = 5 + 10 )); echo $total
 ```
+
+<a id="topic-43"></a>
 
 ### `:`
 
@@ -434,6 +543,8 @@ case $HOSTNAME in (*)* ) echo matched;; esac
 for d in a b; do echo $d; done
 ```
 
+<a id="topic-50"></a>
+
 ### `for (( exp1; exp2; exp3 ))`
 
 **Explanation:** C-style numeric for loop.
@@ -490,6 +601,8 @@ for i in 1 2 3; do [ $i -eq 2 ] && continue; echo $i; done
 
 ## Functions, grouping, and sourcing
 
+<a id="topic-57"></a>
+
 ### `function / name()`
 
 **Explanation:** Define a reusable shell function.
@@ -517,6 +630,8 @@ f(){ return 42; }; f; echo $?
 f(){ caller; }; f
 ```
 
+<a id="topic-60"></a>
+
 ### `. filename [arguments]`
 
 **Explanation:** Read and execute commands from a file in the current shell (source).
@@ -534,6 +649,8 @@ f(){ caller; }; f
 ```bash
 source ./scripts/test.sh
 ```
+
+<a id="topic-62"></a>
 
 ### `{ COMMANDS ; }`
 
@@ -563,6 +680,8 @@ exec 3>&1  # duplicate stdout to fd 3
 ```
 
 ## Job control and processes
+
+<a id="topic-66"></a>
 
 ### `job_spec [&]`
 
