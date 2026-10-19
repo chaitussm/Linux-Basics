@@ -7,7 +7,9 @@
 **Related:** [Components of Unix.md](Components%20of%20Unix.md) (shell vs kernel flow) · [TypesOfFilesInLinux.md](TypesOfFilesInLinux.md) (file types)  
 **Practice script:** [`bash-builtin-examples.sh`](../../scripts/bash-builtin-examples.sh) (Ctrl+click to open)  
 **Check file type:** [`file` command](#file-command) · **Demo:** [`file-command-content-demo.sh`](../../scripts/file-command-content-demo.sh)  
-**Check file size (bytes):** [`ls -l` with filename](#ls-l-file-size) · **Demo:** [`ls-l-file-size-demo.sh`](../../scripts/ls-l-file-size-demo.sh)
+**Check file size (bytes):** [`ls -l` with filename](#ls-l-file-size) · **Demo:** [`ls-l-file-size-demo.sh`](../../scripts/ls-l-file-size-demo.sh)  
+**Display file contents:** [`cat`](#cat-command) · **Demo:** [`cat-command-demo.sh`](../../scripts/cat-command-demo.sh)  
+**Edit file (GUI):** [`gedit`](#gedit-command) · **Demo:** [`gedit-command-demo.sh`](../../scripts/gedit-command-demo.sh)
 
 ```bash
 help              # full list (like the screenshot)
@@ -24,6 +26,8 @@ bash scripts/bash-builtin-examples.sh
 - [3. Command reference (from `help` screen)](#topic-3)
 - [4. Check file type — `file` command (external)](#file-command)
 - [5. Check file size — `ls -l` with filename (external)](#ls-l-file-size)
+- [6. Display contents — `cat` (external)](#cat-command)
+- [7. Edit file — `gedit` (external, GUI)](#gedit-command)
 - [Getting help and command information](#getting-help-and-command-information)
   - [`help`](#help)
   - [`type`](#type)
@@ -1008,4 +1012,121 @@ bash scripts/ls-l-file-size-demo.sh
 | File **type** (content) | `file myname` |
 | File **type** (symbol) + **size** | `ls -l myname` |
 | Easier size display | `ls -lh myname` |
+
+---
+
+<a id="cat-command"></a>
+
+## 6. Display file contents — `cat` (external command)
+
+> **`cat` is not a Bash builtin** (`type cat` → `/usr/bin/cat`).  
+> **Ctrl+click demo:** [`cat-command-demo.sh`](../../scripts/cat-command-demo.sh)
+
+### 1. Command name
+
+**`cat`**
+
+### 2. Usage and explanation
+
+```text
+cat [options] <filename> ...
+cat file1 file2          # concatenate and print
+```
+
+- **Purpose:** **Display** the contents of a file on the terminal (Durga Sir: after editing `sunny.jpg`, use `cat sunny.jpg` to see the text).
+- **Name:** **Cat** = concatenate — can print one or many files in order.
+- **Difference from `touch`:** `touch` creates an **empty** file; `cat` **shows** what is already inside.
+- **Use with `file`:** `cat` shows content; `file` tells you whether that content is ASCII text, binary, etc.
+
+**Verify external command:**
+
+```bash
+type cat
+```
+
+### 3. Example
+
+```bash
+echo "hello friends" > sunny.durga
+cat sunny.durga
+
+cat -n /etc/hosts | head -5    # optional: line numbers
+```
+
+### 4. Runnable demo (Ctrl+click script)
+
+[`scripts/cat-command-demo.sh`](../../scripts/cat-command-demo.sh)
+
+```bash
+bash scripts/cat-command-demo.sh
+```
+
+**See also:** [TypesOfFilesInLinux.md](TypesOfFilesInLinux.md#7-command-reference-this-session)
+
+---
+
+<a id="gedit-command"></a>
+
+## 7. Edit file — `gedit` (external command, GUI)
+
+> **`gedit` is not a Bash builtin** — it is the **GNOME text editor** (GUI). Install on Ubuntu: `sudo apt install gedit` if missing.  
+> **Ctrl+click demo:** [`gedit-command-demo.sh`](../../scripts/gedit-command-demo.sh)
+
+### 1. Command name
+
+**`gedit`**
+
+### 2. Usage and explanation
+
+```text
+gedit [options] <filename>
+gedit sunny.jpg &
+```
+
+- **Purpose:** Open a file in a **graphical editor** so you can type or change content (Durga Sir demo: open `sunny.jpg`, type `hello friends`, save).
+- **When to use:** On **Ubuntu desktop** when you prefer GUI over terminal editors (`nano`, `vim`).
+- **After editing:** Use **`cat filename`** to view content in the terminal and **`file filename`** to see the real type (e.g. ASCII text even if the name is `.jpg`).
+- **Terminal vs GUI:** `gedit` needs a desktop session (`DISPLAY` set). On servers without GUI, use `nano` or `vim` instead.
+
+**Verify external command:**
+
+```bash
+type gedit
+which gedit
+```
+
+### 3. Example
+
+```bash
+touch sunny.jpg
+gedit sunny.jpg          # GUI opens — add text and save
+
+cat sunny.jpg            # hello friends
+file sunny.jpg           # ASCII text
+ls -l sunny.jpg          # size in bytes > 0
+```
+
+### 4. Runnable demo (Ctrl+click script)
+
+[`scripts/gedit-command-demo.sh`](../../scripts/gedit-command-demo.sh)
+
+```bash
+bash scripts/gedit-command-demo.sh
+```
+
+On a full Ubuntu desktop you can also run:
+
+```bash
+gedit sunny.jpg
+```
+
+**Workflow (Session 3)**
+
+| Step | Command |
+| :--- | :--- |
+| Create empty file | `touch sunny.jpg` |
+| Add content | `gedit sunny.jpg` |
+| View content | `cat sunny.jpg` |
+| Check type | `file sunny.jpg` |
+| Check size | `ls -l sunny.jpg` |
 

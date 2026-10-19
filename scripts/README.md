@@ -17,6 +17,8 @@ bash scripts/<script-name>.sh
 | `types-of-files-touch-file-demo.sh` | TypesOfFilesInLinux.md |
 | `file-command-content-demo.sh` | TypesOfFilesInLinux.md, Bash Built-in Commands.md (`file`) |
 | `ls-l-file-size-demo.sh` | Bash Built-in Commands.md (`ls -l` size) |
+| `cat-command-demo.sh` | Bash Built-in Commands.md (`cat`) |
+| `gedit-command-demo.sh` | Bash Built-in Commands.md (`gedit`) |
 | `types-of-files-ls-demo.sh` | TypesOfFilesInLinux.md |
 | `tty-and-dev-demo.sh` | TypesOfFilesInLinux.md |
 | `bash-builtin-examples.sh` | Bash Built-in Commands.md |
