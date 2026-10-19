@@ -4,8 +4,12 @@
 
 ![Bash help command output](../assets/bash-help-screenshot.png)
 
-**Related:** [Components of Unix.md](Components%20of%20Unix.md) (shell vs kernel flow)  
-**Practice script:** [`scripts/bash-builtin-examples.sh`](../../scripts/bash-builtin-examples.sh)
+**Related:** [Components of Unix.md](Components%20of%20Unix.md) (shell vs kernel flow) · [TypesOfFilesInLinux.md](TypesOfFilesInLinux.md) (file types)  
+**Practice script:** [`bash-builtin-examples.sh`](../../scripts/bash-builtin-examples.sh) (Ctrl+click to open)  
+**Check file type:** [`file` command](#file-command) · **Demo:** [`file-command-content-demo.sh`](../../scripts/file-command-content-demo.sh)  
+**Check file size (bytes):** [`ls -l` with filename](#ls-l-file-size) · **Demo:** [`ls-l-file-size-demo.sh`](../../scripts/ls-l-file-size-demo.sh)  
+**Display file contents:** [`cat`](#cat-command) · **Demo:** [`cat-command-demo.sh`](../../scripts/cat-command-demo.sh)  
+**Edit file (GUI):** [`gedit`](#gedit-command) · **Demo:** [`gedit-command-demo.sh`](../../scripts/gedit-command-demo.sh)
 
 ```bash
 help              # full list (like the screenshot)
@@ -20,6 +24,10 @@ bash scripts/bash-builtin-examples.sh
 - [1. Built-in vs external command](#topic-1)
 - [2. Category overview (pie chart)](#topic-2)
 - [3. Command reference (from `help` screen)](#topic-3)
+- [4. Check file type — `file` command (external)](#file-command)
+- [5. Check file size — `ls -l` with filename (external)](#ls-l-file-size)
+- [6. Display contents — `cat` (external)](#cat-command)
+- [7. Edit file — `gedit` (external, GUI)](#gedit-command)
 - [Getting help and command information](#getting-help-and-command-information)
   - [`help`](#help)
   - [`type`](#type)
@@ -131,7 +139,7 @@ flowchart TB
 | Type | Example | How to check |
 | :--- | :--- | :--- |
 | **Builtin** | `cd`, `echo`, `export` | `type cd` → *builtin* |
-| **External** | `ls`, `grep`, `touch` | `type ls` → */usr/bin/ls* |
+| **External** | `ls`, `grep`, `touch`, [`file`](#file-command) | `type file` → */usr/bin/file* |
 | **Alias** | `ll` → `ls -l` | `type ll` → *alias* |
 
 > A `*` next to a name in `help` means that builtin is **disabled** (`enable -n name`).
@@ -885,4 +893,240 @@ let x=2*3; echo $x
 ```bash
 help variables | head -10
 ```
+
+---
+
+<a id="file-command"></a>
+
+## 4. Check file type — `file` (external command)
+
+> Not in `help` — run with `type file` → `/usr/bin/file`.  
+> **Ctrl+click demo:** [`file-command-content-demo.sh`](../../scripts/file-command-content-demo.sh)
+
+### 1. Command name
+
+**`file`**
+
+### 2. Usage and explanation
+
+```text
+file [options] <filename> ...
+```
+
+- **Purpose:** Check the **type of file** by reading **content**, not the extension (Durga Sir Session 3).
+- **When to use:** After `touch`, before/after `mv` rename, or whenever the name (`.jpg`, `.txt`) might lie.
+- **Common output:** `empty`, `ASCII text`, `JPEG image data`, `directory`, etc.
+- **Verify external command:** `type file`
+
+| Situation | Typical output |
+| :--- | :--- |
+| `touch sunny.jpg` (empty) | `empty` |
+| Text stored inside `sunny.jpg` | `ASCII text` |
+| Renamed to `sunny.durga` | Still `ASCII text` if content unchanged |
+
+**Related topic:** [TypesOfFilesInLinux.md](TypesOfFilesInLinux.md#3-extension-vs-content-file-command)
+
+### 3. Example
+
+```bash
+touch sunny.jpg
+file sunny.jpg
+
+echo "hello friends" > sunny.jpg
+file sunny.jpg
+
+mv sunny.jpg sunny.durga
+file sunny.durga
+```
+
+### 4. Runnable demo (Ctrl+click script)
+
+[`scripts/file-command-content-demo.sh`](../../scripts/file-command-content-demo.sh)
+
+```bash
+bash scripts/file-command-content-demo.sh
+```
+
+---
+
+<a id="ls-l-file-size"></a>
+
+## 5. Check file size — `ls -l <filename>` (external command)
+
+> **`ls` is not a Bash builtin** (`type ls` → `/usr/bin/ls`).  
+> **Ctrl+click demo:** [`ls-l-file-size-demo.sh`](../../scripts/ls-l-file-size-demo.sh)
+
+### 1. Command name
+
+**`ls -l`** (long listing) with a **filename** argument
+
+### 2. Usage and explanation
+
+```text
+ls -l <filename>
+ls -lh <filename>    # optional: human-readable size (K, M, G)
+```
+
+- **Purpose:** Show **permissions**, **owner**, **date**, and **how many bytes** the file uses on disk (5th column). In class this is described as how much data / “memory” the file occupies (file size, not RAM).
+- **First character** of the line: file **type** (`-` ordinary, `d` directory, `l` link) — see [TypesOfFilesInLinux.md](TypesOfFilesInLinux.md#6-how-to-check-file-type-standard-way).
+- **Size column:** byte count (e.g. `0` after empty `touch`, larger after `echo` writes text).
+
+| Part of `ls -l` output | Meaning |
+| :--- | :--- |
+| 1st character | File type |
+| **5th field (number)** | **Size in bytes** |
+| Last field | File name |
+
+Pair with **`file`** when you need content type, not only size.
+
+### 3. Example
+
+```bash
+ls -l /etc/hosts
+# -rw-r--r-- 1 root root 584 Oct 16 10:00 /etc/hosts
+#                              ^^^
+#                              size in bytes
+
+touch demo.txt
+ls -l demo.txt                  # 0 bytes
+
+echo "hello friends" > demo.txt
+ls -l demo.txt                  # e.g. 14 bytes
+file demo.txt                   # ASCII text
+
+ls -lh demo.txt                 # same size, easier to read
+```
+
+### 4. Runnable demo (Ctrl+click script)
+
+[`scripts/ls-l-file-size-demo.sh`](../../scripts/ls-l-file-size-demo.sh)
+
+```bash
+bash scripts/ls-l-file-size-demo.sh
+```
+
+**Quick reference**
+
+| Goal | Command |
+| :--- | :--- |
+| File **type** (content) | `file myname` |
+| File **type** (symbol) + **size** | `ls -l myname` |
+| Easier size display | `ls -lh myname` |
+
+---
+
+<a id="cat-command"></a>
+
+## 6. Display file contents — `cat` (external command)
+
+> **`cat` is not a Bash builtin** (`type cat` → `/usr/bin/cat`).  
+> **Ctrl+click demo:** [`cat-command-demo.sh`](../../scripts/cat-command-demo.sh)
+
+### 1. Command name
+
+**`cat`**
+
+### 2. Usage and explanation
+
+```text
+cat [options] <filename> ...
+cat file1 file2          # concatenate and print
+```
+
+- **Purpose:** **Display** the contents of a file on the terminal (Durga Sir: after editing `sunny.jpg`, use `cat sunny.jpg` to see the text).
+- **Name:** **Cat** = concatenate — can print one or many files in order.
+- **Difference from `touch`:** `touch` creates an **empty** file; `cat` **shows** what is already inside.
+- **Use with `file`:** `cat` shows content; `file` tells you whether that content is ASCII text, binary, etc.
+
+**Verify external command:**
+
+```bash
+type cat
+```
+
+### 3. Example
+
+```bash
+echo "hello friends" > sunny.durga
+cat sunny.durga
+
+cat -n /etc/hosts | head -5    # optional: line numbers
+```
+
+### 4. Runnable demo (Ctrl+click script)
+
+[`scripts/cat-command-demo.sh`](../../scripts/cat-command-demo.sh)
+
+```bash
+bash scripts/cat-command-demo.sh
+```
+
+**See also:** [TypesOfFilesInLinux.md](TypesOfFilesInLinux.md#7-command-reference-this-session)
+
+---
+
+<a id="gedit-command"></a>
+
+## 7. Edit file — `gedit` (external command, GUI)
+
+> **`gedit` is not a Bash builtin** — it is the **GNOME text editor** (GUI). Install on Ubuntu: `sudo apt install gedit` if missing.  
+> **Ctrl+click demo:** [`gedit-command-demo.sh`](../../scripts/gedit-command-demo.sh)
+
+### 1. Command name
+
+**`gedit`**
+
+### 2. Usage and explanation
+
+```text
+gedit [options] <filename>
+gedit sunny.jpg &
+```
+
+- **Purpose:** Open a file in a **graphical editor** so you can type or change content (Durga Sir demo: open `sunny.jpg`, type `hello friends`, save).
+- **When to use:** On **Ubuntu desktop** when you prefer GUI over terminal editors (`nano`, `vim`).
+- **After editing:** Use **`cat filename`** to view content in the terminal and **`file filename`** to see the real type (e.g. ASCII text even if the name is `.jpg`).
+- **Terminal vs GUI:** `gedit` needs a desktop session (`DISPLAY` set). On servers without GUI, use `nano` or `vim` instead.
+
+**Verify external command:**
+
+```bash
+type gedit
+which gedit
+```
+
+### 3. Example
+
+```bash
+touch sunny.jpg
+gedit sunny.jpg          # GUI opens — add text and save
+
+cat sunny.jpg            # hello friends
+file sunny.jpg           # ASCII text
+ls -l sunny.jpg          # size in bytes > 0
+```
+
+### 4. Runnable demo (Ctrl+click script)
+
+[`scripts/gedit-command-demo.sh`](../../scripts/gedit-command-demo.sh)
+
+```bash
+bash scripts/gedit-command-demo.sh
+```
+
+On a full Ubuntu desktop you can also run:
+
+```bash
+gedit sunny.jpg
+```
+
+**Workflow (Session 3)**
+
+| Step | Command |
+| :--- | :--- |
+| Create empty file | `touch sunny.jpg` |
+| Add content | `gedit sunny.jpg` |
+| View content | `cat sunny.jpg` |
+| Check type | `file sunny.jpg` |
+| Check size | `ls -l sunny.jpg` |
 
