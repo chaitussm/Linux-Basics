@@ -33,6 +33,13 @@ dirs -p
 popd >/dev/null
 
 echo ""
+echo "=== file (external — check file type by content) ==="
+WORK_FILE="${TMPDIR:-/tmp}/bash-builtin-file-demo.txt"
+echo "sample text" > "$WORK_FILE"
+type file
+file "$WORK_FILE"
+
+echo ""
 echo "=== printf, read (here-string), mapfile ==="
 printf "User: %s\n" "$(whoami)"
 mapfile -t lines <<< $'one\ntwo'

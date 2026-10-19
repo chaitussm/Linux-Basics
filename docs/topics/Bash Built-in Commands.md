@@ -4,8 +4,9 @@
 
 ![Bash help command output](../assets/bash-help-screenshot.png)
 
-**Related:** [Components of Unix.md](Components%20of%20Unix.md) (shell vs kernel flow)  
-**Practice script:** [`scripts/bash-builtin-examples.sh`](../../scripts/bash-builtin-examples.sh)
+**Related:** [Components of Unix.md](Components%20of%20Unix.md) (shell vs kernel flow) · [TypesOfFilesInLinux.md](TypesOfFilesInLinux.md) (file types)  
+**Practice script:** [`scripts/bash-builtin-examples.sh`](../../scripts/bash-builtin-examples.sh)  
+**Check file type (Ctrl+click):** [`file` command](#file-command)
 
 ```bash
 help              # full list (like the screenshot)
@@ -20,6 +21,7 @@ bash scripts/bash-builtin-examples.sh
 - [1. Built-in vs external command](#topic-1)
 - [2. Category overview (pie chart)](#topic-2)
 - [3. Command reference (from `help` screen)](#topic-3)
+- [4. Check file type — `file` command (external)](#file-command)
 - [Getting help and command information](#getting-help-and-command-information)
   - [`help`](#help)
   - [`type`](#type)
@@ -131,7 +133,7 @@ flowchart TB
 | Type | Example | How to check |
 | :--- | :--- | :--- |
 | **Builtin** | `cd`, `echo`, `export` | `type cd` → *builtin* |
-| **External** | `ls`, `grep`, `touch` | `type ls` → */usr/bin/ls* |
+| **External** | `ls`, `grep`, `touch`, [`file`](#file-command) | `type file` → */usr/bin/file* |
 | **Alias** | `ll` → `ls -l` | `type ll` → *alias* |
 
 > A `*` next to a name in `help` means that builtin is **disabled** (`enable -n name`).
@@ -885,4 +887,50 @@ let x=2*3; echo $x
 ```bash
 help variables | head -10
 ```
+
+---
+
+<a id="file-command"></a>
+
+## 4. Check file type — `file` command (external)
+
+> **`file` is not a Bash builtin** — it does not appear in `help`. The shell runs it as an **external program** (usually `/usr/bin/file`). You use it with builtins such as `touch` and `mv` when learning [Types of Files in Linux](TypesOfFilesInLinux.md).
+
+### `file`
+
+**Explanation:** Inspects the **content** of a path and reports what kind of data it holds (ASCII text, image, executable, empty, etc.). On Linux, the **file extension is not reliable** — Durga Sir’s demo: `sunny.jpg` with text inside is reported as **ASCII text**, not JPEG.
+
+| Situation | Typical `file` output |
+| :--- | :--- |
+| Empty file (`touch sunny.jpg`) | `empty` |
+| Text inside any name | `ASCII text` |
+| Real binary (e.g. image) | `JPEG image data`, `PNG image data`, … |
+
+**How to verify it is external:**
+
+```bash
+type file
+# file is /usr/bin/file
+```
+
+**Example (Durga Sir — extension vs content):**
+
+```bash
+touch sunny.jpg
+file sunny.jpg                    # empty
+
+echo "hello friends" > sunny.jpg
+file sunny.jpg                    # ASCII text (not "JPEG")
+
+mv sunny.jpg sunny.durga
+file sunny.durga                  # still ASCII text
+```
+
+**Run full demo script:**
+
+```bash
+bash scripts/file-command-content-demo.sh
+```
+
+**See also:** [TypesOfFilesInLinux.md — Extension vs content](TypesOfFilesInLinux.md#3-extension-vs-content-file-command) · [`ls -l` first character](TypesOfFilesInLinux.md#6-how-to-check-file-type-standard-way)
 
