@@ -894,42 +894,48 @@ help variables | head -10
 
 <a id="file-command"></a>
 
-## 4. Check file type — `file` command (external)
+## 4. Check file type — `file` (external command)
 
-> **`file` is not a Bash builtin** — it does not appear in `help`. The shell runs it as an **external program** (usually `/usr/bin/file`). You use it with builtins such as `touch` and `mv` when learning [Types of Files in Linux](TypesOfFilesInLinux.md).  
-> **Ctrl+click demo script:** [`file-command-content-demo.sh`](../../scripts/file-command-content-demo.sh)
+> Not in `help` — run with `type file` → `/usr/bin/file`.  
+> **Ctrl+click demo:** [`file-command-content-demo.sh`](../../scripts/file-command-content-demo.sh)
 
-### `file`
+### 1. Command name
 
-**Explanation:** Inspects the **content** of a path and reports what kind of data it holds (ASCII text, image, executable, empty, etc.). On Linux, the **file extension is not reliable** — Durga Sir’s demo: `sunny.jpg` with text inside is reported as **ASCII text**, not JPEG.
+**`file`**
 
-| Situation | Typical `file` output |
-| :--- | :--- |
-| Empty file (`touch sunny.jpg`) | `empty` |
-| Text inside any name | `ASCII text` |
-| Real binary (e.g. image) | `JPEG image data`, `PNG image data`, … |
+### 2. Usage and explanation
 
-**How to verify it is external:**
-
-```bash
-type file
-# file is /usr/bin/file
+```text
+file [options] <filename> ...
 ```
 
-**Example (Durga Sir — extension vs content):**
+- **Purpose:** Check the **type of file** by reading **content**, not the extension (Durga Sir Session 3).
+- **When to use:** After `touch`, before/after `mv` rename, or whenever the name (`.jpg`, `.txt`) might lie.
+- **Common output:** `empty`, `ASCII text`, `JPEG image data`, `directory`, etc.
+- **Verify external command:** `type file`
+
+| Situation | Typical output |
+| :--- | :--- |
+| `touch sunny.jpg` (empty) | `empty` |
+| Text stored inside `sunny.jpg` | `ASCII text` |
+| Renamed to `sunny.durga` | Still `ASCII text` if content unchanged |
+
+**Related topic:** [TypesOfFilesInLinux.md](TypesOfFilesInLinux.md#3-extension-vs-content-file-command)
+
+### 3. Example
 
 ```bash
 touch sunny.jpg
-file sunny.jpg                    # empty
+file sunny.jpg
 
 echo "hello friends" > sunny.jpg
-file sunny.jpg                    # ASCII text (not "JPEG")
+file sunny.jpg
 
 mv sunny.jpg sunny.durga
-file sunny.durga                  # still ASCII text
+file sunny.durga
 ```
 
-**Run full demo (Ctrl+click script path):**
+### 4. Runnable demo (Ctrl+click script)
 
 [`scripts/file-command-content-demo.sh`](../../scripts/file-command-content-demo.sh)
 
@@ -937,60 +943,57 @@ file sunny.durga                  # still ASCII text
 bash scripts/file-command-content-demo.sh
 ```
 
-**See also:** [TypesOfFilesInLinux.md — Extension vs content](TypesOfFilesInLinux.md#3-extension-vs-content-file-command)
-
 ---
 
 <a id="ls-l-file-size"></a>
 
-## 5. Check file size — `ls -l` with filename (external)
+## 5. Check file size — `ls -l <filename>` (external command)
 
-> **`ls` is not a Bash builtin** (it is an external program, usually `/usr/bin/ls`). Durga Sir uses **`ls -l`** to see **file type** (first character) and **how much space the file uses** (size column).
+> **`ls` is not a Bash builtin** (`type ls` → `/usr/bin/ls`).  
+> **Ctrl+click demo:** [`ls-l-file-size-demo.sh`](../../scripts/ls-l-file-size-demo.sh)
 
-### `ls -l <filename>`
+### 1. Command name
 
-**Explanation:** **Long listing** for one or more paths. For each file you get permissions, owner, group, **size in bytes**, date, and name.
+**`ls -l`** (long listing) with a **filename** argument
 
-| Column (typical) | Meaning |
+### 2. Usage and explanation
+
+```text
+ls -l <filename>
+ls -lh <filename>    # optional: human-readable size (K, M, G)
+```
+
+- **Purpose:** Show **permissions**, **owner**, **date**, and **how many bytes** the file uses on disk (5th column). In class this is described as how much data / “memory” the file occupies (file size, not RAM).
+- **First character** of the line: file **type** (`-` ordinary, `d` directory, `l` link) — see [TypesOfFilesInLinux.md](TypesOfFilesInLinux.md#6-how-to-check-file-type-standard-way).
+- **Size column:** byte count (e.g. `0` after empty `touch`, larger after `echo` writes text).
+
+| Part of `ls -l` output | Meaning |
 | :--- | :--- |
-| 1st char (`-`, `d`, `l`, …) | [File type](TypesOfFilesInLinux.md#6-how-to-check-file-type-standard-way) |
-| **5th field (number)** | **File size in bytes** (how much data is stored — what people often mean by “how much memory” the file takes on disk) |
+| 1st character | File type |
+| **5th field (number)** | **Size in bytes** |
+| Last field | File name |
 
-**Example — one file:**
+Pair with **`file`** when you need content type, not only size.
+
+### 3. Example
 
 ```bash
 ls -l /etc/hosts
-# -rw-r--r-- 1 root root 1234 Oct 16 10:00 /etc/hosts
-#                              ^^^^
+# -rw-r--r-- 1 root root 584 Oct 16 10:00 /etc/hosts
+#                              ^^^
 #                              size in bytes
-```
 
-**Example — compare sizes after adding content:**
-
-```bash
 touch demo.txt
-ls -l demo.txt                  # 0 bytes (empty)
+ls -l demo.txt                  # 0 bytes
 
 echo "hello friends" > demo.txt
-ls -l demo.txt                  # 14 bytes (example; exact size may vary)
+ls -l demo.txt                  # e.g. 14 bytes
+file demo.txt                   # ASCII text
 
-file demo.txt                   # ASCII text — type from content
+ls -lh demo.txt                 # same size, easier to read
 ```
 
-**Human-readable sizes (optional):**
-
-```bash
-ls -lh demo.txt                 # -h → KB, MB, GB (e.g. 14B, 1.2K)
-```
-
-**How to verify `ls` is external:**
-
-```bash
-type ls
-# ls is hashed (/usr/bin/ls)
-```
-
-**Run demo (Ctrl+click):**
+### 4. Runnable demo (Ctrl+click script)
 
 [`scripts/ls-l-file-size-demo.sh`](../../scripts/ls-l-file-size-demo.sh)
 
@@ -1002,7 +1005,7 @@ bash scripts/ls-l-file-size-demo.sh
 
 | Goal | Command |
 | :--- | :--- |
-| What **kind** of file? | `file myname` or `ls -l` (1st character) |
-| How **big** is the file? | `ls -l myname` (size column, bytes) |
-| Bigger listing, easier sizes | `ls -lh myname` |
+| File **type** (content) | `file myname` |
+| File **type** (symbol) + **size** | `ls -l myname` |
+| Easier size display | `ls -lh myname` |
 
