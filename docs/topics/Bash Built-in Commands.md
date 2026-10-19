@@ -5,8 +5,9 @@
 ![Bash help command output](../assets/bash-help-screenshot.png)
 
 **Related:** [Components of Unix.md](Components%20of%20Unix.md) (shell vs kernel flow) · [TypesOfFilesInLinux.md](TypesOfFilesInLinux.md) (file types)  
-**Practice script:** [`scripts/bash-builtin-examples.sh`](../../scripts/bash-builtin-examples.sh)  
-**Check file type (Ctrl+click):** [`file` command](#file-command)
+**Practice script:** [`bash-builtin-examples.sh`](../../scripts/bash-builtin-examples.sh) (Ctrl+click to open)  
+**Check file type:** [`file` command](#file-command) · **Demo:** [`file-command-content-demo.sh`](../../scripts/file-command-content-demo.sh)  
+**Check file size (bytes):** [`ls -l` with filename](#ls-l-file-size) · **Demo:** [`ls-l-file-size-demo.sh`](../../scripts/ls-l-file-size-demo.sh)
 
 ```bash
 help              # full list (like the screenshot)
@@ -22,6 +23,7 @@ bash scripts/bash-builtin-examples.sh
 - [2. Category overview (pie chart)](#topic-2)
 - [3. Command reference (from `help` screen)](#topic-3)
 - [4. Check file type — `file` command (external)](#file-command)
+- [5. Check file size — `ls -l` with filename (external)](#ls-l-file-size)
 - [Getting help and command information](#getting-help-and-command-information)
   - [`help`](#help)
   - [`type`](#type)
@@ -894,7 +896,8 @@ help variables | head -10
 
 ## 4. Check file type — `file` command (external)
 
-> **`file` is not a Bash builtin** — it does not appear in `help`. The shell runs it as an **external program** (usually `/usr/bin/file`). You use it with builtins such as `touch` and `mv` when learning [Types of Files in Linux](TypesOfFilesInLinux.md).
+> **`file` is not a Bash builtin** — it does not appear in `help`. The shell runs it as an **external program** (usually `/usr/bin/file`). You use it with builtins such as `touch` and `mv` when learning [Types of Files in Linux](TypesOfFilesInLinux.md).  
+> **Ctrl+click demo script:** [`file-command-content-demo.sh`](../../scripts/file-command-content-demo.sh)
 
 ### `file`
 
@@ -926,11 +929,80 @@ mv sunny.jpg sunny.durga
 file sunny.durga                  # still ASCII text
 ```
 
-**Run full demo script:**
+**Run full demo (Ctrl+click script path):**
+
+[`scripts/file-command-content-demo.sh`](../../scripts/file-command-content-demo.sh)
 
 ```bash
 bash scripts/file-command-content-demo.sh
 ```
 
-**See also:** [TypesOfFilesInLinux.md — Extension vs content](TypesOfFilesInLinux.md#3-extension-vs-content-file-command) · [`ls -l` first character](TypesOfFilesInLinux.md#6-how-to-check-file-type-standard-way)
+**See also:** [TypesOfFilesInLinux.md — Extension vs content](TypesOfFilesInLinux.md#3-extension-vs-content-file-command)
+
+---
+
+<a id="ls-l-file-size"></a>
+
+## 5. Check file size — `ls -l` with filename (external)
+
+> **`ls` is not a Bash builtin** (it is an external program, usually `/usr/bin/ls`). Durga Sir uses **`ls -l`** to see **file type** (first character) and **how much space the file uses** (size column).
+
+### `ls -l <filename>`
+
+**Explanation:** **Long listing** for one or more paths. For each file you get permissions, owner, group, **size in bytes**, date, and name.
+
+| Column (typical) | Meaning |
+| :--- | :--- |
+| 1st char (`-`, `d`, `l`, …) | [File type](TypesOfFilesInLinux.md#6-how-to-check-file-type-standard-way) |
+| **5th field (number)** | **File size in bytes** (how much data is stored — what people often mean by “how much memory” the file takes on disk) |
+
+**Example — one file:**
+
+```bash
+ls -l /etc/hosts
+# -rw-r--r-- 1 root root 1234 Oct 16 10:00 /etc/hosts
+#                              ^^^^
+#                              size in bytes
+```
+
+**Example — compare sizes after adding content:**
+
+```bash
+touch demo.txt
+ls -l demo.txt                  # 0 bytes (empty)
+
+echo "hello friends" > demo.txt
+ls -l demo.txt                  # 14 bytes (example; exact size may vary)
+
+file demo.txt                   # ASCII text — type from content
+```
+
+**Human-readable sizes (optional):**
+
+```bash
+ls -lh demo.txt                 # -h → KB, MB, GB (e.g. 14B, 1.2K)
+```
+
+**How to verify `ls` is external:**
+
+```bash
+type ls
+# ls is hashed (/usr/bin/ls)
+```
+
+**Run demo (Ctrl+click):**
+
+[`scripts/ls-l-file-size-demo.sh`](../../scripts/ls-l-file-size-demo.sh)
+
+```bash
+bash scripts/ls-l-file-size-demo.sh
+```
+
+**Quick reference**
+
+| Goal | Command |
+| :--- | :--- |
+| What **kind** of file? | `file myname` or `ls -l` (1st character) |
+| How **big** is the file? | `ls -l myname` (size column, bytes) |
+| Bigger listing, easier sizes | `ls -lh myname` |
 

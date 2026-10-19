@@ -210,6 +210,7 @@ You should be able to explain:
 | [`types-of-files-touch-file-demo.sh`](../../scripts/types-of-files-touch-file-demo.sh) | `touch` empty file |
 | [`file-command-content-demo.sh`](../../scripts/file-command-content-demo.sh) | `file`, rename with `mv` |
 | [`types-of-files-ls-demo.sh`](../../scripts/types-of-files-ls-demo.sh) | `ls -l` type characters |
+| [`ls-l-file-size-demo.sh`](../../scripts/ls-l-file-size-demo.sh) | `ls -l filename` — size in bytes |
 | [`tty-and-dev-demo.sh`](../../scripts/tty-and-dev-demo.sh) | `tty`, sample `/dev` entries |
 
 ```bash
