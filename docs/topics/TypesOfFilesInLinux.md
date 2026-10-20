@@ -52,7 +52,7 @@ pie title Durga Sir — three file categories (conceptual)
 
 **Create empty normal file:** `touch` creates a **zero-byte** file (no content yet).
 
-**Practice:** `bash scripts/types-of-files-touch-file-demo.sh`
+**Practice:** `bash scripts/types-of-files-in-linux/types-of-files-touch-file-demo.sh`
 
 ---
 
@@ -66,7 +66,7 @@ Durga Sir’s demo:
 
 **Rule:** Do not trust the extension on Linux; use **`file`** to inspect content type.
 
-**Practice:** `bash scripts/file-command-content-demo.sh`
+**Practice:** `bash scripts/types-of-files-in-linux/file-command-content-demo.sh`
 
 ---
 
@@ -77,7 +77,7 @@ Durga Sir’s demo:
 - A directory **contains files and subdirectories**.
 - In Linux, a directory is also a **file** that represents a container.
 
-**Practice:** `bash scripts/types-of-files-ls-demo.sh` (see leading `d` in `ls -l`)
+**Practice:** `bash scripts/types-of-files-in-linux/types-of-files-ls-demo.sh` (see leading `d` in `ls -l`)
 
 ---
 
@@ -102,7 +102,7 @@ echo "Hello" > /dev/pts/1    # writes to terminal 1 (path from tty on that termi
 
 Uses **output redirection** (`>`) — covered in detail in a later session.
 
-**Practice:** `bash scripts/tty-and-dev-demo.sh`
+**Practice:** `bash scripts/types-of-files-in-linux/tty-and-dev-demo.sh`
 
 ---
 
@@ -163,7 +163,7 @@ pie title ls -l first character (types you will see)
 
 - **`c`, `b`, `s`, `p`** — mostly used by **root / superuser** and system services; awareness is enough at this stage.
 
-**Practice:** `bash scripts/types-of-files-ls-demo.sh`
+**Practice:** `bash scripts/types-of-files-in-linux/types-of-files-ls-demo.sh`
 
 ---
 
@@ -207,14 +207,14 @@ You should be able to explain:
 
 | Script | Demonstrates |
 | :--- | :--- |
-| [`types-of-files-touch-file-demo.sh`](../../scripts/types-of-files-touch-file-demo.sh) | `touch` empty file |
-| [`file-command-content-demo.sh`](../../scripts/file-command-content-demo.sh) | `file`, rename with `mv` |
-| [`types-of-files-ls-demo.sh`](../../scripts/types-of-files-ls-demo.sh) | `ls -l` type characters |
-| [`ls-l-file-size-demo.sh`](../../scripts/ls-l-file-size-demo.sh) | `ls -l filename` — size in bytes |
-| [`tty-and-dev-demo.sh`](../../scripts/tty-and-dev-demo.sh) | `tty`, sample `/dev` entries |
+| [`types-of-files-touch-file-demo.sh`](../../scripts/types-of-files-in-linux/types-of-files-touch-file-demo.sh) | `touch` empty file |
+| [`file-command-content-demo.sh`](../../scripts/types-of-files-in-linux/file-command-content-demo.sh) | `file`, rename with `mv` |
+| [`types-of-files-ls-demo.sh`](../../scripts/types-of-files-in-linux/types-of-files-ls-demo.sh) | `ls -l` type characters |
+| [`ls-l-file-size-demo.sh`](../../scripts/bash-built-in-commands/ls-l-file-size-demo.sh) | `ls -l filename` — size in bytes |
+| [`tty-and-dev-demo.sh`](../../scripts/types-of-files-in-linux/tty-and-dev-demo.sh) | `tty`, sample `/dev` entries |
 
 ```bash
 cd /path/to/Linux-Basics
-bash scripts/types-of-files-ls-demo.sh
-bash scripts/file-command-content-demo.sh
+bash scripts/types-of-files-in-linux/types-of-files-ls-demo.sh
+bash scripts/types-of-files-in-linux/file-command-content-demo.sh
 ```

@@ -9,7 +9,7 @@ Hands-on companion for **Durga Sir**'s Linux course ([YouTube playlist](https://
 | [`docs/linuxBasics.md`](docs/linuxBasics.md) | Index to topic notes and scripts |
 | [`docs/topics/Components of Unix.md`](docs/topics/Components%20of%20Unix.md) | Video 2 — shell, kernel, execution flow |
 | [`exercises/`](exercises/) | Topic-based practice READMEs and sample data |
-| [`scripts/`](scripts/) | Example shell scripts from the scripting section |
+| [`scripts/`](scripts/) | Topic folders with `.sh` demos (see [`scripts/README.md`](scripts/README.md)) |
 
 ## Topics covered
 
@@ -31,8 +31,9 @@ cd exercises/01-navigation
 ```
 
 ```bash
-chmod +x scripts/hello.sh scripts/backup-logs.sh
-./scripts/hello.sh Linux
+chmod +x scripts/**/*.sh
+bash scripts/shell-scripting/hello.sh Linux
+bash scripts/components-of-unix/invalid-command-demos.sh
 ```
 
 ## Requirements
