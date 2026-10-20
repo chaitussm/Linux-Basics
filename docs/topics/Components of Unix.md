@@ -67,7 +67,7 @@ graph LR
 
 If step 2 or 3 fails, the **shell** prints the error (not the kernel).
 
-**Run:** `bash scripts/invalid-command-demos.sh` — shows invalid command / invalid usage examples.
+**Run:** `bash scripts/components-of-unix/invalid-command-demos.sh` — shows invalid command / invalid usage examples.
 
 ### 2.2 Kernel responsibilities
 
@@ -77,7 +77,7 @@ If step 2 or 3 fails, the **shell** prints the error (not the kernel).
 
 When the kernel finishes, the **`$` prompt** returns — the terminal is **ready for the next command**.
 
-**Run:** `bash scripts/command-execution-touch-demo.sh` — creates a file via `touch` (full flow: shell → kernel → disk).
+**Run:** `bash scripts/components-of-unix/command-execution-touch-demo.sh` — creates a file via `touch` (full flow: shell → kernel → disk).
 
 ---
 
@@ -168,7 +168,7 @@ The **shell** (e.g. Bash) reads your input. The same flow applies when:
    - `touch -da file` → invalid option.
    - `cal 99999` → invalid year.
 
-**Practice:** `bash scripts/invalid-command-demos.sh`
+**Practice:** `bash scripts/components-of-unix/invalid-command-demos.sh`
 
 #### Box 4 (right) — Not proper: error message
 
@@ -182,8 +182,8 @@ If validation passes, the shell **interprets** (converts) the command into **ker
 
 The **kernel** performs the required action (e.g. create `sunny.txt`), talks to **hardware**, and handles **memory** and **CPU** allocation.
 
-**Practice:** `bash scripts/command-execution-touch-demo.sh`  
-**Full trace (success + error):** `bash scripts/command-execution-flow-trace.sh`
+**Practice:** `bash scripts/components-of-unix/command-execution-touch-demo.sh`  
+**Full trace (success + error):** `bash scripts/components-of-unix/command-execution-flow-trace.sh`
 
 #### Box 7 — `$` prompt again
 
@@ -224,12 +224,12 @@ A **shell script** is a file containing **many commands** executed together (lik
 
 | Script | What it demonstrates |
 | :--- | :--- |
-| [`scripts/test.sh`](../../scripts/test.sh) | Durga Sir demo: `cal`, `date`, `echo` |
-| [`scripts/run-test-script.sh`](../../scripts/run-test-script.sh) | `chmod u+x` and run `test.sh` |
+| [`scripts/components-of-unix/test.sh`](../../scripts/components-of-unix/test.sh) | Durga Sir demo: `cal`, `date`, `echo` |
+| [`scripts/run-test-script.sh`](../../scripts/components-of-unix/run-test-script.sh) | `chmod u+x` and run `test.sh` |
 
 ```bash
-chmod +x scripts/test.sh
-bash scripts/run-test-script.sh
+chmod +x scripts/components-of-unix/test.sh
+bash scripts/components-of-unix/run-test-script.sh
 ```
 
 ---
@@ -241,7 +241,7 @@ bash scripts/run-test-script.sh
 | **Normal user** | **`$`** | Regular account |
 | **Super user (root)** | **`#`** | Full admin |
 
-**Run:** `bash scripts/whoami-demo.sh` — shows current user (`whoami`).  
+**Run:** `bash scripts/components-of-unix/whoami-demo.sh` — shows current user (`whoami`).  
 For root: run `sudo -i` and `whoami` manually (password required), then `exit`.
 
 ---

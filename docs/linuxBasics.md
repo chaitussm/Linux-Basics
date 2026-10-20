@@ -2,7 +2,7 @@
 
 *Durga Sir — [YouTube playlist](https://www.youtube.com/watch?v=txRD_bK062Y&list=PLd3UqWTnYXOloH0vWBs4BtSbP84WcC2NY)*
 
-Each topic has its own **`.md` file** under [`topics/`](topics/). **All runnable examples** live in [`../scripts/`](../scripts/) as **`.sh`** files.
+Each topic has its own **`.md` file** under [`topics/`](topics/). Runnable **`.sh`** demos live under [`../scripts/`](../scripts/) in **topic folders** (same name as the lesson, e.g. `scripts/components-of-unix/`). See [`scripts/README.md`](../scripts/README.md).
 
 ---
 
@@ -30,10 +30,10 @@ Each topic has its own **`.md` file** under [`topics/`](topics/). **All runnable
 
 ```bash
 cd /path/to/Linux-Basics
-chmod +x scripts/*.sh
-bash scripts/invalid-command-demos.sh
-bash scripts/command-execution-touch-demo.sh
-bash scripts/run-test-script.sh
+chmod +x scripts/**/*.sh
+bash scripts/components-of-unix/invalid-command-demos.sh
+bash scripts/components-of-unix/command-execution-touch-demo.sh
+bash scripts/components-of-unix/run-test-script.sh
 ```
 
 See **[scripts/README.md](../scripts/README.md)** for the full script list.

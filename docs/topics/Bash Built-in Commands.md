@@ -5,16 +5,16 @@
 ![Bash help command output](../assets/bash-help-screenshot.png)
 
 **Related:** [Components of Unix.md](Components%20of%20Unix.md) (shell vs kernel flow) · [TypesOfFilesInLinux.md](TypesOfFilesInLinux.md) (file types)  
-**Practice script:** [`bash-builtin-examples.sh`](../../scripts/bash-builtin-examples.sh) (Ctrl+click to open)  
-**Check file type:** [`file` command](#file-command) · **Demo:** [`file-command-content-demo.sh`](../../scripts/file-command-content-demo.sh)  
-**Check file size (bytes):** [`ls -l` with filename](#ls-l-file-size) · **Demo:** [`ls-l-file-size-demo.sh`](../../scripts/ls-l-file-size-demo.sh)  
-**Display file contents:** [`cat`](#cat-command) · **Demo:** [`cat-command-demo.sh`](../../scripts/cat-command-demo.sh)  
-**Edit file (GUI):** [`gedit`](#gedit-command) · **Demo:** [`gedit-command-demo.sh`](../../scripts/gedit-command-demo.sh)
+**Practice script:** [`bash-builtin-examples.sh`](../../scripts/bash-built-in-commands/bash-builtin-examples.sh) (Ctrl+click to open)  
+**Check file type:** [`file` command](#file-command) · **Demo:** [`file-command-content-demo.sh`](../../scripts/types-of-files-in-linux/file-command-content-demo.sh)  
+**Check file size (bytes):** [`ls -l` with filename](#ls-l-file-size) · **Demo:** [`ls-l-file-size-demo.sh`](../../scripts/bash-built-in-commands/ls-l-file-size-demo.sh)  
+**Display file contents:** [`cat`](#cat-command) · **Demo:** [`cat-command-demo.sh`](../../scripts/bash-built-in-commands/cat-command-demo.sh)  
+**Edit file (GUI):** [`gedit`](#gedit-command) · **Demo:** [`gedit-command-demo.sh`](../../scripts/bash-built-in-commands/gedit-command-demo.sh)
 
 ```bash
 help              # full list (like the screenshot)
 help cd           # details for one builtin
-bash scripts/bash-builtin-examples.sh
+bash scripts/bash-built-in-commands/bash-builtin-examples.sh
 ```
 
 ---
@@ -645,7 +645,7 @@ f(){ caller; }; f
 
 **Example:**
 ```bash
-. ./scripts/test.sh
+. ./scripts/components-of-unix/test.sh
 ```
 
 ### `source`
@@ -654,7 +654,7 @@ f(){ caller; }; f
 
 **Example:**
 ```bash
-source ./scripts/test.sh
+source ./scripts/components-of-unix/test.sh
 ```
 
 <a id="topic-62"></a>
@@ -901,7 +901,7 @@ help variables | head -10
 ## 4. Check file type — `file` (external command)
 
 > Not in `help` — run with `type file` → `/usr/bin/file`.  
-> **Ctrl+click demo:** [`file-command-content-demo.sh`](../../scripts/file-command-content-demo.sh)
+> **Ctrl+click demo:** [`file-command-content-demo.sh`](../../scripts/types-of-files-in-linux/file-command-content-demo.sh)
 
 ### 1. Command name
 
@@ -941,10 +941,10 @@ file sunny.durga
 
 ### 4. Runnable demo (Ctrl+click script)
 
-[`scripts/file-command-content-demo.sh`](../../scripts/file-command-content-demo.sh)
+[`scripts/types-of-files-in-linux/file-command-content-demo.sh`](../../scripts/types-of-files-in-linux/file-command-content-demo.sh)
 
 ```bash
-bash scripts/file-command-content-demo.sh
+bash scripts/types-of-files-in-linux/file-command-content-demo.sh
 ```
 
 ---
@@ -954,7 +954,7 @@ bash scripts/file-command-content-demo.sh
 ## 5. Check file size — `ls -l <filename>` (external command)
 
 > **`ls` is not a Bash builtin** (`type ls` → `/usr/bin/ls`).  
-> **Ctrl+click demo:** [`ls-l-file-size-demo.sh`](../../scripts/ls-l-file-size-demo.sh)
+> **Ctrl+click demo:** [`ls-l-file-size-demo.sh`](../../scripts/bash-built-in-commands/ls-l-file-size-demo.sh)
 
 ### 1. Command name
 
@@ -999,10 +999,10 @@ ls -lh demo.txt                 # same size, easier to read
 
 ### 4. Runnable demo (Ctrl+click script)
 
-[`scripts/ls-l-file-size-demo.sh`](../../scripts/ls-l-file-size-demo.sh)
+[`scripts/bash-built-in-commands/ls-l-file-size-demo.sh`](../../scripts/bash-built-in-commands/ls-l-file-size-demo.sh)
 
 ```bash
-bash scripts/ls-l-file-size-demo.sh
+bash scripts/bash-built-in-commands/ls-l-file-size-demo.sh
 ```
 
 **Quick reference**
@@ -1020,7 +1020,7 @@ bash scripts/ls-l-file-size-demo.sh
 ## 6. Display file contents — `cat` (external command)
 
 > **`cat` is not a Bash builtin** (`type cat` → `/usr/bin/cat`).  
-> **Ctrl+click demo:** [`cat-command-demo.sh`](../../scripts/cat-command-demo.sh)
+> **Ctrl+click demo:** [`cat-command-demo.sh`](../../scripts/bash-built-in-commands/cat-command-demo.sh)
 
 ### 1. Command name
 
@@ -1055,10 +1055,10 @@ cat -n /etc/hosts | head -5    # optional: line numbers
 
 ### 4. Runnable demo (Ctrl+click script)
 
-[`scripts/cat-command-demo.sh`](../../scripts/cat-command-demo.sh)
+[`scripts/bash-built-in-commands/cat-command-demo.sh`](../../scripts/bash-built-in-commands/cat-command-demo.sh)
 
 ```bash
-bash scripts/cat-command-demo.sh
+bash scripts/bash-built-in-commands/cat-command-demo.sh
 ```
 
 **See also:** [TypesOfFilesInLinux.md](TypesOfFilesInLinux.md#7-command-reference-this-session)
@@ -1070,7 +1070,7 @@ bash scripts/cat-command-demo.sh
 ## 7. Edit file — `gedit` (external command, GUI)
 
 > **`gedit` is not a Bash builtin** — it is the **GNOME text editor** (GUI). Install on Ubuntu: `sudo apt install gedit` if missing.  
-> **Ctrl+click demo:** [`gedit-command-demo.sh`](../../scripts/gedit-command-demo.sh)
+> **Ctrl+click demo:** [`gedit-command-demo.sh`](../../scripts/bash-built-in-commands/gedit-command-demo.sh)
 
 ### 1. Command name
 
@@ -1108,10 +1108,10 @@ ls -l sunny.jpg          # size in bytes > 0
 
 ### 4. Runnable demo (Ctrl+click script)
 
-[`scripts/gedit-command-demo.sh`](../../scripts/gedit-command-demo.sh)
+[`scripts/bash-built-in-commands/gedit-command-demo.sh`](../../scripts/bash-built-in-commands/gedit-command-demo.sh)
 
 ```bash
-bash scripts/gedit-command-demo.sh
+bash scripts/bash-built-in-commands/gedit-command-demo.sh
 ```
 
 On a full Ubuntu desktop you can also run:
