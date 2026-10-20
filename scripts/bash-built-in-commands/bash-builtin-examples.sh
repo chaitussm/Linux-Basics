@@ -1,3 +1,6 @@
+#Code Runner (formulahendry.code-runner) is already installed. Open a .sh file and use Run Code or press Ctrl+Alt+N to execute it with Bash.
+# It runs the currently open script, not every .sh file in the repository at once. Ensure Bash is installed on your system.
+
 #!/bin/bash
 # Demonstrates sample Bash built-ins documented in Bash Built-in Commands.md
 set -euo pipefail
