@@ -2,7 +2,7 @@
 
 Scripts are grouped in folders that match **`docs/topics/*.md`** notes (one folder per video/topic).
 
-**Command-by-command explanations** (flowcharts, pie charts, Ctrl+click to each `.sh`): [`scripts-execution-summary/`](scripts-execution-summary/README.md)
+**Command-by-command explanations** (flowcharts, pie charts, Ctrl+click to each `.sh`): [`scripts-execution-summary/`](../scripts-execution-summary/README.md)
 
 ## Layout
 
@@ -14,7 +14,7 @@ Scripts are grouped in folders that match **`docs/topics/*.md`** notes (one fold
 | [`file-system-navigation-and-hierarchy/`](file-system-navigation-and-hierarchy/) | [File System Navigation Commands And Hierarchy.md](../docs/topics/File%20System%20Navigation%20Commands%20And%20Hierarchy.md) | `pwd`, `cd`, paths, FHS (Video 4) |
 | [`ls-command-and-its-options/`](ls-command-and-its-options/) | [ls Command and its options.md](../docs/topics/ls%20Command%20and%20its%20options.md) | `ls` and options (Video 7) |
 | [`shell-scripting/`](shell-scripting/) | Shell scripting examples | `hello.sh`, `check-file.sh`, `backup-logs.sh` |
-| [`scripts-execution-summary/`](scripts-execution-summary/) | Per-topic **execution summary** `.md` files | Explains every command in each `.sh` |
+| [`scripts-execution-summary/`](../scripts-execution-summary/) | Per-topic **execution summary** `.md` files | Explains every command in each `.sh` |
 
 ## Run from repo root
 
@@ -103,7 +103,7 @@ bash scripts/shell-scripting/hello.sh "Linux"
 | `ls-with-head-tail-demo.sh` | `head` / `tail` with `ls` |
 | `ls-with-more-less-hint-demo.sh` | `more` / `less` hints |
 
-See [scripts-execution-summary/ls-command-and-its-options.md](scripts-execution-summary/ls-command-and-its-options.md).
+See [scripts-execution-summary/ls-command-and-its-options.md](../scripts-execution-summary/ls-command-and-its-options.md).
 
 ### `shell-scripting/`
 

@@ -6,7 +6,7 @@
 **Prerequisites:** [File System Navigation Commands And Hierarchy.md](File%20System%20Navigation%20Commands%20And%20Hierarchy.md) (`cd`, `pwd`, `ls -a` intro) · [TypesOfFilesInLinux.md](TypesOfFilesInLinux.md) (`ls -l` type column)
 
 **Practice folder:** [`scripts/ls-command-and-its-options/`](../../scripts/ls-command-and-its-options/)  
-**Execution summary:** [`ls-command-and-its-options.md`](../../scripts/scripts-execution-summary/ls-command-and-its-options.md)
+**Execution summary:** [`ls-command-and-its-options.md`](../../scripts-execution-summary/ls-command-and-its-options.md)
 
 ```bash
 cd /path/to/Linux-Basics

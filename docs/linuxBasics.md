@@ -2,7 +2,7 @@
 
 *Durga Sir — [YouTube playlist](https://www.youtube.com/watch?v=txRD_bK062Y&list=PLd3UqWTnYXOloH0vWBs4BtSbP84WcC2NY)*
 
-Each topic has its own **`.md` file** under [`topics/`](topics/). Runnable **`.sh`** demos live under [`../scripts/`](../scripts/) in **topic folders** (same name as the lesson, e.g. `scripts/components-of-unix/`). See [`scripts/README.md`](../scripts/README.md). For **what each script runs**, see [`scripts/scripts-execution-summary/README.md`](../scripts/scripts-execution-summary/README.md).
+Each topic has its own **`.md` file** under [`topics/`](topics/). Runnable **`.sh`** demos live under [`../scripts/`](../scripts/) in **topic folders** (same name as the lesson, e.g. `scripts/components-of-unix/`). See [`scripts/README.md`](../scripts/README.md). For **what each script runs**, see [`scripts-execution-summary/README.md`](../scripts-execution-summary/README.md).
 
 ---
 
