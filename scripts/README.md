@@ -2,6 +2,8 @@
 
 Scripts are grouped in folders that match **`docs/topics/*.md`** notes (one folder per video/topic).
 
+**Command-by-command explanations** (flowcharts, pie charts, Ctrl+click to each `.sh`): [`scripts-execution-summary/`](../scripts-execution-summary/README.md)
+
 ## Layout
 
 | Folder | Topic `.md` file | Purpose |
@@ -10,7 +12,9 @@ Scripts are grouped in folders that match **`docs/topics/*.md`** notes (one fold
 | [`types-of-files-in-linux/`](types-of-files-in-linux/) | [TypesOfFilesInLinux.md](../docs/topics/TypesOfFilesInLinux.md) | File types, `touch`, `file`, `ls -l`, `tty` (Video 3) |
 | [`bash-built-in-commands/`](bash-built-in-commands/) | [Bash Built-in Commands.md](../docs/topics/Bash%20Built-in%20Commands.md) | `help` builtins + `cat`, `gedit`, `ls -l` size |
 | [`file-system-navigation-and-hierarchy/`](file-system-navigation-and-hierarchy/) | [File System Navigation Commands And Hierarchy.md](../docs/topics/File%20System%20Navigation%20Commands%20And%20Hierarchy.md) | `pwd`, `cd`, paths, FHS (Video 4) |
+| [`ls-command-and-its-options/`](ls-command-and-its-options/) | [ls Command and its options.md](../docs/topics/ls%20Command%20and%20its%20options.md) | `ls` and options (Video 7) |
 | [`shell-scripting/`](shell-scripting/) | Shell scripting examples | `hello.sh`, `check-file.sh`, `backup-logs.sh` |
+| [`scripts-execution-summary/`](../scripts-execution-summary/) | Per-topic **execution summary** `.md` files | Explains every command in each `.sh` |
 
 ## Run from repo root
 
@@ -79,6 +83,27 @@ bash scripts/shell-scripting/hello.sh "Linux"
 | `absolute-vs-relative-paths-demo.sh` | Absolute `/` paths vs relative |
 | `bin-sbin-etc-demo.sh` | `/bin`, `/sbin`, `/etc` samples |
 | `fhs-root-directories-demo.sh` | Read-only tour of `/` and FHS dirs |
+
+### `ls-command-and-its-options/`
+
+| Script | Description |
+| :--- | :--- |
+| `ls-basic-and-directory-arg-demo.sh` | `ls` vs `ls <dir>` |
+| `man-ls-redirect-wc-demo.sh` | `man ls`, redirect, `wc -l` |
+| `ls-r-reverse-alphabetical-demo.sh` | `ls -r` |
+| `ls-l-long-listing-demo.sh` | `ls -l` columns |
+| `ls-lt-ltr-time-sort-demo.sh` | `ls -lt`, `ls -ltr` |
+| `ls-a-vs-A-hidden-demo.sh` | `ls -a` vs `ls -A` |
+| `ls-F-classify-demo.sh` | `ls -F` type suffixes |
+| `ls-f-no-color-demo.sh` | `ls -f` no color |
+| `ls-i-inode-demo.sh` | `ls -i` inode |
+| `ls-R-recursive-demo.sh` | `ls -R` recursive |
+| `ls-s-and-lh-size-demo.sh` | `ls -s`, `ls -lh` |
+| `ls-combined-options-quiz-demo.sh` | Combined options |
+| `ls-with-head-tail-demo.sh` | `head` / `tail` with `ls` |
+| `ls-with-more-less-hint-demo.sh` | `more` / `less` hints |
+
+See [scripts-execution-summary/ls-command-and-its-options.md](../scripts-execution-summary/ls-command-and-its-options.md).
 
 ### `shell-scripting/`
 

@@ -9,6 +9,7 @@ This folder explains **every command** used in each **`.sh`** demo under [`../`]
 | [bash-built-in-commands.md](bash-built-in-commands.md) | [`bash-built-in-commands/`](../bash-built-in-commands/) | [Bash Built-in Commands.md](../../docs/topics/Bash%20Built-in%20Commands.md) |
 | [file-system-navigation-and-hierarchy.md](file-system-navigation-and-hierarchy.md) | [`file-system-navigation-and-hierarchy/`](../file-system-navigation-and-hierarchy/) | [File System Navigation Commands And Hierarchy.md](../../docs/topics/File%20System%20Navigation%20Commands%20And%20Hierarchy.md) |
 | [shell-scripting.md](shell-scripting.md) | [`shell-scripting/`](../shell-scripting/) | Shell scripting examples (Part 2 preview) |
+| [ls-command-and-its-options.md](ls-command-and-its-options.md) | [`ls-command-and-its-options/`](../scripts/ls-command-and-its-options/) | [ls Command and its options.md](../docs/topics/ls%20Command%20and%20its%20options.md) (Video 7) |
 
 ```bash
 cd /path/to/Linux-Basics
