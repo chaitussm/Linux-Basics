@@ -199,7 +199,7 @@ You should be able to explain:
 5. How **`ls -l`** first character identifies type (`-`, `d`, `l`, `c`, `b`, `s`, `p`).  
 6. Why **colorized `ls`** is not the standard way to decide type.
 
-**Next (Video 4):** File system navigation and hierarchy — linked from [`linuxBasics.md`](../linuxBasics.md).
+**Next (Video 4):** [File System Navigation Commands And Hierarchy.md](File%20System%20Navigation%20Commands%20And%20Hierarchy.md) · [Session 4 video](https://www.youtube.com/watch?v=Aqx97d4NSbg&list=PLd3UqWTnYXOloH0vWBs4BtSbP84WcC2NY&index=4)
 
 ---
 

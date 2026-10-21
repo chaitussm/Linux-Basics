@@ -9,6 +9,7 @@ Scripts are grouped in folders that match **`docs/topics/*.md`** notes (one fold
 | [`components-of-unix/`](components-of-unix/) | [Components of Unix.md](../docs/topics/Components%20of%20Unix.md) | Shell, kernel, execution flow (Video 2) |
 | [`types-of-files-in-linux/`](types-of-files-in-linux/) | [TypesOfFilesInLinux.md](../docs/topics/TypesOfFilesInLinux.md) | File types, `touch`, `file`, `ls -l`, `tty` (Video 3) |
 | [`bash-built-in-commands/`](bash-built-in-commands/) | [Bash Built-in Commands.md](../docs/topics/Bash%20Built-in%20Commands.md) | `help` builtins + `cat`, `gedit`, `ls -l` size |
+| [`file-system-navigation-and-hierarchy/`](file-system-navigation-and-hierarchy/) | [File System Navigation Commands And Hierarchy.md](../docs/topics/File%20System%20Navigation%20Commands%20And%20Hierarchy.md) | `pwd`, `cd`, paths, FHS (Video 4) |
 | [`shell-scripting/`](shell-scripting/) | Shell scripting examples | `hello.sh`, `check-file.sh`, `backup-logs.sh` |
 
 ## Run from repo root
@@ -62,6 +63,16 @@ bash scripts/shell-scripting/hello.sh "Linux"
 | `cat-command-demo.sh` | Display file with `cat` |
 | `gedit-command-demo.sh` | GUI edit workflow |
 | `ls-l-file-size-demo.sh` | `ls -l` size in bytes |
+
+### `file-system-navigation-and-hierarchy/`
+
+| Script | Description |
+| :--- | :--- |
+| `pwd-cd-navigation-demo.sh` | `pwd`, `cd`, `~`, `.`, `..`, `cd -` |
+| `ls-dot-parent-demo.sh` | `ls -a` and `.` / `..` |
+| `absolute-vs-relative-paths-demo.sh` | Absolute `/` paths vs relative |
+| `mkdir-navigation-tree-demo.sh` | Nested dirs; parent vs `cd -` |
+| `fhs-root-directories-demo.sh` | Read-only tour of `/` and FHS dirs |
 
 ### `shell-scripting/`
 
