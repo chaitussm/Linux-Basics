@@ -69,9 +69,15 @@ bash scripts/shell-scripting/hello.sh "Linux"
 | Script | Description |
 | :--- | :--- |
 | `pwd-cd-navigation-demo.sh` | `pwd`, `cd`, `~`, `.`, `..`, `cd -` |
+| `mkdir-ls-navigation-demo.sh` | `mkdir`, empty `ls`, `ls -a` |
+| `mkdir-navigation-tree-demo.sh` | DR1/DR2 tree; parent vs `cd -` |
 | `ls-dot-parent-demo.sh` | `ls -a` and `.` / `..` |
+| `parent-directory-chain-demo.sh` | Parent chain up to `/` |
+| `cd-multiple-parent-demo.sh` | `cd ../..`, invalid `cd ...` |
+| `cd-root-edge-cases-demo.sh` | `cd ..` / `cd .` at root |
+| `cd-home-relative-vs-absolute-demo.sh` | `cd home` vs `cd /home` |
 | `absolute-vs-relative-paths-demo.sh` | Absolute `/` paths vs relative |
-| `mkdir-navigation-tree-demo.sh` | Nested dirs; parent vs `cd -` |
+| `bin-sbin-etc-demo.sh` | `/bin`, `/sbin`, `/etc` samples |
 | `fhs-root-directories-demo.sh` | Read-only tour of `/` and FHS dirs |
 
 ### `shell-scripting/`
