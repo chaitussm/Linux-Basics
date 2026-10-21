@@ -3,6 +3,7 @@
 set -euo pipefail
 WORK="${TMPDIR:-/tmp}/linux-ls-time-demo"
 rm -rf "$WORK"
+mkdir -p "$WORK"
 cd "$WORK"
 
 touch old.txt
