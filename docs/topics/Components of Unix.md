@@ -222,6 +222,8 @@ Applications and **shell scripts** use the **same pipeline** — only the source
 
 A **shell script** is a file containing **many commands** executed together (like a Windows `.bat` file). The shell runs it **line by line**.
 
+**Beginner walkthrough (shebang, `chmod`, run):** [Steps To Write a Shell Script.md](Steps%20To%20Write%20a%20Shell%20Script.md)
+
 | Script | What it demonstrates |
 | :--- | :--- |
 | [`scripts/components-of-unix/test.sh`](../../scripts/components-of-unix/test.sh) | Durga Sir demo: `cal`, `date`, `echo` |
