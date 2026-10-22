@@ -15,6 +15,7 @@ Each topic has its own **`.md` file** under [`topics/`](topics/). Runnable **`.s
 | 3 | [**TypesOfFilesInLinux.md**](topics/TypesOfFilesInLinux.md) | [Session 3](https://www.youtube.com/watch?v=-Y4bjL-fBMY&list=PLd3UqWTnYXOloH0vWBs4BtSbP84WcC2NY&index=3) |
 | 4 | [**File System Navigation Commands And Hierarchy.md**](topics/File%20System%20Navigation%20Commands%20And%20Hierarchy.md) | [Session 4](https://www.youtube.com/watch?v=Aqx97d4NSbg&list=PLd3UqWTnYXOloH0vWBs4BtSbP84WcC2NY&index=4) |
 | 7 | [**ls Command and its options.md**](topics/ls%20Command%20and%20its%20options.md) | [Session 7](https://www.youtube.com/watch?v=rpxT2L3t1a8&list=PLd3UqWTnYXOloH0vWBs4BtSbP84WcC2NY&index=7) |
+| 8 | [**Date and Cal commands.md**](topics/Date%20and%20Cal%20commands.md) | [Session 8](https://www.youtube.com/watch?v=NmJyVY1Mvww&list=PLd3UqWTnYXOloH0vWBs4BtSbP84WcC2NY&index=8) |
 
 ---
 
@@ -28,6 +29,7 @@ Each topic has its own **`.md` file** under [`topics/`](topics/). Runnable **`.s
 | [**File System Navigation Commands And Hierarchy.md**](topics/File%20System%20Navigation%20Commands%20And%20Hierarchy.md) | `pwd`, `cd`, paths, `.` / `..`, FHS under `/` (Video 4) |
 | [**ls Command and its options.md**](topics/ls%20Command%20and%20its%20options.md) | `ls`, `man`, `-l`, `-a`, `-A`, `-F`, `-R`, `-i`, `-h`, pipes (Video 7) |
 | [**pipeCommands.md**](topics/pipeCommands.md) | Pipe `\|`, `ls -l /etc \| head`, broken pipe |
+| [**Date and Cal commands.md**](topics/Date%20and%20Cal%20commands.md) | `date`, `date +format`, `cal`, options (Video 8) |
 
 ---
 

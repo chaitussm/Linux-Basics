@@ -10,6 +10,7 @@ This folder explains **every command** used in each **`.sh`** demo under [`../`]
 | [file-system-navigation-and-hierarchy.md](file-system-navigation-and-hierarchy.md) | [`file-system-navigation-and-hierarchy/`](../file-system-navigation-and-hierarchy/) | [File System Navigation Commands And Hierarchy.md](../../docs/topics/File%20System%20Navigation%20Commands%20And%20Hierarchy.md) |
 | [shell-scripting.md](shell-scripting.md) | [`shell-scripting/`](../shell-scripting/) | Shell scripting examples (Part 2 preview) |
 | [ls-command-and-its-options.md](ls-command-and-its-options.md) | [`ls-command-and-its-options/`](../scripts/ls-command-and-its-options/) | [ls Command and its options.md](../docs/topics/ls%20Command%20and%20its%20options.md) (Video 7) |
+| [DateandCal Execution summary.md](DateandCal%20Execution%20summary.md) | [`Date and Cal commands.sh`](../scripts/Date%20and%20Cal%20commands.sh) | [Date and Cal commands.md](../docs/topics/Date%20and%20Cal%20commands.md) (Video 8) |
 
 ```bash
 cd /path/to/Linux-Basics
