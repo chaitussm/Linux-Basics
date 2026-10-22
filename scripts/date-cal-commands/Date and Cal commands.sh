@@ -1,8 +1,8 @@
 #!/bin/bash
-# Session 8 — runs split demos in date-and-cal-commands/ (run each .sh alone for clearer output)
+# Session 8 — runs split demos in this folder (run each *-demo.sh alone for clearer output)
 set -euo pipefail
 
-DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)/date-and-cal-commands"
+DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
 
 run_demo() {
   local name="$1"

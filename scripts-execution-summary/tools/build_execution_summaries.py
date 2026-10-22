@@ -206,9 +206,9 @@ pie title Scripting demos
         "file": "DateandCal Execution summary.md",
         "title": "# DateandCal Execution summary",
         "topic": "**Topic:** [Date and Cal commands.md](../docs/topics/Date%20and%20Cal%20commands.md) (Video 8)  ",
-        "dir_line": "**Scripts:** orchestrator [`Date and Cal commands.sh`](../scripts/Date%20and%20Cal%20commands.sh) + [`date-and-cal-commands/`](../scripts/date-and-cal-commands/) split demos",
-        "dirs": ["scripts/date-and-cal-commands"],
-        "extra": ["scripts/Date and Cal commands.sh"],
+        "dir_line": "**Scripts directory:** [`../scripts/date-cal-commands/`](../scripts/date-cal-commands/) (orchestrator + split demos)",
+        "dirs": ["scripts/date-cal-commands"],
+        "extra": None,
         "pie": """```mermaid
 %%{init: {'theme': 'base', 'themeVariables': {'pie1': '#5c5c5c', 'pie2': '#6e6e6e', 'pieTitleTextColor': '#ffffff', 'pieSectionTextColor': '#ffffff'}}}%%
 pie title Session 8 commands
@@ -231,7 +231,7 @@ def main() -> None:
     for spec in SPECS:
         paths = collect_scripts(spec["dirs"], spec.get("extra"))
         if spec["file"] == "DateandCal Execution summary.md":
-            orch = SCRIPTS / "Date and Cal commands.sh"
+            orch = SCRIPTS / "date-cal-commands" / "Date and Cal commands.sh"
             paths = [orch] + [p for p in paths if p.resolve() != orch.resolve()]
         doc = build_doc(
             spec["title"],

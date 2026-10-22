@@ -1,7 +1,7 @@
 # DateandCal Execution summary
 
 **Topic:** [Date and Cal commands.md](../docs/topics/Date%20and%20Cal%20commands.md) (Video 8)  
-**Scripts:** orchestrator [`Date and Cal commands.sh`](../scripts/Date%20and%20Cal%20commands.sh) + [`date-and-cal-commands/`](../scripts/date-and-cal-commands/) split demos
+**Scripts directory:** [`../scripts/date-cal-commands/`](../scripts/date-cal-commands/) (orchestrator + split demos)
 
 ```mermaid
 %%{init: {'theme': 'base', 'themeVariables': {'pie1': '#5c5c5c', 'pie2': '#6e6e6e', 'pieTitleTextColor': '#ffffff', 'pieSectionTextColor': '#ffffff'}}}%%
@@ -30,16 +30,16 @@ Each script section uses the same **four-part** model:
 
 ---
 
-## [`Date and Cal commands.sh`](../scripts/Date%20and%20Cal%20commands.sh)
+## [`Date and Cal commands.sh`](../scripts/date-cal-commands/Date%20and%20Cal%20commands.sh)
 
-**Run:** `bash "scripts/Date and Cal commands.sh"`
+**Run:** `bash "scripts/date-cal-commands/Date and Cal commands.sh"`
 
 ### In-depth command walkthrough
 
 | Command (as in script) | 1. What it is | 2. Added / configured | 3. Execution intent | 4. Output (terminal / file / pipeline) |
 | :--- | :--- | :--- | :--- | :--- |
 | `set -euo pipefail` | Bash strict-mode option bundle. | Written at top of script; not installed separately. | Tell Bash to stop on errors, treat unset variables as errors, and fail pipelines if any stage fails. | No visible output; changes how later commands affect exit status. |
-| `DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)/date-and-cal-commands` | Shell variable assignment. | Name=`value` in script; often under `${TMPDIR:-/tmp}`. | Store path or stamp for later commands (setup, not a user command). | No output; variable used by `cd`, `rm`, file paths. |
+| `DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"` | Shell variable assignment. | Name=`value` in script; often under `${TMPDIR:-/tmp}`. | Store path or stamp for later commands (setup, not a user command). | No output; variable used by `cd`, `rm`, file paths. |
 | `echo ""` | Bash builtin that prints arguments to standard output. | Always available in Bash; no package install. | Show section titles, tips, or messages to the terminal (trying to **print** text for the user). | Lines appear on **stdout** in your terminal (or in CI logs). Not used in a pipeline unless followed by `|`. |
 | `echo "############################################"` | Bash builtin that prints arguments to standard output. | Always available in Bash; no package install. | Show section titles, tips, or messages to the terminal (trying to **print** text for the user). | Lines appear on **stdout** in your terminal (or in CI logs). Not used in a pipeline unless followed by `|`. |
 | `echo "# $name"` | Bash builtin that prints arguments to standard output. | Always available in Bash; no package install. | Show section titles, tips, or messages to the terminal (trying to **print** text for the user). | Lines appear on **stdout** in your terminal (or in CI logs). Not used in a pipeline unless followed by `|`. |
@@ -53,9 +53,9 @@ Each script section uses the same **four-part** model:
 
 ---
 
-## [`cal-basic-month-and-options-demo.sh`](../scripts/date-and-cal-commands/cal-basic-month-and-options-demo.sh)
+## [`cal-basic-month-and-options-demo.sh`](../scripts/date-cal-commands/cal-basic-month-and-options-demo.sh)
 
-**Run:** `bash scripts/date-and-cal-commands/cal-basic-month-and-options-demo.sh`
+**Run:** `bash scripts/date-cal-commands/cal-basic-month-and-options-demo.sh`
 
 ### In-depth command walkthrough
 
@@ -81,9 +81,9 @@ Each script section uses the same **four-part** model:
 
 ---
 
-## [`cal-date-echo-group-demo.sh`](../scripts/date-and-cal-commands/cal-date-echo-group-demo.sh)
+## [`cal-date-echo-group-demo.sh`](../scripts/date-cal-commands/cal-date-echo-group-demo.sh)
 
-**Run:** `bash scripts/date-and-cal-commands/cal-date-echo-group-demo.sh`
+**Run:** `bash scripts/date-cal-commands/cal-date-echo-group-demo.sh`
 
 ### In-depth command walkthrough
 
@@ -99,9 +99,9 @@ Each script section uses the same **four-part** model:
 
 ---
 
-## [`date-default-demo.sh`](../scripts/date-and-cal-commands/date-default-demo.sh)
+## [`date-default-demo.sh`](../scripts/date-cal-commands/date-default-demo.sh)
 
-**Run:** `bash scripts/date-and-cal-commands/date-default-demo.sh`
+**Run:** `bash scripts/date-cal-commands/date-default-demo.sh`
 
 ### In-depth command walkthrough
 
@@ -113,9 +113,9 @@ Each script section uses the same **four-part** model:
 
 ---
 
-## [`date-format-class-and-readable-demo.sh`](../scripts/date-and-cal-commands/date-format-class-and-readable-demo.sh)
+## [`date-format-class-and-readable-demo.sh`](../scripts/date-cal-commands/date-format-class-and-readable-demo.sh)
 
-**Run:** `bash scripts/date-and-cal-commands/date-format-class-and-readable-demo.sh`
+**Run:** `bash scripts/date-cal-commands/date-format-class-and-readable-demo.sh`
 
 ### In-depth command walkthrough
 
@@ -130,9 +130,9 @@ Each script section uses the same **four-part** model:
 
 ---
 
-## [`date-log-timestamp-filename-demo.sh`](../scripts/date-and-cal-commands/date-log-timestamp-filename-demo.sh)
+## [`date-log-timestamp-filename-demo.sh`](../scripts/date-cal-commands/date-log-timestamp-filename-demo.sh)
 
-**Run:** `bash scripts/date-and-cal-commands/date-log-timestamp-filename-demo.sh`
+**Run:** `bash scripts/date-cal-commands/date-log-timestamp-filename-demo.sh`
 
 ### In-depth command walkthrough
 
@@ -152,21 +152,21 @@ Each script section uses the same **four-part** model:
 
 | Script | Run |
 | :--- | :--- |
-| [`Date and Cal commands.sh`](../scripts/Date%20and%20Cal%20commands.sh) | `bash "scripts/Date and Cal commands.sh"` |
-| [`cal-basic-month-and-options-demo.sh`](../scripts/date-and-cal-commands/cal-basic-month-and-options-demo.sh) | `bash scripts/date-and-cal-commands/cal-basic-month-and-options-demo.sh` |
-| [`cal-date-echo-group-demo.sh`](../scripts/date-and-cal-commands/cal-date-echo-group-demo.sh) | `bash scripts/date-and-cal-commands/cal-date-echo-group-demo.sh` |
-| [`date-default-demo.sh`](../scripts/date-and-cal-commands/date-default-demo.sh) | `bash scripts/date-and-cal-commands/date-default-demo.sh` |
-| [`date-format-class-and-readable-demo.sh`](../scripts/date-and-cal-commands/date-format-class-and-readable-demo.sh) | `bash scripts/date-and-cal-commands/date-format-class-and-readable-demo.sh` |
-| [`date-log-timestamp-filename-demo.sh`](../scripts/date-and-cal-commands/date-log-timestamp-filename-demo.sh) | `bash scripts/date-and-cal-commands/date-log-timestamp-filename-demo.sh` |
+| [`Date and Cal commands.sh`](../scripts/date-cal-commands/Date%20and%20Cal%20commands.sh) | `bash "scripts/date-cal-commands/Date and Cal commands.sh"` |
+| [`cal-basic-month-and-options-demo.sh`](../scripts/date-cal-commands/cal-basic-month-and-options-demo.sh) | `bash scripts/date-cal-commands/cal-basic-month-and-options-demo.sh` |
+| [`cal-date-echo-group-demo.sh`](../scripts/date-cal-commands/cal-date-echo-group-demo.sh) | `bash scripts/date-cal-commands/cal-date-echo-group-demo.sh` |
+| [`date-default-demo.sh`](../scripts/date-cal-commands/date-default-demo.sh) | `bash scripts/date-cal-commands/date-default-demo.sh` |
+| [`date-format-class-and-readable-demo.sh`](../scripts/date-cal-commands/date-format-class-and-readable-demo.sh) | `bash scripts/date-cal-commands/date-format-class-and-readable-demo.sh` |
+| [`date-log-timestamp-filename-demo.sh`](../scripts/date-cal-commands/date-log-timestamp-filename-demo.sh) | `bash scripts/date-cal-commands/date-log-timestamp-filename-demo.sh` |
 
 
 **Run every script in this topic (from repo root):**
 
 ```bash
-bash "scripts/Date and Cal commands.sh"
-bash scripts/date-and-cal-commands/cal-basic-month-and-options-demo.sh
-bash scripts/date-and-cal-commands/cal-date-echo-group-demo.sh
-bash scripts/date-and-cal-commands/date-default-demo.sh
-bash scripts/date-and-cal-commands/date-format-class-and-readable-demo.sh
-bash scripts/date-and-cal-commands/date-log-timestamp-filename-demo.sh
+bash "scripts/date-cal-commands/Date and Cal commands.sh"
+bash scripts/date-cal-commands/cal-basic-month-and-options-demo.sh
+bash scripts/date-cal-commands/cal-date-echo-group-demo.sh
+bash scripts/date-cal-commands/date-default-demo.sh
+bash scripts/date-cal-commands/date-format-class-and-readable-demo.sh
+bash scripts/date-cal-commands/date-log-timestamp-filename-demo.sh
 ```

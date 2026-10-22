@@ -14,7 +14,7 @@ Scripts are grouped in folders that match **`docs/topics/*.md`** notes (one fold
 | [`file-system-navigation-and-hierarchy/`](file-system-navigation-and-hierarchy/) | [File System Navigation Commands And Hierarchy.md](../docs/topics/File%20System%20Navigation%20Commands%20And%20Hierarchy.md) | `pwd`, `cd`, paths, FHS (Video 4) |
 | [`ls-command-and-its-options/`](ls-command-and-its-options/) | [ls Command and its options.md](../docs/topics/ls%20Command%20and%20its%20options.md) | `ls` and options (Video 7) |
 | [`shell-scripting/`](shell-scripting/) | Shell scripting examples | `hello.sh`, `check-file.sh`, `backup-logs.sh` |
-| [`date-and-cal-commands/`](date-and-cal-commands/) | [Date and Cal commands.md](../docs/topics/Date%20and%20Cal%20commands.md) | Split `date` / `cal` demos (Video 8) |
+| [`date-cal-commands/`](date-cal-commands/) | [Date and Cal commands.md](../docs/topics/Date%20and%20Cal%20commands.md) | `date` / `cal` demos + orchestrator (Video 8) |
 | [`scripts-execution-summary/`](../scripts-execution-summary/) | Per-topic **execution summary** `.md` files | Explains every command in each `.sh` |
 
 **Large demos:** Some topic folders use a **short orchestrator** `.sh` (same name as before) that runs smaller `*-demo.sh` files in order. Run the **split** scripts when you want output that maps clearly to one topic; run the orchestrator for the full lesson in one go.
@@ -23,12 +23,12 @@ Scripts are grouped in folders that match **`docs/topics/*.md`** notes (one fold
 
 | Script | Description |
 | :--- | :--- |
-| [`Date and Cal commands.sh`](Date%20and%20Cal%20commands.sh) | Orchestrator — runs all demos below |
-| [`date-and-cal-commands/date-default-demo.sh`](date-and-cal-commands/date-default-demo.sh) | `date` default |
-| [`date-and-cal-commands/date-format-class-and-readable-demo.sh`](date-and-cal-commands/date-format-class-and-readable-demo.sh) | `date +format` |
-| [`date-and-cal-commands/date-log-timestamp-filename-demo.sh`](date-and-cal-commands/date-log-timestamp-filename-demo.sh) | Log filename timestamp |
-| [`date-and-cal-commands/cal-basic-month-and-options-demo.sh`](date-and-cal-commands/cal-basic-month-and-options-demo.sh) | `cal`, month/year, `-y`, `-3`, `-m` |
-| [`date-and-cal-commands/cal-date-echo-group-demo.sh`](date-and-cal-commands/cal-date-echo-group-demo.sh) | `cal` + `date` + `echo` (like `test.sh`) |
+| [`date-cal-commands/Date and Cal commands.sh`](date-cal-commands/Date%20and%20Cal%20commands.sh) | Orchestrator — runs all demos in this folder |
+| [`date-cal-commands/date-default-demo.sh`](date-cal-commands/date-default-demo.sh) | `date` default |
+| [`date-cal-commands/date-format-class-and-readable-demo.sh`](date-cal-commands/date-format-class-and-readable-demo.sh) | `date +format` |
+| [`date-cal-commands/date-log-timestamp-filename-demo.sh`](date-cal-commands/date-log-timestamp-filename-demo.sh) | Log filename timestamp |
+| [`date-cal-commands/cal-basic-month-and-options-demo.sh`](date-cal-commands/cal-basic-month-and-options-demo.sh) | `cal`, month/year, `-y`, `-3`, `-m` |
+| [`date-cal-commands/cal-date-echo-group-demo.sh`](date-cal-commands/cal-date-echo-group-demo.sh) | `cal` + `date` + `echo` (like `test.sh`) |
 
 See [DateandCal Execution summary.md](../scripts-execution-summary/DateandCal%20Execution%20summary.md).
 
@@ -37,8 +37,8 @@ See [DateandCal Execution summary.md](../scripts-execution-summary/DateandCal%20
 ```bash
 cd /path/to/Linux-Basics
 chmod +x scripts/**/*.sh
-chmod +x "scripts/Date and Cal commands.sh"
-bash "scripts/Date and Cal commands.sh"
+chmod +x "scripts/date-cal-commands/"*.sh
+bash "scripts/date-cal-commands/Date and Cal commands.sh"
 bash scripts/components-of-unix/invalid-command-demos.sh
 bash scripts/types-of-files-in-linux/file-command-content-demo.sh
 bash scripts/bash-built-in-commands/cat-command-demo.sh
