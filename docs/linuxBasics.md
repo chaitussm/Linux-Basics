@@ -30,6 +30,7 @@ Each topic has its own **`.md` file** under [`topics/`](topics/). Runnable **`.s
 | [**ls Command and its options.md**](topics/ls%20Command%20and%20its%20options.md) | `ls`, `man`, `-l`, `-a`, `-A`, `-F`, `-R`, `-i`, `-h`, pipes (Video 7) |
 | [**pipeCommands.md**](topics/pipeCommands.md) | Pipe `\|`, `ls -l /etc \| head`, broken pipe |
 | [**Date and Cal commands.md**](topics/Date%20and%20Cal%20commands.md) | `date`, `date +format`, `cal`, options (Video 8) |
+| [**Steps To Write a Shell Script.md**](topics/Steps%20To%20Write%20a%20Shell%20Script.md) | `#!/bin/bash`, write and run `.sh` files (beginner guide) |
 
 ---
 
