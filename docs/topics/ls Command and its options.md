@@ -297,7 +297,7 @@ ls -l /etc | tail       # last 10
 ls -l /etc | tail -3    # last 3
 ```
 
-**`head`** / **`tail`** are separate commands (detailed later); combine with **`ls`** using **`|`** (pipe). Full theory: [pipe.md](pipe.md) (includes **`Broken pipe`**).
+**`head`** / **`tail`** are separate commands (detailed later); combine with **`ls`** using **`|`** (pipe). Full theory: [pipeCommands.md](pipeCommands.md) (includes **`Broken pipe`**).
 
 **Demo:** [`ls-with-head-tail-demo.sh`](../../scripts/ls-command-and-its-options/ls-with-head-tail-demo.sh)
 
