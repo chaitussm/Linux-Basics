@@ -27,6 +27,7 @@ Each topic has its own **`.md` file** under [`topics/`](topics/). Runnable **`.s
 | [**TypesOfFilesInLinux.md**](topics/TypesOfFilesInLinux.md) | Normal, directory, device files; `ls -l`, `file`, `tty` |
 | [**File System Navigation Commands And Hierarchy.md**](topics/File%20System%20Navigation%20Commands%20And%20Hierarchy.md) | `pwd`, `cd`, paths, `.` / `..`, FHS under `/` (Video 4) |
 | [**ls Command and its options.md**](topics/ls%20Command%20and%20its%20options.md) | `ls`, `man`, `-l`, `-a`, `-A`, `-F`, `-R`, `-i`, `-h`, pipes (Video 7) |
+| [**pipe.md**](topics/pipe.md) | Pipe `\|`, `ls -l /etc \| head`, broken pipe |
 
 ---
 
