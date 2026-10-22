@@ -1,32 +1,17 @@
 #!/bin/bash
-# Session 4 — cd home (relative) fails from nested dir; cd /home works
+# Session 4 — cd home (relative) vs cd /home (orchestrator)
 set -euo pipefail
 
-BASE="${TMPDIR:-/tmp}/linux-cd-home-demo"
-rm -rf "$BASE"
-mkdir -p "$BASE/desktop/d1/d2"
-cd "$BASE/desktop/d1/d2"
+HERE="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
 
-echo "=== cwd is deep inside d2 (no 'home' folder here) ==="
-pwd
+run_demo() {
+  local name="$1"
+  echo ""
+  echo "############################################"
+  echo "# $name"
+  echo "############################################"
+  bash "$HERE/$name"
+}
 
-echo ""
-echo "=== cd home (relative) — looks for ./home under current directory ==="
-if cd home 2>/dev/null; then
-  pwd
-else
-  echo "Failed: no such file or directory (expected from d2)"
-fi
-
-echo ""
-echo "=== cd /home (absolute from /) — always the users' home parent dir ==="
-if [[ -d /home ]]; then
-  cd /home
-  pwd
-  ls -la /home | head -8
-else
-  echo "/home not on this system"
-fi
-
-echo ""
-echo "Remember: /home exists only under root /, not as a relative name from random cwd."
+run_demo cd-home-relative-fails-demo.sh
+run_demo cd-slash-home-absolute-demo.sh

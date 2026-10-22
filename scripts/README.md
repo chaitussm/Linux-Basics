@@ -14,13 +14,21 @@ Scripts are grouped in folders that match **`docs/topics/*.md`** notes (one fold
 | [`file-system-navigation-and-hierarchy/`](file-system-navigation-and-hierarchy/) | [File System Navigation Commands And Hierarchy.md](../docs/topics/File%20System%20Navigation%20Commands%20And%20Hierarchy.md) | `pwd`, `cd`, paths, FHS (Video 4) |
 | [`ls-command-and-its-options/`](ls-command-and-its-options/) | [ls Command and its options.md](../docs/topics/ls%20Command%20and%20its%20options.md) | `ls` and options (Video 7) |
 | [`shell-scripting/`](shell-scripting/) | Shell scripting examples | `hello.sh`, `check-file.sh`, `backup-logs.sh` |
+| [`date-cal-commands/`](date-cal-commands/) | [Date and Cal commands.md](../docs/topics/Date%20and%20Cal%20commands.md) | `date` / `cal` demos + orchestrator (Video 8) |
 | [`scripts-execution-summary/`](../scripts-execution-summary/) | Per-topic **execution summary** `.md` files | Explains every command in each `.sh` |
 
-## Session 8 — root script
+**Large demos:** Some topic folders use a **short orchestrator** `.sh` (same name as before) that runs smaller `*-demo.sh` files in order. Run the **split** scripts when you want output that maps clearly to one topic; run the orchestrator for the full lesson in one go.
+
+## Session 8 — date and cal
 
 | Script | Description |
 | :--- | :--- |
-| [`Date and Cal commands.sh`](Date%20and%20Cal%20commands.sh) | `date`, `date +format`, `cal`, options (Video 8) |
+| [`date-cal-commands/Date and Cal commands.sh`](date-cal-commands/Date%20and%20Cal%20commands.sh) | Orchestrator — runs all demos in this folder |
+| [`date-cal-commands/date-default-demo.sh`](date-cal-commands/date-default-demo.sh) | `date` default |
+| [`date-cal-commands/date-format-class-and-readable-demo.sh`](date-cal-commands/date-format-class-and-readable-demo.sh) | `date +format` |
+| [`date-cal-commands/date-log-timestamp-filename-demo.sh`](date-cal-commands/date-log-timestamp-filename-demo.sh) | Log filename timestamp |
+| [`date-cal-commands/cal-basic-month-and-options-demo.sh`](date-cal-commands/cal-basic-month-and-options-demo.sh) | `cal`, month/year, `-y`, `-3`, `-m` |
+| [`date-cal-commands/cal-date-echo-group-demo.sh`](date-cal-commands/cal-date-echo-group-demo.sh) | `cal` + `date` + `echo` (like `test.sh`) |
 
 See [DateandCal Execution summary.md](../scripts-execution-summary/DateandCal%20Execution%20summary.md).
 
@@ -29,8 +37,8 @@ See [DateandCal Execution summary.md](../scripts-execution-summary/DateandCal%20
 ```bash
 cd /path/to/Linux-Basics
 chmod +x scripts/**/*.sh
-chmod +x "scripts/Date and Cal commands.sh"
-bash "scripts/Date and Cal commands.sh"
+chmod +x "scripts/date-cal-commands/"*.sh
+bash "scripts/date-cal-commands/Date and Cal commands.sh"
 bash scripts/components-of-unix/invalid-command-demos.sh
 bash scripts/types-of-files-in-linux/file-command-content-demo.sh
 bash scripts/bash-built-in-commands/cat-command-demo.sh
@@ -73,7 +81,14 @@ bash scripts/shell-scripting/hello.sh "Linux"
 
 | Script | Description |
 | :--- | :--- |
-| `bash-builtin-examples.sh` | Sample builtins |
+| `bash-builtin-examples.sh` | Orchestrator — all builtin demos |
+| `bash-help-list-demo.sh` | `help` |
+| `bash-pwd-cd-echo-type-demo.sh` | `pwd`, `cd`, `echo`, `type` |
+| `bash-conditional-arithmetic-demo.sh` | `[[ ]]`, `(( ))` |
+| `bash-alias-export-unset-demo.sh` | `alias`, `export`, `unset` |
+| `bash-pushd-popd-dirs-demo.sh` | `pushd`, `popd`, `dirs` |
+| `bash-external-file-command-demo.sh` | external `file` |
+| `bash-printf-mapfile-demo.sh` | `printf`, `mapfile` |
 | `cat-command-demo.sh` | Display file with `cat` |
 | `gedit-command-demo.sh` | GUI edit workflow |
 | `ls-l-file-size-demo.sh` | `ls -l` size in bytes |
@@ -82,17 +97,40 @@ bash scripts/shell-scripting/hello.sh "Linux"
 
 | Script | Description |
 | :--- | :--- |
-| `pwd-cd-navigation-demo.sh` | `pwd`, `cd`, `~`, `.`, `..`, `cd -` |
-| `mkdir-ls-navigation-demo.sh` | `mkdir`, empty `ls`, `ls -a` |
-| `mkdir-navigation-tree-demo.sh` | DR1/DR2 tree; parent vs `cd -` |
+| `pwd-cd-navigation-demo.sh` | Orchestrator — `pwd`, `cd`, `~`, `.`, `..`, `cd -` |
+| `pwd-and-cd-relative-demo.sh` | `pwd`, relative `cd` |
+| `cd-dot-and-parent-demo.sh` | `cd .`, `cd ..` |
+| `cd-home-and-tilde-demo.sh` | `cd`, `cd ~` |
+| `cd-previous-directory-demo.sh` | `cd -` |
+| `mkdir-ls-navigation-demo.sh` | Orchestrator — `mkdir`, empty `ls`, `ls -a` |
+| `mkdir-dir1-dir2-demo.sh` | `mkdir`, nested `cd` |
+| `ls-empty-vs-dot-parent-demo.sh` | empty `ls`, `ls -a` |
+| `mkdir-navigation-tree-demo.sh` | Orchestrator — DR1/DR2 tree; parent vs `cd -` |
+| `nav-tree-create-and-descend-demo.sh` | create tree, `cd` down |
+| `nav-tree-parent-vs-cd-dash-demo.sh` | `cd ..` vs `cd -` |
 | `ls-dot-parent-demo.sh` | `ls -a` and `.` / `..` |
-| `parent-directory-chain-demo.sh` | Parent chain up to `/` |
-| `cd-multiple-parent-demo.sh` | `cd ../..`, invalid `cd ...` |
+| `parent-directory-chain-demo.sh` | Orchestrator — parent chain up to `/` |
+| `parent-chain-walk-up-demo.sh` | `cd ..` from dir2 to `/` |
+| `parent-chain-at-root-demo.sh` | `cd ..` at `/` |
+| `cd-multiple-parent-demo.sh` | Orchestrator — `cd ../..`, invalid `cd ...` |
+| `cd-chained-parent-paths-demo.sh` | chained `..` paths |
+| `cd-three-dots-invalid-demo.sh` | invalid `cd ...` |
 | `cd-root-edge-cases-demo.sh` | `cd ..` / `cd .` at root |
-| `cd-home-relative-vs-absolute-demo.sh` | `cd home` vs `cd /home` |
-| `absolute-vs-relative-paths-demo.sh` | Absolute `/` paths vs relative |
-| `bin-sbin-etc-demo.sh` | `/bin`, `/sbin`, `/etc` samples |
-| `fhs-root-directories-demo.sh` | Read-only tour of `/` and FHS dirs |
+| `cd-home-relative-vs-absolute-demo.sh` | Orchestrator — `cd home` vs `cd /home` |
+| `cd-home-relative-fails-demo.sh` | relative `cd home` fails |
+| `cd-slash-home-absolute-demo.sh` | `cd /home` |
+| `absolute-vs-relative-paths-demo.sh` | Orchestrator — absolute `/` vs relative |
+| `relative-cd-mydir-demo.sh` | relative `cd` |
+| `absolute-cd-work-and-home-demo.sh` | absolute `cd`, `ls -ld /home` |
+| `cd-home-from-root-vs-tmp-demo.sh` | `cd home` from `/` vs `/tmp` |
+| `bin-sbin-etc-demo.sh` | Orchestrator — `/bin`, `/sbin`, `/etc` |
+| `which-command-paths-demo.sh` | `command -v` |
+| `bin-and-sbin-ls-sample-demo.sh` | sample `ls` under `/bin`, `/sbin` |
+| `etc-config-files-head-demo.sh` | `head` on `/etc` files |
+| `fhs-root-directories-demo.sh` | Orchestrator — FHS tour |
+| `fhs-root-ls-slash-demo.sh` | `ls -l /` |
+| `fhs-directories-tour-part1-demo.sh` | `/bin` … `/home` |
+| `fhs-directories-tour-part2-demo.sh` | `/usr` … `/root` |
 
 ### `ls-command-and-its-options/`
 

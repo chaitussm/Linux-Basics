@@ -5,12 +5,12 @@
 
 **Prerequisites:** [Components of Unix.md](Components%20of%20Unix.md) (`cal`, `date` in `test.sh`) · [ls Command and its options.md](ls%20Command%20and%20its%20options.md) (`man` pages habit)
 
-**Practice script:** [`Date and Cal commands.sh`](../../scripts/Date%20and%20Cal%20commands.sh) (Ctrl+click)  
+**Practice script:** [`Date and Cal commands.sh`](../../scripts/date-cal-commands/Date%20and%20Cal%20commands.sh) (Ctrl+click)  
 **Execution summary:** [DateandCal Execution summary.md](../../scripts-execution-summary/DateandCal%20Execution%20summary.md)
 
 ```bash
 cd /path/to/Linux-Basics
-bash "scripts/Date and Cal commands.sh"
+bash "scripts/date-cal-commands/Date and Cal commands.sh"
 ```
 
 ---
@@ -220,7 +220,12 @@ You should be able to:
 
 | Script | Demonstrates |
 | :--- | :--- |
-| [`Date and Cal commands.sh`](../../scripts/Date%20and%20Cal%20commands.sh) | All topics above in one runnable demo |
+| [`Date and Cal commands.sh`](../../scripts/date-cal-commands/Date%20and%20Cal%20commands.sh) | Orchestrator — runs all split demos below |
+| [`date-default-demo.sh`](../../scripts/date-cal-commands/date-default-demo.sh) | Default `date` |
+| [`date-format-class-and-readable-demo.sh`](../../scripts/date-cal-commands/date-format-class-and-readable-demo.sh) | `date +format` |
+| [`date-log-timestamp-filename-demo.sh`](../../scripts/date-cal-commands/date-log-timestamp-filename-demo.sh) | Log file timestamp |
+| [`cal-basic-month-and-options-demo.sh`](../../scripts/date-cal-commands/cal-basic-month-and-options-demo.sh) | `cal` options |
+| [`cal-date-echo-group-demo.sh`](../../scripts/date-cal-commands/cal-date-echo-group-demo.sh) | Like Video 2 `test.sh` |
 
 **Related:** [`components-of-unix/test.sh`](../../scripts/components-of-unix/test.sh) — minimal `cal` + `date` + `echo`.
 
