@@ -16,11 +16,21 @@ Scripts are grouped in folders that match **`docs/topics/*.md`** notes (one fold
 | [`shell-scripting/`](shell-scripting/) | Shell scripting examples | `hello.sh`, `check-file.sh`, `backup-logs.sh` |
 | [`scripts-execution-summary/`](../scripts-execution-summary/) | Per-topic **execution summary** `.md` files | Explains every command in each `.sh` |
 
+## Session 8 — root script
+
+| Script | Description |
+| :--- | :--- |
+| [`Date and Cal commands.sh`](Date%20and%20Cal%20commands.sh) | `date`, `date +format`, `cal`, options (Video 8) |
+
+See [DateandCal Execution summary.md](../scripts-execution-summary/DateandCal%20Execution%20summary.md).
+
 ## Run from repo root
 
 ```bash
 cd /path/to/Linux-Basics
 chmod +x scripts/**/*.sh
+chmod +x "scripts/Date and Cal commands.sh"
+bash "scripts/Date and Cal commands.sh"
 bash scripts/components-of-unix/invalid-command-demos.sh
 bash scripts/types-of-files-in-linux/file-command-content-demo.sh
 bash scripts/bash-built-in-commands/cat-command-demo.sh
