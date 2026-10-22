@@ -2,51 +2,24 @@
 # It runs the currently open script, not every .sh file in the repository at once. Ensure Bash is installed on your system.
 
 #!/bin/bash
-# Demonstrates sample Bash built-ins documented in Bash Built-in Commands.md
+# Runs split builtin demos — prefer individual bash-*-demo.sh files for readable output
 set -euo pipefail
 
-echo "=== help (list internal commands) ==="
-help | head -8
+HERE="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
 
-echo ""
-echo "=== pwd, cd, echo, type ==="
-pwd
-cd /tmp
-pwd
-echo "Hello from echo builtin"
-type echo
+run_demo() {
+  local name="$1"
+  echo ""
+  echo "############################################"
+  echo "# $name"
+  echo "############################################"
+  bash "$HERE/$name"
+}
 
-echo ""
-echo "=== test / [[ / (( arithmetic )) ==="
-[[ -d /tmp ]] && echo "/tmp is a directory"
-(( x = 3 + 4 )) && echo "(( )) result: x=$x"
-
-echo ""
-echo "=== alias, export, unset ==="
-alias demo_ls='ls --color=auto'
-demo_ls /tmp | head -3
-export DEMO_VAR=linux
-echo "DEMO_VAR=$DEMO_VAR"
-unset DEMO_VAR
-
-echo ""
-echo "=== pushd / popd / dirs ==="
-pushd /tmp >/dev/null
-dirs -p
-popd >/dev/null
-
-echo ""
-echo "=== file (external — check file type by content) ==="
-WORK_FILE="${TMPDIR:-/tmp}/bash-builtin-file-demo.txt"
-echo "sample text" > "$WORK_FILE"
-type file
-file "$WORK_FILE"
-
-echo ""
-echo "=== printf, read (here-string), mapfile ==="
-printf "User: %s\n" "$(whoami)"
-mapfile -t lines <<< $'one\ntwo'
-printf 'mapfile[0]=%s\n' "${lines[0]}"
-
-echo ""
-echo "Done. See: docs/topics/Bash Built-in Commands.md"
+run_demo bash-help-list-demo.sh
+run_demo bash-pwd-cd-echo-type-demo.sh
+run_demo bash-conditional-arithmetic-demo.sh
+run_demo bash-alias-export-unset-demo.sh
+run_demo bash-pushd-popd-dirs-demo.sh
+run_demo bash-external-file-command-demo.sh
+run_demo bash-printf-mapfile-demo.sh
