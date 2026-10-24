@@ -43,6 +43,7 @@ See [DateandCal Execution summary.md](../scripts-execution-summary/DateandCal%20
 | `cat-multiple-files-concat-demo.sh` | `cat f1 f2` |
 | `tac-reverse-lines-demo.sh` | `tac` |
 | `rev-reverse-line-chars-demo.sh` | `rev` |
+| `rev-tac-display-only-demo.sh` | `rev`/`tac` — file on disk unchanged |
 | `head-top-lines-demo.sh` | `head`, negative `-n` |
 | `tail-bottom-lines-demo.sh` | `tail` |
 | `small-vs-large-file-view-demo.sh` | cat vs head/tail |
