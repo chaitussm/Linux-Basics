@@ -372,11 +372,37 @@ After providng the command at line
 
 Durga Sir stresses this — easy to mix up in exams.
 
-### Characters from top
+### Characters from top — `head -c` (Durga Sir)
+
+By default, **`head`** counts **lines**. With **`-c`**, you count **characters** (bytes) from the **start** of the file instead.
+
+**Command (class example):**
 
 ```bash
-head -c 100 abc.txt    # first 100 bytes/characters
+head -c 100 abc.txt
 ```
+
+**Durga Sir (as in class notes):**
+
+> It will display the first **100 characters** of the file.  
+> In Linux every character will take **one byte**. Hence it will display first **100 bytes** of file content.
+
+| Idea | Meaning |
+| :--- | :--- |
+| **`head abc.txt`** | First **10 lines** (default) |
+| **`head -n 5 abc.txt`** | First **5 lines** |
+| **`head -c 100 abc.txt`** | First **100 characters** (= **100 bytes** in normal text) |
+
+**Lab (same `-c` idea on a real script):** from `scripts/linuxbasics/`, Durga Sir’s class often uses a file like **`printString.sh`**:
+
+```bash
+cd ~/Study/Linux-Basics/scripts/linuxbasics
+head -c 100 printString.sh
+```
+
+Output stops after **100 bytes** — so you may see only **part** of a line (e.g. cut off mid-comment). Use **`cat printString.sh`** to see the full file.
+
+![Terminal: head -c 100 printString.sh shows first 100 bytes, then cat shows full script](../assets/head-c-100-printString-terminal.png)
 
 **Demo:** [`head-top-lines-demo.sh`](../../scripts/viewContentOfFiles/head-top-lines-demo.sh)
 
