@@ -154,8 +154,9 @@ pie title Choosing > vs >>
 
 **Override vs append (repo names):**
 
-- [`overrideData.sh`](../../../scripts/linuxbasics/overrideData.sh) — idea: **`>`** replaces content  
-- [`appendData.sh`](../../../scripts/linuxbasics/appendData.sh) — idea: build file with **`>>`** or heredoc  
+- [`overwrite-greater-than-demo.sh`](../../../scripts/Redirection/overwrite-greater-than-demo.sh) — **`>`** replaces content (Rama/Sita)  
+- [`append-greater-greater-demo.sh`](../../../scripts/Redirection/append-greater-greater-demo.sh) — **`>>`** builds file line by line  
+- [`heredoc-eof-demo.sh`](../../../scripts/Redirection/heredoc-eof-demo.sh) — **`<<EOF`** multi-line  
 
 ---
 
