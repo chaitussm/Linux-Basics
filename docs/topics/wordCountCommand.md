@@ -405,6 +405,52 @@ Same idea as default **`wc`** on multiple files ([§10](#10-multiple-files-and-t
 
 ![Terminal: wc -l, wc -w, wc -c on fileinfo.txt filedata.txt datfile.txt — each with total](../assets/wc-multiple-files-lwc-flags-terminal.png)
 
+### Combined flags on multiple files — `-lc`, `-lw`, `-wc`
+
+You can **combine** flags on the **same three files**. Each row still shows **only the columns you asked for** (in order **lines → words → bytes**), then **`total`** adds **each column** across files — same rule as [§7](#7-wc--c--bytes--characters) for a single file.
+
+```bash
+cd ~/Study/Linux-Basics/scripts/linuxbasics
+wc -lc fileinfo.txt filedata.txt datfile.txt
+wc -lw fileinfo.txt filedata.txt datfile.txt
+wc -wc fileinfo.txt filedata.txt datfile.txt
+```
+
+**`wc -lc`** (lines + bytes per file, then totals):
+
+```text
+  5 135 fileinfo.txt
+  5 135 filedata.txt
+  4 222 datfile.txt
+ 14 492 total
+```
+
+**`wc -lw`** (lines + words):
+
+```text
+  5  24 fileinfo.txt
+  5  24 filedata.txt
+  4  39 datfile.txt
+ 14  87 total
+```
+
+**`wc -wc`** (words + bytes):
+
+```text
+ 24 135 fileinfo.txt
+ 24 135 filedata.txt
+ 39 222 datfile.txt
+ 87 492 total
+```
+
+| Command | Columns per file | **`total`** sums |
+| :--- | :--- | :--- |
+| **`wc -lc`** … | lines, bytes | line total **14**, byte total **492** |
+| **`wc -lw`** … | lines, words | line total **14**, word total **87** |
+| **`wc -wc`** … | words, bytes | word total **87**, byte total **492** |
+
+![Terminal: wc -lc, -lw, -wc on three files — each with total row](../assets/wc-multiple-files-combo-flags-terminal.png)
+
 **Demo:** [`wc-multiple-files-lwc-flags-demo.sh`](../../scripts/wordCountCommand/wc-multiple-files-lwc-flags-demo.sh)
 
 ---
