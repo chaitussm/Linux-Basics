@@ -543,9 +543,9 @@ def row_for(line: str, key: str | None) -> str:
     return f"| `{short}` | {w} | {c} | {i} | {o} |"
 
 
-def script_link(rel: Path) -> str:
+def script_link(rel: Path, prefix: str = "../scripts/") -> str:
     encoded = rel.as_posix().replace(" ", "%20")
-    return f"../scripts/{encoded}"
+    return f"{prefix}{encoded}"
 
 
 def run_command(rel: Path) -> str:
@@ -555,11 +555,11 @@ def run_command(rel: Path) -> str:
     return f"bash scripts/{pos}"
 
 
-def section_for_script(path: Path) -> str:
+def section_for_script(path: Path, scripts_link_prefix: str = "../scripts/") -> str:
     rel = path.relative_to(SCRIPTS)
     lines = path.read_text(encoding="utf-8", errors="replace").splitlines()
     out = [
-        f"## [`{path.name}`]({script_link(rel)})",
+        f"## [`{path.name}`]({script_link(rel, scripts_link_prefix)})",
         "",
         f"**Run:** `{run_command(rel)}`",
         "",

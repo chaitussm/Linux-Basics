@@ -16,7 +16,7 @@ Scripts are grouped in folders that match **`docs/topics/*.md`** notes (one fold
 | [`shell-scripting/`](shell-scripting/) | Shell scripting examples | `hello.sh`, `check-file.sh`, `backup-logs.sh` |
 | [`date-cal-commands/`](date-cal-commands/) | [Date and Cal commands.md](../docs/topics/Date%20and%20Cal%20commands.md) | `date` / `cal` demos + orchestrator (Video 8) |
 | [`viewContentOfFiles/`](viewContentOfFiles/) | [viewContentOfFiles.md](../docs/topics/viewContentOfFiles.md) | `cat`, `tac`, `rev`, `head`, `tail`, `more`, `less` (Video 9) |
-| [`Redirection/`](Redirection/) | [Redirection/README.md](../docs/topics/Redirection/README.md) | `>`, `>>`, `<`, `<<EOF` (Durga Sir redirection) |
+| [`Redirection/`](Redirection/) | [EOF and Redirection.md](../docs/topics/EOF%20and%20Redirection.md) | `>`, `>>`, `<`, `<<EOF` (Durga Sir redirection) |
 | [`scripts-execution-summary/`](../scripts-execution-summary/) | Per-topic **execution summary** `.md` files | Explains every command in each `.sh` |
 
 **Large demos:** Some topic folders use a **short orchestrator** `.sh` (same name as before) that runs smaller `*-demo.sh` files in order. Run the **split** scripts when you want output that maps clearly to one topic; run the orchestrator for the full lesson in one go.
@@ -43,12 +43,13 @@ See [DateandCal Execution summary.md](../scripts-execution-summary/DateandCal%20
 | `cat-multiple-files-concat-demo.sh` | `cat f1 f2` |
 | `tac-reverse-lines-demo.sh` | `tac` |
 | `rev-reverse-line-chars-demo.sh` | `rev` |
+| `rev-tac-display-only-demo.sh` | `rev`/`tac` — file on disk unchanged |
 | `head-top-lines-demo.sh` | `head`, negative `-n` |
 | `tail-bottom-lines-demo.sh` | `tail` |
 | `small-vs-large-file-view-demo.sh` | cat vs head/tail |
 | `more-less-pager-hint-demo.sh` | `more` / `less` |
 
-See [viewContentOfFiles/viewContentOfFiles.md](../scripts-execution-summary/viewContentOfFiles/viewContentOfFiles.md).
+Execution summary is **Part 2** in [viewContentOfFiles.md](../docs/topics/viewContentOfFiles.md#part-2--execution-summary-scriptsviewcontentoffiles).
 
 ## Redirection — `>`, `>>`, EOF
 
@@ -60,7 +61,7 @@ See [viewContentOfFiles/viewContentOfFiles.md](../scripts-execution-summary/view
 | `input-less-than-demo.sh` | `cat < file` |
 | `pipe-vs-redirect-hint-demo.sh` | `\|` vs `>` |
 
-See [Redirection/Redirection.md](../scripts-execution-summary/Redirection/Redirection.md).
+See [Redirection.md](../scripts-execution-summary/Redirection.md).
 
 ## Run from repo root
 
