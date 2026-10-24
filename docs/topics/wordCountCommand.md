@@ -292,14 +292,61 @@ Durga Sir: the **newline** after `echo` is also **one character** (one byte). Th
 
 ## 10. Multiple files and the **total** line
 
+Durga Sir: you can pass **more than one file name** to **`wc`**. It prints **one row per file** (lines, words, bytes, name), then a final **`total`** row that **adds** those three counts across **all** files.
+
+### Syntax
+
 ```bash
-wc file1.txt file2.txt
+wc file1.txt file2.txt file3.txt
 ```
 
-- **`wc`** prints one row **per file**.
-- Last row **`total`** — combined lines, words, and bytes for **all** files listed.
+| Row type | Meaning |
+| :--- | :--- |
+| **Per file** | Lines, words, bytes for **that** file only |
+| **`total`** | **Sum** of lines, **sum** of words, **sum** of bytes for **every** file you listed |
 
-**Demo:** [`wc-multiple-files-total-demo.sh`](../../scripts/wordCountCommand/wc-multiple-files-total-demo.sh)
+The **`total`** line does **not** include a fourth file name — the word **`total`** is the label in the last column.
+
+### Lab — `fileinfo.txt`, `filedata.txt`, `datfile.txt` (Durga Sir)
+
+Prepare three files under **`scripts/linuxbasics/`**:
+
+```bash
+cd ~/Study/Linux-Basics/scripts/linuxbasics
+cp fileinfo.txt filedata.txt    # copy — same counts as fileinfo.txt
+touch datfile.txt
+gedit datfile.txt               # add your own lines, save, close
+```
+
+Then run **`wc`** on **all three** at once:
+
+```bash
+wc fileinfo.txt filedata.txt datfile.txt
+```
+
+**Example output (from class terminal):**
+
+```text
+  5  24 135 fileinfo.txt
+  5  24 135 filedata.txt
+  4  39 222 datfile.txt
+ 14  87 492 total
+```
+
+**How to read it:**
+
+| File | Lines | Words | Bytes | Note |
+| :--- | ---: | ---: | ---: | :--- |
+| **fileinfo.txt** | 5 | 24 | 135 | Original lab file ([§4](#4-default-output--four-columns)) |
+| **filedata.txt** | 5 | 24 | 135 | **Copy** of `fileinfo.txt` — same three numbers |
+| **datfile.txt** | 4 | 39 | 222 | Different content you typed in `gedit` |
+| **`total`** | **14** | **87** | **492** | **5+5+4** lines, **24+24+39** words, **135+135+222** bytes |
+
+Durga Sir: the **`total`** row is the **grand total** for the whole command — useful when you need **overall** size of several files in one shot.
+
+![Terminal: cp fileinfo to filedata, gedit datfile, wc on three files — total 14 87 492](../assets/wc-multiple-files-total-linuxbasics-terminal.png)
+
+**Demo (minimal two-file example in `/tmp`):** [`wc-multiple-files-total-demo.sh`](../../scripts/wordCountCommand/wc-multiple-files-total-demo.sh)
 
 ---
 
