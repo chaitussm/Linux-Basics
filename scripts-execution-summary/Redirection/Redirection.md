@@ -1,6 +1,6 @@
 # Execution summary — `Redirection/`
 
-**Topic:** [Redirection/README.md](../../docs/topics/Redirection/README.md)  
+**Topic:** [EOF and Redirection.md](../../docs/topics/EOF%20and%20Redirection.md)  
 **Scripts directory:** [`../../scripts/Redirection/`](../../scripts/Redirection/)
 
 ```mermaid

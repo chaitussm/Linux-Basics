@@ -46,13 +46,13 @@ def collect_scripts(rel_dirs: list[str], extra: list[str] | None = None) -> list
     return out
 
 
-def script_index_table(paths: list[Path]) -> str:
+def script_index_table(paths: list[Path], scripts_link_prefix: str = "../scripts/") -> str:
     rows = ["| Script | Run |", "| :--- | :--- |"]
     for p in paths:
         rel = p.relative_to(SCRIPTS)
         run = f"`{run_command(rel)}`"
         encoded = rel.as_posix().replace(" ", "%20")
-        rows.append(f"| [`{p.name}`](../scripts/{encoded}) | {run} |")
+        rows.append(f"| [`{p.name}`]({scripts_link_prefix}{encoded}) | {run} |")
     return "\n".join(rows) + "\n"
 
 
@@ -63,6 +63,7 @@ def build_doc(
     pie_mermaid: str,
     flow_mermaid: str | None,
     paths: list[Path],
+    scripts_link_prefix: str = "../scripts/",
 ) -> str:
     parts = [
         title,
@@ -77,12 +78,12 @@ def build_doc(
         parts.extend([flow_mermaid, ""])
     parts.extend([FOUR_PART_LEGEND.strip(), "", "---", ""])
     for p in paths:
-        parts.append(section_for_script(p))
+        parts.append(section_for_script(p, scripts_link_prefix))
         parts.append("---")
         parts.append("")
     parts.append("## Script index (all `.sh` in this summary)")
     parts.append("")
-    parts.append(script_index_table(paths))
+    parts.append(script_index_table(paths, scripts_link_prefix))
     parts.append("")
     parts.append("**Run every script in this topic (from repo root):**")
     parts.append("")
@@ -225,12 +226,15 @@ flowchart TD
 ```""",
     },
     {
-        "file": "viewContentOfFiles/viewContentOfFiles.md",
+        "merge_into_topic": "docs/topics/viewContentOfFiles.md",
+        "execution_begin": "<!-- BEGIN EXECUTION_SUMMARY (generated) -->",
+        "execution_end": "<!-- END EXECUTION_SUMMARY (generated) -->",
         "title": "# Execution summary — `viewContentOfFiles/`",
         "topic": "**Topic:** [viewContentOfFiles.md](../../docs/topics/viewContentOfFiles.md) (Video 9)  ",
         "dir_line": "**Scripts directory:** [`../../scripts/viewContentOfFiles/`](../../scripts/viewContentOfFiles/)",
         "dirs": ["scripts/viewContentOfFiles"],
         "extra": None,
+        "scripts_link_prefix": "../../scripts/",
         "pie": """```mermaid
 %%{init: {'theme': 'base', 'themeVariables': {'pie1': '#5c5c5c', 'pie2': '#6e6e6e', 'pie3': '#4a4a4a', 'pie4': '#7a7a7a', 'pieTitleTextColor': '#ffffff', 'pieSectionTextColor': '#ffffff'}}}%%
 pie title View-content commands in demos
@@ -244,7 +248,7 @@ pie title View-content commands in demos
     {
         "file": "Redirection/Redirection.md",
         "title": "# Execution summary — `Redirection/`",
-        "topic": "**Topic:** [Redirection/README.md](../../docs/topics/Redirection/README.md)  ",
+        "topic": "**Topic:** [EOF and Redirection.md](../../docs/topics/EOF%20and%20Redirection.md)  ",
         "dir_line": "**Scripts directory:** [`../../scripts/Redirection/`](../../scripts/Redirection/)",
         "dirs": ["scripts/Redirection"],
         "extra": None,
@@ -261,12 +265,69 @@ pie title Redirection demos
 ]
 
 
+def execution_body_for_topic(
+    pie_mermaid: str,
+    flow_mermaid: str | None,
+    paths: list[Path],
+    scripts_link_prefix: str,
+) -> str:
+    """Pie chart through run-all block — embedded in docs/topics/*.md."""
+    parts = [pie_mermaid, ""]
+    if flow_mermaid:
+        parts.extend([flow_mermaid, ""])
+    parts.extend([FOUR_PART_LEGEND.strip(), "", "---", ""])
+    for p in paths:
+        parts.append(section_for_script(p, scripts_link_prefix=scripts_link_prefix))
+        parts.append("---")
+        parts.append("")
+    parts.append("## Script index (all `.sh` in this summary)")
+    parts.append("")
+    parts.append(script_index_table(paths, scripts_link_prefix))
+    parts.append("")
+    parts.append("**Run every script in this topic (from repo root):**")
+    parts.append("")
+    parts.append("```bash")
+    for p in paths:
+        rel = p.relative_to(SCRIPTS)
+        parts.append(run_command(rel))
+    parts.append("```")
+    parts.append("")
+    return "\n".join(parts)
+
+
+def merge_execution_into_topic(topic_rel: str, begin: str, end: str, body: str) -> None:
+    topic_path = REPO / topic_rel
+    text = topic_path.read_text(encoding="utf-8")
+    if begin not in text or end not in text:
+        raise SystemExit(f"Markers not found in {topic_path}")
+    start = text.index(begin) + len(begin)
+    stop = text.index(end)
+    new_text = text[:start] + "\n" + body.rstrip() + "\n" + text[stop:]
+    topic_path.write_text(new_text, encoding="utf-8")
+
+
 def main() -> None:
     for spec in SPECS:
         paths = collect_scripts(spec["dirs"], spec.get("extra"))
-        if spec["file"] == "DateandCal Execution summary.md":
+        if spec.get("file") == "DateandCal Execution summary.md":
             orch = SCRIPTS / "date-cal-commands" / "Date and Cal commands.sh"
             paths = [orch] + [p for p in paths if p.resolve() != orch.resolve()]
+        link_prefix = spec.get("scripts_link_prefix", "../scripts/")
+        if spec.get("merge_into_topic"):
+            body = execution_body_for_topic(
+                spec["pie"],
+                spec.get("flow"),
+                paths,
+                link_prefix,
+            )
+            merge_execution_into_topic(
+                spec["merge_into_topic"],
+                spec["execution_begin"],
+                spec["execution_end"],
+                body,
+            )
+            print(f"Merged execution summary into {spec['merge_into_topic']} ({len(paths)} scripts)")
+            continue
         doc = build_doc(
             spec["title"],
             spec["topic"],
@@ -274,6 +335,7 @@ def main() -> None:
             spec["pie"],
             spec.get("flow"),
             paths,
+            link_prefix,
         )
         out_path = OUT / spec["file"]
         out_path.parent.mkdir(parents=True, exist_ok=True)
