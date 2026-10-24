@@ -24,12 +24,13 @@ bash scripts/wordCountCommand/wc-default-four-columns-demo.sh
 - [5. `wc -l` — number of lines only](#5-wc--l--number-of-lines-only)
 - [6. `wc -w` — number of words only](#6-wc--w--number-of-words-only)
 - [7. `wc -c` — bytes / characters](#7-wc--c--bytes--characters)
-- [8. Newline and `echo -n` (Durga Sir lab)](#8-newline-and-echo--n-durga-sir-lab)
-- [9. Multiple files and the **total** line](#9-multiple-files-and-the-total-line)
-- [10. `wc` with a pipe](#10-wc-with-a-pipe)
-- [11. `wc` vs viewing the whole file](#11-wc-vs-viewing-the-whole-file)
-- [12. Session checklist](#12-session-checklist)
-- [13. Script index](#13-script-index)
+- [8. `wc -L` — longest line length (capital **L**)](#8-wc--l--longest-line-length-capital-l)
+- [9. Newline and `echo -n` (Durga Sir lab)](#9-newline-and-echo--n-durga-sir-lab)
+- [10. Multiple files and the **total** line](#10-multiple-files-and-the-total-line)
+- [11. `wc` with a pipe](#11-wc-with-a-pipe)
+- [12. `wc` vs viewing the whole file](#12-wc-vs-viewing-the-whole-file)
+- [13. Session checklist](#13-session-checklist)
+- [14. Script index](#14-script-index)
 
 ---
 
@@ -153,7 +154,9 @@ Durga Sir: remember — **lines**, **words**, **characters (bytes)**, and **file
 
 ## 5. `wc -l` — number of lines only
 
-If you want **only** the **line count**, use **`-l`** (letter **l** = **lines**).
+If you want **only** the **line count**, use **`-l`** (lowercase **l** = **lines**).
+
+Do **not** confuse **`wc -l`** with **`wc -L`** (capital **L**) — that is the **longest line** length ([§8](#8-wc--l--longest-line-length-capital-l)).
 
 ```bash
 wc -l fruits.txt
@@ -229,7 +232,45 @@ Flag letters can be written together (**`-lw`**) or separately (**`-l -w`**); th
 
 ---
 
-## 8. Newline and `echo -n` (Durga Sir lab)
+## 8. `wc -L` — longest line length (capital **L**)
+
+Durga Sir: **`wc -L`** answers a different question — not “how many lines?” but **how long is the longest line** (in **characters / bytes** on that line)?
+
+| Flag | Letter | Meaning |
+| :---: | :---: | :--- |
+| **`-l`** | lowercase **l** | **Count** of lines |
+| **`-L`** | capital **L** | **Length** of the **longest** line (including spaces between words on that line) |
+
+**Syntax:**
+
+```bash
+wc -L fileinfo.txt
+```
+
+**Durga Sir lab (`fileinfo.txt`):**
+
+```bash
+cd ~/Study/Linux-Basics/scripts/linuxbasics
+wc -L fileinfo.txt
+```
+
+Example output:
+
+```text
+37 fileinfo.txt
+```
+
+→ The **longest line** in the file has **37** characters (bytes). Other lines may be shorter; **`-L`** scans the whole file and reports the **maximum** line length only.
+
+To see **which** line is longest, use **`cat -n fileinfo.txt`** and compare — **`wc -L`** gives you the **number** without manual counting.
+
+![Terminal: wc -L fileinfo.txt — 37 fileinfo.txt](../assets/wc-capital-L-longest-line-fileinfo-terminal.png)
+
+**Demo:** [`wc-longest-line-capital-L-demo.sh`](../../scripts/wordCountCommand/wc-longest-line-capital-L-demo.sh)
+
+---
+
+## 9. Newline and `echo -n` (Durga Sir lab)
 
 Same idea as [`printString.sh`](../../scripts/linuxbasics/printString.sh) in **`scripts/linuxbasics/`**:
 
@@ -249,7 +290,7 @@ Durga Sir: the **newline** after `echo` is also **one character** (one byte). Th
 
 ---
 
-## 9. Multiple files and the **total** line
+## 10. Multiple files and the **total** line
 
 ```bash
 wc file1.txt file2.txt
@@ -262,7 +303,7 @@ wc file1.txt file2.txt
 
 ---
 
-## 10. `wc` with a pipe
+## 11. `wc` with a pipe
 
 You can count **command output** without saving to a file:
 
@@ -283,7 +324,7 @@ Durga Sir: **`wc`** is very often used **after** **`|`** in real scripts and exa
 
 ---
 
-## 11. `wc` vs viewing the whole file
+## 12. `wc` vs viewing the whole file
 
 | Need | Use |
 | :--- | :--- |
@@ -295,20 +336,21 @@ Preview from Session 9: **`man cat`** saved to a file — here **`wc -l`** answe
 
 ---
 
-## 12. Session checklist
+## 13. Session checklist
 
 You should be able to:
 
 1. Say what **`wc`** stands for and why Durga Sir teaches it after viewing files.  
 2. Run **`wc filename`** and read **lines, words, bytes, name**.  
-3. Use **`wc -l`**, **`wc -w`**, **`wc -c`** when only one count is needed.  
-4. Explain **`echo "vishnu" | wc -c`** vs **`echo -n "vishnu" | wc -c`**.  
-5. Run **`wc`** on **two or more files** and read the **`total`** row.  
-6. Use **`something | wc -l`** for line counts from a command.
+3. Use **`wc -l`**, **`wc -w`**, **`wc -c`** when only one count is needed (and combos **`-lw`**, **`-lc`**, **`-wc`**).  
+4. Distinguish **`wc -l`** (line **count**) from **`wc -L`** (longest line **length**).  
+5. Explain **`echo "vishnu" | wc -c`** vs **`echo -n "vishnu" | wc -c`**.  
+6. Run **`wc`** on **two or more files** and read the **`total`** row.  
+7. Use **`something | wc -l`** for line counts from a command.
 
 ---
 
-## 13. Script index
+## 14. Script index
 
 | Script | Topic |
 | :--- | :--- |
@@ -316,6 +358,7 @@ You should be able to:
 | [`wc-lines-only-demo.sh`](../../scripts/wordCountCommand/wc-lines-only-demo.sh) | `wc -l` |
 | [`wc-words-only-demo.sh`](../../scripts/wordCountCommand/wc-words-only-demo.sh) | `wc -w` |
 | [`wc-bytes-chars-newline-demo.sh`](../../scripts/wordCountCommand/wc-bytes-chars-newline-demo.sh) | `wc -c`, `echo` vs `echo -n` |
+| [`wc-longest-line-capital-L-demo.sh`](../../scripts/wordCountCommand/wc-longest-line-capital-L-demo.sh) | `wc -L` longest line |
 | [`wc-multiple-files-total-demo.sh`](../../scripts/wordCountCommand/wc-multiple-files-total-demo.sh) | Multiple files + `total` |
 | [`wc-pipe-count-demo.sh`](../../scripts/wordCountCommand/wc-pipe-count-demo.sh) | `wc` after `\|` |
 

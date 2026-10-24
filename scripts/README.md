@@ -60,6 +60,7 @@ Execution summary is **Part 2** in [viewContentOfFiles.md](../docs/topics/viewCo
 | `wc-lines-only-demo.sh` | `wc -l` |
 | `wc-words-only-demo.sh` | `wc -w` |
 | `wc-bytes-chars-newline-demo.sh` | `wc -c`; `echo` vs `echo -n` |
+| `wc-longest-line-capital-L-demo.sh` | `wc -L` — longest line length |
 | `wc-multiple-files-total-demo.sh` | Two files + `total` row |
 | `wc-pipe-count-demo.sh` | `ls \| wc -l` style |
 
