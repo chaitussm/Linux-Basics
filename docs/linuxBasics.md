@@ -17,6 +17,7 @@ Each topic has its own **`.md` file** under [`topics/`](topics/). Runnable **`.s
 | 7 | [**ls Command and its options.md**](topics/ls%20Command%20and%20its%20options.md) | [Session 7](https://www.youtube.com/watch?v=rpxT2L3t1a8&list=PLd3UqWTnYXOloH0vWBs4BtSbP84WcC2NY&index=7) |
 | 8 | [**Date and Cal commands.md**](topics/Date%20and%20Cal%20commands.md) | [Session 8](https://www.youtube.com/watch?v=NmJyVY1Mvww&list=PLd3UqWTnYXOloH0vWBs4BtSbP84WcC2NY&index=8) |
 | 9 | [**viewContentOfFiles.md**](topics/viewContentOfFiles.md) | [Session 9](https://www.youtube.com/watch?v=FuzpoZwDcZU&list=PLd3UqWTnYXOloH0vWBs4BtSbP84WcC2NY&index=9) |
+| 10 | [**wordCountCommand.md**](topics/wordCountCommand.md) | [Session 10 — `wc`](https://www.youtube.com/watch?v=hmPHZBR-9Wk&list=PLd3UqWTnYXOloH0vWBs4BtSbP84WcC2NY&index=10) |
 
 ---
 
@@ -33,6 +34,7 @@ Each topic has its own **`.md` file** under [`topics/`](topics/). Runnable **`.s
 | [**Date and Cal commands.md**](topics/Date%20and%20Cal%20commands.md) | `date`, `date +format`, `cal`, options (Video 8) |
 | [**Steps To Write a Shell Script.md**](topics/Steps%20To%20Write%20a%20Shell%20Script.md) | `#!/bin/bash`, write and run `.sh` files (beginner guide) |
 | [**viewContentOfFiles.md**](topics/viewContentOfFiles.md) | `cat`, `tac`, `rev`, `head`, `tail`, `more`, `less` (Video 9) |
+| [**wordCountCommand.md**](topics/wordCountCommand.md) | `wc` — lines, words, bytes; `-l`, `-w`, `-c`; pipes (Video 10) |
 | [**EOF and Redirection.md**](topics/EOF%20and%20Redirection.md) | `>`, `>>`, `<`, heredoc `<<EOF` (overwrite vs append) |
 
 ---

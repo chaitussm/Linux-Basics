@@ -16,6 +16,7 @@ Scripts are grouped in folders that match **`docs/topics/*.md`** notes (one fold
 | [`shell-scripting/`](shell-scripting/) | Shell scripting examples | `hello.sh`, `check-file.sh`, `backup-logs.sh` |
 | [`date-cal-commands/`](date-cal-commands/) | [Date and Cal commands.md](../docs/topics/Date%20and%20Cal%20commands.md) | `date` / `cal` demos + orchestrator (Video 8) |
 | [`viewContentOfFiles/`](viewContentOfFiles/) | [viewContentOfFiles.md](../docs/topics/viewContentOfFiles.md) | `cat`, `tac`, `rev`, `head`, `tail`, `more`, `less` (Video 9) |
+| [`wordCountCommand/`](wordCountCommand/) | [wordCountCommand.md](../docs/topics/wordCountCommand.md) | `wc`, `-l`, `-w`, `-c`, multiple files, pipes (Video 10) |
 | [`Redirection/`](Redirection/) | [EOF and Redirection.md](../docs/topics/EOF%20and%20Redirection.md) | `>`, `>>`, `<`, `<<EOF` (Durga Sir redirection) |
 | [`scripts-execution-summary/`](../scripts-execution-summary/) | Per-topic **execution summary** `.md` files | Explains every command in each `.sh` |
 
@@ -50,6 +51,19 @@ See [DateandCal Execution summary.md](../scripts-execution-summary/DateandCal%20
 | `more-less-pager-hint-demo.sh` | `more` / `less` |
 
 Execution summary is **Part 2** in [viewContentOfFiles.md](../docs/topics/viewContentOfFiles.md#part-2--execution-summary-scriptsviewcontentoffiles).
+
+## Session 10 — word count (`wc`)
+
+| Script | Description |
+| :--- | :--- |
+| `wc-default-four-columns-demo.sh` | Default `wc` — lines, words, bytes, name |
+| `wc-lines-only-demo.sh` | `wc -l` |
+| `wc-words-only-demo.sh` | `wc -w` |
+| `wc-bytes-chars-newline-demo.sh` | `wc -c`; `echo` vs `echo -n` |
+| `wc-multiple-files-total-demo.sh` | Two files + `total` row |
+| `wc-pipe-count-demo.sh` | `ls \| wc -l` style |
+
+See [wordCountCommand.md](../scripts-execution-summary/wordCountCommand.md).
 
 ## Redirection — `>`, `>>`, EOF
 

@@ -18,6 +18,7 @@ python3 scripts-execution-summary/tools/build_execution_summaries.py
 | [ls-command-and-its-options.md](ls-command-and-its-options.md) | [`ls-command-and-its-options/`](../scripts/ls-command-and-its-options/) | [ls Command and its options.md](../docs/topics/ls%20Command%20and%20its%20options.md) (Video 7) |
 | [DateandCal Execution summary.md](DateandCal%20Execution%20summary.md) | [`date-cal-commands/`](../scripts/date-cal-commands/) | [Date and Cal commands.md](../docs/topics/Date%20and%20Cal%20commands.md) (Video 8) |
 | *(in topic file)* [viewContentOfFiles.md — Part 2](../../docs/topics/viewContentOfFiles.md#part-2--execution-summary-scriptsviewcontentoffiles) | [`viewContentOfFiles/`](../scripts/viewContentOfFiles/) | [viewContentOfFiles.md](../../docs/topics/viewContentOfFiles.md) (Video 9) |
+| [wordCountCommand.md](wordCountCommand.md) | [`wordCountCommand/`](../scripts/wordCountCommand/) | [wordCountCommand.md](../../docs/topics/wordCountCommand.md) (Video 10) |
 | [Redirection.md](Redirection.md) | [`Redirection/`](../scripts/Redirection/) | [EOF and Redirection.md](../../docs/topics/EOF%20and%20Redirection.md) |
 
 ```bash
