@@ -6,7 +6,7 @@
 **Prerequisites:** [TypesOfFilesInLinux.md](TypesOfFilesInLinux.md) (`touch`, create files) · [Bash Built-in Commands.md](Bash%20Built-in%20Commands.md) (`cat`, `gedit`) · [pipeCommands.md](pipeCommands.md) (pipes with `head`/`tail`)
 
 **Scripts folder:** [`viewContentOfFiles/`](../../scripts/viewContentOfFiles/)  
-**Execution summary:** [`viewContentOfFiles/viewContentOfFiles.md`](../../scripts-execution-summary/viewContentOfFiles/viewContentOfFiles.md)
+**Execution summary:** [`viewContentOfFiles.md`](../../scripts-execution-summary/viewContentOfFiles.md)
 
 ```bash
 cd /path/to/Linux-Basics
@@ -32,6 +32,7 @@ bash scripts/viewContentOfFiles/cat-view-file-demo.sh
 - [13. Preview: wc and redirection](#13-preview-wc-and-redirection)
 - [14. Session checklist](#14-session-checklist)
 - [15. Script index](#15-script-index)
+- [16. Script execution notes](#16-script-execution-notes)
 
 ---
 
@@ -311,5 +312,50 @@ You should be able to:
 | [`tail-bottom-lines-demo.sh`](../../scripts/viewContentOfFiles/tail-bottom-lines-demo.sh) | `tail` |
 | [`small-vs-large-file-view-demo.sh`](../../scripts/viewContentOfFiles/small-vs-large-file-view-demo.sh) | cat vs head/tail |
 | [`more-less-pager-hint-demo.sh`](../../scripts/viewContentOfFiles/more-less-pager-hint-demo.sh) | `more` / `less` hints |
+
+---
+
+## 16. Script execution notes
+
+Each demo can be understood with the same four questions:
+
+| Step | Question | Example |
+| :---: | :--- | :--- |
+| **1. Identify** | What command or shell feature is used? | `cat` displays file contents. |
+| **2. Locate** | How is it available or configured? | `cat` is a core utility; `echo` is available as a Bash builtin. |
+| **3. Intent** | What is the command trying to do? | `head -5 file` previews the first five lines. |
+| **4. Observe** | Where does its result go? | Command output is printed to stdout; redirection can write it to a file. |
+
+Most scripts enable Bash strict mode and create their demo files under
+`${TMPDIR:-/tmp}/linux-view-content-demo`. They remove that directory before
+recreating it, so do not keep unrelated files in that demo directory.
+The pager hint script instead accepts an optional file path and previews it
+with `head`; it does not launch an interactive pager.
+
+| Demo | What it sets up and demonstrates |
+| :--- | :--- |
+| [`cat-multiple-files-concat-demo.sh`](../../scripts/viewContentOfFiles/cat-multiple-files-concat-demo.sh) | Creates two files and runs `cat file1.txt file2.txt` to print their contents in order; contrasts concatenating with copying. |
+| [`cat-n-and-b-line-numbers-demo.sh`](../../scripts/viewContentOfFiles/cat-n-and-b-line-numbers-demo.sh) | Creates a file with blank lines, then compares `cat`, `cat -n` (numbers every line), and `cat -b` (numbers non-empty lines). |
+| [`cat-view-file-demo.sh`](../../scripts/viewContentOfFiles/cat-view-file-demo.sh) | Creates a sample file and displays it with both `cat file` and `cat < file`. |
+| [`head-top-lines-demo.sh`](../../scripts/viewContentOfFiles/head-top-lines-demo.sh) | Generates 20 numbered lines and compares the default, positive-count, and negative-count forms of `head`. |
+| [`more-less-pager-hint-demo.sh`](../../scripts/viewContentOfFiles/more-less-pager-hint-demo.sh) | Prints suggested `more`/`less` commands for a file (default `/etc/passwd` or a supplied path) and previews its first 12 lines. |
+| [`rev-reverse-line-chars-demo.sh`](../../scripts/viewContentOfFiles/rev-reverse-line-chars-demo.sh) | Displays `chini`, then uses `rev` to show the characters on that line in reverse order. |
+| [`small-vs-large-file-view-demo.sh`](../../scripts/viewContentOfFiles/small-vs-large-file-view-demo.sh) | Displays a small sample with `cat`; previews the beginning and end of `/etc/passwd` with `head` and `tail` when available. |
+| [`tac-reverse-lines-demo.sh`](../../scripts/viewContentOfFiles/tac-reverse-lines-demo.sh) | Displays a sample file with `cat` and `tac` to compare normal and reversed line order. |
+| [`tail-bottom-lines-demo.sh`](../../scripts/viewContentOfFiles/tail-bottom-lines-demo.sh) | Generates 20 numbered lines and compares default `tail` with `tail -n 5` and `tail -5`. |
+
+**Run every demo from the repository root:**
+
+```bash
+bash scripts/viewContentOfFiles/cat-multiple-files-concat-demo.sh
+bash scripts/viewContentOfFiles/cat-n-and-b-line-numbers-demo.sh
+bash scripts/viewContentOfFiles/cat-view-file-demo.sh
+bash scripts/viewContentOfFiles/head-top-lines-demo.sh
+bash scripts/viewContentOfFiles/more-less-pager-hint-demo.sh
+bash scripts/viewContentOfFiles/rev-reverse-line-chars-demo.sh
+bash scripts/viewContentOfFiles/small-vs-large-file-view-demo.sh
+bash scripts/viewContentOfFiles/tac-reverse-lines-demo.sh
+bash scripts/viewContentOfFiles/tail-bottom-lines-demo.sh
+```
 
 **Next in playlist:** continue from [`linuxBasics.md`](../linuxBasics.md).
