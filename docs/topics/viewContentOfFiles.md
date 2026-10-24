@@ -359,10 +359,16 @@ head -n 5 abc.txt      # first 5 lines
 
 ### Important: `head -n -5` (negative n)
 
-| Command          | Meaning                                           |
-| :--------------- | :------------------------------------------------ |
-| **`head -n 5`**  | Only **first 5** lines                            |
+| Command         | Meaning                |
+| :-------------- | :--------------------- |
+| **`head -n 5`** | Only **first 5** lines |
+![alt text](headCommandV2.png)
 | **`head -n -5`** | **All lines except the last 5** (do not confuse!) |
+![alt text](../../scripts/linuxbasics/afterheadCommand.png)
+Actual lines in the code 
+![alt text](../../scripts/linuxbasics/totalLines.png)
+After providng the command at line 
+
 
 Durga Sir stresses this — easy to mix up in exams.
 
@@ -374,7 +380,7 @@ head -c 100 abc.txt    # first 100 bytes/characters
 
 **Demo:** [`head-top-lines-demo.sh`](../../scripts/viewContentOfFiles/head-top-lines-demo.sh)
 
-![alt text](headCommandV2.png)
+
 
 ---
 
