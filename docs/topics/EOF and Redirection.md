@@ -71,7 +71,21 @@ echo Sita >> appendData.sh    # file: Rama, Sita
 echo Rama > appendData.sh     # file: only Rama  ← Sita gone
 ```
 
-### Why `Sita` disappeared
+### Yes — correct for a single `>` (overwrite)
+
+When you use **`>`** on a file that **already has content**:
+
+```bash
+echo "new line" > appendData.sh
+```
+
+1. The shell **opens** the file and **clears it** (truncates to empty).  
+2. Then it writes **only** what that command prints (often **one line** from `echo`).  
+3. **Everything that was in the file before is gone** — whether you had **2 lines or 200**.
+
+You do **not** need a special rule for “two lines vs many lines.” **Any** existing data is replaced whenever you use **`>`** on that file.
+
+### Why `Sita` disappeared (same rule)
 
 **`>` does not “add one line and keep the rest.”**  
 Every time you use **`>`** on a file, the shell:
@@ -85,7 +99,7 @@ So `echo Rama > appendData.sh` writes **one line** (`Rama` + newline). Anything 
 | File before | Command | File after |
 | :--- | :--- | :--- |
 | `Rama` + `Sita` (2 lines) | `echo Rama > appendData.sh` | **Only** `Rama` (1 line) |
-| 100 lines | `echo X > file` | **Only** `X` (1 line) |
+| 100 lines or **200 lines** | `echo X > file` | **Only** `X` (1 line) |
 
 **Rule:** One `>` = **whole file becomes only this command’s output** (often one line from `echo`).
 
