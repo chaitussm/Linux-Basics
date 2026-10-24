@@ -1,6 +1,6 @@
 # Scripts execution summary
 
-This folder explains **every command** in **every** **`.sh`** under [`../scripts/`](../scripts/). One **`.md` file per topic folder** matches the split demo layout: each script has an **in-depth table** with (1) what the command is, (2) how it is configured, (3) execution intent, (4) terminal / file / pipeline output.
+This folder explains **every command** in **every** **`.sh`** under [`../scripts/`](../scripts/). One **`.md` file per topic folder** matches the split demo layout (except **Video 9**, where the execution summary is **Part 2** inside [`docs/topics/viewContentOfFiles.md`](../../docs/topics/viewContentOfFiles.md)). Each script section has an **in-depth table** with (1) what the command is, (2) how it is configured, (3) execution intent, (4) terminal / file / pipeline output.
 
 Regenerate after script changes:
 
@@ -17,8 +17,8 @@ python3 scripts-execution-summary/tools/build_execution_summaries.py
 | [shell-scripting.md](shell-scripting.md) | [`shell-scripting/`](../shell-scripting/) | Shell scripting examples (Part 2 preview) |
 | [ls-command-and-its-options.md](ls-command-and-its-options.md) | [`ls-command-and-its-options/`](../scripts/ls-command-and-its-options/) | [ls Command and its options.md](../docs/topics/ls%20Command%20and%20its%20options.md) (Video 7) |
 | [DateandCal Execution summary.md](DateandCal%20Execution%20summary.md) | [`date-cal-commands/`](../scripts/date-cal-commands/) | [Date and Cal commands.md](../docs/topics/Date%20and%20Cal%20commands.md) (Video 8) |
-| [viewContentOfFiles/viewContentOfFiles.md](viewContentOfFiles/viewContentOfFiles.md) | [`viewContentOfFiles/`](../scripts/viewContentOfFiles/) | [viewContentOfFiles.md](../../docs/topics/viewContentOfFiles.md) (Video 9) |
-| [Redirection/Redirection.md](Redirection/Redirection.md) | [`Redirection/`](../scripts/Redirection/) | [Redirection/README.md](../../docs/topics/Redirection/README.md) |
+| *(in topic file)* [viewContentOfFiles.md — Part 2](../../docs/topics/viewContentOfFiles.md#part-2--execution-summary-scriptsviewcontentoffiles) | [`viewContentOfFiles/`](../scripts/viewContentOfFiles/) | [viewContentOfFiles.md](../../docs/topics/viewContentOfFiles.md) (Video 9) |
+| [Redirection.md](Redirection.md) | [`Redirection/`](../scripts/Redirection/) | [EOF and Redirection.md](../../docs/topics/EOF%20and%20Redirection.md) |
 
 ```bash
 cd /path/to/Linux-Basics
