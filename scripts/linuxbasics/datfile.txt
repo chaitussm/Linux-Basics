@@ -1,0 +1,4 @@
+Linux is a very good language
+It helps to connect with the Harware systems in a beautiful way
+By learning this we can learn any cloud based or YAML related topics 
+Shell programming is also very straighht forward language
