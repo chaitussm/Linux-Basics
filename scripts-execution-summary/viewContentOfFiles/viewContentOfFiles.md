@@ -179,6 +179,42 @@ Each script section uses the same **four-part** model:
 
 ---
 
+## [`rev-tac-display-only-demo.sh`](../scripts/viewContentOfFiles/rev-tac-display-only-demo.sh)
+
+**Run:** `bash scripts/viewContentOfFiles/rev-tac-display-only-demo.sh`
+
+### In-depth command walkthrough
+
+| Command (as in script) | 1. What it is | 2. Added / configured | 3. Execution intent | 4. Output (terminal / file / pipeline) |
+| :--- | :--- | :--- | :--- | :--- |
+| `set -euo pipefail` | Bash strict-mode option bundle. | Written at top of script; not installed separately. | Tell Bash to stop on errors, treat unset variables as errors, and fail pipelines if any stage fails. | No visible output; changes how later commands affect exit status. |
+| `WORK="${TMPDIR:-/tmp}/linux-view-readonly-demo"` | Shell variable assignment. | Name=`value` in script; often under `${TMPDIR:-/tmp}`. | Store path or stamp for later commands (setup, not a user command). | No output; variable used by `cd`, `rm`, file paths. |
+| `rm -rf "$WORK"` | Remove files/directories recursively, force. | Coreutils; `-r` recursive, `-f` no prompt. | Clean old demo data under `/tmp` before recreating. | Silent on success. |
+| `mkdir -p "$WORK"` | Make directories. | Coreutils; `-p` creates parents as needed. | Try to **create** folder(s) for the demo tree. | Silent on success; errors on stderr if path invalid. |
+| `FILE="$WORK/sample.sh"` | Shell variable assignment. | Name=`value` in script; often under `${TMPDIR:-/tmp}`. | Store path or stamp for later commands (setup, not a user command). | No output; variable used by `cd`, `rm`, file paths. |
+| `cat > "$FILE" <<'EOF'` | Concatenate and print files. | Coreutils. | Try to **display file contents** on terminal. | File bytes on stdout. |
+| `echo "All arguments with @ : $@"` | Bash builtin that prints arguments to standard output. | Always available in Bash; no package install. | Show section titles, tips, or messages to the terminal (trying to **print** text for the user). | Lines appear on **stdout** in your terminal (or in CI logs). Not used in a pipeline unless followed by `|`. |
+| `EOF` | Shell syntax (variable, test, subshell, or function). | Defined in this script only. | Prepare path, branch on failure, or wrap commands. | Depends on line: may be silent or print via embedded commands. |
+| `echo "=== 1) Original file on disk (cat) ==="` | Section header for humans. | Literal string in script | **Print** section title | Title line on **stdout** before commands |
+| `cat "$FILE"` | Concatenate and print files. | Coreutils. | Try to **display file contents** on terminal. | File bytes on stdout. |
+| `echo ""` | Bash builtin that prints arguments to standard output. | Always available in Bash; no package install. | Show section titles, tips, or messages to the terminal (trying to **print** text for the user). | Lines appear on **stdout** in your terminal (or in CI logs). Not used in a pipeline unless followed by `|`. |
+| `echo "=== 2) rev — reversed CHARACTERS on screen only (file unchanged)…` | Section header for humans. | Literal string in script | **Print** section title | Title line on **stdout** before commands |
+| `rev "$FILE"` | Reverse characters on each line. | Coreutils. | Horizontal reverse per line. | Each line mirrored on stdout. |
+| `echo ""` | Bash builtin that prints arguments to standard output. | Always available in Bash; no package install. | Show section titles, tips, or messages to the terminal (trying to **print** text for the user). | Lines appear on **stdout** in your terminal (or in CI logs). Not used in a pipeline unless followed by `|`. |
+| `echo "=== 3) cat again — same original order (proof file not modified)…` | Section header for humans. | Literal string in script | **Print** section title | Title line on **stdout** before commands |
+| `cat "$FILE"` | Concatenate and print files. | Coreutils. | Try to **display file contents** on terminal. | File bytes on stdout. |
+| `echo ""` | Bash builtin that prints arguments to standard output. | Always available in Bash; no package install. | Show section titles, tips, or messages to the terminal (trying to **print** text for the user). | Lines appear on **stdout** in your terminal (or in CI logs). Not used in a pipeline unless followed by `|`. |
+| `echo "=== 4) tac — reversed LINE order on screen (add second line firs…` | Section header for humans. | Literal string in script | **Print** section title | Title line on **stdout** before commands |
+| `printf 'line-one\nline-two\n' > "$WORK/two.txt"` | Formatted print (builtin). | Bash builtin. | Print with format specifiers like C. | Formatted bytes on stdout. |
+| `tac "$WORK/two.txt"` | Print file with lines in reverse order. | Coreutils; cat spelled backward. | Vertical reverse: last line first. | Lines on stdout in reversed order. |
+| `echo ""` | Bash builtin that prints arguments to standard output. | Always available in Bash; no package install. | Show section titles, tips, or messages to the terminal (trying to **print** text for the user). | Lines appear on **stdout** in your terminal (or in CI logs). Not used in a pipeline unless followed by `|`. |
+| `echo "=== 5) cat two.txt — still line-one then line-two on disk ==="` | Section header for humans. | Literal string in script | **Print** section title | Title line on **stdout** before commands |
+| `cat "$WORK/two.txt"` | Concatenate and print files. | Coreutils. | Try to **display file contents** on terminal. | File bytes on stdout. |
+| `echo ""` | Bash builtin that prints arguments to standard output. | Always available in Bash; no package install. | Show section titles, tips, or messages to the terminal (trying to **print** text for the user). | Lines appear on **stdout** in your terminal (or in CI logs). Not used in a pipeline unless followed by `|`. |
+| `echo "Tip: file changes only when you WRITE (>, >>, editor). Not from…` | Bash builtin that prints arguments to standard output. | Always available in Bash; no package install. | Show section titles, tips, or messages to the terminal (trying to **print** text for the user). | Lines appear on **stdout** in your terminal (or in CI logs). Not used in a pipeline unless followed by `|`. |
+
+---
+
 ## [`small-vs-large-file-view-demo.sh`](../scripts/viewContentOfFiles/small-vs-large-file-view-demo.sh)
 
 **Run:** `bash scripts/viewContentOfFiles/small-vs-large-file-view-demo.sh`
@@ -270,6 +306,7 @@ Each script section uses the same **four-part** model:
 | [`head-top-lines-demo.sh`](../scripts/viewContentOfFiles/head-top-lines-demo.sh) | `bash scripts/viewContentOfFiles/head-top-lines-demo.sh` |
 | [`more-less-pager-hint-demo.sh`](../scripts/viewContentOfFiles/more-less-pager-hint-demo.sh) | `bash scripts/viewContentOfFiles/more-less-pager-hint-demo.sh` |
 | [`rev-reverse-line-chars-demo.sh`](../scripts/viewContentOfFiles/rev-reverse-line-chars-demo.sh) | `bash scripts/viewContentOfFiles/rev-reverse-line-chars-demo.sh` |
+| [`rev-tac-display-only-demo.sh`](../scripts/viewContentOfFiles/rev-tac-display-only-demo.sh) | `bash scripts/viewContentOfFiles/rev-tac-display-only-demo.sh` |
 | [`small-vs-large-file-view-demo.sh`](../scripts/viewContentOfFiles/small-vs-large-file-view-demo.sh) | `bash scripts/viewContentOfFiles/small-vs-large-file-view-demo.sh` |
 | [`tac-reverse-lines-demo.sh`](../scripts/viewContentOfFiles/tac-reverse-lines-demo.sh) | `bash scripts/viewContentOfFiles/tac-reverse-lines-demo.sh` |
 | [`tail-bottom-lines-demo.sh`](../scripts/viewContentOfFiles/tail-bottom-lines-demo.sh) | `bash scripts/viewContentOfFiles/tail-bottom-lines-demo.sh` |
@@ -284,6 +321,7 @@ bash scripts/viewContentOfFiles/cat-view-file-demo.sh
 bash scripts/viewContentOfFiles/head-top-lines-demo.sh
 bash scripts/viewContentOfFiles/more-less-pager-hint-demo.sh
 bash scripts/viewContentOfFiles/rev-reverse-line-chars-demo.sh
+bash scripts/viewContentOfFiles/rev-tac-display-only-demo.sh
 bash scripts/viewContentOfFiles/small-vs-large-file-view-demo.sh
 bash scripts/viewContentOfFiles/tac-reverse-lines-demo.sh
 bash scripts/viewContentOfFiles/tail-bottom-lines-demo.sh

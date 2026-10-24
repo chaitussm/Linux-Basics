@@ -24,6 +24,7 @@ bash scripts/viewContentOfFiles/cat-view-file-demo.sh
 - [5. cat multiple files](#5-cat-multiple-files)
 - [6. tac — reverse line order](#6-tac--reverse-line-order)
 - [7. rev — reverse each line](#7-rev--reverse-each-line)
+- [7A. Display-only viewing — `cat` / `rev` / `tac` do **not** change the file](#7a-display-only-viewing--cat--rev--tac-do-not-change-the-file)
 - [8. head — top of file](#8-head--top-of-file)
 - [9. tail — bottom of file](#9-tail--bottom-of-file)
 - [10. more and less — pagers](#10-more-and-less--pagers)
@@ -134,6 +135,8 @@ Not the same as **copying** files — see [§12](#12-cat-vs-cp-durga-sir).
 
 ## 6. tac — reverse line order
 
+**By default, `tac` does not edit the file** — it only prints reversed line order to the terminal. See [§7A](#7a-display-only-viewing--cat--rev--tac-do-not-change-the-file).
+
 **Vertical reverse** of `cat` (line order only):
 
 | Normal `cat` (top → bottom) | `tac` (bottom → top) |
@@ -156,6 +159,8 @@ Less common in daily work, but **exam/class** topic.
 
 ## 7. rev — reverse each line
 
+**By default, `rev` does not edit the file** — it only prints reversed characters to the terminal. See [§7A](#7a-display-only-viewing--cat--rev--tac-do-not-change-the-file).
+
 **Horizontal reverse** — characters on **each line**:
 
 ```bash
@@ -170,6 +175,174 @@ rev abc.txt
 | **Characters in line** (horizontal) | `rev` |
 
 **Demo:** [`rev-reverse-line-chars-demo.sh`](../../scripts/viewContentOfFiles/rev-reverse-line-chars-demo.sh)
+
+---
+
+## 7A. Display-only viewing — `cat` / `rev` / `tac` do **not** change the file
+
+This section answers a common lab doubt (e.g. `rev testThree.sh` then `cat testThree.sh`):
+
+> “After `rev`, why does `cat` show the **old order**? Does `rev` or `tac` change the file?”
+
+**Answer:** **`rev`, `tac`, and `cat` (by themselves) only read the file and print to the terminal.** They do **not** rewrite the file on disk. The **original content stays** until you use a **write** operation (`>`, `>>`, editor, etc.).
+
+### Two places to think about
+
+| Place | What happens |
+| :--- | :--- |
+| **File on disk** (`testThree.sh`) | Stored bytes — **unchanged** after `rev` / `tac` / `cat` |
+| **Terminal (screen)** | What you **see** for that command — can be normal, reversed lines, or reversed characters |
+
+```mermaid
+%%{init: {'theme': 'base', 'themeVariables': {'primaryColor': '#5c5c5c', 'primaryTextColor': '#ffffff', 'primaryBorderColor': '#3d3d3d', 'lineColor': '#b0b0b0'}}}%%
+flowchart LR
+    DISK[(File on disk\noriginal order)]
+    DISK -->|read| CAT[cat]
+    DISK -->|read| REV[rev]
+    DISK -->|read| TAC[tac]
+    CAT --> T1[Terminal: normal text]
+    REV --> T2[Terminal: chars reversed per line]
+    TAC --> T3[Terminal: lines bottom-to-top]
+    DISK -.->|unchanged| DISK
+
+    classDef darkGrey fill:#5c5c5c,stroke:#3d3d3d,color:#ffffff,stroke-width:2px
+    class DISK,CAT,REV,TAC,T1,T2,T3 darkGrey
+```
+
+### Your `testThree.sh` example (step by step)
+
+**File on disk (simplified):**
+
+```bash
+#! /bin/bash
+IFS="_"
+echo "All arguments with * : $*"
+echo "All arguments with @ one by one  : $@"
+```
+
+**Command 1 — `rev testThree.sh`**
+
+- Linux **opens** `testThree.sh` for reading only.
+- For **each line**, `rev` prints characters **backwards** to **stdout** (your screen).
+- Example: `#! /bin/bash` may look like `hsab/nib/ !#` on the terminal.
+- **The file is not saved in reversed form.**
+
+**Command 2 — `cat testThree.sh`**
+
+- `cat` reads the **same file on disk** (still normal order).
+- You see `#! /bin/bash`, `IFS="_"`, `echo ...` as originally stored.
+
+So: **`rev` showed a mirror; `cat` showed the real notebook.**
+
+```mermaid
+%%{init: {'theme': 'base', 'themeVariables': {'pie1': '#5c5c5c', 'pie2': '#6e6e6e', 'pie3': '#4a4a4a', 'pieTitleTextColor': '#ffffff', 'pieSectionTextColor': '#ffffff'}}}%%
+pie title What changed after rev testThree.sh ?
+    "File on disk (same content)" : 100
+    "Disk content replaced by rev" : 0
+```
+
+### `rev` vs `tac` — both read-only; different “mirror”
+
+| Command | What you see on screen | File on disk after command |
+| :--- | :--- | :--- |
+| **`cat file`** | Lines in **normal** order | **Unchanged** |
+| **`tac file`** | **Line order** reversed (last line printed first) | **Unchanged** |
+| **`rev file`** | Each **line’s characters** reversed (`echo` → `ohce`) | **Unchanged** |
+| **`head` / `tail` / `more` / `less`** | Part or paged view | **Unchanged** (no redirect) |
+
+```mermaid
+%%{init: {'theme': 'base', 'themeVariables': {'primaryColor': '#5c5c5c', 'primaryTextColor': '#ffffff', 'primaryBorderColor': '#3d3d3d', 'lineColor': '#b0b0b0'}}}%%
+flowchart TB
+    subgraph vertical [Vertical reverse — line order]
+        TAC[tac] --> V[Last line becomes first on screen]
+    end
+    subgraph horizontal [Horizontal reverse — characters]
+        REV[rev] --> H[Each line spelled backwards on screen]
+    end
+    F[Same file on disk] --> TAC
+    F --> REV
+    F --> CAT[cat shows stored order]
+
+    classDef darkGrey fill:#5c5c5c,stroke:#3d3d3d,color:#ffffff,stroke-width:2px
+    class F,TAC,REV,CAT,V,H vertical horizontal
+```
+
+### When **does** the file content change?
+
+View commands become **writers** only if you **redirect output into a file** (or use an editor):
+
+| Action | Changes file? |
+| :--- | :---: |
+| `rev myfile` | No — display only |
+| `tac myfile` | No — display only |
+| `cat myfile` | No — display only |
+| `echo line > myfile` | **Yes** — overwrites |
+| `echo line >> myfile` | **Yes** — appends |
+| `rev myfile > myfile` | **Yes** — **dangerous** (can corrupt file) |
+| `gedit myfile` / `nano myfile` | **Yes** — when you save |
+
+Full rules: [Redirection/EOF and Redirection.md](Redirection/EOF%20and%20Redirection.md) (`>` truncates, `>>` appends).
+
+```mermaid
+%%{init: {'theme': 'base', 'themeVariables': {'primaryColor': '#5c5c5c', 'primaryTextColor': '#ffffff', 'primaryBorderColor': '#3d3d3d', 'lineColor': '#b0b0b0'}}}%%
+flowchart TD
+    Q[You run a command on a file]
+    Q --> R{Output goes where?}
+    R -->|Only terminal| SAFE[cat / rev / tac / head / tail\nfile on disk unchanged]
+    R -->|> or >> to a file| WRITE[File content changes]
+    R -->|Editor save| WRITE
+
+    classDef darkGrey fill:#5c5c5c,stroke:#3d3d3d,color:#ffffff,stroke-width:2px
+    class Q,R,SAFE,WRITE darkGrey
+```
+
+### Why `rev` on a `.sh` file looks scary (but is harmless to the file)
+
+Shell scripts must start with readable `#!/bin/bash` on disk to run. **`rev` on screen** shows gibberish-like lines — that is **only the display**, not the saved script. Running the script still uses the **on-disk** file:
+
+```bash
+bash testThree.sh          # uses real file (normal shebang)
+rev testThree.sh           # never run this output as a script
+```
+
+### If `cat` shows the **same block repeated** many times
+
+That is **not** caused by `rev` or `tac`. It means the file on disk **already contains** those lines repeated (often from **`>>` append**, copy-paste, or merging files). `rev` only prints what is stored — if the block appears three times in the file, reversed output can also look repeated when you run `rev` multiple times.
+
+**Fix:** open the file in an editor and delete duplicates, or recreate with a single heredoc:
+
+```bash
+cat > testThree.sh <<'EOF'
+#!/bin/bash
+IFS="_"
+echo "All arguments with * : $*"
+echo "All arguments with @ one by one  : $@"
+EOF
+```
+
+### Memory table (exam + lab)
+
+| Question | Short answer |
+| :--- | :--- |
+| Does `rev` change the original file? | **No** (unless you redirect into the file) |
+| Does `tac` change the original file? | **No** (unless you redirect) |
+| Why does `cat` show normal order after `rev`? | **`cat` reads the unchanged file** |
+| What is the difference between `rev` and `tac`? | **`rev`** = chars per line; **`tac`** = line order |
+| How do I **save** reversed text? | `rev file > newfile` (use a **new** name; avoid `> file` same name) |
+
+```mermaid
+%%{init: {'theme': 'base', 'themeVariables': {'pie1': '#5c5c5c', 'pie2': '#6e6e6e', 'pieTitleTextColor': '#ffffff', 'pieSectionTextColor': '#ffffff'}}}%%
+pie title View commands in Session 9 (default behavior)
+    "Read file print to terminal only" : 85
+    "Modify file without extra redirect" : 0
+    "Modify file when using > >> or editor" : 15
+```
+
+**Demo:** [`rev-tac-display-only-demo.sh`](../../scripts/viewContentOfFiles/rev-tac-display-only-demo.sh)
+
+```bash
+bash scripts/viewContentOfFiles/rev-tac-display-only-demo.sh
+```
 
 ---
 
@@ -291,10 +464,11 @@ You should be able to:
 1. Display a file with **`cat`** (with and without `<`).  
 2. Use **`cat -n`** vs **`cat -b`** on files with blank lines.  
 3. Explain **`tac`** vs **`rev`**.  
-4. Use **`head`** / **`tail`** defaults and **`-n`**.  
-5. Explain **`head -n -5`** vs **`head -n 5`**.  
-6. Choose **`cat`** vs **`head`/`tail`/`less`** for small vs large files.  
-7. Name **`more`** and **`less`** and when they are used.
+4. State that **`cat` / `rev` / `tac` do not change the file** unless you use **`>`**, **`>>`**, or an editor.  
+5. Use **`head`** / **`tail`** defaults and **`-n`**.  
+6. Explain **`head -n -5`** vs **`head -n 5`**.  
+7. Choose **`cat`** vs **`head`/`tail`/`less`** for small vs large files.  
+8. Name **`more`** and **`less`** and when they are used.
 
 ---
 
@@ -307,6 +481,7 @@ You should be able to:
 | [`cat-multiple-files-concat-demo.sh`](../../scripts/viewContentOfFiles/cat-multiple-files-concat-demo.sh) | `cat f1 f2` |
 | [`tac-reverse-lines-demo.sh`](../../scripts/viewContentOfFiles/tac-reverse-lines-demo.sh) | `tac` |
 | [`rev-reverse-line-chars-demo.sh`](../../scripts/viewContentOfFiles/rev-reverse-line-chars-demo.sh) | `rev` |
+| [`rev-tac-display-only-demo.sh`](../../scripts/viewContentOfFiles/rev-tac-display-only-demo.sh) | `rev`/`tac` vs `cat`; file unchanged |
 | [`head-top-lines-demo.sh`](../../scripts/viewContentOfFiles/head-top-lines-demo.sh) | `head`, `-n`, negative `-n` |
 | [`tail-bottom-lines-demo.sh`](../../scripts/viewContentOfFiles/tail-bottom-lines-demo.sh) | `tail` |
 | [`small-vs-large-file-view-demo.sh`](../../scripts/viewContentOfFiles/small-vs-large-file-view-demo.sh) | cat vs head/tail |
