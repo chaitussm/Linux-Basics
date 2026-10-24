@@ -62,6 +62,7 @@ Execution summary is **Part 2** in [viewContentOfFiles.md](../docs/topics/viewCo
 | `wc-bytes-chars-newline-demo.sh` | `wc -c`; `echo` vs `echo -n` |
 | `wc-longest-line-capital-L-demo.sh` | `wc -L` — longest line length |
 | `wc-multiple-files-total-demo.sh` | Two files + `total` row |
+| `wc-multiple-files-lwc-flags-demo.sh` | Three files: `wc -l` / `-w` / `-c` + `total` |
 | `wc-pipe-count-demo.sh` | `ls \| wc -l` style |
 
 See [wordCountCommand.md](../scripts-execution-summary/wordCountCommand.md).
