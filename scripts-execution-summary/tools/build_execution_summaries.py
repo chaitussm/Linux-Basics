@@ -224,6 +224,23 @@ flowchart TD
     O --> C[cal-*-demo.sh]
 ```""",
     },
+    {
+        "file": "viewContentOfFiles/viewContentOfFiles.md",
+        "title": "# Execution summary — `viewContentOfFiles/`",
+        "topic": "**Topic:** [viewContentOfFiles.md](../../docs/topics/viewContentOfFiles.md) (Video 9)  ",
+        "dir_line": "**Scripts directory:** [`../../scripts/viewContentOfFiles/`](../../scripts/viewContentOfFiles/)",
+        "dirs": ["scripts/viewContentOfFiles"],
+        "extra": None,
+        "pie": """```mermaid
+%%{init: {'theme': 'base', 'themeVariables': {'pie1': '#5c5c5c', 'pie2': '#6e6e6e', 'pie3': '#4a4a4a', 'pie4': '#7a7a7a', 'pieTitleTextColor': '#ffffff', 'pieSectionTextColor': '#ffffff'}}}%%
+pie title View-content commands in demos
+    "cat and options" : 35
+    "head / tail" : 30
+    "tac / rev" : 15
+    "more / less / strategy" : 20
+```""",
+        "flow": None,
+    },
 ]
 
 
@@ -242,8 +259,9 @@ def main() -> None:
             paths,
         )
         out_path = OUT / spec["file"]
+        out_path.parent.mkdir(parents=True, exist_ok=True)
         out_path.write_text(doc, encoding="utf-8")
-        print(f"Wrote {out_path.name} ({len(paths)} scripts)")
+        print(f"Wrote {out_path} ({len(paths)} scripts)")
 
 
 if __name__ == "__main__":
