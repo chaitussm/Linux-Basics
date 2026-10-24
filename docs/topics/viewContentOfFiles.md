@@ -489,6 +489,29 @@ You often see **only the end** of a comment line plus the last `echo` line — b
 
 ![Terminal: tail -c 100 printString.sh then cat printString.sh — last 100 bytes vs full script](../assets/tail-c-100-printString-terminal.png)
 
+### `head` and `tail` together (pipe) — line selection
+
+Use **`|`** to chain **`head`** then **`tail`**: first cut from the **top**, then keep a part of that result.
+
+```bash
+head -5 printString.sh | tail -5
+```
+
+| Step | Meaning |
+| :--- | :--- |
+| **`head -5 file`** | First **5 lines** of the file |
+| **`\| tail -5`** | From that output, the **last 5 lines** of the chunk |
+
+On a short file, `head -5 | tail -5` often shows the **same first 5 lines**. On a **long** file, increase `head` then use `tail` to grab a **middle window** (example: `head -20 file | tail -5` ≈ lines **16–20**).
+
+```bash
+cd ~/Study/Linux-Basics/scripts/linuxbasics
+head -5 printString.sh | tail -5
+cat printString.sh
+```
+
+![Terminal: head -5 printString.sh pipe tail -5, then cat for full file](../assets/head-tail-pipe-printString-terminal.png)
+
 **Note:** GNU `tail` options like `tail -n +5` (start printing from line 5 onward) are advanced; class focuses on **last N lines** and **last N bytes**.
 
 **Demo:** [`tail-bottom-lines-demo.sh`](../../scripts/viewContentOfFiles/tail-bottom-lines-demo.sh)
