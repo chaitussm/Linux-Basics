@@ -498,7 +498,7 @@ You should be able to:
 4. Distinguish **`wc -l`** (line **count**) from **`wc -L`** (longest line **length**).  
 5. Explain **`echo "vishnu" | wc -c`** vs **`echo -n "vishnu" | wc -c`**.  
 6. Run **`wc`** on **two or more files** and read the **`total`** row.  
-7. Run **`wc -l` / `-w` / `-c`** on **multiple files** and read the matching **`total`** sum.  
+7. Run **`wc -l` / `-w` / `-c`** (and combos **`-lc`**, **`-lw`**, **`-wc`**) on **multiple files** and read each **`total`** row.  
 8. Use **`something | wc -l`** for line counts from a command.
 
 ---
