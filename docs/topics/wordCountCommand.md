@@ -193,6 +193,36 @@ wc -c fruits.txt
 
 Use this when the requirement is **number of characters / bytes** in the **given file**.
 
+### Single options and combinations (`-l`, `-w`, `-c`) — Durga Sir lab
+
+On the same **`fileinfo.txt`** from [§4](#4-default-output--four-columns), Durga Sir runs **`wc`** with **one flag** or **two flags together**. You can **combine** **`-l`**, **`-w`**, and **`-c`**; the terminal prints **only** the counts you asked for (in a fixed order), then the **file name**.
+
+**Order when combined:** **lines** → **words** → **bytes** (same order as default `wc` without options).
+
+```bash
+cd ~/Study/Linux-Basics/scripts/linuxbasics
+wc -l fileinfo.txt
+wc -c fileinfo.txt
+wc -w fileinfo.txt
+wc -lc fileinfo.txt
+wc -wc fileinfo.txt
+wc -lw fileinfo.txt
+```
+
+| Command | What it prints (before file name) | Example output |
+| :--- | :--- | :--- |
+| **`wc -l fileinfo.txt`** | **Lines** only | `5 fileinfo.txt` |
+| **`wc -w fileinfo.txt`** | **Words** only | `24 fileinfo.txt` |
+| **`wc -c fileinfo.txt`** | **Bytes** only | `135 fileinfo.txt` |
+| **`wc -lw fileinfo.txt`** | **Lines**, then **words** | `5 24 fileinfo.txt` |
+| **`wc -lc fileinfo.txt`** | **Lines**, then **bytes** | `5 135 fileinfo.txt` |
+| **`wc -wc fileinfo.txt`** | **Words**, then **bytes** | `24 135 fileinfo.txt` |
+| **`wc` (no options)** | **Lines**, **words**, **bytes** | `5 24 135 fileinfo.txt` |
+
+Flag letters can be written together (**`-lw`**) or separately (**`-l -w`**); the result is the same.
+
+![Terminal: wc -l, -c, -w, -lc, -wc, -lw on fileinfo.txt](../assets/wc-options-combos-fileinfo-terminal.png)
+
 **Note:** GNU `wc` also has **`-m`** (characters, multibyte-aware). Durga Sir’s class examples at this stage focus on **`-c`** and **pipes with `echo`**.
 
 **Demo:** [`wc-bytes-chars-newline-demo.sh`](../../scripts/wordCountCommand/wc-bytes-chars-newline-demo.sh)
