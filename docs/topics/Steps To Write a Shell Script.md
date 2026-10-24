@@ -271,6 +271,8 @@ echo "More" >> mylog.txt       # append to file
 | `>` | **Send** output into a file (replace file contents) |
 | `>>` | **Append** to end of file |
 
+**Full guide (Rama/Sita example, EOF heredoc):** [EOF and Redirection.md](EOF%20and%20Redirection.md)
+
 ### Pipeline (`|`)
 
 ```bash

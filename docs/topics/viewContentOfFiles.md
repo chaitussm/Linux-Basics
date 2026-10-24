@@ -277,8 +277,10 @@ Commands may **look similar** in conversation but each has its **own purpose**.
 
 ## 13. Preview: wc and redirection
 
-- **`man cat`** — full manual; Durga Sir shows saving man output to a file (redirection `>` — later session).
+- **`man cat`** — full manual; Durga Sir shows saving man output to a file (redirection `>`).
 - **`wc -l file`** — count lines **without** printing file body (when you only need the number).
+
+**Redirection and EOF (`>`, `>>`, `<<EOF`):** [EOF and Redirection.md](EOF%20and%20Redirection.md)
 
 ---
 
