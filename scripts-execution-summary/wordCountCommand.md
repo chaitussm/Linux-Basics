@@ -115,6 +115,32 @@ Each script section uses the same **four-part** model:
 
 ---
 
+## [`wc-multiple-files-lwc-flags-demo.sh`](../scripts/wordCountCommand/wc-multiple-files-lwc-flags-demo.sh)
+
+**Run:** `bash scripts/wordCountCommand/wc-multiple-files-lwc-flags-demo.sh`
+
+### In-depth command walkthrough
+
+| Command (as in script) | 1. What it is | 2. Added / configured | 3. Execution intent | 4. Output (terminal / file / pipeline) |
+| :--- | :--- | :--- | :--- | :--- |
+| `set -euo pipefail` | Bash strict-mode option bundle. | Written at top of script; not installed separately. | Tell Bash to stop on errors, treat unset variables as errors, and fail pipelines if any stage fails. | No visible output; changes how later commands affect exit status. |
+| `REPO="$(cd "$(dirname "$0")/../.." && pwd)"` | Shell syntax (variable, test, subshell, or function). | Defined in this script only. | Prepare path, branch on failure, or wrap commands. | Depends on line: may be silent or print via embedded commands. |
+| `LAB="$REPO/scripts/linuxbasics"` | Shell syntax (variable, test, subshell, or function). | Defined in this script only. | Prepare path, branch on failure, or wrap commands. | Depends on line: may be silent or print via embedded commands. |
+| `for f in fileinfo.txt filedata.txt datfile.txt; do` | `for` loop over words. | Bash syntax; list after `in`. | Repeat command for each item (e.g. each utility name). | One output line per iteration on stdout. |
+| `if [[ ! -f "$LAB/$f" ]]; then` | Conditional test `[[ ... ]]` or `if`. | Bash syntax. | Branch: run block only when directory exists / command succeeds. | Either block runs (messages on stdout) or `else` branch. |
+| `echo "Missing $LAB/$f — see wordCountCommand.md section 10 lab"` | Bash builtin that prints arguments to standard output. | Always available in Bash; no package install. | Show section titles, tips, or messages to the terminal (trying to **print** text for the user). | Lines appear on **stdout** in your terminal (or in CI logs). Not used in a pipeline unless followed by `|`. |
+| `exit 1` | Shell syntax (variable, test, subshell, or function). | Defined in this script only. | Prepare path, branch on failure, or wrap commands. | Depends on line: may be silent or print via embedded commands. |
+| `echo "=== wc -l (lines per file + total) ==="` | Section header for humans. | Literal string in script | **Print** section title | Title line on **stdout** before commands |
+| `wc -l "$LAB/fileinfo.txt" "$LAB/filedata.txt" "$LAB/datfile.txt"` | Word/line/byte count. | Coreutils; `-l` lines, `-c` bytes. | Count entries or file size. | Number on stdout; `wc -l < file` reads file via stdin redirect. |
+| `echo ""` | Bash builtin that prints arguments to standard output. | Always available in Bash; no package install. | Show section titles, tips, or messages to the terminal (trying to **print** text for the user). | Lines appear on **stdout** in your terminal (or in CI logs). Not used in a pipeline unless followed by `|`. |
+| `echo "=== wc -w (words per file + total) ==="` | Section header for humans. | Literal string in script | **Print** section title | Title line on **stdout** before commands |
+| `wc -w "$LAB/fileinfo.txt" "$LAB/filedata.txt" "$LAB/datfile.txt"` | Word/line/byte count. | Coreutils; `-l` lines, `-c` bytes. | Count entries or file size. | Number on stdout; `wc -l < file` reads file via stdin redirect. |
+| `echo ""` | Bash builtin that prints arguments to standard output. | Always available in Bash; no package install. | Show section titles, tips, or messages to the terminal (trying to **print** text for the user). | Lines appear on **stdout** in your terminal (or in CI logs). Not used in a pipeline unless followed by `|`. |
+| `echo "=== wc -c (bytes per file + total) ==="` | Section header for humans. | Literal string in script | **Print** section title | Title line on **stdout** before commands |
+| `wc -c "$LAB/fileinfo.txt" "$LAB/filedata.txt" "$LAB/datfile.txt"` | Word/line/byte count. | Coreutils; `-l` lines, `-c` bytes. | Count entries or file size. | Number on stdout; `wc -l < file` reads file via stdin redirect. |
+
+---
+
 ## [`wc-multiple-files-total-demo.sh`](../scripts/wordCountCommand/wc-multiple-files-total-demo.sh)
 
 **Run:** `bash scripts/wordCountCommand/wc-multiple-files-total-demo.sh`
@@ -186,6 +212,7 @@ Each script section uses the same **four-part** model:
 | [`wc-default-four-columns-demo.sh`](../scripts/wordCountCommand/wc-default-four-columns-demo.sh) | `bash scripts/wordCountCommand/wc-default-four-columns-demo.sh` |
 | [`wc-lines-only-demo.sh`](../scripts/wordCountCommand/wc-lines-only-demo.sh) | `bash scripts/wordCountCommand/wc-lines-only-demo.sh` |
 | [`wc-longest-line-capital-L-demo.sh`](../scripts/wordCountCommand/wc-longest-line-capital-L-demo.sh) | `bash scripts/wordCountCommand/wc-longest-line-capital-L-demo.sh` |
+| [`wc-multiple-files-lwc-flags-demo.sh`](../scripts/wordCountCommand/wc-multiple-files-lwc-flags-demo.sh) | `bash scripts/wordCountCommand/wc-multiple-files-lwc-flags-demo.sh` |
 | [`wc-multiple-files-total-demo.sh`](../scripts/wordCountCommand/wc-multiple-files-total-demo.sh) | `bash scripts/wordCountCommand/wc-multiple-files-total-demo.sh` |
 | [`wc-pipe-count-demo.sh`](../scripts/wordCountCommand/wc-pipe-count-demo.sh) | `bash scripts/wordCountCommand/wc-pipe-count-demo.sh` |
 | [`wc-words-only-demo.sh`](../scripts/wordCountCommand/wc-words-only-demo.sh) | `bash scripts/wordCountCommand/wc-words-only-demo.sh` |
@@ -198,6 +225,7 @@ bash scripts/wordCountCommand/wc-bytes-chars-newline-demo.sh
 bash scripts/wordCountCommand/wc-default-four-columns-demo.sh
 bash scripts/wordCountCommand/wc-lines-only-demo.sh
 bash scripts/wordCountCommand/wc-longest-line-capital-L-demo.sh
+bash scripts/wordCountCommand/wc-multiple-files-lwc-flags-demo.sh
 bash scripts/wordCountCommand/wc-multiple-files-total-demo.sh
 bash scripts/wordCountCommand/wc-pipe-count-demo.sh
 bash scripts/wordCountCommand/wc-words-only-demo.sh

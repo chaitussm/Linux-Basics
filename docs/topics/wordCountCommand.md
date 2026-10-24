@@ -27,10 +27,11 @@ bash scripts/wordCountCommand/wc-default-four-columns-demo.sh
 - [8. `wc -L` — longest line length (capital **L**)](#8-wc--l--longest-line-length-capital-l)
 - [9. Newline and `echo -n` (Durga Sir lab)](#9-newline-and-echo--n-durga-sir-lab)
 - [10. Multiple files and the **total** line](#10-multiple-files-and-the-total-line)
-- [11. `wc` with a pipe](#11-wc-with-a-pipe)
-- [12. `wc` vs viewing the whole file](#12-wc-vs-viewing-the-whole-file)
-- [13. Session checklist](#13-session-checklist)
-- [14. Script index](#14-script-index)
+- [11. Multiple files — `-l`, `-w`, `-c` only (still shows **total**)](#11-multiple-files--l-w-c-only-still-shows-total)
+- [12. `wc` with a pipe](#12-wc-with-a-pipe)
+- [13. `wc` vs viewing the whole file](#13-wc-vs-viewing-the-whole-file)
+- [14. Session checklist](#14-session-checklist)
+- [15. Script index](#15-script-index)
 
 ---
 
@@ -350,7 +351,65 @@ Durga Sir: the **`total`** row is the **grand total** for the whole command — 
 
 ---
 
-## 11. `wc` with a pipe
+## 11. Multiple files — `-l`, `-w`, `-c` only (still shows **total**)
+
+Same three files as [§10](#10-multiple-files-and-the-total-line). Durga Sir: when you list **several files**, you can add **one flag** (`-l`, `-w`, or `-c`). **`wc`** still prints **each file** on its own line, then a **`total`** row that **adds only that column** across all files.
+
+```bash
+cd ~/Study/Linux-Basics/scripts/linuxbasics
+wc -l fileinfo.txt filedata.txt datfile.txt
+wc -w fileinfo.txt filedata.txt datfile.txt
+wc -c fileinfo.txt filedata.txt datfile.txt
+```
+
+### `wc -l` — total **lines** across files
+
+```text
+  5 fileinfo.txt
+  5 filedata.txt
+  4 datfile.txt
+ 14 total
+```
+
+→ **5 + 5 + 4 = 14** lines in all three files together.
+
+### `wc -w` — total **words** across files
+
+```text
+ 24 fileinfo.txt
+ 24 filedata.txt
+ 39 datfile.txt
+ 87 total
+```
+
+→ **24 + 24 + 39 = 87** words.
+
+### `wc -c` — total **bytes** across files
+
+```text
+135 fileinfo.txt
+135 filedata.txt
+222 datfile.txt
+492 total
+```
+
+→ **135 + 135 + 222 = 492** bytes.
+
+| Flag | Each row shows | **`total`** row |
+| :---: | :--- | :--- |
+| **`-l`** | Line count for that file | Sum of **lines** |
+| **`-w`** | Word count for that file | Sum of **words** |
+| **`-c`** | Byte count for that file | Sum of **bytes** |
+
+Same idea as default **`wc`** on multiple files ([§10](#10-multiple-files-and-the-total-line)), but you ask for **one kind** of count per command instead of all three columns at once.
+
+![Terminal: wc -l, wc -w, wc -c on fileinfo.txt filedata.txt datfile.txt — each with total](../assets/wc-multiple-files-lwc-flags-terminal.png)
+
+**Demo:** [`wc-multiple-files-lwc-flags-demo.sh`](../../scripts/wordCountCommand/wc-multiple-files-lwc-flags-demo.sh)
+
+---
+
+## 12. `wc` with a pipe
 
 You can count **command output** without saving to a file:
 
@@ -371,7 +430,7 @@ Durga Sir: **`wc`** is very often used **after** **`|`** in real scripts and exa
 
 ---
 
-## 12. `wc` vs viewing the whole file
+## 13. `wc` vs viewing the whole file
 
 | Need | Use |
 | :--- | :--- |
@@ -383,7 +442,7 @@ Preview from Session 9: **`man cat`** saved to a file — here **`wc -l`** answe
 
 ---
 
-## 13. Session checklist
+## 14. Session checklist
 
 You should be able to:
 
@@ -393,11 +452,12 @@ You should be able to:
 4. Distinguish **`wc -l`** (line **count**) from **`wc -L`** (longest line **length**).  
 5. Explain **`echo "vishnu" | wc -c`** vs **`echo -n "vishnu" | wc -c`**.  
 6. Run **`wc`** on **two or more files** and read the **`total`** row.  
-7. Use **`something | wc -l`** for line counts from a command.
+7. Run **`wc -l` / `-w` / `-c`** on **multiple files** and read the matching **`total`** sum.  
+8. Use **`something | wc -l`** for line counts from a command.
 
 ---
 
-## 14. Script index
+## 15. Script index
 
 | Script | Topic |
 | :--- | :--- |
@@ -407,6 +467,7 @@ You should be able to:
 | [`wc-bytes-chars-newline-demo.sh`](../../scripts/wordCountCommand/wc-bytes-chars-newline-demo.sh) | `wc -c`, `echo` vs `echo -n` |
 | [`wc-longest-line-capital-L-demo.sh`](../../scripts/wordCountCommand/wc-longest-line-capital-L-demo.sh) | `wc -L` longest line |
 | [`wc-multiple-files-total-demo.sh`](../../scripts/wordCountCommand/wc-multiple-files-total-demo.sh) | Multiple files + `total` |
+| [`wc-multiple-files-lwc-flags-demo.sh`](../../scripts/wordCountCommand/wc-multiple-files-lwc-flags-demo.sh) | Multi-file `-l` / `-w` / `-c` + `total` |
 | [`wc-pipe-count-demo.sh`](../../scripts/wordCountCommand/wc-pipe-count-demo.sh) | `wc` after `\|` |
 
 **Next in playlist:** continue from [`linuxBasics.md`](../linuxBasics.md).
