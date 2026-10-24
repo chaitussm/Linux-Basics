@@ -241,6 +241,23 @@ pie title View-content commands in demos
 ```""",
         "flow": None,
     },
+    {
+        "file": "Redirection/Redirection.md",
+        "title": "# Execution summary — `Redirection/`",
+        "topic": "**Topic:** [Redirection/README.md](../../docs/topics/Redirection/README.md)  ",
+        "dir_line": "**Scripts directory:** [`../../scripts/Redirection/`](../../scripts/Redirection/)",
+        "dirs": ["scripts/Redirection"],
+        "extra": None,
+        "pie": """```mermaid
+%%{init: {'theme': 'base', 'themeVariables': {'pie1': '#5c5c5c', 'pie2': '#6e6e6e', 'pie3': '#4a4a4a', 'pieTitleTextColor': '#ffffff', 'pieSectionTextColor': '#ffffff'}}}%%
+pie title Redirection demos
+    "Overwrite >" : 25
+    "Append >>" : 25
+    "Heredoc EOF" : 25
+    "Input < and pipe hint" : 25
+```""",
+        "flow": None,
+    },
 ]
 
 

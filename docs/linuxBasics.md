@@ -33,6 +33,8 @@ Each topic has its own **`.md` file** under [`topics/`](topics/). Runnable **`.s
 | [**Date and Cal commands.md**](topics/Date%20and%20Cal%20commands.md) | `date`, `date +format`, `cal`, options (Video 8) |
 | [**Steps To Write a Shell Script.md**](topics/Steps%20To%20Write%20a%20Shell%20Script.md) | `#!/bin/bash`, write and run `.sh` files (beginner guide) |
 | [**viewContentOfFiles.md**](topics/viewContentOfFiles.md) | `cat`, `tac`, `rev`, `head`, `tail`, `more`, `less` (Video 9) |
+| [**Redirection/**](topics/Redirection/README.md) | Durga Sir **redirection** sessions (`>`, `>>`, EOF, more coming) |
+| ↳ [EOF and Redirection.md](topics/Redirection/EOF%20and%20Redirection.md) | `>`, `>>`, `<`, heredoc `<<EOF` (overwrite vs append) |
 
 ---
 

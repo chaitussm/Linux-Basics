@@ -16,6 +16,7 @@ Scripts are grouped in folders that match **`docs/topics/*.md`** notes (one fold
 | [`shell-scripting/`](shell-scripting/) | Shell scripting examples | `hello.sh`, `check-file.sh`, `backup-logs.sh` |
 | [`date-cal-commands/`](date-cal-commands/) | [Date and Cal commands.md](../docs/topics/Date%20and%20Cal%20commands.md) | `date` / `cal` demos + orchestrator (Video 8) |
 | [`viewContentOfFiles/`](viewContentOfFiles/) | [viewContentOfFiles.md](../docs/topics/viewContentOfFiles.md) | `cat`, `tac`, `rev`, `head`, `tail`, `more`, `less` (Video 9) |
+| [`Redirection/`](Redirection/) | [Redirection/README.md](../docs/topics/Redirection/README.md) | `>`, `>>`, `<`, `<<EOF` (Durga Sir redirection) |
 | [`scripts-execution-summary/`](../scripts-execution-summary/) | Per-topic **execution summary** `.md` files | Explains every command in each `.sh` |
 
 **Large demos:** Some topic folders use a **short orchestrator** `.sh` (same name as before) that runs smaller `*-demo.sh` files in order. Run the **split** scripts when you want output that maps clearly to one topic; run the orchestrator for the full lesson in one go.
@@ -48,6 +49,18 @@ See [DateandCal Execution summary.md](../scripts-execution-summary/DateandCal%20
 | `more-less-pager-hint-demo.sh` | `more` / `less` |
 
 See [viewContentOfFiles/viewContentOfFiles.md](../scripts-execution-summary/viewContentOfFiles/viewContentOfFiles.md).
+
+## Redirection — `>`, `>>`, EOF
+
+| Script | Description |
+| :--- | :--- |
+| `overwrite-greater-than-demo.sh` | Rama/Sita — `>` truncates file |
+| `append-greater-greater-demo.sh` | `>>` keeps old lines |
+| `heredoc-eof-demo.sh` | `cat >` / `cat >>` with `<<EOF` |
+| `input-less-than-demo.sh` | `cat < file` |
+| `pipe-vs-redirect-hint-demo.sh` | `\|` vs `>` |
+
+See [Redirection/Redirection.md](../scripts-execution-summary/Redirection/Redirection.md).
 
 ## Run from repo root
 
