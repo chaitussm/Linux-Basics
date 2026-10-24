@@ -61,7 +61,7 @@ Execution summary is **Part 2** in [viewContentOfFiles.md](../docs/topics/viewCo
 | `input-less-than-demo.sh` | `cat < file` |
 | `pipe-vs-redirect-hint-demo.sh` | `\|` vs `>` |
 
-See [Redirection/Redirection.md](../scripts-execution-summary/Redirection/Redirection.md).
+See [Redirection.md](../scripts-execution-summary/Redirection.md).
 
 ## Run from repo root
 

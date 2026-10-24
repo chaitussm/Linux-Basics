@@ -246,7 +246,7 @@ pie title View-content commands in demos
         "flow": None,
     },
     {
-        "file": "Redirection/Redirection.md",
+        "file": "Redirection.md",
         "title": "# Execution summary — `Redirection/`",
         "topic": "**Topic:** [EOF and Redirection.md](../../docs/topics/EOF%20and%20Redirection.md)  ",
         "dir_line": "**Scripts directory:** [`../../scripts/Redirection/`](../../scripts/Redirection/)",
