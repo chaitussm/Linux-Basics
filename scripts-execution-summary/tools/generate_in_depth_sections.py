@@ -280,6 +280,18 @@ GLOSSARY: dict[str, tuple[str, str, str, str]] = {
         "Scroll long listings.",
         "Interactive pager on stdout.",
     ),
+    "tac": (
+        "Print file with lines in reverse order.",
+        "Coreutils; cat spelled backward.",
+        "Vertical reverse: last line first.",
+        "Lines on stdout in reversed order.",
+    ),
+    "rev": (
+        "Reverse characters on each line.",
+        "Coreutils.",
+        "Horizontal reverse per line.",
+        "Each line mirrored on stdout.",
+    ),
 }
 
 VAR_ASSIGN = (
@@ -376,6 +388,10 @@ def classify_line(line: str) -> str | None:
         return "date"
     if s.startswith("cal"):
         return "cal"
+    if s.startswith("tac "):
+        return "tac"
+    if s.startswith("rev "):
+        return "rev"
     if s.startswith("cd "):
         return "cd"
     if s.startswith("ls "):
