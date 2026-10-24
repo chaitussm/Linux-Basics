@@ -246,6 +246,23 @@ pie title View-content commands in demos
         "flow": None,
     },
     {
+        "file": "wordCountCommand.md",
+        "title": "# Execution summary — `wordCountCommand/`",
+        "topic": "**Topic:** [wordCountCommand.md](../docs/topics/wordCountCommand.md) (Video 10)  ",
+        "dir_line": "**Scripts directory:** [`../scripts/wordCountCommand/`](../scripts/wordCountCommand/)",
+        "dirs": ["scripts/wordCountCommand"],
+        "extra": None,
+        "pie": """```mermaid
+%%{init: {'theme': 'base', 'themeVariables': {'pie1': '#5c5c5c', 'pie2': '#6e6e6e', 'pie3': '#4a4a4a', 'pieTitleTextColor': '#ffffff', 'pieSectionTextColor': '#ffffff'}}}%%
+pie title wc demos
+    "Default wc" : 20
+    "Options -l -w -c" : 45
+    "Multiple files" : 15
+    "Pipe counts" : 20
+```""",
+        "flow": None,
+    },
+    {
         "file": "Redirection.md",
         "title": "# Execution summary — `Redirection/`",
         "topic": "**Topic:** [EOF and Redirection.md](../../docs/topics/EOF%20and%20Redirection.md)  ",
