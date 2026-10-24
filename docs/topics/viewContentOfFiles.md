@@ -412,17 +412,84 @@ Output stops after **100 bytes** — so you may see only **part** of a line (e.g
 
 ## 9. tail — bottom of file
 
-**Opposite of `head`:** view from **end** of file.
+**Opposite of `head`:** view from the **end** of the file (bottom), not the top.
 
-| Command                         | Meaning                          |
-| :------------------------------ | :------------------------------- |
-| **`tail abc.txt`**              | Last **10** lines (default)      |
-| **`tail -n 5`** / **`tail -5`** | Last **5** lines                 |
-| **`tail -c 100`**               | Last **100** characters from end |
+Durga Sir: **`head` and `tail` are opposites** — `head` from the **start**, `tail` from the **end**.
 
-Durga Sir: **`head` and `tail` are opposites** (top vs bottom).
+| Command | Meaning |
+| :--- | :--- |
+| **`tail abc.txt`** | Last **10 lines** (default) |
+| **`tail -n 5 abc.txt`** / **`tail -5 abc.txt`** | Last **5 lines** |
+| **`tail -c 100 abc.txt`** | Last **100 characters** from the **end** of the file |
 
-**Note:** GNU `tail` options like `tail -n +5` (start from line 5) are advanced; class focuses on **last N lines**.
+### Default — last 10 lines
+
+```bash
+tail abc.txt
+tail testThree.sh
+```
+
+Same idea as `head`: if you omit **`-n`**, Linux shows the **last 10 lines**.
+
+**Lab (`scripts/linuxbasics/`):** after you know what is in the file (`cat`), use **`tail`** to see only the **bottom** of the file:
+
+```bash
+cd ~/Study/Linux-Basics/scripts/linuxbasics
+cat testThree.sh      # full file on screen
+tail testThree.sh     # last 10 lines only
+```
+
+![Terminal: cat testThree.sh then tail testThree.sh — last 10 lines at bottom of file](../assets/tail-default-testThree-terminal.png)
+
+### Last N lines — `tail -n` / `tail -5`
+
+```bash
+tail -n 5 abc.txt
+tail -5 abc.txt       # same idea: last 5 lines
+```
+
+**Lab:**
+
+```bash
+tail -5 testThree.sh
+cat testThree.sh      # compare: tail shows only the end (VERSION, help, footer)
+```
+
+![Terminal: tail -5 testThree.sh then cat testThree.sh — last 5 lines vs full file](../assets/tail-5-testThree-terminal.png)
+
+### Last N characters — `tail -c` (Durga Sir)
+
+With **`-c`**, you count **characters** (bytes) from the **end** of the file instead of lines.
+
+**Command (class example):**
+
+```bash
+tail -c 100 abc.txt
+```
+
+**Durga Sir (same idea as `head -c`, but from the bottom):**
+
+> It will display the last **100 characters** of the file.  
+> In Linux every character will take **one byte**. Hence it will display last **100 bytes** of file content.
+
+| Idea | Meaning |
+| :--- | :--- |
+| **`head -c 100 file`** | First **100 bytes** from the **top** |
+| **`tail -c 100 file`** | Last **100 bytes** from the **bottom** |
+
+**Lab (`printString.sh`):**
+
+```bash
+cd ~/Study/Linux-Basics/scripts/linuxbasics
+tail -c 100 printString.sh
+cat printString.sh
+```
+
+You often see **only the end** of a comment line plus the last `echo` line — because counting stops after **100 bytes**, not at a line boundary.
+
+![Terminal: tail -c 100 printString.sh then cat printString.sh — last 100 bytes vs full script](../assets/tail-c-100-printString-terminal.png)
+
+**Note:** GNU `tail` options like `tail -n +5` (start printing from line 5 onward) are advanced; class focuses on **last N lines** and **last N bytes**.
 
 **Demo:** [`tail-bottom-lines-demo.sh`](../../scripts/viewContentOfFiles/tail-bottom-lines-demo.sh)
 
