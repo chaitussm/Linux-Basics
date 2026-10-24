@@ -113,10 +113,39 @@ wc fruits.txt
 Typical output shape:
 
 ```text
-  3  3 21 fruits.txt
+  3  3 19 fruits.txt
 ```
 
-Read as: **3 lines**, **3 words**, **21 bytes**, file **`fruits.txt`**.
+Read as: **3 lines**, **3 words**, **19 bytes**, file **`fruits.txt`** (exact byte count depends on newlines; run `wc fruits.txt` on your machine to verify).
+
+**Lab (`fileinfo.txt` — Durga Sir class):**
+
+```bash
+cd ~/Study/Linux-Basics/scripts/linuxbasics
+touch fileinfo.txt
+gedit fileinfo.txt          # add text, save, close
+cat fileinfo.txt
+wc fileinfo.txt
+```
+
+Sample content (your file may match this shape):
+
+```text
+Mango is the king od fruits
+Brinjal is the king od vegetables
+Almond is the healthy dryfruit
+urad dal is the coolest among pulses
+```
+
+Example **`wc`** line from the lab:
+
+```text
+  5  24 135 fileinfo.txt
+```
+
+→ **5 lines**, **24 words**, **135 bytes**, **`fileinfo.txt`**.
+
+![Terminal: touch fileinfo.txt, cat, then wc fileinfo.txt — 5 24 135 fileinfo.txt](../assets/wc-default-four-columns-fileinfo-terminal.png)
 
 Durga Sir: remember — **lines**, **words**, **characters (bytes)**, and **file name** are all shown together by default.
 
