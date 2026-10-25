@@ -462,15 +462,107 @@ bash scripts/redirection/tty-devpts-hint-demo.sh
 
 ## 13. Exam-style recap
 
-| Question                                      | Answer                                                                    |
-| :-------------------------------------------- | :------------------------------------------------------------------------ |
-| How many standard streams?                    | **Three** — 0, 1, 2                                                       |
-| Default device for stdin?                     | **Keyboard**                                                              |
-| Default for stdout and stderr?                | **Terminal**                                                              |
-| `ls > output.txt` redirects which stream?     | **Stdout (1)**                                                            |
-| Capture `cal` invalid-year message in a file? | **`2> error.txt`** (not plain `>` alone)                                  |
-| Difference `<` vs `>` vs `>>`?                | **`<`** input from file; **`>`** overwrite output; **`>>`** append output |
-| Send both output and errors to one file?      | **`&>`** or **`&>>`**                                                     |
+Durga Sir’s end-of-session questions (from class material). Use this block for revision before tests.
+
+### Q1. In how many ways can a command get input?
+
+**Two main ways** at this level in the course:
+
+| # | Way | Example |
+| :---: | :--- | :--- |
+| 1 | **Arguments on the command line** | `cat a.txt`, `ls /etc` — the command reads file names or paths you type after the command name |
+| 2 | **Input redirection** | `cat < a.txt` or typing at the keyboard when stdin is not a file (e.g. `cat > new.txt` then you type lines) |
+
+Pipes (`|`) send **another command’s output** as input — related idea, covered in [pipeCommands.md](pipeCommands.md).
+
+### Q2. Which of the following are data streams?
+
+All three are standard **data streams**:
+
+- **Standard Input** (stdin)
+- **Standard Output** (stdout)
+- **Standard Error** (stderr)
+
+They are **not** files on disk by themselves — they are **channels** the shell connects to devices (keyboard, terminal) or to files when you redirect.
+
+### Q3. By default, the standard input device is connected to:
+
+**Keyboard**
+
+### Q4. By default, where are standard output and standard error connected?
+
+| Stream | Default device |
+| :--- | :--- |
+| **Standard Output** | **Terminal** (your screen) |
+| **Standard Error** | **Terminal** (your screen) |
+
+That is why normal output and error messages both **appear on the same window** until you use **`2>`**, **`&>`**, etc.
+
+### File descriptor numbers (must know)
+
+| FD | Stream |
+| :---: | :--- |
+| **0** | Standard **Input** stream |
+| **1** | Standard **Output** stream |
+| **2** | Standard **Error** stream |
+
+Optional digits **`0`**, **`1`**, **`2`** before **`<`**, **`>`**, **`>>`** name **which** stream you redirect. **`1`** and **`0`** are often omitted when the meaning is clear (`>` = stdout, `<` = stdin).
+
+### Q. Redirect **standard output** of `ls` to a file `output.txt`
+
+Either form is correct in exams:
+
+```bash
+ls > output.txt
+ls 1> output.txt
+```
+
+Both send **stdout (1)** to `output.txt` and **overwrite** the file if it already exists.
+
+### Q. Redirect `ls` **stdout** to `output.txt` and **stderr** to `error.txt` at the same time
+
+```bash
+ls > output.txt 2> error.txt
+```
+
+| Part | Role |
+| :--- | :--- |
+| `> output.txt` | Normal listing → **stdout** file |
+| `2> error.txt` | Error messages (e.g. permission denied on one path) → **stderr** file |
+
+Use **`2>> error.txt`** if errors should **append** to an existing log.
+
+### Q. What is the difference between `<`, `>`, and `>>`?
+
+| Symbol | Durga Sir meaning |
+| :---: | :--- |
+| **`<`** | **Input redirection** — command reads from a **file** (or device) instead of the default keyboard |
+| **`>`** | **Output / error redirection** with **overwrite** — old file contents are **replaced** (`1>` for stdout, `2>` for stderr; plain `>` is stdout) |
+| **`>>`** | **Output / error redirection** with **append** — new data is **added at the end** (`1>>` or `2>>`) |
+
+Remember: **`>`** and **`>>`** do **not** read input; **`<`** does **not** write command output to a file.
+
+### Q. Redirect output to **another terminal** (revision)
+
+```bash
+tty                  # on receiver — e.g. /dev/pts/1
+cal > /dev/pts/1     # on sender — calendar appears on that terminal
+```
+
+See [§11](#11-redirect-to-another-terminal-tty-devpts).
+
+### Quick one-line revision table
+
+| Topic | Answer |
+| :--- | :--- |
+| How many standard streams? | **Three** — stdin, stdout, stderr |
+| FD for stdin / stdout / stderr? | **0 / 1 / 2** |
+| Default stdin? | **Keyboard** |
+| Default stdout and stderr? | **Terminal** |
+| `ls > output.txt` — which stream? | **Stdout (1)** |
+| `cal` invalid year into a file? | **`2> error.txt`** (or **`2>>`**) — plain `>` alone does not capture stderr |
+| Both streams to one file? | **`&>`** (overwrite) or **`&>>`** (append) |
+| Space after `1` before `>`? | **Wrong** — use `1>file`, not `1 > file` |
 
 ---
 
