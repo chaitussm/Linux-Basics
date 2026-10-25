@@ -230,7 +230,20 @@ cal 99999 2> error.txt     # error text in error.txt
 
 Use **`2>>`** to **append** errors to an existing log file.
 
-**Lab command:**
+**Your lab — invalid `cal` year, capture stderr with `2>>` (`scripts/linuxbasics`):**
+
+```bash
+cd scripts/linuxbasics
+cal whihyo798 2>> errorRedir.txt
+cat errorRedir.txt
+gedit errorRedir.txt    # optional — same error text in the editor
+```
+
+The terminal stays quiet for the error line because **stderr** went to the file: `cal: not a valid year whihyo798`.
+
+![Terminal: cal whihyo798 2>> errorRedir.txt, cat file, gedit shows stderr message](../assets/cal-2-append-errorRedir-stderr-terminal.png)
+
+**Repo demo script:**
 
 ```bash
 bash scripts/redirection/stderr-2-greater-demo.sh
