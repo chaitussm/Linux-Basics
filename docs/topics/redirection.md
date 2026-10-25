@@ -358,12 +358,19 @@ bash scripts/redirection/stdin-combined-redirect-demo.sh
 
 ## 10. Both streams — `&>` and `&>>`
 
-When you want **stdout and stderr in the same file**:
+When you want **stdout and stderr in the same file**, use **`&`** before **`>`** or **`>>`**:
 
 | Operator  | Effect                                          |
 | :-------: | :---------------------------------------------- |
 | **`&>`**  | Send **both** streams to a file (**overwrite**) |
 | **`&>>`** | Send **both** streams to a file (**append**)    |
+
+| Symbol | Meaning |
+| :--- | :--- |
+| **`&`** | **Stdout (1) and stderr (2)** together |
+| **`>`** / **`>>`** | Overwrite or **append** that combined output to the file |
+
+If the command **succeeds**, normal output (e.g. a calendar) goes to the file. If it **fails**, the **error message** goes to the file instead — still with **`&>`** / **`&>>`**, not plain **`>`** alone for stderr-only cases when you want one log file for everything.
 
 **Class-style lab:**
 
@@ -372,7 +379,23 @@ cal 2024 &> results1.txt
 cal 99999 &>> results1.txt    # invalid year — error appended to same file
 ```
 
-**Lab command:**
+**Your lab — two bad `cal` years, append both errors (`scripts/linuxbasics`):**
+
+```bash
+cd scripts/linuxbasics
+cal daifhaikf &>> resultsErrcombo.txt
+cat resultsErrcombo.txt
+
+cal 123daifhaikf &>> resultsErrcombo.txt
+cat resultsErrcombo.txt
+gedit resultsErrcombo.txt    # optional
+```
+
+The terminal stays quiet each time because **stderr** is redirected. The second run **appends** a second line; **`cat`** shows both errors in one file.
+
+![Terminal: cal daifhaikf and cal 123daifhaikf with &>> resultsErrcombo.txt — two errors appended, gedit confirms](../assets/cal-ampersand-append-resultsErrcombo-terminal.png)
+
+**Repo demo script:**
 
 ```bash
 bash scripts/redirection/both-streams-ampersand-greater-demo.sh
