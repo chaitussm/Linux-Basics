@@ -19,6 +19,7 @@ python3 scripts-execution-summary/tools/build_execution_summaries.py
 | [DateandCal Execution summary.md](DateandCal%20Execution%20summary.md) | [`date-cal-commands/`](../scripts/date-cal-commands/) | [Date and Cal commands.md](../docs/topics/Date%20and%20Cal%20commands.md) (Video 8) |
 | *(in topic file)* [viewContentOfFiles.md — Part 2](../../docs/topics/viewContentOfFiles.md#part-2--execution-summary-scriptsviewcontentoffiles) | [`viewContentOfFiles/`](../scripts/viewContentOfFiles/) | [viewContentOfFiles.md](../../docs/topics/viewContentOfFiles.md) (Video 9) |
 | [wordCountCommand.md](wordCountCommand.md) | [`wordCountCommand/`](../scripts/wordCountCommand/) | [wordCountCommand.md](../../docs/topics/wordCountCommand.md) (Video 10) |
+| [redirectionScriptSummary.md](redirectionScriptSummary.md) | [`redirection.sh`](../scripts/redirection.sh), [`redirection/`](../scripts/redirection/), [`Redirection/`](../scripts/Redirection/) | [redirection.md](../../docs/topics/redirection.md) (Video 11) |
 | [Redirection.md](Redirection.md) | [`Redirection/`](../scripts/Redirection/) | [EOF and Redirection.md](../../docs/topics/EOF%20and%20Redirection.md) |
 
 ```bash

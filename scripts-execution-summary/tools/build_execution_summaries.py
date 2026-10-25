@@ -279,6 +279,38 @@ pie title Redirection demos
 ```""",
         "flow": None,
     },
+    {
+        "file": "redirectionScriptSummary.md",
+        "title": "# Execution summary — Session 11 redirection",
+        "topic": "**Topic:** [redirection.md](../docs/topics/redirection.md) (Video 11)  ",
+        "dir_line": "**Scripts:** [`../scripts/redirection.sh`](../scripts/redirection.sh) · [`../scripts/redirection/`](../scripts/redirection/) · [`../scripts/Redirection/`](../scripts/Redirection/)",
+        "dirs": ["scripts/redirection", "scripts/Redirection"],
+        "extra": ["scripts/redirection.sh"],
+        "pie": """```mermaid
+%%{init: {'theme': 'base', 'themeVariables': {'pie1': '#5c5c5c', 'pie2': '#6e6e6e', 'pie3': '#4a4a4a', 'pie4': '#7a7a7a', 'pieTitleTextColor': '#ffffff', 'pieSectionTextColor': '#ffffff'}}}%%
+pie title Session 11 redirection demos
+    "Streams 0 1 2" : 15
+    "Stdout > >>" : 25
+    "Stderr 2>" : 20
+    "Stdin < combined" : 15
+    "&> both streams" : 10
+    "EOF Rama demos" : 15
+```""",
+        "flow": f"""```mermaid
+{MERMAID_GREY}
+flowchart LR
+    IN[stdin 0] --> CMD[Command]
+    CMD --> OUT[stdout 1]
+    CMD --> ERR[stderr 2]
+    OUT -->|"> >>"| F[File]
+    ERR -->|"2>"| E[Error file]
+    OUT -->|"&>"| B[Both in one file]
+    ERR --> B
+
+    classDef darkGrey fill:#5c5c5c,stroke:#3d3d3d,color:#ffffff,stroke-width:2px
+    class IN,CMD,OUT,ERR,F,E,B darkGrey
+```""",
+    },
 ]
 
 

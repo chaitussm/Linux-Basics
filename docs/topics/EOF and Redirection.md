@@ -4,8 +4,10 @@
 
 **Related:** [Steps To Write a Shell Script.md](Steps%20To%20Write%20a%20Shell%20Script.md) · [viewContentOfFiles.md](viewContentOfFiles.md) (`cat < file`) · [pipeCommands.md](pipeCommands.md) (`|` is **not** `>`)
 
-**Practice scripts:** [`scripts/Redirection/`](../../scripts/Redirection/) (demos for `>`, `>>`, `<<EOF`, `<`)  
-**Execution summary:** [`scripts-execution-summary/Redirection.md`](../../scripts-execution-summary/Redirection.md)
+**Session 11 (streams 0/1/2, `2>`, `&>`):** [redirection.md](redirection.md)
+
+**Practice scripts:** [`scripts/Redirection/`](../../scripts/Redirection/) (demos for `>`, `>>`, `<<EOF`, `<`) · [`scripts/redirection.sh`](../../scripts/redirection.sh)  
+**Execution summary:** [`scripts-execution-summary/Redirection.md`](../../scripts-execution-summary/Redirection.md) · [`redirectionScriptSummary.md`](../../scripts-execution-summary/redirectionScriptSummary.md)
 
 ```bash
 cd /path/to/Linux-Basics
