@@ -277,30 +277,100 @@ Also: [`scripts/Redirection/input-less-than-demo.sh`](../../scripts/Redirection/
 
 ## 9. Combined redirects on one line
 
-Durga Sir combines all three on one **`cat`** line:
+### Durga Sir explanation
+
+**Goal:** Read **input** from **`a.txt`**, send **normal output** to **`result.txt`**, and send **errors** to **`error.txt`** — all on **one** command line.
+
+For **`cat`**, if the file name is already on the command line, **stdin redirection is optional** (same idea as `cat a.txt`):
 
 ```bash
-cat < a.txt > result.txt 2> error.txt
+cat a.txt
 ```
 
-| Part           | Role                          |
-| :------------- | :---------------------------- |
-| `< a.txt`      | Input from `a.txt`            |
-| `> result.txt` | Normal output to `result.txt` |
-| `2> error.txt` | Errors to `error.txt`         |
+So you can drop the leading **`0`** and often drop **`<`** as well — but in exams and labs you should still recognize the **full** form with stream numbers.
 
-Order and spacing matter for readability; practice on your machine until the three files behave as expected.
+**Three equivalent styles (note `2>>` appends errors):**
+
+```bash
+cat 0< a.txt  1> result.txt  2>> error.txt
+cat  < a.txt  > result.txt  2>> error.txt
+cat    a.txt  > result.txt  2>> error.txt
+```
+
+| Piece | Stream | Meaning |
+| :--- | :---: | :--- |
+| `0< a.txt` or `< a.txt` or `a.txt` as argument | **0** | Input from **`a.txt`** |
+| `1> result.txt` or `> result.txt` | **1** | **Stdout** → **`result.txt`** (overwrite) |
+| `2>> error.txt` | **2** | **Stderr** → **`error.txt`** (**append**) |
+
+**Lab test checklist (what you practice in class):**
+
+1. **Input redirection** — from **keyboard** into **`a.txt`** (e.g. `cat > a.txt`, type lines, **Ctrl+D**).
+2. **Output redirection** — from **terminal (stdout)** into **`result.txt`**.
+3. **Error redirection** — from **terminal (stderr)** into **`error.txt`** when something fails.
+
+![Class notes: three combined cat forms; lab checklist for keyboard → a.txt, stdout → result.txt, stderr → error.txt](../assets/redirection-combined-three-streams-class-notes.png)
+
+### Your lab — `scripts/linuxbasics`
+
+**View a script using input redirect** (same output as `cat printString.sh`):
+
+```bash
+cd scripts/linuxbasics
+cat < printString.sh
+```
+
+**Prepare input file** (if you do not already have `a.txt`):
+
+```bash
+cat > a.txt
+# type a few lines, Ctrl+D
+```
+
+**Run combined redirect** (pick one form from above), then inspect files:
+
+```bash
+cat  < a.txt  > result.txt  2>> error.txt
+cat result.txt
+cat error.txt
+```
+
+**Copy file content to output files** (uses `filedata.txt` from earlier `wc` labs):
+
+```bash
+cat filedata.txt > inputToOutput.txt > outputRedir.txt
+cat outputRedir.txt
+cat filedata.txt &>> inputToOutput.txt
+cat inputToOutput.txt
+```
+
+Watch **spelling** of file names — a typo gives `No such file or directory` (e.g. `inputToOuput.txt` vs `inputToOutput.txt`).
+
+![Terminal: cat < printString.sh, combined redirects, filedata.txt to output files, &>> append](../assets/redirection-combined-linuxbasics-lab-terminal.png)
+
+**Repo demo script:**
+
+```bash
+bash scripts/redirection/stdin-combined-redirect-demo.sh
+```
 
 ---
 
 ## 10. Both streams — `&>` and `&>>`
 
-When you want **stdout and stderr in the same file**:
+When you want **stdout and stderr in the same file**, use **`&`** before **`>`** or **`>>`**:
 
 | Operator  | Effect                                          |
 | :-------: | :---------------------------------------------- |
 | **`&>`**  | Send **both** streams to a file (**overwrite**) |
 | **`&>>`** | Send **both** streams to a file (**append**)    |
+
+| Symbol | Meaning |
+| :--- | :--- |
+| **`&`** | **Stdout (1) and stderr (2)** together |
+| **`>`** / **`>>`** | Overwrite or **append** that combined output to the file |
+
+If the command **succeeds**, normal output (e.g. a calendar) goes to the file. If it **fails**, the **error message** goes to the file instead — still with **`&>`** / **`&>>`**, not plain **`>`** alone for stderr-only cases when you want one log file for everything.
 
 **Class-style lab:**
 
@@ -309,7 +379,23 @@ cal 2024 &> results1.txt
 cal 99999 &>> results1.txt    # invalid year — error appended to same file
 ```
 
-**Lab command:**
+**Your lab — two bad `cal` years, append both errors (`scripts/linuxbasics`):**
+
+```bash
+cd scripts/linuxbasics
+cal daifhaikf &>> resultsErrcombo.txt
+cat resultsErrcombo.txt
+
+cal 123daifhaikf &>> resultsErrcombo.txt
+cat resultsErrcombo.txt
+gedit resultsErrcombo.txt    # optional
+```
+
+The terminal stays quiet each time because **stderr** is redirected. The second run **appends** a second line; **`cat`** shows both errors in one file.
+
+![Terminal: cal daifhaikf and cal 123daifhaikf with &>> resultsErrcombo.txt — two errors appended, gedit confirms](../assets/cal-ampersand-append-resultsErrcombo-terminal.png)
+
+**Repo demo script:**
 
 ```bash
 bash scripts/redirection/both-streams-ampersand-greater-demo.sh
