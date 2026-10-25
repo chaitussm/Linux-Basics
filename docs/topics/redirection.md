@@ -124,21 +124,46 @@ ls > output.txt
 ls 1> output.txt         # same meaning
 ```
 
-**Your lab — type several lines from the keyboard into a file (`1>` = stdout):**
+**Your lab — `1>` overwrite, `1>>` append, and the “space” mistake (`scripts/linuxbasics`):**
 
 ```bash
 cd scripts/linuxbasics
 cat 1> outputRedir.txt
 ```
 
-Type one line, press **Enter**, type the next line (repeat). When finished, press **Ctrl+D**. Then check the file:
+Type four lines (press **Enter** after each line). Press **Ctrl+D** when done. Verify:
 
 ```bash
 cat outputRedir.txt
-gedit outputRedir.txt    # optional — open in editor to see all lines
+gedit outputRedir.txt    # optional
 ```
 
-![Terminal: cat 1> outputRedir.txt — four lines typed, then cat and gedit confirm file contents](../assets/cat-1-greater-outputRedir-four-lines-terminal.png)
+**Wrong — space between `1` and `>>`** (shell treats `1` as a file name for `cat`):
+
+```bash
+cat 1 >> outputRedir.txt
+# cat: 1: No such file or directory
+```
+
+Use **`1>>`** with **no space** to append stdout.
+
+**Overwrite again** with `1>` (old lines in the file are replaced):
+
+```bash
+cat 1> outputRedir.txt
+# type two new lines, Ctrl+D
+cat outputRedir.txt
+```
+
+**Append** without erasing what is already in the file:
+
+```bash
+cat 1>> outputRedir.txt
+# type two more lines, Ctrl+D
+cat outputRedir.txt
+```
+
+![Terminal: cat 1> and 1>> on outputRedir.txt — overwrite, cat 1 >> error, overwrite again, append two lines](../assets/cat-1-greater-append-outputRedir-full-lab-terminal.png)
 
 **Repo demo script:**
 
@@ -157,9 +182,10 @@ Durga Sir stresses: after the stream number there must be **no space** before `>
 | Valid | Invalid (do not use in exam) |
 | :--- | :--- |
 | `1>file.txt` | `1 > file.txt` |
+| `1>>file.txt` | `1 >> file.txt` (see §4 lab — `cat` looks for a file named `1`) |
 | `2>error.txt` | `2 > error.txt` |
 
-The digit and `>` act as **one** redirection operator.
+The digit and `>` / `>>` act as **one** redirection operator.
 
 ---
 
