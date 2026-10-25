@@ -124,7 +124,23 @@ ls > output.txt
 ls 1> output.txt         # same meaning
 ```
 
-**Lab command:**
+**Your lab — type several lines from the keyboard into a file (`1>` = stdout):**
+
+```bash
+cd scripts/linuxbasics
+cat 1> outputRedir.txt
+```
+
+Type one line, press **Enter**, type the next line (repeat). When finished, press **Ctrl+D**. Then check the file:
+
+```bash
+cat outputRedir.txt
+gedit outputRedir.txt    # optional — open in editor to see all lines
+```
+
+![Terminal: cat 1> outputRedir.txt — four lines typed, then cat and gedit confirm file contents](../assets/cat-1-greater-outputRedir-four-lines-terminal.png)
+
+**Repo demo script:**
 
 ```bash
 bash scripts/redirection/stdout-greater-than-demo.sh
