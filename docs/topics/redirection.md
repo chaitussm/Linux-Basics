@@ -21,21 +21,22 @@ bash scripts/redirection/stderr-2-greater-demo.sh
 
 **Table of contents**
 
-- [1. Goal of this session](#1-goal-of-this-session)
-- [2. Data streams — 0, 1, and 2](#2-data-streams--0-1-and-2)
-- [3. Default devices (keyboard and terminal)](#3-default-devices-keyboard-and-terminal)
-- [4. Output redirection — stdout (`>` and `>>`)](#4-output-redirection--stdout--and-)
-- [5. Explicit `1>` and “no space” rule](#5-explicit-1-and-no-space-rule)
-- [6. `cat > file` — keyboard input, file output](#6-cat--file--keyboard-input-file-output)
-- [7. Error redirection — stderr (`2>` and `2>>`)](#7-error-redirection--stderr-2-and-2)
-- [8. Input redirection — stdin (`<` and `0<`)](#8-input-redirection--stdin--and-0)
-- [9. Combined redirects on one line](#9-combined-redirects-on-one-line)
-- [10. Both streams — `&>` and `&>>`](#10-both-streams--and-)
-- [11. Redirect to another terminal (`tty`, `/dev/pts`)](#11-redirect-to-another-terminal-tty-devpts)
-- [12. `gedit` is not redirection](#12-gedit-is-not-redirection)
-- [13. Exam-style recap](#13-exam-style-recap)
-- [14. Session checklist](#14-session-checklist)
-- [15. Script index](#15-script-index)
+- [Redirection — stdin, stdout, stderr (Session 11)](#redirection--stdin-stdout-stderr-session-11)
+  - [1. Goal of this session](#1-goal-of-this-session)
+  - [2. Data streams — 0, 1, and 2](#2-data-streams--0-1-and-2)
+  - [3. Default devices (keyboard and terminal)](#3-default-devices-keyboard-and-terminal)
+  - [4. Output redirection — stdout (`>` and `>>`)](#4-output-redirection--stdout--and-)
+  - [5. Explicit `1>` and “no space” rule](#5-explicit-1-and-no-space-rule)
+  - [6. `cat > file` — keyboard input, file output](#6-cat--file--keyboard-input-file-output)
+  - [7. Error redirection — stderr (`2>` and `2>>`)](#7-error-redirection--stderr-2-and-2)
+  - [8. Input redirection — stdin (`<` and `0<`)](#8-input-redirection--stdin--and-0)
+  - [9. Combined redirects on one line](#9-combined-redirects-on-one-line)
+  - [10. Both streams — `&>` and `&>>`](#10-both-streams---and-)
+  - [11. Redirect to another terminal (`tty`, `/dev/pts`)](#11-redirect-to-another-terminal-tty-devpts)
+  - [12. `gedit` is not redirection](#12-gedit-is-not-redirection)
+  - [13. Exam-style recap](#13-exam-style-recap)
+  - [14. Session checklist](#14-session-checklist)
+  - [15. Script index](#15-script-index)
 
 ---
 
@@ -45,13 +46,13 @@ Durga Sir treats **redirection** as moving **data streams** between **devices** 
 
 After this session you should know:
 
-| Idea | Takeaway |
-| :--- | :--- |
-| **Three streams** | **0** = stdin, **1** = stdout, **2** = stderr |
-| **Stdout redirect** | `>` overwrite, `>>` append (default stream is **1**) |
-| **Stderr redirect** | **`2>`** or **`2>>`** — required for error text |
-| **Stdin redirect** | **`<`** or **`0<`** — read from file |
-| **Both at once** | **`&>`** / **`&>>`** — stdout **and** stderr to the **same** file |
+| Idea                | Takeaway                                                          |
+| :------------------ | :---------------------------------------------------------------- |
+| **Three streams**   | **0** = stdin, **1** = stdout, **2** = stderr                     |
+| **Stdout redirect** | `>` overwrite, `>>` append (default stream is **1**)              |
+| **Stderr redirect** | **`2>`** or **`2>>`** — required for error text                   |
+| **Stdin redirect**  | **`<`** or **`0<`** — read from file                              |
+| **Both at once**    | **`&>`** / **`&>>`** — stdout **and** stderr to the **same** file |
 
 ```mermaid
 %%{init: {'theme': 'base', 'themeVariables': {'pie1': '#5c5c5c', 'pie2': '#6e6e6e', 'pie3': '#4a4a4a', 'pieTitleTextColor': '#ffffff', 'pieSectionTextColor': '#ffffff'}}}%%
@@ -65,10 +66,10 @@ pie title Session 11 — where output can go
 
 ## 2. Data streams — 0, 1, and 2
 
-| FD | Name | Typical default | What flows |
-| :---: | :--- | :--- | :--- |
-| **0** | **stdin** | Keyboard | Input **into** the command |
-| **1** | **stdout** | Terminal screen | Normal **success** output |
+|  FD   | Name       | Typical default | What flows                        |
+| :---: | :--------- | :-------------- | :-------------------------------- |
+| **0** | **stdin**  | Keyboard        | Input **into** the command        |
+| **1** | **stdout** | Terminal screen | Normal **success** output         |
 | **2** | **stderr** | Terminal screen | **Error** and diagnostic messages |
 
 ```mermaid
@@ -105,10 +106,10 @@ Errors and normal output can both appear on the **same screen**, but they are **
 
 ## 4. Output redirection — stdout (`>` and `>>`)
 
-| Operator | Effect |
-| :---: | :--- |
-| **`>`** | Send **stdout** to a file; **overwrite** (truncate) the file first |
-| **`>>`** | Send **stdout** to a file; **append** at the end |
+| Operator | Effect                                                             |
+| :------: | :----------------------------------------------------------------- |
+| **`>`**  | Send **stdout** to a file; **overwrite** (truncate) the file first |
+| **`>>`** | Send **stdout** to a file; **append** at the end                   |
 
 **Class examples:**
 
@@ -173,17 +174,19 @@ bash scripts/redirection/stdout-greater-than-demo.sh
 
 For Rama/Sita and **`>` vs `>>`**, see [EOF and Redirection.md §2–§3](EOF%20and%20Redirection.md#2--overwrite-truncate--your-rama--sita-question).
 
+By default > and >> are meant for output redirection only.
+
 ---
 
 ## 5. Explicit `1>` and “no space” rule
 
 Durga Sir stresses: after the stream number there must be **no space** before `>`.
 
-| Valid | Invalid (do not use in exam) |
-| :--- | :--- |
-| `1>file.txt` | `1 > file.txt` |
+| Valid         | Invalid (do not use in exam)                                    |
+| :------------ | :-------------------------------------------------------------- |
+| `1>file.txt`  | `1 > file.txt`                                                  |
 | `1>>file.txt` | `1 >> file.txt` (see §4 lab — `cat` looks for a file named `1`) |
-| `2>error.txt` | `2 > error.txt` |
+| `2>error.txt` | `2 > error.txt`                                                 |
 
 The digit and `>` / `>>` act as **one** redirection operator.
 
@@ -220,10 +223,10 @@ cal 99999                  # error text on terminal
 cal 99999 2> error.txt     # error text in error.txt
 ```
 
-| Mistake | What happens |
-| :--- | :--- |
-| `cal 99999 > only.txt` | Only **stdout** goes to the file; **errors still print on screen** |
-| `cal 99999 2> error.txt` | **stderr** captured in `error.txt` |
+| Mistake                  | What happens                                                       |
+| :----------------------- | :----------------------------------------------------------------- |
+| `cal 99999 > only.txt`   | Only **stdout** goes to the file; **errors still print on screen** |
+| `cal 99999 2> error.txt` | **stderr** captured in `error.txt`                                 |
 
 Use **`2>>`** to **append** errors to an existing log file.
 
@@ -237,9 +240,9 @@ bash scripts/redirection/stderr-2-greater-demo.sh
 
 ## 8. Input redirection — stdin (`<` and `0<`)
 
-| Form | Meaning |
-| :---: | :--- |
-| **`< file`** | Read **stdin** from `file` |
+|     Form     | Meaning                           |
+| :----------: | :-------------------------------- |
+| **`< file`** | Read **stdin** from `file`        |
 | **`0<file`** | Same; leading **`0`** is optional |
 
 For **`cat`**, these are equivalent in class:
@@ -267,11 +270,11 @@ Durga Sir combines all three on one **`cat`** line:
 cat < a.txt > result.txt 2> error.txt
 ```
 
-| Part | Role |
-| :--- | :--- |
-| `< a.txt` | Input from `a.txt` |
+| Part           | Role                          |
+| :------------- | :---------------------------- |
+| `< a.txt`      | Input from `a.txt`            |
 | `> result.txt` | Normal output to `result.txt` |
-| `2> error.txt` | Errors to `error.txt` |
+| `2> error.txt` | Errors to `error.txt`         |
 
 Order and spacing matter for readability; practice on your machine until the three files behave as expected.
 
@@ -281,10 +284,10 @@ Order and spacing matter for readability; practice on your machine until the thr
 
 When you want **stdout and stderr in the same file**:
 
-| Operator | Effect |
-| :---: | :--- |
-| **`&>`** | Send **both** streams to a file (**overwrite**) |
-| **`&>>`** | Send **both** streams to a file (**append**) |
+| Operator  | Effect                                          |
+| :-------: | :---------------------------------------------- |
+| **`&>`**  | Send **both** streams to a file (**overwrite**) |
+| **`&>>`** | Send **both** streams to a file (**append**)    |
 
 **Class-style lab:**
 
@@ -330,15 +333,15 @@ bash scripts/redirection/tty-devpts-hint-demo.sh
 
 ## 13. Exam-style recap
 
-| Question | Answer |
-| :--- | :--- |
-| How many standard streams? | **Three** — 0, 1, 2 |
-| Default device for stdin? | **Keyboard** |
-| Default for stdout and stderr? | **Terminal** |
-| `ls > output.txt` redirects which stream? | **Stdout (1)** |
-| Capture `cal` invalid-year message in a file? | **`2> error.txt`** (not plain `>` alone) |
-| Difference `<` vs `>` vs `>>`? | **`<`** input from file; **`>`** overwrite output; **`>>`** append output |
-| Send both output and errors to one file? | **`&>`** or **`&>>`** |
+| Question                                      | Answer                                                                    |
+| :-------------------------------------------- | :------------------------------------------------------------------------ |
+| How many standard streams?                    | **Three** — 0, 1, 2                                                       |
+| Default device for stdin?                     | **Keyboard**                                                              |
+| Default for stdout and stderr?                | **Terminal**                                                              |
+| `ls > output.txt` redirects which stream?     | **Stdout (1)**                                                            |
+| Capture `cal` invalid-year message in a file? | **`2> error.txt`** (not plain `>` alone)                                  |
+| Difference `<` vs `>` vs `>>`?                | **`<`** input from file; **`>`** overwrite output; **`>>`** append output |
+| Send both output and errors to one file?      | **`&>`** or **`&>>`**                                                     |
 
 ---
 
@@ -357,15 +360,15 @@ bash scripts/redirection/tty-devpts-hint-demo.sh
 
 ## 15. Script index
 
-| Script | Topic |
-| :--- | :--- |
-| [`redirection.sh`](../../scripts/redirection.sh) | Run all Session 11 + `Redirection/` demos |
-| [`streams-0-1-2-demo.sh`](../../scripts/redirection/streams-0-1-2-demo.sh) | Streams 0, 1, 2 |
-| [`stdout-greater-than-demo.sh`](../../scripts/redirection/stdout-greater-than-demo.sh) | `>`, `>>`, `1>` |
-| [`stderr-2-greater-demo.sh`](../../scripts/redirection/stderr-2-greater-demo.sh) | `2>` vs `>` |
-| [`stdin-combined-redirect-demo.sh`](../../scripts/redirection/stdin-combined-redirect-demo.sh) | `<`, combined line |
-| [`both-streams-ampersand-greater-demo.sh`](../../scripts/redirection/both-streams-ampersand-greater-demo.sh) | `&>`, `&>>` |
-| [`tty-devpts-hint-demo.sh`](../../scripts/redirection/tty-devpts-hint-demo.sh) | `tty`, `/dev/pts` |
-| [`Redirection/*.sh`](../../scripts/Redirection/) | `>`, `>>`, `<<EOF`, pipe hint |
+| Script                                                                                                       | Topic                                     |
+| :----------------------------------------------------------------------------------------------------------- | :---------------------------------------- |
+| [`redirection.sh`](../../scripts/redirection.sh)                                                             | Run all Session 11 + `Redirection/` demos |
+| [`streams-0-1-2-demo.sh`](../../scripts/redirection/streams-0-1-2-demo.sh)                                   | Streams 0, 1, 2                           |
+| [`stdout-greater-than-demo.sh`](../../scripts/redirection/stdout-greater-than-demo.sh)                       | `>`, `>>`, `1>`                           |
+| [`stderr-2-greater-demo.sh`](../../scripts/redirection/stderr-2-greater-demo.sh)                             | `2>` vs `>`                               |
+| [`stdin-combined-redirect-demo.sh`](../../scripts/redirection/stdin-combined-redirect-demo.sh)               | `<`, combined line                        |
+| [`both-streams-ampersand-greater-demo.sh`](../../scripts/redirection/both-streams-ampersand-greater-demo.sh) | `&>`, `&>>`                               |
+| [`tty-devpts-hint-demo.sh`](../../scripts/redirection/tty-devpts-hint-demo.sh)                               | `tty`, `/dev/pts`                         |
+| [`Redirection/*.sh`](../../scripts/Redirection/)                                                             | `>`, `>>`, `<<EOF`, pipe hint             |
 
 Full command-by-command tables: [`redirectionScriptSummary.md`](../../scripts-execution-summary/redirectionScriptSummary.md).
