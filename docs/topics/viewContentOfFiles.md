@@ -580,6 +580,8 @@ Commands may **look similar** in conversation but each has its **own purpose**.
 
 **Full Session 10 notes:** [wordCountCommand.md](wordCountCommand.md) (`wc`, `-l`, `-w`, `-c`, pipes).
 
+**Full Session 11 notes:** [redirection.md](redirection.md) (streams 0/1/2, `>`, `2>`, `<`, `&>`).
+
 **Redirection and EOF (`>`, `>>`, `<<EOF`):** [EOF and Redirection.md](EOF%20and%20Redirection.md)
 
 ---

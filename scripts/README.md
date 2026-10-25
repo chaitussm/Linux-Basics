@@ -17,7 +17,9 @@ Scripts are grouped in folders that match **`docs/topics/*.md`** notes (one fold
 | [`date-cal-commands/`](date-cal-commands/) | [Date and Cal commands.md](../docs/topics/Date%20and%20Cal%20commands.md) | `date` / `cal` demos + orchestrator (Video 8) |
 | [`viewContentOfFiles/`](viewContentOfFiles/) | [viewContentOfFiles.md](../docs/topics/viewContentOfFiles.md) | `cat`, `tac`, `rev`, `head`, `tail`, `more`, `less` (Video 9) |
 | [`wordCountCommand/`](wordCountCommand/) | [wordCountCommand.md](../docs/topics/wordCountCommand.md) | `wc`, `-l`, `-w`, `-c`, multiple files, pipes (Video 10) |
-| [`Redirection/`](Redirection/) | [EOF and Redirection.md](../docs/topics/EOF%20and%20Redirection.md) | `>`, `>>`, `<`, `<<EOF` (Durga Sir redirection) |
+| [`redirection/`](redirection/) | [redirection.md](../docs/topics/redirection.md) | Streams 0/1/2, `2>`, `&>`, combined redirects (Video 11) |
+| [`redirection.sh`](redirection.sh) | [redirection.md](../docs/topics/redirection.md) | Orchestrator — runs `redirection/` then `Redirection/` |
+| [`Redirection/`](Redirection/) | [EOF and Redirection.md](../docs/topics/EOF%20and%20Redirection.md) | `>`, `>>`, `<`, `<<EOF` (overwrite vs append) |
 | [`scripts-execution-summary/`](../scripts-execution-summary/) | Per-topic **execution summary** `.md` files | Explains every command in each `.sh` |
 
 **Large demos:** Some topic folders use a **short orchestrator** `.sh` (same name as before) that runs smaller `*-demo.sh` files in order. Run the **split** scripts when you want output that maps clearly to one topic; run the orchestrator for the full lesson in one go.
@@ -79,6 +81,20 @@ See [wordCountCommand.md](../scripts-execution-summary/wordCountCommand.md).
 
 See [Redirection.md](../scripts-execution-summary/Redirection.md).
 
+## Session 11 — redirection (streams)
+
+| Script | Description |
+| :--- | :--- |
+| [`redirection.sh`](redirection.sh) | Run all Session 11 + `Redirection/` demos |
+| `redirection/streams-0-1-2-demo.sh` | stdin 0, stdout 1, stderr 2 |
+| `redirection/stdout-greater-than-demo.sh` | `>`, `>>`, `1>` |
+| `redirection/stderr-2-greater-demo.sh` | `2>` vs plain `>` |
+| `redirection/stdin-combined-redirect-demo.sh` | `<`, `cat < a > r 2> e` |
+| `redirection/both-streams-ampersand-greater-demo.sh` | `&>`, `&>>` |
+| `redirection/tty-devpts-hint-demo.sh` | `tty`, `/dev/pts` two-terminal lab |
+
+See [redirectionScriptSummary.md](../scripts-execution-summary/redirectionScriptSummary.md).
+
 ## Run from repo root
 
 ```bash
@@ -86,6 +102,7 @@ cd /path/to/Linux-Basics
 chmod +x scripts/**/*.sh
 chmod +x "scripts/date-cal-commands/"*.sh
 bash "scripts/date-cal-commands/Date and Cal commands.sh"
+bash scripts/redirection.sh
 bash scripts/components-of-unix/invalid-command-demos.sh
 bash scripts/types-of-files-in-linux/file-command-content-demo.sh
 bash scripts/bash-built-in-commands/cat-command-demo.sh
