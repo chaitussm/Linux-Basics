@@ -405,18 +405,48 @@ bash scripts/redirection/both-streams-ampersand-greater-demo.sh
 
 ## 11. Redirect to another terminal (`tty`, `/dev/pts`)
 
-In a **two-terminal** lab:
+The **terminal window** you type in is also a **device file** under **`/dev/pts/`** (pseudo-terminal). Durga Sir’s lab:
 
-1. On **terminal A**, run **`tty`** — example output: `/dev/pts/1`
-2. On **terminal B**, run **`cal > /dev/pts/1`** — the calendar appears on **A’s** screen
+1. Find **this** window’s device with **`tty`**.
+2. Open a **second** terminal tab or window and run **`tty`** there too — you get a **different** path (e.g. `/dev/pts/0` vs `/dev/pts/1`).
+3. Redirect **stdout** to the **other** window’s path — output appears **there**, not where you typed the command.
+
+| Command | Meaning |
+| :--- | :--- |
+| **`tty`** | Print the device file for **this** terminal session |
+| **`cal > /dev/pts/N`** | Send **`cal`** output to terminal **`N`** (replace with the path from the **other** window’s `tty`) |
+
+**Step 1 — sender terminal (`scripts/linuxbasics`):** see your own device, then redirect to the **other** pts:
+
+```bash
+cd scripts/linuxbasics
+tty
+# example: /dev/pts/0  ← you are here
+
+cal > /dev/pts/1
+# no calendar on this screen — stdout went to pts/1
+```
+
+![Terminal: tty shows /dev/pts/0, then cal > /dev/pts/1 with no output on sender](../assets/tty-cal-redirect-to-devpts-send-terminal.png)
+
+**Step 2 — receiver terminal:** open the second window, confirm its device, then run **`cal > /dev/pts/1`** from the **first** window (use the path **`tty`** printed **here**):
+
+```bash
+tty
+# example: /dev/pts/1  ← calendar from Step 1 appears below
+```
+
+The October calendar is **not** typed in this pane — it arrived because the other session used **`> /dev/pts/1`**.
+
+![Two terminals: left tty /dev/pts/1 shows calendar received from cal > /dev/pts/1 on the other session](../assets/tty-two-terminal-cal-on-devpts-receive.png)
 
 Same idea with **`echo`**:
 
 ```bash
-echo "message" > /dev/pts/1
+echo "message from another terminal" > /dev/pts/1
 ```
 
-**Lab command (prints instructions if only one pseudo-tty):**
+**Repo demo (single-terminal hint only):**
 
 ```bash
 bash scripts/redirection/tty-devpts-hint-demo.sh
