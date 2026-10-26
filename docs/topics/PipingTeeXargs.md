@@ -28,10 +28,11 @@ bash scripts/PipingTeeXargs.sh
 - [8. Pipe carries stdout only (not stderr)](#8-pipe-carries-stdout-only-not-stderr)
 - [9. When piping “breaks” — `>` before `|`](#9-when-piping-breaks--before-)
 - [10. `tee` — write to file and screen](#10-tee--write-to-file-and-screen)
-- [11. `xargs` — build command lines from stdin](#11-xargs--build-command-lines-from-stdin)
-- [12. Pipe vs redirection vs `tee`](#12-pipe-vs-redirection-vs-tee)
-- [13. Session checklist](#13-session-checklist)
-- [14. Script index](#14-script-index)
+- [11. Tee with multiple files](#11-tee-with-multiple-files)
+- [12. `xargs` — build command lines from stdin](#12-xargs--build-command-lines-from-stdin)
+- [13. Pipe vs redirection vs `tee`](#13-pipe-vs-redirection-vs-tee)
+- [14. Session checklist](#14-session-checklist)
+- [15. Script index](#15-script-index)
 
 ---
 
@@ -574,7 +575,55 @@ bash scripts/PipingTeeXargs/tee-append-multiple-files-demo.sh
 
 ---
 
-## 11. `xargs` — build command lines from stdin
+## 11. Tee with multiple files
+
+After [§10](#10-tee--write-to-file-and-screen), **`tee`** saves the **listing** while the pipe continues. This lab adds a **second file**: redirect **`wc`**’s stdout so you keep **both** the **`ls -l`** copy and the **word-count** result.
+
+### Durga Sir — requirement (class)
+
+![Class notes: save ls -l to output.txt, pipe to wc, save wc to wc.txt](../assets/tee-class-requirement-output-txt-wc-txt.png)
+
+**Requirement (wording from class):**
+
+> If I want to save the result of **`ls -l`** in **`output.txt`** and pass the output to **`wc`** command and save that output in **`wc.txt`**
+
+**Command from the board:**
+
+```bash
+ls -l | tee output.txt | wc > wc.txt
+```
+
+| Piece | Role |
+| :--- | :--- |
+| **`ls -l`** | Produces the listing on stdout |
+| **`| tee output.txt`** | Writes that listing to **`output.txt`** and passes the **same** lines to **`wc`** |
+| **`| wc`** | Reads the listing from the pipe; prints line/word/byte counts on stdout |
+| **`> wc.txt`** | Sends **`wc`**’s output **only** to **`wc.txt`** (not to the terminal) |
+
+You end with **two files**: **`output.txt`** (full listing) and **`wc.txt`** (three numbers from **`wc`**). That is different from [§10](#10-tee--write-to-file-and-screen) where **`wc -l`** printed **`246`** on screen — here the **last** stage uses **`>`**, so verify with **`cat wc.txt`**.
+
+### Lab test evidence — `scripts/linuxbasics`
+
+Same pipeline in the repo lab folder (file names match your terminal):
+
+```bash
+cd scripts/linuxbasics
+ls -l | tee outputData.txt | wc > wordCount.txt
+cat wordCount.txt
+```
+
+| Step | What you should see |
+| :--- | :--- |
+| **`ls -l \| tee outputData.txt \| wc > wordCount.txt`** | **No** listing on screen — **`tee`** filled **`outputData.txt`** in the background; **`wc`**’s result went to **`wordCount.txt`** |
+| **`cat wordCount.txt`** | One line of counts, e.g. **`33 294 1976`** → **33** lines, **294** words, **1976** bytes for the **`ls -l`** listing in that directory |
+
+![Terminal: ls -l | tee outputData.txt | wc > wordCount.txt, then cat wordCount.txt → 33 294 1976](../assets/tee-ls-tee-outputData-wc-wordCount-terminal.png)
+
+Optional check: **`cat outputData.txt`** shows the **`ls -l`** lines that **`tee`** saved while **`wc`** ran on the pipe.
+
+---
+
+## 12. `xargs` — build command lines from stdin
 
 **Problem:** Some commands want **file names as arguments** (`touch a b c`, `wc file1 file2`), but a pipe gives **stdin**, not argv.
 
@@ -615,7 +664,7 @@ bash scripts/PipingTeeXargs/xargs-with-find-style-demo.sh
 
 ---
 
-## 12. Pipe vs redirection vs `tee`
+## 13. Pipe vs redirection vs `tee`
 
 | Mechanism | Symbol / command | Connects to |
 | :--- | :--- | :--- |
@@ -631,20 +680,21 @@ ls -l /etc | tee etclist.txt | wc -l
 
 ---
 
-## 13. Session checklist
+## 14. Session checklist
 
 - [ ] Explain **three** output destinations: terminal, file, **pipe**
 - [ ] Run `ls -l /etc | head` and `ls -l /etc | wc -l`
 - [ ] Run `cat marks.txt | sort | uniq` and `uniq -c`
 - [ ] Show `cal 99999 | wc -l` — error on screen, pipe does not carry stderr
 - [ ] Run `ls -l | tee listing.txt` and confirm file + screen
+- [ ] Run `ls -l | tee output.txt | wc > wc.txt` (or lab: `outputData.txt` / `wordCount.txt`) and `cat` both files
 - [ ] Run `echo "a b c" | xargs touch`
 - [ ] Run `bash scripts/PipingTeeXargs.sh`
 - [ ] Add lab **screenshots** under each block after class (same workflow as `redirection.md`)
 
 ---
 
-## 14. Script index
+## 15. Script index
 
 | Script | Topic |
 | :--- | :--- |
