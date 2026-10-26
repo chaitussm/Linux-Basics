@@ -621,6 +621,38 @@ cat wordCount.txt
 
 Optional check: **`cat outputData.txt`** shows the **`ls -l`** lines that **`tee`** saved while **`wc`** ran on the pipe.
 
+### Using `tee` more than once in the same pipeline
+
+You are **not** limited to a single **`tee`** per command line. Each **`tee`** is another **T-junction**: it can **write a file** at that stage **and** keep stdout flowing to the next command.
+
+**Pattern A — save `wc` with redirect (silent on screen):**
+
+```bash
+ls -l | tee outputData.txt | wc > wordCount.txt
+cat wordCount.txt    # e.g. 33 294 1976
+```
+
+**Pattern B — second `tee` after `wc` (file + screen for the counts):**
+
+```bash
+ls -l | tee outputData.txt | wc | tee wordCount.txt
+```
+
+| Compare | What happens to **`wc`** output |
+| :--- | :--- |
+| **`wc > wordCount.txt`** | Goes **only** to the file — **nothing** from **`wc`** on the terminal |
+| **`wc \| tee wordCount.txt`** | **Copied** to **`wordCount.txt`** **and** printed on the terminal (**`33 294 1976`**) |
+
+**Points to remember:**
+
+1. **First `tee`** — usually captures **early** pipeline output (here, the full **`ls -l`** listing in **`outputData.txt`**).
+2. **Second `tee`** — can capture a **later** stage (here, the **three numbers** from **`wc`** in **`wordCount.txt`**) without breaking the pipe.
+3. **`tee`** can appear **multiple times**; order matters — each **`tee`** only sees what reached that point in the chain.
+4. Use **`>`** on the **last** step when you want a file **and** no terminal output; use **`tee`** on the last step when you want **file and screen** together.
+5. Same lab folder: **`scripts/linuxbasics`** — run both patterns and compare what appears on screen.
+
+![Terminal: redirect vs double tee — ls -l | tee outputData.txt | wc > wordCount.txt, cat; then ls -l | tee outputData.txt | wc | tee wordCount.txt shows 33 294 1976](../assets/tee-double-tee-listing-and-wc-counts-terminal.png)
+
 ---
 
 ## 12. `xargs` — build command lines from stdin
@@ -688,6 +720,7 @@ ls -l /etc | tee etclist.txt | wc -l
 - [ ] Show `cal 99999 | wc -l` — error on screen, pipe does not carry stderr
 - [ ] Run `ls -l | tee listing.txt` and confirm file + screen
 - [ ] Run `ls -l | tee output.txt | wc > wc.txt` (or lab: `outputData.txt` / `wordCount.txt`) and `cat` both files
+- [ ] Run `ls -l | tee outputData.txt | wc | tee wordCount.txt` and confirm counts on screen **and** in the file
 - [ ] Run `echo "a b c" | xargs touch`
 - [ ] Run `bash scripts/PipingTeeXargs.sh`
 - [ ] Add lab **screenshots** under each block after class (same workflow as `redirection.md`)
