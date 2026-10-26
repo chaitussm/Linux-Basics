@@ -29,13 +29,14 @@ bash scripts/PipingTeeXargs.sh
 - [9. When piping “breaks” — `>` before `|`](#9-when-piping-breaks--before-)
 - [10. `tee` — write to file and screen](#10-tee--write-to-file-and-screen)
 - [11. Tee with multiple files](#11-tee-with-multiple-files)
-- [12. Reason for `xargs`](#12-reason-for-xargs)
-- [13. `xargs` — build command lines from stdin](#13-xargs--build-command-lines-from-stdin)
-- [14. eg2 — display contents of files named in an input file](#14-eg2--display-contents-of-files-named-in-an-input-file)
-- [15. Printing `date` and `cal` with `xargs echo`](#15-printing-date-and-cal-with-xargs-echo)
-- [16. Pipe vs redirection vs `tee`](#16-pipe-vs-redirection-vs-tee)
-- [17. Session checklist](#17-session-checklist)
-- [18. Script index](#18-script-index)
+- [12. Combine two listings — save merged file and reverse-sorted copy (`tee`)](#12-combine-two-listings--save-merged-file-and-reverse-sorted-copy-tee)
+- [13. Reason for `xargs`](#13-reason-for-xargs)
+- [14. `xargs` — build command lines from stdin](#14-xargs--build-command-lines-from-stdin)
+- [15. eg2 — display contents of files named in an input file](#15-eg2--display-contents-of-files-named-in-an-input-file)
+- [16. Printing `date` and `cal` with `xargs echo`](#16-printing-date-and-cal-with-xargs-echo)
+- [17. Pipe vs redirection vs `tee`](#17-pipe-vs-redirection-vs-tee)
+- [18. Session checklist](#18-session-checklist)
+- [19. Script index](#19-script-index)
 
 ---
 
@@ -783,7 +784,86 @@ ls -l | tee outputData.txt | wc | tee wordCount.txt
 
 ---
 
-## 12. Reason for `xargs`
+## 12. Combine two listings — save merged file and reverse-sorted copy (`tee`)
+
+Durga Sir uses this problem **after** [§11](#11-tee-with-multiple-files): you already have two saved listings; you need a **merged** copy **and** a **reverse-sorted** copy — without losing the unsorted merge on disk.
+
+### Class — question (two-step vs one pipeline)
+
+![Class: ls /dev and /bin to file1/file2; cat merge then sort -r vs cat | tee file3 | sort -r](../assets/tee-class-cat-tee-sort-pipeline-question.png)
+
+**Step 0 — create the two source files:**
+
+```bash
+ls /dev > file1.txt
+ls /bin > file2.txt
+```
+
+| File | Contents |
+| :--- | :--- |
+| **`file1.txt`** | One name per line from **`/dev`** |
+| **`file2.txt`** | One name per line from **`/bin`** |
+
+**Goal:** Concatenate both lists into **`file3.txt`**, then produce **`sorted.txt`** with names in **reverse** order (**`sort -r`**).
+
+**Method A — two commands, intermediate file read again:**
+
+```bash
+cat file1.txt file2.txt > file3.txt
+sort -r file3.txt > sorted.txt
+```
+
+| Step | What happens |
+| :--- | :--- |
+| **`cat … > file3.txt`** | **Merged** listing saved; stdout went **only** to **`file3.txt`** (nothing left for a pipe) |
+| **`sort -r file3.txt > sorted.txt`** | **`sort`** reads **`file3.txt`** from disk; reverse-sorted result in **`sorted.txt`** |
+
+Works, but you **run two steps** and **`sort`** must **open `file3.txt`** again.
+
+**Method B — one pipeline with `tee` (class answer):**
+
+```bash
+cat file1.txt file2.txt | tee file3.txt | sort -r > sorted.txt
+```
+
+| Piece | Role |
+| :--- | :--- |
+| **`cat file1.txt file2.txt`** | Streams **dev names**, then **bin names**, on stdout |
+| **`| tee file3.txt`** | Writes that **same** merged stream to **`file3.txt`** **and** passes it on |
+| **`| sort -r`** | Sorts the piped lines in **reverse** order |
+| **`> sorted.txt`** | Saves sorted output to **`sorted.txt`** (not to the terminal) |
+
+**Why `tee` here:** You need **`file3.txt`** (unsorted merge) **and** **`sorted.txt`** (sorted merge) from **one** run of **`cat`**. Redirect-only **`>`** after **`cat`** would fill **`file3.txt`** but **break** the pipe to **`sort`** — same lesson as [§9](#9-when-piping-breaks--before-).
+
+### Lab test evidence — `scripts/linuxbasics` (answer)
+
+Same pattern with lab file names (your terminal):
+
+```bash
+cd scripts/linuxbasics
+ls /dev > devfiles.txt
+ls /bin > binfiles.txt
+cat devfiles.txt binfiles.txt | tee alltypefiles.txt | sort -r > sorted.txt
+head -5 alltypefiles.txt
+tail -5 alltypefiles.txt
+wc alltypefiles.txt
+```
+
+![Terminal: devfiles + binfiles, tee alltypefiles.txt, sort -r sorted.txt; head/tail/wc](../assets/tee-lab-dev-bin-tee-alltype-sort-terminal.png)
+
+| Check | Expected |
+| :--- | :--- |
+| **`alltypefiles.txt`** | **Combined** `/dev` + `/bin` names in **cat order** (not sorted) — e.g. **`head`** shows early **`/dev`** entries like `acpi_thermal_rel`, `autofs`, … |
+| **`sorted.txt`** | **Same lines**, **reverse-sorted** — not shown in full in the screenshot; created by **`sort -r`** on the pipe |
+| **`tail -5 alltypefiles.txt`** | End of **unsorted** merge (lab shows names like `zstd`, `zstdcat`, … from the **`/bin`** side) |
+| **`wc alltypefiles.txt`** | Lab example: **`1942` lines** — both directories contributed many entries |
+| **Typo note** | `head -5 alltypesfiles.txt` fails (extra **`s`**); correct name is **`alltypefiles.txt`** |
+
+Repo copies (for study without re-running **`ls /dev`**): [`devfiles.txt`](../../scripts/linuxbasics/devfiles.txt), [`binfiles.txt`](../../scripts/linuxbasics/binfiles.txt), [`alltypefiles.txt`](../../scripts/linuxbasics/alltypefiles.txt), [`sorted.txt`](../../scripts/linuxbasics/sorted.txt).
+
+---
+
+## 13. Reason for `xargs`
 
 **Video (Session 12):** [Piping and importance of `tee` and `xargs`](https://www.youtube.com/watch?v=Ko3VktocAQw&list=PLd3UqWTnYXOloH0vWBs4BtSbP84WcC2NY&index=12) — Durga Sir introduces **`xargs`** after **`tee`** because **piping** and **command-line arguments** are not the same thing.
 
@@ -813,7 +893,7 @@ You are sending a **stream** into **`rm`**, but **`rm`** does **not** read file 
 cat input.txt | xargs rm
 ```
 
-(Only use **`rm`** with **`xargs`** when you are sure every line in the file is a file you intend to delete — see [§13](#13-xargs--build-command-lines-from-stdin).)
+(Only use **`rm`** with **`xargs`** when you are sure every line in the file is a file you intend to delete — see [§14](#14-xargs--build-command-lines-from-stdin).)
 
 ### Lab test evidence — `cat … | rm` fails (`scripts/linuxbasics`)
 
@@ -837,9 +917,9 @@ cat inputData.txt | rm
 
 ---
 
-## 13. `xargs` — build command lines from stdin
+## 14. `xargs` — build command lines from stdin
 
-After [§12](#12-reason-for-xargs), the rule is clear: **`xargs`** reads **stdin** (lines or words) and **builds command-line arguments** for the next command (default command is **`echo`** if you omit one).
+After [§13](#13-reason-for-xargs), the rule is clear: **`xargs`** reads **stdin** (lines or words) and **builds command-line arguments** for the next command (default command is **`echo`** if you omit one).
 
 **Durga Sir definition:** **`xargs`** is used to **convert the output stream into command-line arguments**.
 
@@ -847,7 +927,7 @@ After [§12](#12-reason-for-xargs), the rule is clear: **`xargs`** reads **stdin
 
 ### Durga Sir — how `xargs` turns a stream into `rm` arguments (class summary)
 
-Board flow (no extra screenshot — same idea as [§12](#12-reason-for-xargs), step 2):
+Board flow (no extra screenshot — same idea as [§13](#13-reason-for-xargs), step 2):
 
 1. **`input.txt`** holds one file name per line, for example:
    ```text
@@ -962,7 +1042,7 @@ bash scripts/PipingTeeXargs/xargs-with-find-style-demo.sh
 
 ---
 
-## 14. eg2 — display contents of files named in an input file
+## 15. eg2 — display contents of files named in an input file
 
 **Durga Sir — class (eg2):**
 
@@ -997,10 +1077,10 @@ cat input.txt | xargs cat
 | Step | Role |
 | :--- | :--- |
 | **`cat input.txt`** | Prints file names to stdout — a **stream** of lines |
-| **`| xargs`** | Converts that stream into **command-line arguments** ([§13](#13-xargs--build-command-lines-from-stdin)) |
+| **`| xargs`** | Converts that stream into **command-line arguments** ([§14](#14-xargs--build-command-lines-from-stdin)) |
 | **`cat`** (second) | Runs like **`cat a.txt b.txt c.txt`** — prints **each file’s contents** to the terminal, one after another |
 
-Same pattern as **`cat input.txt | xargs rm`** in [§13](#13-xargs--build-command-lines-from-stdin), but the command after **`xargs`** is **`cat`** (read/display) instead of **`rm`** (delete).
+Same pattern as **`cat input.txt | xargs rm`** in [§14](#14-xargs--build-command-lines-from-stdin), but the command after **`xargs`** is **`cat`** (read/display) instead of **`rm`** (delete).
 
 ### Lab test evidence — `inputData.txt` and `xargs cat` (`scripts/linuxbasics`)
 
@@ -1039,9 +1119,9 @@ cat inputData.txt | xargs cat
 
 ---
 
-## 15. Printing `date` and `cal` with `xargs echo`
+## 16. Printing `date` and `cal` with `xargs echo`
 
-After [§14](#14-eg2--display-contents-of-files-named-in-an-input-file), you have seen **`xargs`** turn a **stream** into **arguments** for **`cat`** and **`rm`**. The same idea works with **`echo`** — useful because **`echo` does not read stdin** from a pipe.
+After [§15](#15-eg2--display-contents-of-files-named-in-an-input-file), you have seen **`xargs`** turn a **stream** into **arguments** for **`cat`** and **`rm`**. The same idea works with **`echo`** — useful because **`echo` does not read stdin** from a pipe.
 
 | Command | Why `xargs`? |
 | :--- | :--- |
@@ -1065,14 +1145,14 @@ cal | xargs echo
 
 **Points:**
 
-1. **`xargs`** reads **stdout** from **`date`** or **`cal`** and builds **`echo`**’s argument list — that is **stream → command-line arguments** again ([§13](#13-xargs--build-command-lines-from-stdin)).
+1. **`xargs`** reads **stdout** from **`date`** or **`cal`** and builds **`echo`**’s argument list — that is **stream → command-line arguments** again ([§14](#14-xargs--build-command-lines-from-stdin)).
 2. For **`date`**, you usually run **`date`** alone; **`xargs echo`** is a **small demo** of the mechanism, not required in daily use.
 3. For **`cal`**, **`cal | xargs echo`** **destroys** the calendar layout — use plain **`cal`** when you want the normal grid. The lab shows what **`xargs`** does to **multi-line** input (whitespace and newlines become argument separators).
 4. Do **not** write **`date cal | xargs echo`** — the shell does not run two commands like that; run **`date`** and **`cal`** separately, or use **`{ date; cal; } | xargs echo`** only if you intentionally want **both** outputs mashed into one line.
 
 ---
 
-## 16. Pipe vs redirection vs `tee`
+## 17. Pipe vs redirection vs `tee`
 
 | Mechanism | Symbol / command | Connects to |
 | :--- | :--- | :--- |
@@ -1088,7 +1168,7 @@ ls -l /etc | tee etclist.txt | wc -l
 
 ---
 
-## 17. Session checklist
+## 18. Session checklist
 
 - [ ] Explain **three** output destinations: terminal, file, **pipe**
 - [ ] Run `ls -l /etc | head` and `ls -l /etc | wc -l`
@@ -1097,17 +1177,18 @@ ls -l /etc | tee etclist.txt | wc -l
 - [ ] Run `ls -l | tee listing.txt` and confirm file + screen
 - [ ] Run `ls -l | tee output.txt | wc > wc.txt` (or lab: `outputData.txt` / `wordCount.txt`) and `cat` both files
 - [ ] Run `ls -l | tee outputData.txt | wc | tee wordCount.txt` and confirm counts on screen **and** in the file
-- [ ] Explain why `cat file | rm` fails and what `xargs` fixes ([§12](#12-reason-for-xargs))
-- [ ] Lab: `touch file{1..5}.txt`, list names in `inputData.txt`, run `cat inputData.txt | xargs rm`, confirm files gone but list file unchanged ([§13](#13-xargs--build-command-lines-from-stdin))
-- [ ] Run `cat inputData.txt | xargs cat` (eg2 — [§14](#14-eg2--display-contents-of-files-named-in-an-input-file))
-- [ ] Run `date | xargs echo` and `cal | xargs echo`; compare with plain `date` and `cal` ([§15](#15-printing-date-and-cal-with-xargs-echo))
+- [ ] Run `cat devfiles.txt binfiles.txt | tee alltypefiles.txt | sort -r > sorted.txt` ([§12](#12-combine-two-listings--save-merged-file-and-reverse-sorted-copy-tee))
+- [ ] Explain why `cat file | rm` fails and what `xargs` fixes ([§13](#13-reason-for-xargs))
+- [ ] Lab: `touch file{1..5}.txt`, list names in `inputData.txt`, run `cat inputData.txt | xargs rm`, confirm files gone but list file unchanged ([§14](#14-xargs--build-command-lines-from-stdin))
+- [ ] Run `cat inputData.txt | xargs cat` (eg2 — [§15](#15-eg2--display-contents-of-files-named-in-an-input-file))
+- [ ] Run `date | xargs echo` and `cal | xargs echo`; compare with plain `date` and `cal` ([§16](#16-printing-date-and-cal-with-xargs-echo))
 - [ ] Run `echo "a b c" | xargs touch`
 - [ ] Run `bash scripts/PipingTeeXargs.sh`
 - [ ] Add lab **screenshots** under each block after class (same workflow as `redirection.md`)
 
 ---
 
-## 18. Script index
+## 19. Script index
 
 | Script | Topic |
 | :--- | :--- |
