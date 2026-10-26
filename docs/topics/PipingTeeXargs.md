@@ -621,6 +621,110 @@ cat wordCount.txt
 
 Optional check: **`cat outputData.txt`** shows the **`ls -l`** lines that **`tee`** saved while **`wc`** ran on the pipe.
 
+### Concept — multiple `tee` with piping (how it fits together)
+
+**Piping** moves data **left → right**: each command reads **stdin**, writes **stdout**, and **`|`** connects stdout of command *N* to stdin of command *N+1*.
+
+**`tee`** sits **inside** that chain. It does **not** “use up” the stream like **`>`** does. For every line (or byte chunk) it receives, it:
+
+1. **Writes** a copy to one or more **files** (arguments to **`tee`**), and  
+2. **Forwards** the **same** data to **stdout** so the **rest of the pipe** still works.
+
+So “multiple tee” in Durga Sir’s session means two related ideas:
+
+| Idea | What it means | Example |
+| :--- | :--- | :--- |
+| **Several files from one `tee`** | One **`tee`** can open **many** file names; each gets the **same** snapshot of the stream **at that point** | `cmd \| tee a.txt b.txt \| wc` |
+| **Several `tee` commands in one pipeline** | Each **`tee`** is at a **different stage** — it logs **whatever output exists there** (listing vs counts vs filtered text) | `ls -l \| tee list.txt \| wc \| tee counts.txt` |
+
+**Mental model — two T-junctions in one line:**
+
+```mermaid
+%%{init: {'theme': 'base', 'themeVariables': {'primaryColor': '#FF9800', 'primaryTextColor': '#212121', 'primaryBorderColor': '#424242', 'lineColor': '#1E88E5', 'tertiaryColor': '#FFFFFF'}}}%%
+flowchart LR
+    LS["ls -l"] --> T1((tee))
+    T1 --> WC[wc]
+    T1 --> F1["outputData.txt<br/>(full listing)"]
+    WC --> T2((tee))
+    T2 --> SCR["terminal<br/>(counts)"]
+    T2 --> F2["wordCount.txt<br/>(counts)"]
+
+    classDef orange fill:#FF9800,stroke:#424242,color:#212121,stroke-width:2px
+    classDef blue fill:#1E88E5,stroke:#424242,color:#ffffff,stroke-width:2px
+    classDef white fill:#FFFFFF,stroke:#424242,color:#212121,stroke-width:2px
+    class LS,F1,F2 orange
+    class T1,T2 blue
+    class WC,SCR white
+```
+
+**Rules that stay true no matter how many `tee`s you use:**
+
+- **`tee` only sees upstream output** — the **first** `tee` never sees **`wc`**’s numbers; the **second** `tee` never sees the raw **`ls -l`** lines unless you saved them earlier.
+- **Order of commands still matters** — `ls | sort | tee sorted.txt | uniq` saves **sorted** lines, not the original order.
+- **`>` at the end** sends **only** to a file (silent screen). **`tee` at the end** sends to **file and screen** ([§10](#10-tee--write-to-file-and-screen) vs this section).
+- **Pipe + `tee` + redirect** can mix: `… | tee mid.txt | wc > end.txt` uses **`tee`** for the middle snapshot and **`>`** for the final file.
+
+### Worked examples (multiple `tee` / multiple destinations)
+
+**Example 1 — class board: two files, no screen for `wc`**
+
+```bash
+ls -l | tee output.txt | wc > wc.txt
+# cat output.txt   → full listing
+# cat wc.txt       → one line: lines words bytes
+```
+
+**Example 2 — lab: same, different file names**
+
+```bash
+ls -l | tee outputData.txt | wc > wordCount.txt
+```
+
+**Example 3 — second `tee`: save counts and show them**
+
+```bash
+ls -l | tee outputData.txt | wc | tee wordCount.txt
+# wordCount.txt and terminal both show e.g. 33 294 1976
+```
+
+**Example 4 — one `tee`, two listing files (same stage)**
+
+From [§10](#10-tee--write-to-file-and-screen) — duplicate **without** a second `tee`:
+
+```bash
+ls -l | tee copy1.txt copy2.txt | wc -l
+```
+
+Both **`copy1.txt`** and **`copy2.txt`** get the **same** `ls -l` output; **`wc -l`** still runs on the pipe.
+
+**Example 5 — `tee` after a filter (snapshot of *processed* data)**
+
+```bash
+cat marks.txt | sort | tee sorted-snapshot.txt | uniq -c | tee summary.txt
+```
+
+| File | Contents |
+| :--- | :--- |
+| **`sorted-snapshot.txt`** | Lines **after** **`sort`**, **before** **`uniq -c`** |
+| **`summary.txt`** | Final **`uniq -c`** table (and terminal if you omit a final **`>`**) |
+
+**Example 6 — debug a long pipe (log intermediate steps)**
+
+```bash
+ls -l /etc | tee step1-listing.txt | head -20 | tee step2-head20.txt | wc -l
+```
+
+You keep **full listing**, **first 20 lines**, and still get a **line count** of those 20 on screen — three “checkpoints” in one run.
+
+**Example 7 — append a run log with `tee -a`**
+
+```bash
+date | tee -a pipeline.log
+ls -l | tee -a pipeline.log listing.txt | wc | tee -a pipeline.log counts.txt
+```
+
+**`tee -a`** adds to **`pipeline.log`** without wiping earlier lines ([§10](#10-tee--write-to-file-and-screen) quick reference).
+
 ### Using `tee` more than once in the same pipeline
 
 You are **not** limited to a single **`tee`** per command line. Each **`tee`** is another **T-junction**: it can **write a file** at that stage **and** keep stdout flowing to the next command.
