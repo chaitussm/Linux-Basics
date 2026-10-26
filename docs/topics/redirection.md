@@ -38,7 +38,8 @@ bash scripts/redirection/stderr-2-greater-demo.sh
   - [12. `gedit` is not redirection](#12-gedit-is-not-redirection)
   - [13. Exam-style recap](#13-exam-style-recap)
   - [14. Session checklist](#14-session-checklist)
-  - [15. Script index](#15-script-index)
+  - [15. Lab — add and remove data in a file (`outputData.txt`)](#15-lab--add-and-remove-data-in-a-file-outputdatatxt)
+  - [16. Script index](#16-script-index)
 
 ---
 
@@ -577,11 +578,137 @@ See [§11](#11-redirect-to-another-terminal-tty-devpts).
 - [ ] Try `cal 2024 &> results1.txt` and append an error with `&>>`
 - [ ] (Two terminals) `tty` then `cal > /dev/pts/N`
 - [ ] Read [EOF and Redirection.md](EOF%20and%20Redirection.md) for heredoc and Rama/Sita
-- [ ] Add **screenshots** under each command block above after your lab (same style as `wordCountCommand.md`)
+- [ ] Complete [§15 `outputData.txt` lab](#15-lab--add-and-remove-data-in-a-file-outputdatatxt) — append with `>>`, clear with `>`, truly empty with `echo -n` or `> file`
+- [ ] Read [EOF and Redirection.md](EOF%20and%20Redirection.md) for heredoc and Rama/Sita
 
 ---
 
-## 15. Script index
+## 15. Lab — add and remove data in a file (`outputData.txt`)
+
+This lab ties **`touch`**, **`>>` (append)**, and **`>` (overwrite / truncate)** together in the order Durga Sir uses in class (`scripts/linuxbasics`).
+
+```mermaid
+%%{init: {'theme': 'base', 'themeVariables': {'pie1': '#FF9800', 'pie2': '#1E88E5', 'pie3': '#FFFFFF', 'pie4': '#FF9800', 'pie5': '#1E88E5', 'pieTitleTextColor': '#212121', 'pieSectionTextColor': '#212121', 'pieStrokeColor': '#424242'}}}%%
+pie title outputData.txt — add vs remove data
+    "Add data (touch, >>)" : 45
+    "Remove old data (> truncate)" : 35
+    "Truly 0 bytes (>, echo -n)" : 20
+```
+
+```mermaid
+%%{init: {'theme': 'base', 'themeVariables': {'primaryColor': '#1E88E5', 'primaryTextColor': '#ffffff', 'primaryBorderColor': '#424242', 'lineColor': '#FF9800'}}}%%
+flowchart TD
+    A[Start: outputData.txt] --> B{Goal?}
+    B -->|Put listing in file| C[touch file if needed]
+    C --> D["ls -l >> outputData.txt"]
+    D --> E[cat outputData.txt]
+    B -->|Delete OLD content| F["echo > file OR > file"]
+    F --> G{Need 0 bytes?}
+    G -->|No — one blank line OK| H["echo > file (newline left)"]
+    G -->|Yes — empty file| I["> file or echo -n > file"]
+    B -->|Delete whole file| J["rm outputData.txt"]
+
+    classDef orange fill:#FF9800,stroke:#424242,color:#212121,stroke-width:2px
+    classDef blue fill:#1E88E5,stroke:#424242,color:#ffffff,stroke-width:2px
+    classDef white fill:#FFFFFF,stroke:#424242,color:#212121,stroke-width:2px
+    class C,D,E orange
+    class F,H,I blue
+    class A,B,G white
+```
+
+| Goal | Operator | What happens to **old** data in the file |
+| :--- | :---: | :--- |
+| **Add** at end | **`>>`** | **Kept** — new output is **appended** |
+| **Replace / clear** | **`>`** | **Removed** — file is **truncated** first, then new output is written |
+| **Delete file** | **`rm`** | File name gone (not redirection) |
+
+**Not the same as `rm *`:** `rm` deletes **files** in a directory. To **empty one file** while keeping the name, use **`>`** / **`echo >`**, not `rm`.
+
+---
+
+### Step 1 — **Add** data: `touch` then `ls -l >> outputData.txt`
+
+```bash
+cd scripts/linuxbasics
+touch outputData.txt
+ls -l >> outputData.txt
+cat outputData          # wrong name — error
+cat outputData.txt      # full listing inside file
+```
+
+| Command | Role |
+| :--- | :--- |
+| **`touch outputData.txt`** | Create an **empty** file (or refresh its timestamp if it already exists) |
+| **`ls -l >> outputData.txt`** | **Append** the long listing to the file — **does not** erase previous contents |
+| **`cat outputData`** | Fails: Linux needs the **exact** name (`outputData.txt`) |
+
+![Terminal: touch, ls -l >> outputData.txt, cat typo, cat outputData.txt shows listing](../assets/outputData-touch-ls-append-terminal.png)
+
+The first line inside the file is often **`total …`** — that is **disk blocks** for the directory listing, not the file count (same idea as [§9](redirection.md#ls-l-and-the-total-line-after-pipe-examples) in piping notes).
+
+---
+
+### Step 2 — **Remove** old data with `echo >` (truncate + one newline)
+
+After the file has data, **`>`** **wipes** old content, then writes whatever the left side prints.
+
+```bash
+echo > outputData.txt
+echo> outputData.txt
+echo>outputData.txt
+cat outputData.txt
+```
+
+| Point | Explanation |
+| :--- | :--- |
+| **Truncate** | All **previous** lines from `ls -l >>` are **gone** — this answers “remove all the contents” for practical labs |
+| **`echo` with no text** | Still prints a **newline** (`\n`) by default |
+| **`cat` shows a blank line** | File is **not** 0 bytes — it usually has **one newline** |
+| **Spaces around `>`** | `echo > file`, `echo> file`, and `echo>file` behave the same here — the shell still redirects **`echo`** output |
+
+![Terminal: echo > outputData.txt spacing variants — cat shows one blank line](../assets/outputData-echo-greater-spacing-terminal.png)
+
+**Simplest clear (no `echo`):**
+
+```bash
+> outputData.txt
+```
+
+Same truncate rule as [EOF and Redirection.md §2](EOF%20and%20Redirection.md#2--overwrite-truncate--your-rama--sita-question).
+
+---
+
+### Step 3 — **Truly empty** file (0 bytes) — `echo -n >`
+
+When `cat` must show **nothing** (no blank line):
+
+```bash
+echo -n > outputData.txt
+cat outputData.txt
+wc -c outputData.txt    # 0
+```
+
+| Command | Bytes after |
+| :--- | :---: |
+| `echo > file` | Usually **1** (newline) |
+| `echo -n > file` | **0** |
+| `> file` | **0** |
+
+![Terminal: echo > vs echo -n > — only -n gives empty cat output](../assets/outputData-echo-n-truly-empty-terminal.png)
+
+---
+
+### Quick recap (exam-style)
+
+1. **`>>`** — add output **without** deleting what was already in the file.  
+2. **`>`** — **truncate** then write; old data is **lost**.  
+3. **`echo > file`** — clears old data but often leaves **one newline**.  
+4. **`> file`** or **`echo -n > file`** — file exists with **no** visible content (`wc -c` → **0**).  
+5. **`rm file`** — removes the **file**, not “contents only.”
+
+---
+
+## 16. Script index
 
 | Script                                                                                                       | Topic                                     |
 | :----------------------------------------------------------------------------------------------------------- | :---------------------------------------- |
