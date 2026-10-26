@@ -264,6 +264,15 @@ Durga Sir stresses: **order matters** — each command reads what the **previous
 
 ### Your lab — `ls -l | wc` then `ls -l | wc | wc -l` (`scripts/linuxbasics`)
 
+**Short form:** On most Ubuntu/bash setups, **`ll`** is an **alias** for **`ls -l`** (long listing). Check with `type ll` — you often see `ll is aliased to 'ls -l'`. So these are the same idea:
+
+```bash
+ll | wc
+ls -l | wc
+```
+
+See [Bash Built-in Commands.md — `alias`](Bash%20Built-in%20Commands.md) for how aliases are defined.
+
 ```bash
 cd scripts/linuxbasics
 ls -l | wc
