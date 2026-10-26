@@ -4,7 +4,7 @@
 **Scripts directory:** [`../scripts/shell-scripting/`](../scripts/shell-scripting/)
 
 ```mermaid
-%%{init: {'theme': 'base', 'themeVariables': {'pie1': '#5c5c5c', 'pie2': '#6e6e6e', 'pieTitleTextColor': '#ffffff', 'pieSectionTextColor': '#ffffff'}}}%%
+%%{init: {'theme': 'base', 'themeVariables': {'pie1': '#FF9800', 'pie2': '#1E88E5', 'pie3': '#FFFFFF', 'pie4': '#FF9800', 'pie5': '#1E88E5', 'pieTitleTextColor': '#212121', 'pieSectionTextColor': '#212121', 'pieStrokeColor': '#424242'}}}%%
 pie title Scripting demos
     "Parameters and tests" : 50
     "tar backup" : 50

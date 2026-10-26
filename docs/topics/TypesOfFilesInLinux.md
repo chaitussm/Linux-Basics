@@ -16,7 +16,7 @@
 | **Extension is not decisive** | Linux identifies type from **content** and metadata, not from `.txt` / `.jpg` names (Windows-style extensions are misleading on Linux). |
 
 ```mermaid
-%%{init: {'theme': 'base', 'themeVariables': {'primaryColor': '#5c5c5c', 'primaryTextColor': '#ffffff', 'primaryBorderColor': '#3d3d3d', 'lineColor': '#b0b0b0'}}}%%
+%%{init: {'theme': 'base', 'themeVariables': {'pie1': '#FF9800', 'pie2': '#1E88E5', 'pie3': '#FFFFFF', 'pie4': '#FF9800', 'pie5': '#1E88E5', 'pieTitleTextColor': '#212121', 'pieSectionTextColor': '#212121', 'pieStrokeColor': '#424242'}}}%%
 flowchart TB
     A["Linux: everything is a file"] --> B["Normal / ordinary files"]
     A --> C["Directory files"]
@@ -27,7 +27,7 @@ flowchart TB
 ```
 
 ```mermaid
-%%{init: {'theme': 'base', 'themeVariables': {'pie1': '#5c5c5c', 'pie2': '#6e6e6e', 'pie3': '#4a4a4a', 'pieTitleTextColor': '#ffffff', 'pieSectionTextColor': '#ffffff'}}}%%
+%%{init: {'theme': 'base', 'themeVariables': {'pie1': '#FF9800', 'pie2': '#1E88E5', 'pie3': '#FFFFFF', 'pie4': '#FF9800', 'pie5': '#1E88E5', 'pieTitleTextColor': '#212121', 'pieSectionTextColor': '#212121', 'pieStrokeColor': '#424242'}}}%%
 pie title Durga Sir — three file categories (conceptual)
     "Normal / ordinary (data)" : 70
     "Directory (organization)" : 20
@@ -138,7 +138,7 @@ ls -l
 | **`p`** | Pipe | Named pipe (FIFO) |
 
 ```mermaid
-%%{init: {'theme': 'base', 'themeVariables': {'primaryColor': '#5c5c5c', 'primaryTextColor': '#ffffff', 'primaryBorderColor': '#3d3d3d', 'lineColor': '#b0b0b0'}}}%%
+%%{init: {'theme': 'base', 'themeVariables': {'pie1': '#FF9800', 'pie2': '#1E88E5', 'pie3': '#FFFFFF', 'pie4': '#FF9800', 'pie5': '#1E88E5', 'pieTitleTextColor': '#212121', 'pieSectionTextColor': '#212121', 'pieStrokeColor': '#424242'}}}%%
 flowchart LR
     Q["Need file type?"] --> A["ls -l"]
     A --> B["Read 1st character"]
@@ -153,7 +153,7 @@ flowchart LR
 ```
 
 ```mermaid
-%%{init: {'theme': 'base', 'themeVariables': {'pie1': '#5c5c5c', 'pie2': '#6e6e6e', 'pie3': '#656565', 'pie4': '#4a4a4a', 'pie5': '#707070', 'pie6': '#555555', 'pieTitleTextColor': '#ffffff', 'pieSectionTextColor': '#ffffff'}}}%%
+%%{init: {'theme': 'base', 'themeVariables': {'pie1': '#FF9800', 'pie2': '#1E88E5', 'pie3': '#FFFFFF', 'pie4': '#FF9800', 'pie5': '#1E88E5', 'pieTitleTextColor': '#212121', 'pieSectionTextColor': '#212121', 'pieStrokeColor': '#424242'}}}%%
 pie title ls -l first character (types you will see)
     "Ordinary (-)" : 55
     "Directory (d)" : 30

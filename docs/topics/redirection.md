@@ -57,7 +57,7 @@ After this session you should know:
 | **Both at once**    | **`&>`** / **`&>>`** — stdout **and** stderr to the **same** file |
 
 ```mermaid
-%%{init: {'theme': 'base', 'themeVariables': {'pie1': '#5c5c5c', 'pie2': '#6e6e6e', 'pie3': '#4a4a4a', 'pieTitleTextColor': '#ffffff', 'pieSectionTextColor': '#ffffff'}}}%%
+%%{init: {'theme': 'base', 'themeVariables': {'pie1': '#FF9800', 'pie2': '#1E88E5', 'pie3': '#FFFFFF', 'pie4': '#FF9800', 'pie5': '#1E88E5', 'pieTitleTextColor': '#212121', 'pieSectionTextColor': '#212121', 'pieStrokeColor': '#424242'}}}%%
 pie title Session 11 — where output can go
     "Terminal (default)" : 30
     "File via > >> 2> &>" : 45
@@ -75,7 +75,7 @@ pie title Session 11 — where output can go
 | **2** | **stderr** | Terminal screen | **Error** and diagnostic messages |
 
 ```mermaid
-%%{init: {'theme': 'base', 'themeVariables': {'primaryColor': '#5c5c5c', 'primaryTextColor': '#ffffff', 'primaryBorderColor': '#3d3d3d', 'lineColor': '#b0b0b0'}}}%%
+%%{init: {'theme': 'base', 'themeVariables': {'pie1': '#FF9800', 'pie2': '#1E88E5', 'pie3': '#FFFFFF', 'pie4': '#FF9800', 'pie5': '#1E88E5', 'pieTitleTextColor': '#212121', 'pieSectionTextColor': '#212121', 'pieStrokeColor': '#424242'}}}%%
 flowchart LR
     K[Keyboard stdin 0] --> CMD[Command]
     CMD --> OUT[stdout 1]

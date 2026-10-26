@@ -37,7 +37,7 @@ bash scripts/Redirection/heredoc-eof-demo.sh
 Normally a command prints to the **terminal** (called **standard output**, **stdout**). **Redirection** sends that output **somewhere else** — usually a **file**.
 
 ```mermaid
-%%{init: {'theme': 'base', 'themeVariables': {'pie1': '#5c5c5c', 'pie2': '#6e6e6e', 'pie3': '#4a4a4a', 'pieTitleTextColor': '#ffffff', 'pieSectionTextColor': '#ffffff'}}}%%
+%%{init: {'theme': 'base', 'themeVariables': {'pie1': '#FF9800', 'pie2': '#1E88E5', 'pie3': '#FFFFFF', 'pie4': '#FF9800', 'pie5': '#1E88E5', 'pieTitleTextColor': '#212121', 'pieSectionTextColor': '#212121', 'pieStrokeColor': '#424242'}}}%%
 pie title Where command output can go
     "Terminal (default)" : 40
     "File via > or >>" : 35
@@ -45,7 +45,7 @@ pie title Where command output can go
 ```
 
 ```mermaid
-%%{init: {'theme': 'base', 'themeVariables': {'primaryColor': '#5c5c5c', 'primaryTextColor': '#ffffff', 'primaryBorderColor': '#3d3d3d', 'lineColor': '#b0b0b0'}}}%%
+%%{init: {'theme': 'base', 'themeVariables': {'pie1': '#FF9800', 'pie2': '#1E88E5', 'pie3': '#FFFFFF', 'pie4': '#FF9800', 'pie5': '#1E88E5', 'pieTitleTextColor': '#212121', 'pieSectionTextColor': '#212121', 'pieStrokeColor': '#424242'}}}%%
 flowchart LR
     CMD[echo / cat / date] --> OUT[stdout]
     OUT --> T[Terminal]
@@ -108,7 +108,7 @@ So `echo Rama > appendData.sh` writes **one line** (`Rama` + newline). Anything 
 **Rule:** One `>` = **whole file becomes only this command’s output** (often one line from `echo`).
 
 ```mermaid
-%%{init: {'theme': 'base', 'themeVariables': {'primaryColor': '#5c5c5c', 'primaryTextColor': '#ffffff', 'primaryBorderColor': '#3d3d3d', 'lineColor': '#b0b0b0'}}}%%
+%%{init: {'theme': 'base', 'themeVariables': {'pie1': '#FF9800', 'pie2': '#1E88E5', 'pie3': '#FFFFFF', 'pie4': '#FF9800', 'pie5': '#1E88E5', 'pieTitleTextColor': '#212121', 'pieSectionTextColor': '#212121', 'pieStrokeColor': '#424242'}}}%%
 flowchart TD
     A[File has Rama + Sita] --> B["echo Rama > appendData.sh"]
     B --> C[Shell truncates file to empty]
@@ -137,7 +137,7 @@ echo Lakshmana >> appendData.sh
 | **`>>`** | **Kept** | Old + new at bottom |
 
 ```mermaid
-%%{init: {'theme': 'base', 'themeVariables': {'pie1': '#5c5c5c', 'pie2': '#6e6e6e', 'pieTitleTextColor': '#ffffff', 'pieSectionTextColor': '#ffffff'}}}%%
+%%{init: {'theme': 'base', 'themeVariables': {'pie1': '#FF9800', 'pie2': '#1E88E5', 'pie3': '#FFFFFF', 'pie4': '#FF9800', 'pie5': '#1E88E5', 'pieTitleTextColor': '#212121', 'pieSectionTextColor': '#212121', 'pieStrokeColor': '#424242'}}}%%
 pie title Choosing > vs >>
     "Want to REPLACE whole file" : 50
     "Want to ADD at end" : 50
@@ -208,7 +208,7 @@ EOF
 **`>>`** = keep existing lines, add new block at end.
 
 ```mermaid
-%%{init: {'theme': 'base', 'themeVariables': {'primaryColor': '#5c5c5c', 'primaryTextColor': '#ffffff', 'primaryBorderColor': '#3d3d3d', 'lineColor': '#b0b0b0'}}}%%
+%%{init: {'theme': 'base', 'themeVariables': {'pie1': '#FF9800', 'pie2': '#1E88E5', 'pie3': '#FFFFFF', 'pie4': '#FF9800', 'pie5': '#1E88E5', 'pieTitleTextColor': '#212121', 'pieSectionTextColor': '#212121', 'pieStrokeColor': '#424242'}}}%%
 flowchart TB
     START[Need multi-line file content] --> Q{Replace or add?}
     Q -->|Replace all| O["cat > file <<EOF ... EOF"]

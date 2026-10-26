@@ -4,7 +4,7 @@
 **Scripts:** [`../scripts/redirection.sh`](../scripts/redirection.sh) · [`../scripts/redirection/`](../scripts/redirection/) · [`../scripts/Redirection/`](../scripts/Redirection/)
 
 ```mermaid
-%%{init: {'theme': 'base', 'themeVariables': {'pie1': '#5c5c5c', 'pie2': '#6e6e6e', 'pie3': '#4a4a4a', 'pie4': '#7a7a7a', 'pieTitleTextColor': '#ffffff', 'pieSectionTextColor': '#ffffff'}}}%%
+%%{init: {'theme': 'base', 'themeVariables': {'pie1': '#FF9800', 'pie2': '#1E88E5', 'pie3': '#FFFFFF', 'pie4': '#FF9800', 'pie5': '#1E88E5', 'pieTitleTextColor': '#212121', 'pieSectionTextColor': '#212121', 'pieStrokeColor': '#424242'}}}%%
 pie title Session 11 redirection demos
     "Streams 0 1 2" : 15
     "Stdout > >>" : 25

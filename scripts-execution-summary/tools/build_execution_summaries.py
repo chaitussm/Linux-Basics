@@ -24,6 +24,16 @@ Each script section uses the same **four-part** model:
 
 MERMAID_GREY = """%%{init: {'theme': 'base', 'themeVariables': {'primaryColor': '#5c5c5c', 'primaryTextColor': '#ffffff', 'primaryBorderColor': '#3d3d3d', 'lineColor': '#b0b0b0'}}}%%"""
 
+# Pie charts: orange / blue / white slices (high contrast; flowcharts stay MERMAID_GREY)
+PIE_CHART_INIT = (
+    "%%{init: {'theme': 'base', 'themeVariables': {"
+    "'pie1': '#FF9800', 'pie2': '#1E88E5', 'pie3': '#FFFFFF', "
+    "'pie4': '#FF9800', 'pie5': '#1E88E5', "
+    "'pieTitleTextColor': '#212121', 'pieSectionTextColor': '#212121', "
+    "'pieStrokeColor': '#424242'"
+    "}}}%%"
+)
+
 
 def collect_scripts(rel_dirs: list[str], extra: list[str] | None = None) -> list[Path]:
     paths: list[Path] = []
@@ -105,7 +115,7 @@ SPECS = [
         "dirs": ["scripts/components-of-unix"],
         "extra": None,
         "pie": """```mermaid
-%%{init: {'theme': 'base', 'themeVariables': {'pie1': '#5c5c5c', 'pie2': '#6e6e6e', 'pie3': '#4a4a4a', 'pie4': '#7a7a7a', 'pieTitleTextColor': '#ffffff', 'pieSectionTextColor': '#ffffff'}}}%%
+%%{init: {'theme': 'base', 'themeVariables': {'pie1': '#FF9800', 'pie2': '#1E88E5', 'pie3': '#FFFFFF', 'pie4': '#FF9800', 'pie5': '#1E88E5', 'pieTitleTextColor': '#212121', 'pieSectionTextColor': '#212121', 'pieStrokeColor': '#424242'}}}%%
 pie title Commands in this folder (by role)
     "File create / list (touch, ls)" : 35
     "Shell errors / validation" : 25
@@ -132,7 +142,7 @@ flowchart LR
         "dirs": ["scripts/types-of-files-in-linux"],
         "extra": None,
         "pie": """```mermaid
-%%{init: {'theme': 'base', 'themeVariables': {'pie1': '#5c5c5c', 'pie2': '#6e6e6e', 'pie3': '#4a4a4a', 'pieTitleTextColor': '#ffffff', 'pieSectionTextColor': '#ffffff'}}}%%
+%%{init: {'theme': 'base', 'themeVariables': {'pie1': '#FF9800', 'pie2': '#1E88E5', 'pie3': '#FFFFFF', 'pie4': '#FF9800', 'pie5': '#1E88E5', 'pieTitleTextColor': '#212121', 'pieSectionTextColor': '#212121', 'pieStrokeColor': '#424242'}}}%%
 pie title File-type demos
     "touch / ls -l" : 40
     "file / mv" : 35
@@ -148,7 +158,7 @@ pie title File-type demos
         "dirs": ["scripts/bash-built-in-commands"],
         "extra": None,
         "pie": """```mermaid
-%%{init: {'theme': 'base', 'themeVariables': {'pie1': '#5c5c5c', 'pie2': '#6e6e6e', 'pie3': '#4a4a4a', 'pie4': '#7a7a7a', 'pieTitleTextColor': '#ffffff', 'pieSectionTextColor': '#ffffff'}}}%%
+%%{init: {'theme': 'base', 'themeVariables': {'pie1': '#FF9800', 'pie2': '#1E88E5', 'pie3': '#FFFFFF', 'pie4': '#FF9800', 'pie5': '#1E88E5', 'pieTitleTextColor': '#212121', 'pieSectionTextColor': '#212121', 'pieStrokeColor': '#424242'}}}%%
 pie title Built-in vs external in demos
     "Bash builtins" : 55
     "External (file, cat, gedit, ls)" : 45
@@ -163,7 +173,7 @@ pie title Built-in vs external in demos
         "dirs": ["scripts/file-system-navigation-and-hierarchy"],
         "extra": None,
         "pie": """```mermaid
-%%{init: {'theme': 'base', 'themeVariables': {'pie1': '#5c5c5c', 'pie2': '#6e6e6e', 'pie3': '#4a4a4a', 'pie4': '#7a7a7a', 'pie5': '#555555', 'pieTitleTextColor': '#ffffff', 'pieSectionTextColor': '#ffffff'}}}%%
+%%{init: {'theme': 'base', 'themeVariables': {'pie1': '#FF9800', 'pie2': '#1E88E5', 'pie3': '#FFFFFF', 'pie4': '#FF9800', 'pie5': '#1E88E5', 'pieTitleTextColor': '#212121', 'pieSectionTextColor': '#212121', 'pieStrokeColor': '#424242'}}}%%
 pie title Demo scripts by theme
     "cd / pwd / paths" : 40
     "mkdir / ls / ls -a" : 25
@@ -180,7 +190,7 @@ pie title Demo scripts by theme
         "dirs": ["scripts/ls-command-and-its-options"],
         "extra": None,
         "pie": """```mermaid
-%%{init: {'theme': 'base', 'themeVariables': {'pie1': '#5c5c5c', 'pie2': '#6e6e6e', 'pie3': '#4a4a4a', 'pieTitleTextColor': '#ffffff', 'pieSectionTextColor': '#ffffff'}}}%%
+%%{init: {'theme': 'base', 'themeVariables': {'pie1': '#FF9800', 'pie2': '#1E88E5', 'pie3': '#FFFFFF', 'pie4': '#FF9800', 'pie5': '#1E88E5', 'pieTitleTextColor': '#212121', 'pieSectionTextColor': '#212121', 'pieStrokeColor': '#424242'}}}%%
 pie title ls demo focus
     "Listing options (-l -a -R …)" : 50
     "Pipes (head tail man)" : 30
@@ -196,7 +206,7 @@ pie title ls demo focus
         "dirs": ["scripts/shell-scripting"],
         "extra": None,
         "pie": """```mermaid
-%%{init: {'theme': 'base', 'themeVariables': {'pie1': '#5c5c5c', 'pie2': '#6e6e6e', 'pieTitleTextColor': '#ffffff', 'pieSectionTextColor': '#ffffff'}}}%%
+%%{init: {'theme': 'base', 'themeVariables': {'pie1': '#FF9800', 'pie2': '#1E88E5', 'pie3': '#FFFFFF', 'pie4': '#FF9800', 'pie5': '#1E88E5', 'pieTitleTextColor': '#212121', 'pieSectionTextColor': '#212121', 'pieStrokeColor': '#424242'}}}%%
 pie title Scripting demos
     "Parameters and tests" : 50
     "tar backup" : 50
@@ -211,7 +221,7 @@ pie title Scripting demos
         "dirs": ["scripts/date-cal-commands"],
         "extra": None,
         "pie": """```mermaid
-%%{init: {'theme': 'base', 'themeVariables': {'pie1': '#5c5c5c', 'pie2': '#6e6e6e', 'pieTitleTextColor': '#ffffff', 'pieSectionTextColor': '#ffffff'}}}%%
+%%{init: {'theme': 'base', 'themeVariables': {'pie1': '#FF9800', 'pie2': '#1E88E5', 'pie3': '#FFFFFF', 'pie4': '#FF9800', 'pie5': '#1E88E5', 'pieTitleTextColor': '#212121', 'pieSectionTextColor': '#212121', 'pieStrokeColor': '#424242'}}}%%
 pie title Session 8 commands
     "date (default + formats)" : 50
     "cal (month + options)" : 35
@@ -236,7 +246,7 @@ flowchart TD
         "extra": None,
         "scripts_link_prefix": "../../scripts/",
         "pie": """```mermaid
-%%{init: {'theme': 'base', 'themeVariables': {'pie1': '#5c5c5c', 'pie2': '#6e6e6e', 'pie3': '#4a4a4a', 'pie4': '#7a7a7a', 'pieTitleTextColor': '#ffffff', 'pieSectionTextColor': '#ffffff'}}}%%
+%%{init: {'theme': 'base', 'themeVariables': {'pie1': '#FF9800', 'pie2': '#1E88E5', 'pie3': '#FFFFFF', 'pie4': '#FF9800', 'pie5': '#1E88E5', 'pieTitleTextColor': '#212121', 'pieSectionTextColor': '#212121', 'pieStrokeColor': '#424242'}}}%%
 pie title View-content commands in demos
     "cat and options" : 35
     "head / tail" : 30
@@ -253,7 +263,7 @@ pie title View-content commands in demos
         "dirs": ["scripts/wordCountCommand"],
         "extra": None,
         "pie": """```mermaid
-%%{init: {'theme': 'base', 'themeVariables': {'pie1': '#5c5c5c', 'pie2': '#6e6e6e', 'pie3': '#4a4a4a', 'pieTitleTextColor': '#ffffff', 'pieSectionTextColor': '#ffffff'}}}%%
+%%{init: {'theme': 'base', 'themeVariables': {'pie1': '#FF9800', 'pie2': '#1E88E5', 'pie3': '#FFFFFF', 'pie4': '#FF9800', 'pie5': '#1E88E5', 'pieTitleTextColor': '#212121', 'pieSectionTextColor': '#212121', 'pieStrokeColor': '#424242'}}}%%
 pie title wc demos
     "Default wc" : 20
     "Options -l -w -c" : 45
@@ -270,7 +280,7 @@ pie title wc demos
         "dirs": ["scripts/Redirection"],
         "extra": None,
         "pie": """```mermaid
-%%{init: {'theme': 'base', 'themeVariables': {'pie1': '#5c5c5c', 'pie2': '#6e6e6e', 'pie3': '#4a4a4a', 'pieTitleTextColor': '#ffffff', 'pieSectionTextColor': '#ffffff'}}}%%
+%%{init: {'theme': 'base', 'themeVariables': {'pie1': '#FF9800', 'pie2': '#1E88E5', 'pie3': '#FFFFFF', 'pie4': '#FF9800', 'pie5': '#1E88E5', 'pieTitleTextColor': '#212121', 'pieSectionTextColor': '#212121', 'pieStrokeColor': '#424242'}}}%%
 pie title Redirection demos
     "Overwrite >" : 25
     "Append >>" : 25
@@ -287,7 +297,7 @@ pie title Redirection demos
         "dirs": ["scripts/redirection", "scripts/Redirection"],
         "extra": ["scripts/redirection.sh"],
         "pie": """```mermaid
-%%{init: {'theme': 'base', 'themeVariables': {'pie1': '#5c5c5c', 'pie2': '#6e6e6e', 'pie3': '#4a4a4a', 'pie4': '#7a7a7a', 'pieTitleTextColor': '#ffffff', 'pieSectionTextColor': '#ffffff'}}}%%
+%%{init: {'theme': 'base', 'themeVariables': {'pie1': '#FF9800', 'pie2': '#1E88E5', 'pie3': '#FFFFFF', 'pie4': '#FF9800', 'pie5': '#1E88E5', 'pieTitleTextColor': '#212121', 'pieSectionTextColor': '#212121', 'pieStrokeColor': '#424242'}}}%%
 pie title Session 11 redirection demos
     "Streams 0 1 2" : 15
     "Stdout > >>" : 25
@@ -319,7 +329,7 @@ flowchart LR
         "dirs": ["scripts/PipingTeeXargs"],
         "extra": ["scripts/PipingTeeXargs.sh"],
         "pie": """```mermaid
-%%{init: {'theme': 'base', 'themeVariables': {'pie1': '#5c5c5c', 'pie2': '#6e6e6e', 'pie3': '#4a4a4a', 'pie4': '#7a7a7a', 'pieTitleTextColor': '#ffffff', 'pieSectionTextColor': '#ffffff'}}}%%
+%%{init: {'theme': 'base', 'themeVariables': {'pie1': '#FF9800', 'pie2': '#1E88E5', 'pie3': '#FFFFFF', 'pie4': '#FF9800', 'pie5': '#1E88E5', 'pieTitleTextColor': '#212121', 'pieSectionTextColor': '#212121', 'pieStrokeColor': '#424242'}}}%%
 pie title Session 12 demos
     "Pipe filters" : 35
     "tee" : 25

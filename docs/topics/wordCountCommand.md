@@ -44,7 +44,7 @@ After you can **open and read** files (`cat`, `head`, `tail`), Durga Sir introdu
 - **Number of characters / bytes** (class level: **one character = one byte** for normal English text)
 
 ```mermaid
-%%{init: {'theme': 'base', 'themeVariables': {'pie1': '#5c5c5c', 'pie2': '#6e6e6e', 'pie3': '#4a4a4a', 'pie4': '#7a7a7a', 'pieTitleTextColor': '#ffffff', 'pieSectionTextColor': '#ffffff'}}}%%
+%%{init: {'theme': 'base', 'themeVariables': {'pie1': '#FF9800', 'pie2': '#1E88E5', 'pie3': '#FFFFFF', 'pie4': '#FF9800', 'pie5': '#1E88E5', 'pieTitleTextColor': '#212121', 'pieSectionTextColor': '#212121', 'pieStrokeColor': '#424242'}}}%%
 pie title Session 10 — what wc reports
     "Lines (-l)" : 30
     "Words (-w)" : 30
@@ -63,7 +63,7 @@ pie title Session 10 — what wc reports
 | **When to use** | Reports, logs, assignments: “how many lines in this file?” without `cat` the whole file |
 
 ```mermaid
-%%{init: {'theme': 'base', 'themeVariables': {'primaryColor': '#5c5c5c', 'primaryTextColor': '#ffffff', 'primaryBorderColor': '#3d3d3d', 'lineColor': '#b0b0b0'}}}%%
+%%{init: {'theme': 'base', 'themeVariables': {'pie1': '#FF9800', 'pie2': '#1E88E5', 'pie3': '#FFFFFF', 'pie4': '#FF9800', 'pie5': '#1E88E5', 'pieTitleTextColor': '#212121', 'pieSectionTextColor': '#212121', 'pieStrokeColor': '#424242'}}}%%
 flowchart LR
     F[File or pipe input] --> WC[wc]
     WC --> L[lines]
