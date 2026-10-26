@@ -153,23 +153,72 @@ If a command **only** accepts file names and **never** reads stdin, it is a **po
 
 ## 6. Piping with filters — Durga Sir examples
 
-### Example 1 — `ls -l /etc | head`
+**Filter commands** (`wc`, `head`, `sort`, …) can read input in **two** ways:
 
-Large directory → show only **first 10 lines** (default `head`):
+| Source | Meaning |
+| :--- | :--- |
+| **Keyboard (terminal)** | Run the filter **alone**, type lines, end with **Ctrl+D** |
+| **Pipe** | Previous command’s **stdout** becomes this command’s **stdin** |
+
+---
+
+### Your lab — `wc` (`scripts/linuxbasics`)
+
+**1) Input from the terminal (keyboard):**
+
+```bash
+cd scripts/linuxbasics
+wc
+```
+
+Type lines (e.g. `This is first line`, `This is second line`), then **Ctrl+D**.  
+**`wc`** prints three numbers: **lines**, **words**, **characters** (example: `2  8  41`).
+
+**2) Input from another command’s output (pipe):**
+
+```bash
+ls -l /etc | wc
+```
+
+Here **`wc`** does **not** read the keyboard — it counts whatever **`ls -l /etc`** printed (example: `246  2223  20956`).
+
+![Terminal: wc with keyboard input, then ls -l /etc | wc](../assets/pipe-wc-keyboard-and-ls-etc-pipe-terminal.png)
+
+---
+
+### Your lab — `head` (keyboard, then pipe)
+
+**1) Input from the terminal:**
+
+```bash
+head
+```
+
+Type lines from the keyboard (Durga Sir lab: up to **10 lines**). When you press **Enter** after the tenth line, or when you press **Ctrl+D**, **`head`** prints only the **first 10 lines** of what you typed.
+
+**2) Input from a pipe:**
 
 ```bash
 ls -l /etc | head
 ```
 
-Same idea as Video 7 — see [pipeCommands.md §2](pipeCommands.md#2-example-ls--l-etc--head).
+**`head`** reads the **`ls`** listing from the pipe and shows the **first 10 lines** on screen — you do not type the `/etc` listing yourself.
 
-### Example 2 — `ls -l /etc | wc -l`
+*(Add your **piping1** `head` screenshot here when you upload it — same place as the `wc` image above.)*
 
-**How many lines** in the listing (rough “how many entries” lab):
+---
 
-```bash
-ls -l /etc | wc -l
+### `ls -l` and the **`total`** line (after pipe examples)
+
+Whenever you run **`ls -l`** on a directory (including **`ls -l /etc | …`**), the **first line** of the listing looks like:
+
+```text
+total 1234
 ```
+
+Durga Sir’s point: **`total`** is **not** the number of files. It is the **total disk blocks** used by the **files and directories** listed for that folder (here, under **`/etc`**). The lines below **`total`** are the individual files and directories.
+
+---
 
 ### Example 3 — `who | wc -l`
 
