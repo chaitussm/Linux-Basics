@@ -413,35 +413,128 @@ ls -l /etc | tee outputData.txt | wc -l
 
 ## 10. `tee` — write to file and screen
 
-**`tee`** is named like the letter **T** — **split** the stream:
+After [§9](#9-when-piping-breaks--before-), you know **`cmd > file | other`** does **not** pass listing data through the pipe. **`tee`** is Durga Sir’s answer: **save to a file** and **keep the pipeline alive** at the same time.
 
-- One copy → **terminal** (you still **see** output)
-- One copy → **file** (you **save** output)
+### Durga Sir — class notes (`tee` command)
 
-### Basic use
+**Example from the board:**
+
+```bash
+ls -l | tee output.txt | wc
+```
+
+**Definition (wording from class):**
+
+> In piping, if we want to **save the output of one command to a file** and we want to **pass that same output as input to the next command simultaneously**, we should use the **`tee`** command.
+
+| Piece | Role |
+| :--- | :--- |
+| **`ls -l`** | Produces listing on **stdout** |
+| **`| tee output.txt`** | **Copies** that stream → **file** **and** → stdout for the rest of the pipe |
+| **`| wc`** | Reads the **same** listing lines from stdin (counts lines/words/bytes) |
+
+**Not valid for this goal:** `ls -l > output.txt | wc` — redirect eats stdout; pipe gets nothing ([§9](#9-when-piping-breaks--before-)).
+
+```mermaid
+%%{init: {'theme': 'base', 'themeVariables': {'pie1': '#FF9800', 'pie2': '#1E88E5', 'pie3': '#FFFFFF', 'pie4': '#FF9800', 'pieTitleTextColor': '#212121', 'pieSectionTextColor': '#212121', 'pieStrokeColor': '#424242'}}}%%
+pie title tee splits one stdout stream
+    "To file (save)" : 50
+    "To next command (pipe)" : 50
+```
+
+### T-pipe picture (Durga Sir diagram — recreated)
+
+Think of a **T-junction** in plumbing: water enters from the **left**, most continues **straight** to the right, and a branch goes **down** into a **tank** (your file).
+
+```mermaid
+%%{init: {'theme': 'base', 'themeVariables': {'primaryColor': '#FF9800', 'primaryTextColor': '#212121', 'primaryBorderColor': '#424242', 'lineColor': '#1E88E5', 'tertiaryColor': '#FFFFFF'}}}%%
+flowchart LR
+    IN[["stdin from<br/>previous command"]] --> T((tee))
+    T --> OUT[["stdout to<br/>next command / screen"]]
+    T --> F[["file<br/>output.txt"]]
+
+    classDef orange fill:#FF9800,stroke:#424242,color:#212121,stroke-width:2px
+    classDef blue fill:#1E88E5,stroke:#424242,color:#ffffff,stroke-width:2px
+    classDef white fill:#FFFFFF,stroke:#424242,color:#212121,stroke-width:2px
+    class IN orange
+    class T blue
+    class OUT white
+    class F orange
+```
+
+| Arrow in class slide | Meaning |
+| :--- | :--- |
+| **Into left of pipe** | Output of **`ls`** (or any command) enters **`tee`** |
+| **Out to the right** | Same data continues to **`wc`**, **`head`**, etc. |
+| **Down the branch** | Same data is **written** to **`output.txt`** |
+
+### Flowchart — `ls | tee abc.txt | wc` (board version)
+
+Durga Sir’s second diagram labels each leg in blue:
+
+```mermaid
+%%{init: {'theme': 'base', 'themeVariables': {'primaryColor': '#1E88E5', 'primaryTextColor': '#ffffff', 'primaryBorderColor': '#424242', 'lineColor': '#FF9800'}}}%%
+flowchart LR
+    LS["ls command"] -->|"output of ls"| TEE((tee command))
+    TEE -->|"send output of ls<br/>as input to wc"| WC[wc]
+    TEE -->|"save output of ls<br/>to abc.txt file"| ABC[abc.txt]
+
+    classDef orange fill:#FF9800,stroke:#424242,color:#212121,stroke-width:2px
+    classDef blue fill:#1E88E5,stroke:#424242,color:#ffffff,stroke-width:2px
+    classDef white fill:#FFFFFF,stroke:#424242,color:#212121,stroke-width:2px
+    class LS,ABC orange
+    class TEE blue
+    class WC white
+```
+
+**Point by point:**
+
+1. **`ls`** (or **`ls -l`**) runs once — one stream of text lines.  
+2. **`tee abc.txt`** is the **T** — it does **not** consume the data; it **duplicates** it.  
+3. **Downward branch** → file **`abc.txt`** holds a **copy** of the listing.  
+4. **Rightward branch** → **`wc`** receives a **copy** as **stdin** and prints counts.  
+5. Replacing **`tee`** with **`>`** breaks step 4 — that is exactly the **`0`** vs **`246`** lab in [§9](#9-when-piping-breaks--before-).
+
+### Your lab — `ls -l /etc | tee outputData.txt | wc -l` (`scripts/linuxbasics`)
+
+```bash
+cd scripts/linuxbasics
+ls -l /etc | tee outputData.txt | wc -l
+cat outputData.txt | head -5
+```
+
+| Step | What you should see |
+| :--- | :--- |
+| **`tee`** | Creates/updates **`outputData.txt`** with the full **`/etc`** listing |
+| **`wc -l`** | Prints the **line count** (example: **`246`**) — pipe **not** broken |
+| **`cat … \| head`** | Confirms the file has real data (starts with **`total …`**) |
+
+![Terminal: ls -l /etc | tee outputData.txt | wc -l → 246](../assets/tee-ls-etc-outputData-wc-l-lab-terminal.png)
+
+Compare with §9: `ls -l /etc > outputData.txt | wc -l` → **`0`**; with **`tee`** → **`246`**.
+
+### More `tee` options (quick reference)
+
+**Screen + file (default `tee`):**
 
 ```bash
 ls -l | tee listing.txt
 ```
 
-Same output on screen **and** in **`listing.txt`**.
-
-### Append — `tee -a`
+**Append — `tee -a`:**
 
 ```bash
 echo "line 1" | tee log.txt
 echo "line 2" | tee -a log.txt
 ```
 
-### Multiple files
+**Multiple files:**
 
 ```bash
 echo "report" | tee file1.txt file2.txt
 ```
 
-Durga Sir uses **`tee`** when you need **both** human viewing **and** a log file (install logs, long command output).
-
-**Lab commands:**
+**Repo demo scripts:**
 
 ```bash
 bash scripts/PipingTeeXargs/tee-screen-and-file-demo.sh
