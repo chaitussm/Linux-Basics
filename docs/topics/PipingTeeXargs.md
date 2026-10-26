@@ -37,6 +37,7 @@ bash scripts/PipingTeeXargs.sh
 - [17. Pipe vs redirection vs `tee`](#17-pipe-vs-redirection-vs-tee)
 - [18. Session checklist](#18-session-checklist)
 - [19. Script index](#19-script-index)
+- [20. Questions](#20-questions)
 
 ---
 
@@ -1202,3 +1203,40 @@ ls -l /etc | tee etclist.txt | wc -l
 | [`xargs-with-find-style-demo.sh`](../../scripts/PipingTeeXargs/xargs-with-find-style-demo.sh) | `ls *.sh \| xargs wc -l` |
 
 Full command tables: [`scripts-execution-summary/PipingTeeXargs.md`](../../scripts-execution-summary/PipingTeeXargs.md).
+
+---
+
+## 20. Questions
+
+Durga Sir — Session 12 recap (piping, **`tee`**, **`xargs`**). Short answers for revision and exams.
+
+**Q1. What is piping?**
+
+- A way of **connecting commands together**.
+- A way of **passing the output of one command as input to another command**.
+
+See [§3](#3-need-of-piping) and [§4](#4-what-is-a-pipe-).
+
+**Q2. How do you pipe the standard output of command **X** to the standard input of command **Y**?**
+
+```bash
+X | Y
+```
+
+The **`|`** operator connects **stdout** of **X** to **stdin** of **Y** ([§4](#4-what-is-a-pipe-)).
+
+**Q3. How can we use the **`tee`** command when piping commands **A**, **B**, and **C** together, to **save the output of B** in **`results.txt`**?**
+
+```bash
+A | B | tee results.txt | C
+```
+
+**`B`** runs in the middle of the chain. **`tee results.txt`** writes **B**’s stdout to **`results.txt`** and **still passes** that same stream to **C** ([§10](#10-tee--write-to-file-and-screen), [§11](#11-tee-with-multiple-files)).
+
+**Q4. How do you pipe data from command **A** to command **B** when **B** does not accept standard input and accepts **only command-line arguments**?**
+
+```bash
+A | xargs B
+```
+
+**`xargs`** converts the **output stream** from **A** into **arguments** for **B** ([§13](#13-reason-for-xargs), [§14](#14-xargs--build-command-lines-from-stdin)).
