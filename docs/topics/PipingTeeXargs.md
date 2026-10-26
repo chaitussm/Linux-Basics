@@ -188,6 +188,8 @@ Here **`wc`** does **not** read the keyboard — it counts whatever **`ls -l /et
 
 ### Your lab — `head` (keyboard, then pipe)
 
+![Terminal: head from keyboard, then ls -l /etc | head -5 (total line, Broken pipe)](../assets/piping1-head-keyboard-ls-etc-head5-terminal.png)
+
 **1) Input from the terminal:**
 
 ```bash
@@ -199,12 +201,10 @@ Type lines from the keyboard (Durga Sir lab: up to **10 lines**). When you press
 **2) Input from a pipe:**
 
 ```bash
-ls -l /etc | head
+ls -l /etc | head -5
 ```
 
-**`head`** reads the **`ls`** listing from the pipe and shows the **first 10 lines** on screen — you do not type the `/etc` listing yourself.
-
-*(Add your **piping1** `head` screenshot here when you upload it — same place as the `wc` image above.)*
+**`head`** reads the **`ls`** listing from the pipe and shows the **first 5 lines** on screen (including the **`total`** line) — you do not type the `/etc` listing yourself. You may see **`ls: Broken pipe`** after **`head`** exits; that is normal when the reader stops early (see [pipeCommands.md](pipeCommands.md#5-broken-pipe--what-does-it-mean)).
 
 ---
 
