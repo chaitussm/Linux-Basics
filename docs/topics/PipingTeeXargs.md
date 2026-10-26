@@ -435,6 +435,20 @@ ls -l | tee output.txt | wc
 
 **Not valid for this goal:** `ls -l > output.txt | wc` — redirect eats stdout; pipe gets nothing ([§9](#9-when-piping-breaks--before-)).
 
+### Continuation — **eg1:** terminal only, file only, or both (`tee`)
+
+Durga Sir compares three cases before putting **`tee`** in the middle of a pipe:
+
+| Case | Command | Where does `ls -l` output go? |
+| :---: | :--- | :--- |
+| **A** | `ls -l` | **Terminal only** — you see the listing on screen; **no** file |
+| **B** | `ls -l > output.txt` | **File only** — saved in **`output.txt`**; **not** shown on the terminal (stdout was redirected) |
+| **C** | `ls -l \| tee output.txt \| wc -l` | **File and pipe** — copy in **`output.txt`**, **same** lines also go to **`wc -l`** (and you still see **`wc`**’s result on screen) |
+
+**Class wording for case B:** *“It will save the output to `output.txt` and won’t be displayed to the terminal.”*
+
+**Why `tee` exists:** Case **B** is what you want for **archiving**, but it **cannot** feed **`wc`** in the same line. Case **C** is the fix: **save** and **continue the pipeline** together.
+
 ```mermaid
 %%{init: {'theme': 'base', 'themeVariables': {'pie1': '#FF9800', 'pie2': '#1E88E5', 'pie3': '#FFFFFF', 'pie4': '#FF9800', 'pieTitleTextColor': '#212121', 'pieSectionTextColor': '#212121', 'pieStrokeColor': '#424242'}}}%%
 pie title tee splits one stdout stream
@@ -511,6 +525,24 @@ cat outputData.txt
 ![Terminal: ls -l /etc | tee outputData.txt | wc -l → 246, then cat outputData.txt shows listing](../assets/tee-ls-etc-outputData-wc-l-cat-verify-terminal.png)
 
 Compare with §9: `ls -l /etc > outputData.txt | wc -l` → **`0`**; with **`tee`** → **`246`**.
+
+### What your lab terminal shows (tee piping — read without re-running)
+
+Walk through the same session as the screenshot above:
+
+1. **`ls -l /etc | tee outputData.txt | wc -l`**  
+   - **`ls -l /etc`** produces a long listing (hundreds of lines).  
+   - **`tee outputData.txt`** writes **every line** into **`outputData.txt`** **and** forwards the **same** stream to the next stage.  
+   - **`wc -l`** counts lines from the pipe → you see **`246`** on the terminal. That number is **not** “zero” like the broken **`>`** lab in §9.
+
+2. **`cat outputData.txt`** (after the pipeline finishes)  
+   - Proves the file was filled **during** the pipe, not in a separate step.  
+   - First line is **`total 1208`** (blocks for **`/etc`**), then directory entries such as **`ModemManager`**, **`NetworkManager`**, **`PackageKit`**, **`UPower`**, **`X11`**, config files, etc.  
+   - The line count from **`wc -l`** and the **`cat`** listing describe the **same** data — one went through the pipe, one sits in the file.
+
+3. **Tee vs redirect in one line**  
+   - **`>`** = “send stdout **only** to file” → nothing left for **`| wc`**.  
+   - **`tee`** = “**copy** to file **and** keep stdout for **`| wc`**” → **`246`** plus a full **`outputData.txt`**.
 
 ### More `tee` options (quick reference)
 
