@@ -699,6 +699,27 @@ ls -l | tee copy1.txt copy2.txt | wc -l
 
 Both **`copy1.txt`** and **`copy2.txt`** get the **same** `ls -l` output; **`wc -l`** still runs on the pipe.
 
+**Example 4 (lab) — one `tee`, ten files with brace expansion**
+
+**`tee`** accepts **more than two** file operands. Bash **brace expansion** `{1..10}` builds many names in one shot:
+
+```bash
+cd scripts/linuxbasics
+cat inputData.txt | tee file{1..10}.txt
+ls
+```
+
+| Piece | Role |
+| :--- | :--- |
+| **`cat inputData.txt`** | Sends the list file’s contents to stdout (e.g. `filedata.txt`, `fileinfo.txt`, `logfile.sh`) |
+| **`tee file{1..10}.txt`** | Expands to **`file1.txt` … `file10.txt`** — **same** text copied into **all ten** files |
+| **Terminal** | **`tee`** also prints that stream on screen (three lines in the lab screenshot) |
+| **`ls`** | Confirms **`file1.txt`–`file10.txt`** were created alongside existing lab files |
+
+![Terminal: cat inputData.txt | tee file{1..10}.txt — output on screen; ls shows file1.txt through file10.txt](../assets/tee-lab-cat-inputData-tee-file-brace-1-10-terminal.png)
+
+**Caution:** **`tee`** **overwrites** each target file (unless you use **`tee -a`**). Here every **`fileN.txt`** gets an identical copy of **`inputData.txt`**’s contents — useful for demos; in real scripts, pick names you intend to replace.
+
 **Example 5 — `tee` after a filter (snapshot of *processed* data)**
 
 ```bash
