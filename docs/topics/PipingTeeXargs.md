@@ -500,16 +500,15 @@ flowchart LR
 ```bash
 cd scripts/linuxbasics
 ls -l /etc | tee outputData.txt | wc -l
-cat outputData.txt | head -5
+cat outputData.txt
 ```
 
 | Step | What you should see |
 | :--- | :--- |
-| **`tee`** | Creates/updates **`outputData.txt`** with the full **`/etc`** listing |
-| **`wc -l`** | Prints the **line count** (example: **`246`**) — pipe **not** broken |
-| **`cat … \| head`** | Confirms the file has real data (starts with **`total …`**) |
+| **`ls -l /etc \| tee outputData.txt \| wc -l`** | **`246`** on screen — the pipe still works; **`tee`** wrote to the file **and** passed lines to **`wc -l`** |
+| **`cat outputData.txt`** | Full **`/etc`** listing in the file (starts with **`total 1208`**, then `ModemManager`, `NetworkManager`, …) — proof the **same** data was saved while the pipeline ran |
 
-![Terminal: ls -l /etc | tee outputData.txt | wc -l → 246](../assets/tee-ls-etc-outputData-wc-l-lab-terminal.png)
+![Terminal: ls -l /etc | tee outputData.txt | wc -l → 246, then cat outputData.txt shows listing](../assets/tee-ls-etc-outputData-wc-l-cat-verify-terminal.png)
 
 Compare with §9: `ls -l /etc > outputData.txt | wc -l` → **`0`**; with **`tee`** → **`246`**.
 
