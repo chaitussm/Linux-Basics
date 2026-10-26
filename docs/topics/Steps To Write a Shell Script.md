@@ -39,7 +39,7 @@ A **shell script** is a **text file** that holds **Linux commands** one per line
 | **`.sh`** | File name ending; means “shell script” (convention, not magic). |
 
 ```mermaid
-%%{init: {'theme': 'base', 'themeVariables': {'pie1': '#5c5c5c', 'pie2': '#6e6e6e', 'pie3': '#4a4a4a', 'pieTitleTextColor': '#ffffff', 'pieSectionTextColor': '#ffffff'}}}%%
+%%{init: {'theme': 'base', 'themeVariables': {'pie1': '#FF9800', 'pie2': '#1E88E5', 'pie3': '#FFFFFF', 'pie4': '#FF9800', 'pie5': '#1E88E5', 'pieTitleTextColor': '#212121', 'pieSectionTextColor': '#212121', 'pieStrokeColor': '#424242'}}}%%
 pie title What is inside a typical lesson script
     "Commands (date, ls, echo…)" : 70
     "Comments and setup lines" : 20
@@ -69,7 +69,7 @@ Almost every script in this repo starts with:
 **Analogy:** Shebang is like writing at the top of a recipe: “A chef who speaks Bash should follow these steps.”
 
 ```mermaid
-%%{init: {'theme': 'base', 'themeVariables': {'primaryColor': '#5c5c5c', 'primaryTextColor': '#ffffff', 'primaryBorderColor': '#3d3d3d', 'lineColor': '#b0b0b0'}}}%%
+%%{init: {'theme': 'base', 'themeVariables': {'pie1': '#FF9800', 'pie2': '#1E88E5', 'pie3': '#FFFFFF', 'pie4': '#FF9800', 'pie5': '#1E88E5', 'pieTitleTextColor': '#212121', 'pieSectionTextColor': '#212121', 'pieStrokeColor': '#424242'}}}%%
 flowchart TD
     A[You double-click or run ./script.sh] --> B{First line shebang?}
     B -->|yes #!/bin/bash| C[OS starts /bin/bash]
@@ -138,7 +138,7 @@ chmod u+x hello-first.sh    # allow yourself to run it
 | `./hello-first.sh` | Run the program in **this** directory |
 
 ```mermaid
-%%{init: {'theme': 'base', 'themeVariables': {'primaryColor': '#5c5c5c', 'primaryTextColor': '#ffffff', 'primaryBorderColor': '#3d3d3d', 'lineColor': '#b0b0b0'}}}%%
+%%{init: {'theme': 'base', 'themeVariables': {'pie1': '#FF9800', 'pie2': '#1E88E5', 'pie3': '#FFFFFF', 'pie4': '#FF9800', 'pie5': '#1E88E5', 'pieTitleTextColor': '#212121', 'pieSectionTextColor': '#212121', 'pieStrokeColor': '#424242'}}}%%
 flowchart LR
     S1[Create .sh file] --> S2[Add #!/bin/bash]
     S2 --> S3[Write commands]
@@ -157,7 +157,7 @@ flowchart LR
 Same idea as [Components of Unix.md](Components%20of%20Unix.md): **you** → **shell** → (if valid) **kernel** → result back to terminal.
 
 ```mermaid
-%%{init: {'theme': 'base', 'themeVariables': {'primaryColor': '#5c5c5c', 'primaryTextColor': '#ffffff', 'primaryBorderColor': '#3d3d3d', 'lineColor': '#b0b0b0'}}}%%
+%%{init: {'theme': 'base', 'themeVariables': {'pie1': '#FF9800', 'pie2': '#1E88E5', 'pie3': '#FFFFFF', 'pie4': '#FF9800', 'pie5': '#1E88E5', 'pieTitleTextColor': '#212121', 'pieSectionTextColor': '#212121', 'pieStrokeColor': '#424242'}}}%%
 flowchart TD
     U[Script line: touch file.txt] --> SH[Shell checks spelling and options]
     SH -->|OK| K[Kernel creates/updates file on disk]
@@ -196,7 +196,7 @@ These appear often in Durga Sir demos and in [`scripts/`](../../scripts/README.m
 | **`man`** | **Open** manual (help) for a command | Pager on screen; `q` to quit |
 
 ```mermaid
-%%{init: {'theme': 'base', 'themeVariables': {'pie1': '#5c5c5c', 'pie2': '#6e6e6e', 'pie3': '#4a4a4a', 'pie4': '#7a7a7a', 'pieTitleTextColor': '#ffffff', 'pieSectionTextColor': '#ffffff'}}}%%
+%%{init: {'theme': 'base', 'themeVariables': {'pie1': '#FF9800', 'pie2': '#1E88E5', 'pie3': '#FFFFFF', 'pie4': '#FF9800', 'pie5': '#1E88E5', 'pieTitleTextColor': '#212121', 'pieSectionTextColor': '#212121', 'pieStrokeColor': '#424242'}}}%%
 pie title Beginner script actions (by intent)
     "Print / explain (echo)" : 30
     "Create files (touch, mkdir)" : 25
@@ -288,7 +288,7 @@ ls /bin | head -5
 See also: [pipeCommands.md](pipeCommands.md).
 
 ```mermaid
-%%{init: {'theme': 'base', 'themeVariables': {'primaryColor': '#5c5c5c', 'primaryTextColor': '#ffffff', 'primaryBorderColor': '#3d3d3d', 'lineColor': '#b0b0b0'}}}%%
+%%{init: {'theme': 'base', 'themeVariables': {'pie1': '#FF9800', 'pie2': '#1E88E5', 'pie3': '#FFFFFF', 'pie4': '#FF9800', 'pie5': '#1E88E5', 'pieTitleTextColor': '#212121', 'pieSectionTextColor': '#212121', 'pieStrokeColor': '#424242'}}}%%
 flowchart LR
     CMD[command 1] -->|stdout| PIPE[|]
     PIPE --> CMD2[command 2]

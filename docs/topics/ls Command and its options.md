@@ -54,7 +54,7 @@ bash scripts/ls-command-and-its-options/ls-basic-and-directory-arg-demo.sh
 **Demo:** [`ls-basic-and-directory-arg-demo.sh`](../../scripts/ls-command-and-its-options/ls-basic-and-directory-arg-demo.sh)
 
 ```mermaid
-%%{init: {'theme': 'base', 'themeVariables': {'primaryColor': '#5c5c5c', 'primaryTextColor': '#ffffff', 'primaryBorderColor': '#3d3d3d', 'lineColor': '#b0b0b0'}}}%%
+%%{init: {'theme': 'base', 'themeVariables': {'pie1': '#FF9800', 'pie2': '#1E88E5', 'pie3': '#FFFFFF', 'pie4': '#FF9800', 'pie5': '#1E88E5', 'pieTitleTextColor': '#212121', 'pieSectionTextColor': '#212121', 'pieStrokeColor': '#424242'}}}%%
 flowchart LR
     A["ls"] --> C["current directory"]
     B["ls scripts"] --> D["given directory only"]
@@ -156,7 +156,7 @@ With **`ls -l`**, default sort is still **alphabetical** unless you add **`-t`**
 **Demo:** [`ls-lt-ltr-time-sort-demo.sh`](../../scripts/ls-command-and-its-options/ls-lt-ltr-time-sort-demo.sh)
 
 ```mermaid
-%%{init: {'theme': 'base', 'themeVariables': {'pie1': '#5c5c5c', 'pie2': '#6e6e6e', 'pieTitleTextColor': '#ffffff', 'pieSectionTextColor': '#ffffff'}}}%%
+%%{init: {'theme': 'base', 'themeVariables': {'pie1': '#FF9800', 'pie2': '#1E88E5', 'pie3': '#FFFFFF', 'pie4': '#FF9800', 'pie5': '#1E88E5', 'pieTitleTextColor': '#212121', 'pieSectionTextColor': '#212121', 'pieStrokeColor': '#424242'}}}%%
 pie title ls -l sort key
     "Default: name (alphabetical)" : 50
     "With -t: modification time" : 50
@@ -361,7 +361,7 @@ ls -l /etc | less
 | **`-h`** | Human-readable sizes (with `-l`) |
 
 ```mermaid
-%%{init: {'theme': 'base', 'themeVariables': {'primaryColor': '#5c5c5c', 'primaryTextColor': '#ffffff', 'primaryBorderColor': '#3d3d3d', 'lineColor': '#b0b0b0'}}}%%
+%%{init: {'theme': 'base', 'themeVariables': {'pie1': '#FF9800', 'pie2': '#1E88E5', 'pie3': '#FFFFFF', 'pie4': '#FF9800', 'pie5': '#1E88E5', 'pieTitleTextColor': '#212121', 'pieSectionTextColor': '#212121', 'pieStrokeColor': '#424242'}}}%%
 flowchart TB
     LS[ls]
     LS --> SORT[sort: name / -r / -t]
