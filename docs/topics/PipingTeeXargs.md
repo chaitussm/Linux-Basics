@@ -26,11 +26,12 @@ bash scripts/PipingTeeXargs.sh
 - [6. Piping with filters — Durga Sir examples](#6-piping-with-filters--durga-sir-examples)
 - [7. Long pipelines and order](#7-long-pipelines-and-order)
 - [8. Pipe carries stdout only (not stderr)](#8-pipe-carries-stdout-only-not-stderr)
-- [9. `tee` — write to file and screen](#9-tee--write-to-file-and-screen)
-- [10. `xargs` — build command lines from stdin](#10-xargs--build-command-lines-from-stdin)
-- [11. Pipe vs redirection vs `tee`](#11-pipe-vs-redirection-vs-tee)
-- [12. Session checklist](#12-session-checklist)
-- [13. Script index](#13-script-index)
+- [9. When piping “breaks” — `>` before `|`](#9-when-piping-breaks--before-)
+- [10. `tee` — write to file and screen](#10-tee--write-to-file-and-screen)
+- [11. `xargs` — build command lines from stdin](#11-xargs--build-command-lines-from-stdin)
+- [12. Pipe vs redirection vs `tee`](#12-pipe-vs-redirection-vs-tee)
+- [13. Session checklist](#13-session-checklist)
+- [14. Script index](#14-script-index)
 
 ---
 
@@ -325,7 +326,92 @@ bash scripts/PipingTeeXargs/pipe-stdout-only-not-stderr-demo.sh
 
 ---
 
-## 9. `tee` — write to file and screen
+## 9. When piping “breaks” — `>` before `|`
+
+**Rule:** For one command, **stdout goes either to a file (`>`) or into a pipe (`|`) — not both at once.**  
+If you put **`>`** on the left command, its output is **saved in the file** and **nothing** is left on stdout for the **`|`** to carry forward.
+
+That is why Durga Sir shows **`wc -l`** printing **`0`** on a long-looking pipeline — the count command received **no lines** from the pipe, even though the **file** later has hundreds of lines.
+
+```mermaid
+%%{init: {'theme': 'base', 'themeVariables': {'pie1': '#FF9800', 'pie2': '#1E88E5', 'pie3': '#FFFFFF', 'pie4': '#FF9800', 'pie5': '#1E88E5', 'pieTitleTextColor': '#212121', 'pieSectionTextColor': '#212121', 'pieStrokeColor': '#424242'}}}%%
+pie title Where ls -l stdout goes
+    "Into file via >" : 50
+    "Into pipe | (needs tee)" : 50
+```
+
+```mermaid
+%%{init: {'theme': 'base', 'themeVariables': {'primaryColor': '#1E88E5', 'primaryTextColor': '#ffffff', 'primaryBorderColor': '#424242', 'lineColor': '#FF9800'}}}%%
+flowchart LR
+    LS[ls -l /etc] -->|"> outputData.txt"| F[File full of lines]
+    LS -.->|"nothing left"| P[Pipe]
+    P --> WC[wc -l prints 0]
+
+    LS2[ls -l /etc] -->|"| tee file"| T[tee]
+    T --> P2[Pipe]
+    P2 --> WC2[wc -l counts lines]
+
+    classDef orange fill:#FF9800,stroke:#424242,color:#212121,stroke-width:2px
+    classDef blue fill:#1E88E5,stroke:#424242,color:#ffffff,stroke-width:2px
+    classDef white fill:#FFFFFF,stroke:#424242,color:#212121,stroke-width:2px
+    class LS,F,LS2 orange
+    class P,WC,T,P2,WC2 blue
+```
+
+### Your lab — broken pipe vs correct count (`scripts/linuxbasics`)
+
+Use **`outputData.txt`** from [redirection.md §15](redirection.md#15-lab--add-and-remove-data-in-a-file-outputdatatxt).
+
+**Step A — piping looks connected, but count is `0`:**
+
+```bash
+cd scripts/linuxbasics
+ls -l > outputData.txt | cat outputData.txt | wc -l
+ls -l /etc > outputData.txt | cat outputData.txt | wc -l
+```
+
+| # | What happens |
+| :---: | :--- |
+| 1 | **`ls -l`** (or **`ls -l /etc`**) runs with **`> outputData.txt`** |
+| 2 | **All listing output** goes **into the file** — stdout is **not** sent to the pipe |
+| 3 | The **`|`** still runs the next commands, but they get **empty stdin** from that stage |
+| 4 | **`wc -l`** counts lines from the pipe → **`0`** |
+
+**Step B — prove the file is not empty:**
+
+```bash
+cat outputData.txt
+```
+
+You see the full listing (e.g. **`total 1208`** and many lines under **`/etc`**). The redirect **worked**; only the **pipe** had no data.
+
+![Terminal: ls -l > outputData.txt | … | wc -l gives 0; cat outputData.txt shows /etc listing](../assets/pipe-breaks-ls-greater-then-pipe-wc-zero-terminal.png)
+
+**Step C — run the right steps separately (pipe works):**
+
+```bash
+cat outputData.txt | wc -l
+```
+
+| # | What happens |
+| :---: | :--- |
+| 1 | **`cat outputData.txt`** reads the **file** and sends lines to **stdout** |
+| 2 | **`|`** connects that stdout to **`wc -l`** |
+| 3 | Output is the real line count (example from lab: **`246`**) |
+
+![Terminal: cat outputData.txt | wc -l → 246](../assets/pipe-cat-outputData-wc-l-246-terminal.png)
+
+**Step D — when you need both a file and a pipe:**
+
+Do **not** write `cmd > file | other`. Use **`tee`** (next section):
+
+```bash
+ls -l /etc | tee outputData.txt | wc -l
+```
+
+---
+
+## 10. `tee` — write to file and screen
 
 **`tee`** is named like the letter **T** — **split** the stream:
 
@@ -364,7 +450,7 @@ bash scripts/PipingTeeXargs/tee-append-multiple-files-demo.sh
 
 ---
 
-## 10. `xargs` — build command lines from stdin
+## 11. `xargs` — build command lines from stdin
 
 **Problem:** Some commands want **file names as arguments** (`touch a b c`, `wc file1 file2`), but a pipe gives **stdin**, not argv.
 
@@ -405,7 +491,7 @@ bash scripts/PipingTeeXargs/xargs-with-find-style-demo.sh
 
 ---
 
-## 11. Pipe vs redirection vs `tee`
+## 12. Pipe vs redirection vs `tee`
 
 | Mechanism | Symbol / command | Connects to |
 | :--- | :--- | :--- |
@@ -421,7 +507,7 @@ ls -l /etc | tee etclist.txt | wc -l
 
 ---
 
-## 12. Session checklist
+## 13. Session checklist
 
 - [ ] Explain **three** output destinations: terminal, file, **pipe**
 - [ ] Run `ls -l /etc | head` and `ls -l /etc | wc -l`
@@ -434,7 +520,7 @@ ls -l /etc | tee etclist.txt | wc -l
 
 ---
 
-## 13. Script index
+## 14. Script index
 
 | Script | Topic |
 | :--- | :--- |
