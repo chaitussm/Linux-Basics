@@ -311,6 +311,34 @@ flowchart LR
     class IN,CMD,OUT,ERR,F,E,B darkGrey
 ```""",
     },
+    {
+        "file": "PipingTeeXargs.md",
+        "title": "# Execution summary — Session 12 piping, tee, xargs",
+        "topic": "**Topic:** [PipingTeeXargs.md](../docs/topics/PipingTeeXargs.md) (Video 12)  ",
+        "dir_line": "**Scripts:** [`../scripts/PipingTeeXargs.sh`](../scripts/PipingTeeXargs.sh) · [`../scripts/PipingTeeXargs/`](../scripts/PipingTeeXargs/)",
+        "dirs": ["scripts/PipingTeeXargs"],
+        "extra": ["scripts/PipingTeeXargs.sh"],
+        "pie": """```mermaid
+%%{init: {'theme': 'base', 'themeVariables': {'pie1': '#5c5c5c', 'pie2': '#6e6e6e', 'pie3': '#4a4a4a', 'pie4': '#7a7a7a', 'pieTitleTextColor': '#ffffff', 'pieSectionTextColor': '#ffffff'}}}%%
+pie title Session 12 demos
+    "Pipe filters" : 35
+    "tee" : 25
+    "xargs" : 25
+    "stderr note" : 15
+```""",
+        "flow": f"""```mermaid
+{MERMAID_GREY}
+flowchart LR
+    A[command1] -->|pipe| B[filter]
+    B --> C[terminal]
+    B -->|tee| F[file]
+    D[stdin lines] --> X[xargs]
+    X --> E[command with args]
+
+    classDef darkGrey fill:#5c5c5c,stroke:#3d3d3d,color:#ffffff,stroke-width:2px
+    class A,B,C,F,D,X,E darkGrey
+```""",
+    },
 ]
 
 
