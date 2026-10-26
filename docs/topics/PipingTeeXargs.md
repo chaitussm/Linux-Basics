@@ -262,6 +262,42 @@ ls -l | grep ".sh"
 
 Durga Sir stresses: **order matters** — each command reads what the **previous** command produced.
 
+### Your lab — `ls -l | wc` then `ls -l | wc | wc -l` (`scripts/linuxbasics`)
+
+**Short form:** On most Ubuntu/bash setups, **`ll`** is an **alias** for **`ls -l`** (long listing). Check with `type ll` — you often see `ll is aliased to 'ls -l'`. So these are the same idea:
+
+```bash
+ll | wc
+ls -l | wc
+```
+
+See [Bash Built-in Commands.md — `alias`](Bash%20Built-in%20Commands.md) for how aliases are defined.
+
+```bash
+cd scripts/linuxbasics
+ls -l | wc
+ls -l | wc | wc -l
+```
+
+![Terminal: ls -l | wc then ls -l | wc | wc -l](../assets/pipe-ls-wc-wc-l-long-pipeline-terminal.png)
+
+**What you see (from the screenshot):**
+
+| Step | Command | Output | Meaning |
+| :---: | :--- | :--- | :--- |
+| 1 | `ls -l \| wc` | `30  267  1808` | **`wc`** counted the **whole `ls -l` listing**: **30 lines**, **267 words**, **1808 bytes/characters** |
+| 2 | `ls -l \| wc \| wc -l` | `1` | The **middle `wc`** prints **one summary line** (`30 267 1808`). The **last `wc -l`** only counts **lines in that one line** → always **`1`** |
+
+**Point by point:**
+
+1. **`ls -l`** sends a **multi-line** listing to the pipe (one line per file/dir, plus the **`total`** line).
+2. **First `wc`** (no flags) reads that listing from **stdin** and prints **three numbers**: lines, words, characters.
+3. That **single line** of three numbers becomes the **input** to the **next** command in the chain.
+4. **`wc -l`** at the end counts **how many lines** it received — here **one line**, so output is **`1`**.
+5. This is **not** “30 files”; it is “**one line** of `wc` statistics.” To count **files**, use something like `ls -l | grep -v '^total' | wc -l` (later topic) or count entries another way.
+
+**Another long pipeline (class pattern):**
+
 ```bash
 cat data.txt | sort | uniq | wc -l
 ```
