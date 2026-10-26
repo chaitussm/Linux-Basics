@@ -820,6 +820,84 @@ After [§12](#12-reason-for-xargs), the rule is clear: **`xargs`** reads **stdin
 
 **Problem (recap):** Some commands want **file names as arguments** (`touch a b c`, `wc file1 file2`), but a pipe gives **stdin**, not **`argv`**.
 
+### Durga Sir — how `xargs` turns a stream into `rm` arguments (class summary)
+
+Board flow (no extra screenshot — same idea as [§12](#12-reason-for-xargs), step 2):
+
+1. **`input.txt`** holds one file name per line, for example:
+   ```text
+   file1.txt
+   file2.txt
+   file3.txt
+   ```
+2. **`cat input.txt |`** sends those lines as a **stream** on the pipe (not as **`rm`** arguments yet).
+3. **`xargs`** reads that stream and **builds command-line arguments** for the next command.
+4. The shell effectively runs:
+   ```bash
+   rm file1.txt file2.txt file3.txt
+   ```
+   — **`rm`** still receives **operands on the command line**; **`xargs`** is only the **adapter** between **pipe (stdin)** and **`argv`**.
+
+**Correct pipeline from class:**
+
+```bash
+cat input.txt | xargs rm
+```
+
+| Step | What happens |
+| :--- | :--- |
+| **`cat input.txt`** | Prints the three names to stdout |
+| **`| xargs`** | Collects them (by default, whitespace-separated lines/words) |
+| **`rm`** | Gets **`file1.txt file2.txt file3.txt`** as **arguments** and deletes those files |
+
+Related class example (limit how many names per **`rm`** invocation): `cat input.txt | head -3 | xargs rm` — only the **first three lines** from the file are passed to **`rm`**.
+
+### Lab test evidence — `inputData.txt` and `xargs rm` (`scripts/linuxbasics`)
+
+**Step 1 — create targets and build the list file**
+
+```bash
+cd scripts/linuxbasics
+touch file{1..5}.txt
+ls
+gedit inputData.txt
+```
+
+In **`inputData.txt`**, put one name per line (lab screenshot):
+
+```text
+file1.txt
+file2.txt
+file3.txt
+file4.txt
+file5.txt
+```
+
+![Lab: touch file{1..5}.txt, ls, gedit inputData.txt with five file names](../assets/xargs-lab-touch-gedit-inputData-file-list.png)
+
+**Step 2 — delete via pipe + `xargs`**
+
+```bash
+cat inputData.txt | xargs rm
+cat inputData.txt
+ls
+```
+
+![Lab: cat inputData.txt | xargs rm; cat inputData.txt still lists names; ls shows file1–file5 gone](../assets/xargs-lab-cat-xargs-rm-verify-terminal.png)
+
+| Check | Expected |
+| :--- | :--- |
+| **`ls`** after **`xargs rm`** | **`file1.txt` … `file5.txt`** are **gone** from the directory |
+| **`cat inputData.txt`** | Still shows **`file1.txt` … `file5.txt`** as **text lines** |
+
+### FAQ — after `rm`, why are the names still inside `inputData.txt`?
+
+**Yes — that is correct and normal.**
+
+- **`inputData.txt`** is only a **text file** (a saved list of strings). It is **not** linked to the real files on disk.
+- **`cat inputData.txt | xargs rm`** tells **`rm`** to delete **files in the current directory** whose names match those lines. **`rm`** does **not** edit or clear **`inputData.txt`**.
+- So after deletion: **files removed from the folder**, **names unchanged in the list file** until you change it yourself (`gedit`, `> inputData.txt`, `sed`, etc.).
+
 ### Example 1 — create files from a word list
 
 ```bash
@@ -881,6 +959,7 @@ ls -l /etc | tee etclist.txt | wc -l
 - [ ] Run `ls -l | tee output.txt | wc > wc.txt` (or lab: `outputData.txt` / `wordCount.txt`) and `cat` both files
 - [ ] Run `ls -l | tee outputData.txt | wc | tee wordCount.txt` and confirm counts on screen **and** in the file
 - [ ] Explain why `cat file | rm` fails and what `xargs` fixes ([§12](#12-reason-for-xargs))
+- [ ] Lab: `touch file{1..5}.txt`, list names in `inputData.txt`, run `cat inputData.txt | xargs rm`, confirm files gone but list file unchanged ([§13](#13-xargs--build-command-lines-from-stdin))
 - [ ] Run `echo "a b c" | xargs touch`
 - [ ] Run `bash scripts/PipingTeeXargs.sh`
 - [ ] Add lab **screenshots** under each block after class (same workflow as `redirection.md`)
