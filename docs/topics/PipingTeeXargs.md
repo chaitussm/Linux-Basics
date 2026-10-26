@@ -818,6 +818,8 @@ cat inputData.txt | rm
 
 After [§12](#12-reason-for-xargs), the rule is clear: **`xargs`** reads **stdin** (lines or words) and **builds command-line arguments** for the next command (default command is **`echo`** if you omit one).
 
+**Durga Sir definition:** **`xargs`** is used to **convert the output stream into command-line arguments**.
+
 **Problem (recap):** Some commands want **file names as arguments** (`touch a b c`, `wc file1 file2`), but a pipe gives **stdin**, not **`argv`**.
 
 ### Durga Sir — how `xargs` turns a stream into `rm` arguments (class summary)
@@ -892,7 +894,9 @@ ls
 
 **Discussion (lab screenshot 4):**
 
-1. **`cat inputData.txt | xargs rm`** — **`cat`** streams the five lines; **`xargs`** turns them into **`rm`** arguments; **`rm`** deletes **`file1.txt` … `file5.txt`** in the directory. That matches Durga Sir’s board: stream → **`xargs`** → **`rm file1 … file5`**.
+**Durga Sir — what `xargs` does (one line):** The **`xargs`** command is to **convert the output stream** (data coming through the pipe on **stdin**) **into command-line arguments** for the next command — here, so **`rm`** receives **`file1.txt file2.txt …`** as **argv**, not as a raw stream.
+
+1. **`cat inputData.txt | xargs rm`** — **`cat`** sends the five lines as an **output stream**; **`xargs`** **converts that stream into command-line arguments**; **`rm`** then deletes **`file1.txt` … `file5.txt`**. Same idea as the board: stream → **`xargs`** → **`rm file1 … file5`**.
 2. **`cat inputData.txt` right after `rm`** — you still see all five names printed. **That is correct and expected.** **`inputData.txt`** is only a **text list** (strings in a file). It is **not** tied to whether those files still exist on disk.
 3. **`rm` does not update the list file** — deleting files removes **directory entries**; it does **not** remove or edit lines inside **`inputData.txt`**. Nothing in `cat … | xargs rm` writes back to **`inputData.txt`**.
 4. **`ls` vs `cat inputData.txt`** — **`ls`** proves the **files are gone**; **`cat inputData.txt`** proves the **saved list is unchanged**. Both results together are normal for this lab.
