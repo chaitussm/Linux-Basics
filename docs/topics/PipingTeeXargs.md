@@ -32,9 +32,10 @@ bash scripts/PipingTeeXargs.sh
 - [12. Reason for `xargs`](#12-reason-for-xargs)
 - [13. `xargs` — build command lines from stdin](#13-xargs--build-command-lines-from-stdin)
 - [14. eg2 — display contents of files named in an input file](#14-eg2--display-contents-of-files-named-in-an-input-file)
-- [15. Pipe vs redirection vs `tee`](#15-pipe-vs-redirection-vs-tee)
-- [16. Session checklist](#16-session-checklist)
-- [17. Script index](#17-script-index)
+- [15. Printing `date` and `cal` with `xargs echo`](#15-printing-date-and-cal-with-xargs-echo)
+- [16. Pipe vs redirection vs `tee`](#16-pipe-vs-redirection-vs-tee)
+- [17. Session checklist](#17-session-checklist)
+- [18. Script index](#18-script-index)
 
 ---
 
@@ -1038,7 +1039,40 @@ cat inputData.txt | xargs cat
 
 ---
 
-## 15. Pipe vs redirection vs `tee`
+## 15. Printing `date` and `cal` with `xargs echo`
+
+After [§14](#14-eg2--display-contents-of-files-named-in-an-input-file), you have seen **`xargs`** turn a **stream** into **arguments** for **`cat`** and **`rm`**. The same idea works with **`echo`** — useful because **`echo` does not read stdin** from a pipe.
+
+| Command | Why `xargs`? |
+| :--- | :--- |
+| **`date \| echo`** | **`echo`** ignores the pipe → **no** date on screen |
+| **`date \| xargs echo`** | **`xargs`** passes the date string as **arguments** to **`echo`** → date prints |
+
+**Lab — `scripts/linuxbasics`:**
+
+```bash
+cd scripts/linuxbasics
+date | xargs echo
+cal | xargs echo
+```
+
+![Terminal: date | xargs echo and cal | xargs echo — cal flattened to one line](../assets/xargs-lab-date-cal-xargs-echo-terminal.png)
+
+| Command | What you see |
+| :--- | :--- |
+| **`date \| xargs echo`** | One line, e.g. **`Mon Oct 26 22:26:13 IST 2026`** — same idea as **`date \| xargs`** (default command is **`echo`**) |
+| **`cal \| xargs echo`** | **One long line** — month title, weekday headers, and all day numbers in a single row (grid newlines removed) |
+
+**Points:**
+
+1. **`xargs`** reads **stdout** from **`date`** or **`cal`** and builds **`echo`**’s argument list — that is **stream → command-line arguments** again ([§13](#13-xargs--build-command-lines-from-stdin)).
+2. For **`date`**, you usually run **`date`** alone; **`xargs echo`** is a **small demo** of the mechanism, not required in daily use.
+3. For **`cal`**, **`cal | xargs echo`** **destroys** the calendar layout — use plain **`cal`** when you want the normal grid. The lab shows what **`xargs`** does to **multi-line** input (whitespace and newlines become argument separators).
+4. Do **not** write **`date cal | xargs echo`** — the shell does not run two commands like that; run **`date`** and **`cal`** separately, or use **`{ date; cal; } | xargs echo`** only if you intentionally want **both** outputs mashed into one line.
+
+---
+
+## 16. Pipe vs redirection vs `tee`
 
 | Mechanism | Symbol / command | Connects to |
 | :--- | :--- | :--- |
@@ -1054,7 +1088,7 @@ ls -l /etc | tee etclist.txt | wc -l
 
 ---
 
-## 16. Session checklist
+## 17. Session checklist
 
 - [ ] Explain **three** output destinations: terminal, file, **pipe**
 - [ ] Run `ls -l /etc | head` and `ls -l /etc | wc -l`
@@ -1066,13 +1100,14 @@ ls -l /etc | tee etclist.txt | wc -l
 - [ ] Explain why `cat file | rm` fails and what `xargs` fixes ([§12](#12-reason-for-xargs))
 - [ ] Lab: `touch file{1..5}.txt`, list names in `inputData.txt`, run `cat inputData.txt | xargs rm`, confirm files gone but list file unchanged ([§13](#13-xargs--build-command-lines-from-stdin))
 - [ ] Run `cat inputData.txt | xargs cat` (eg2 — [§14](#14-eg2--display-contents-of-files-named-in-an-input-file))
+- [ ] Run `date | xargs echo` and `cal | xargs echo`; compare with plain `date` and `cal` ([§15](#15-printing-date-and-cal-with-xargs-echo))
 - [ ] Run `echo "a b c" | xargs touch`
 - [ ] Run `bash scripts/PipingTeeXargs.sh`
 - [ ] Add lab **screenshots** under each block after class (same workflow as `redirection.md`)
 
 ---
 
-## 17. Script index
+## 18. Script index
 
 | Script | Topic |
 | :--- | :--- |
