@@ -890,13 +890,15 @@ ls
 | **`ls`** after **`xargs rm`** | **`file1.txt` … `file5.txt`** are **gone** from the directory |
 | **`cat inputData.txt`** | Still shows **`file1.txt` … `file5.txt`** as **text lines** |
 
-### FAQ — after `rm`, why are the names still inside `inputData.txt`?
+**Discussion (lab screenshot 4):**
 
-**Yes — that is correct and normal.**
+1. **`cat inputData.txt | xargs rm`** — **`cat`** streams the five lines; **`xargs`** turns them into **`rm`** arguments; **`rm`** deletes **`file1.txt` … `file5.txt`** in the directory. That matches Durga Sir’s board: stream → **`xargs`** → **`rm file1 … file5`**.
+2. **`cat inputData.txt` right after `rm`** — you still see all five names printed. **That is correct and expected.** **`inputData.txt`** is only a **text list** (strings in a file). It is **not** tied to whether those files still exist on disk.
+3. **`rm` does not update the list file** — deleting files removes **directory entries**; it does **not** remove or edit lines inside **`inputData.txt`**. Nothing in `cat … | xargs rm` writes back to **`inputData.txt`**.
+4. **`ls` vs `cat inputData.txt`** — **`ls`** proves the **files are gone**; **`cat inputData.txt`** proves the **saved list is unchanged**. Both results together are normal for this lab.
+5. **If you want an empty list after delete** — that is a **separate** step, for example `> inputData.txt`, `gedit inputData.txt`, or `sed -i` to edit the file. **`xargs rm` alone will not do that.**
 
-- **`inputData.txt`** is only a **text file** (a saved list of strings). It is **not** linked to the real files on disk.
-- **`cat inputData.txt | xargs rm`** tells **`rm`** to delete **files in the current directory** whose names match those lines. **`rm`** does **not** edit or clear **`inputData.txt`**.
-- So after deletion: **files removed from the folder**, **names unchanged in the list file** until you change it yourself (`gedit`, `> inputData.txt`, `sed`, etc.).
+**FAQ (same point in one line):** After **`rm`**, names still in **`inputData.txt`**? **Yes — normal.** Clear or edit the list file yourself if you no longer want those lines saved.
 
 ### Example 1 — create files from a word list
 
