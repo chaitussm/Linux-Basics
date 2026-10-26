@@ -31,9 +31,10 @@ bash scripts/PipingTeeXargs.sh
 - [11. Tee with multiple files](#11-tee-with-multiple-files)
 - [12. Reason for `xargs`](#12-reason-for-xargs)
 - [13. `xargs` — build command lines from stdin](#13-xargs--build-command-lines-from-stdin)
-- [14. Pipe vs redirection vs `tee`](#14-pipe-vs-redirection-vs-tee)
-- [15. Session checklist](#15-session-checklist)
-- [16. Script index](#16-script-index)
+- [14. eg2 — display contents of files named in an input file](#14-eg2--display-contents-of-files-named-in-an-input-file)
+- [15. Pipe vs redirection vs `tee`](#15-pipe-vs-redirection-vs-tee)
+- [16. Session checklist](#16-session-checklist)
+- [17. Script index](#17-script-index)
 
 ---
 
@@ -939,7 +940,84 @@ bash scripts/PipingTeeXargs/xargs-with-find-style-demo.sh
 
 ---
 
-## 14. Pipe vs redirection vs `tee`
+## 14. eg2 — display contents of files named in an input file
+
+**Durga Sir — class (eg2):**
+
+> Assume **`input.txt`** contains **multiple file names**. Read all these file names from **`input.txt`** and **display the files’ content** to the terminal.
+
+**Setup on the board:**
+
+```bash
+cat input.txt
+```
+
+Example contents:
+
+```text
+a.txt
+b.txt
+c.txt
+```
+
+**Manual way** (type every name as an argument):
+
+```bash
+cat a.txt b.txt c.txt
+```
+
+**With piping + `xargs`** (names come from the list file; **`xargs`** converts the stream into **`cat`** arguments):
+
+```bash
+cat input.txt | xargs cat
+```
+
+| Step | Role |
+| :--- | :--- |
+| **`cat input.txt`** | Prints file names to stdout — a **stream** of lines |
+| **`| xargs`** | Converts that stream into **command-line arguments** ([§13](#13-xargs--build-command-lines-from-stdin)) |
+| **`cat`** (second) | Runs like **`cat a.txt b.txt c.txt`** — prints **each file’s contents** to the terminal, one after another |
+
+Same pattern as **`cat input.txt | xargs rm`** in [§13](#13-xargs--build-command-lines-from-stdin), but the command after **`xargs`** is **`cat`** (read/display) instead of **`rm`** (delete).
+
+### Lab test evidence — `inputData.txt` and `xargs cat` (`scripts/linuxbasics`)
+
+**Step 1 — put target file names in the list file**
+
+```bash
+cd scripts/linuxbasics
+cat inputData.txt    # optional: see current list
+gedit inputData.txt
+```
+
+For this lab, **`inputData.txt`** lists files that **have content** (example from your terminal):
+
+```text
+filedata.txt
+fileinfo.txt
+logfile.sh
+```
+
+![Lab: gedit inputData.txt with filedata.txt, fileinfo.txt, logfile.sh](../assets/xargs-eg2-lab-gedit-inputData-file-list.png)
+
+**Step 2 — read every listed file in one command**
+
+```bash
+cat inputData.txt | xargs cat
+```
+
+![Lab: cat inputData.txt | xargs cat — concatenated contents of filedata, fileinfo, logfile.sh](../assets/xargs-eg2-lab-cat-inputData-xargs-cat-terminal.png)
+
+| What you see on screen | Meaning |
+| :--- | :--- |
+| Repeated lines from **`filedata.txt`** / **`fileinfo.txt`** | **`xargs cat`** passed those paths to **`cat`**; output is **file contents**, not file names |
+| **`logfile.sh`** script body (`#!/bin/bash`, `timestamp=…`, etc.) | Third argument from the list — **`cat`** prints the script source like any text file |
+
+**Note:** If a name in **`inputData.txt`** is wrong or the file is missing, **`cat`** reports an error for that operand. Keep **one file name per line** and paths relative to **`scripts/linuxbasics`** (or use full paths in the list).
+
+---
+
+## 15. Pipe vs redirection vs `tee`
 
 | Mechanism | Symbol / command | Connects to |
 | :--- | :--- | :--- |
@@ -955,7 +1033,7 @@ ls -l /etc | tee etclist.txt | wc -l
 
 ---
 
-## 15. Session checklist
+## 16. Session checklist
 
 - [ ] Explain **three** output destinations: terminal, file, **pipe**
 - [ ] Run `ls -l /etc | head` and `ls -l /etc | wc -l`
@@ -966,13 +1044,14 @@ ls -l /etc | tee etclist.txt | wc -l
 - [ ] Run `ls -l | tee outputData.txt | wc | tee wordCount.txt` and confirm counts on screen **and** in the file
 - [ ] Explain why `cat file | rm` fails and what `xargs` fixes ([§12](#12-reason-for-xargs))
 - [ ] Lab: `touch file{1..5}.txt`, list names in `inputData.txt`, run `cat inputData.txt | xargs rm`, confirm files gone but list file unchanged ([§13](#13-xargs--build-command-lines-from-stdin))
+- [ ] Run `cat inputData.txt | xargs cat` (eg2 — [§14](#14-eg2--display-contents-of-files-named-in-an-input-file))
 - [ ] Run `echo "a b c" | xargs touch`
 - [ ] Run `bash scripts/PipingTeeXargs.sh`
 - [ ] Add lab **screenshots** under each block after class (same workflow as `redirection.md`)
 
 ---
 
-## 16. Script index
+## 17. Script index
 
 | Script | Topic |
 | :--- | :--- |
