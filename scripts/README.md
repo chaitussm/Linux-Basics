@@ -19,6 +19,8 @@ Scripts are grouped in folders that match **`docs/topics/*.md`** notes (one fold
 | [`wordCountCommand/`](wordCountCommand/) | [wordCountCommand.md](../docs/topics/wordCountCommand.md) | `wc`, `-l`, `-w`, `-c`, multiple files, pipes (Video 10) |
 | [`redirection/`](redirection/) | [redirection.md](../docs/topics/redirection.md) | Streams 0/1/2, `2>`, `&>`, combined redirects (Video 11) |
 | [`redirection.sh`](redirection.sh) | [redirection.md](../docs/topics/redirection.md) | Orchestrator — runs `redirection/` then `Redirection/` |
+| [`PipingTeeXargs/`](PipingTeeXargs/) | [PipingTeeXargs.md](../docs/topics/PipingTeeXargs.md) | Pipe, `tee`, `xargs` (Video 12) |
+| [`PipingTeeXargs.sh`](PipingTeeXargs.sh) | [PipingTeeXargs.md](../docs/topics/PipingTeeXargs.md) | Orchestrator — all Session 12 demos |
 | [`Redirection/`](Redirection/) | [EOF and Redirection.md](../docs/topics/EOF%20and%20Redirection.md) | `>`, `>>`, `<`, `<<EOF` (overwrite vs append) |
 | [`scripts-execution-summary/`](../scripts-execution-summary/) | Per-topic **execution summary** `.md` files | Explains every command in each `.sh` |
 
@@ -95,6 +97,21 @@ See [Redirection.md](../scripts-execution-summary/Redirection.md).
 
 See [redirectionScriptSummary.md](../scripts-execution-summary/redirectionScriptSummary.md).
 
+## Session 12 — pipe, tee, xargs
+
+| Script | Description |
+| :--- | :--- |
+| [`PipingTeeXargs.sh`](PipingTeeXargs.sh) | Run all demos in order |
+| `PipingTeeXargs/pipe-ls-head-wc-demo.sh` | `ls \| head`, `ls \| wc -l` |
+| `PipingTeeXargs/pipe-filters-sort-uniq-demo.sh` | `sort \| uniq`, `uniq -c` |
+| `PipingTeeXargs/pipe-stdout-only-not-stderr-demo.sh` | Pipe does not carry stderr |
+| `PipingTeeXargs/tee-screen-and-file-demo.sh` | `ls \| tee file` |
+| `PipingTeeXargs/tee-append-multiple-files-demo.sh` | `tee -a`, multiple files |
+| `PipingTeeXargs/xargs-build-command-line-demo.sh` | `xargs touch`, `-n` |
+| `PipingTeeXargs/xargs-with-find-style-demo.sh` | `ls *.sh \| xargs wc -l` |
+
+See [PipingTeeXargs.md](../scripts-execution-summary/PipingTeeXargs.md).
+
 ## Run from repo root
 
 ```bash
@@ -103,6 +120,7 @@ chmod +x scripts/**/*.sh
 chmod +x "scripts/date-cal-commands/"*.sh
 bash "scripts/date-cal-commands/Date and Cal commands.sh"
 bash scripts/redirection.sh
+bash scripts/PipingTeeXargs.sh
 bash scripts/components-of-unix/invalid-command-demos.sh
 bash scripts/types-of-files-in-linux/file-command-content-demo.sh
 bash scripts/bash-built-in-commands/cat-command-demo.sh

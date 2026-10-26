@@ -2,6 +2,8 @@
 
 **Context:** Durga Sir — [ls Command and its options.md](ls%20Command%20and%20its%20options.md) (Video 7) uses **`ls -l /etc | head`** when a directory has hundreds of entries. This note explains the **pipe**, a classic example, and **`Broken pipe`**.
 
+**Full Session 12 (filters, `tee`, `xargs`):** [PipingTeeXargs.md](PipingTeeXargs.md)
+
 **Related:** [File System Navigation Commands And Hierarchy.md](File%20System%20Navigation%20Commands%20And%20Hierarchy.md) (`/etc`) · [ls Command and its options.md](ls%20Command%20and%20its%20options.md) (§16 `head` / `tail`)
 
 ---

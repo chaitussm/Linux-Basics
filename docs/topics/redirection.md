@@ -5,6 +5,8 @@
 
 **Prerequisites:** [viewContentOfFiles.md](viewContentOfFiles.md) (`cat`, viewing files) · [wordCountCommand.md](wordCountCommand.md) (`wc`) · [Date and Cal commands.md](Date%20and%20Cal%20commands.md) (`cal` errors in labs) · [pipeCommands.md](pipeCommands.md) (`|` is **not** `>`)
 
+**Next:** [PipingTeeXargs.md](PipingTeeXargs.md) (Session 12 — piping, `tee`, `xargs`)
+
 **Related (overwrite, append, heredoc):** [EOF and Redirection.md](EOF%20and%20Redirection.md) — Rama/Sita, `>>`, `<<EOF` in depth
 
 **Scripts:** [`scripts/redirection.sh`](../../scripts/redirection.sh) (orchestrator) · [`scripts/redirection/`](../../scripts/redirection/) (Session 11 demos) · [`scripts/Redirection/`](../../scripts/Redirection/) (`>`, `>>`, EOF)  

@@ -19,6 +19,7 @@ Each topic has its own **`.md` file** under [`topics/`](topics/). Runnable **`.s
 | 9 | [**viewContentOfFiles.md**](topics/viewContentOfFiles.md) | [Session 9](https://www.youtube.com/watch?v=FuzpoZwDcZU&list=PLd3UqWTnYXOloH0vWBs4BtSbP84WcC2NY&index=9) |
 | 10 | [**wordCountCommand.md**](topics/wordCountCommand.md) | [Session 10 — `wc`](https://www.youtube.com/watch?v=hmPHZBR-9Wk&list=PLd3UqWTnYXOloH0vWBs4BtSbP84WcC2NY&index=10) |
 | 11 | [**redirection.md**](topics/redirection.md) | [Session 11 — Redirection](https://www.youtube.com/watch?v=f_B6BIxlYFw&list=PLd3UqWTnYXOloH0vWBs4BtSbP84WcC2NY&index=11) |
+| 12 | [**PipingTeeXargs.md**](topics/PipingTeeXargs.md) | [Session 12 — Pipe, tee, xargs](https://www.youtube.com/watch?v=Ko3VktocAQw&list=PLd3UqWTnYXOloH0vWBs4BtSbP84WcC2NY&index=12) |
 
 ---
 
@@ -37,6 +38,7 @@ Each topic has its own **`.md` file** under [`topics/`](topics/). Runnable **`.s
 | [**viewContentOfFiles.md**](topics/viewContentOfFiles.md) | `cat`, `tac`, `rev`, `head`, `tail`, `more`, `less` (Video 9) |
 | [**wordCountCommand.md**](topics/wordCountCommand.md) | `wc` — lines, words, bytes; `-l`, `-w`, `-c`; pipes (Video 10) |
 | [**redirection.md**](topics/redirection.md) | Streams 0/1/2; `>`, `2>`, `<`, `&>`; `tty` / `/dev/pts` (Video 11) |
+| [**PipingTeeXargs.md**](topics/PipingTeeXargs.md) | Pipe `\|`, filters, `tee`, `xargs` (Video 12) |
 | [**EOF and Redirection.md**](topics/EOF%20and%20Redirection.md) | `>`, `>>`, `<`, heredoc `<<EOF` (overwrite vs append) |
 
 ---
