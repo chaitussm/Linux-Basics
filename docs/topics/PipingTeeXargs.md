@@ -47,11 +47,11 @@ After [redirection](redirection.md), Durga Sir introduces **piping** — the **o
 
 In the same session you learn:
 
-| Topic | Command | One-line idea |
-| :--- | :--- | :--- |
-| **Piping** | **`|`** | Connect **stdout** of left command to **stdin** of right command |
-| **tee** | **`tee`** | **Split** output — show on **terminal** **and** save to **file(s)** |
-| **xargs** | **`xargs`** | Read **stdin**, build **argument list** for another command |
+| Topic      | Command     | One-line idea                                                       |
+| :--------- | :---------- | :------------------------------------------------------------------ |
+| **Piping** | **`         | `**                                                                 | Connect **stdout** of left command to **stdin** of right command |
+| **tee**    | **`tee`**   | **Split** output — show on **terminal** **and** save to **file(s)** |
+| **xargs**  | **`xargs`** | Read **stdin**, build **argument list** for another command         |
 
 ```mermaid
 %%{init: {'theme': 'base', 'themeVariables': {'pie1': '#FF9800', 'pie2': '#1E88E5', 'pie3': '#FFFFFF', 'pie4': '#FF9800', 'pie5': '#1E88E5', 'pieTitleTextColor': '#212121', 'pieSectionTextColor': '#212121', 'pieStrokeColor': '#424242'}}}%%
@@ -69,18 +69,18 @@ Durga Sir repeats the model from the redirection session:
 
 ### Input (how a command gets data)
 
-| # | Source | Example |
-| :---: | :--- | :--- |
-| 1 | **Command-line arguments** | `cat a.txt`, `ls /etc` |
-| 2 | **Standard input** | Keyboard, **`< file`**, or **pipe** from previous command |
+|   #   | Source                     | Example                                                   |
+| :---: | :------------------------- | :-------------------------------------------------------- |
+|   1   | **Command-line arguments** | `cat a.txt`, `ls /etc`                                    |
+|   2   | **Standard input**         | Keyboard, **`< file`**, or **pipe** from previous command |
 
 ### Output (where command results go)
 
-| # | Destination | Mechanism |
-| :---: | :--- | :--- |
-| 1 | **Terminal** | Default **stdout** / **stderr** |
-| 2 | **File** | **Redirection** — `>`, `>>`, `2>`, `&>`, … |
-| 3 | **Another command** | **Piping** — **`|`** |
+|   #   | Destination         | Mechanism                                  |
+| :---: | :------------------ | :----------------------------------------- |
+|   1   | **Terminal**        | Default **stdout** / **stderr**            |
+|   2   | **File**            | **Redirection** — `>`, `>>`, `2>`, `&>`, … |
+|   3   | **Another command** | **Piping** — **`                           | `** |
 
 So: **redirection** → file; **pipe** → **next program**.
 
@@ -111,11 +111,11 @@ Durga Sir’s point: piping is **efficient** and **common** in real servers — 
 command1 | command2
 ```
 
-| Part | Role |
-| :--- | :--- |
+| Part         | Role                                       |
+| :----------- | :----------------------------------------- |
 | **command1** | Writes **normal output** to **stdout (1)** |
-| **`|`** | Kernel **pipe** — buffer between processes |
-| **command2** | Reads from **stdin (0)** |
+| **`          | `**                                        | Kernel **pipe** — buffer between processes |
+| **command2** | Reads from **stdin (0)**                   |
 
 ```mermaid
 %%{init: {'theme': 'base', 'themeVariables': {'pie1': '#FF9800', 'pie2': '#1E88E5', 'pie3': '#FFFFFF', 'pie4': '#FF9800', 'pie5': '#1E88E5', 'pieTitleTextColor': '#212121', 'pieSectionTextColor': '#212121', 'pieStrokeColor': '#424242'}}}%%
@@ -144,15 +144,15 @@ bash scripts/PipingTeeXargs/pipe-ls-head-wc-demo.sh
 
 Durga Sir lists examples you will use often with **`|`**:
 
-| Filter | Typical use with pipe |
-| :--- | :--- |
-| **`wc`** | Count lines, words, bytes |
-| **`grep`** | Search for a pattern |
-| **`sort`** | Sort lines |
-| **`uniq`** | Remove duplicate **adjacent** lines (use after **`sort`**) |
-| **`head`** / **`tail`** | First / last lines |
-| **`cut`** | Columns (later session) |
-| **`tr`** | Translate characters (later session) |
+| Filter                  | Typical use with pipe                                      |
+| :---------------------- | :--------------------------------------------------------- |
+| **`wc`**                | Count lines, words, bytes                                  |
+| **`grep`**              | Search for a pattern                                       |
+| **`sort`**              | Sort lines                                                 |
+| **`uniq`**              | Remove duplicate **adjacent** lines (use after **`sort`**) |
+| **`head`** / **`tail`** | First / last lines                                         |
+| **`cut`**               | Columns (later session)                                    |
+| **`tr`**                | Translate characters (later session)                       |
 
 If a command **only** accepts file names and **never** reads stdin, it is a **poor** filter for piping (unless you use **`xargs`**).
 
@@ -162,10 +162,10 @@ If a command **only** accepts file names and **never** reads stdin, it is a **po
 
 **Filter commands** (`wc`, `head`, `sort`, …) can read input in **two** ways:
 
-| Source | Meaning |
-| :--- | :--- |
-| **Keyboard (terminal)** | Run the filter **alone**, type lines, end with **Ctrl+D** |
-| **Pipe** | Previous command’s **stdout** becomes this command’s **stdin** |
+| Source                  | Meaning                                                        |
+| :---------------------- | :------------------------------------------------------------- |
+| **Keyboard (terminal)** | Run the filter **alone**, type lines, end with **Ctrl+D**      |
+| **Pipe**                | Previous command’s **stdout** becomes this command’s **stdin** |
 
 ---
 
@@ -290,10 +290,10 @@ ls -l | wc | wc -l
 
 **What you see (from the screenshot):**
 
-| Step | Command | Output | Meaning |
-| :---: | :--- | :--- | :--- |
-| 1 | `ls -l \| wc` | `30  267  1808` | **`wc`** counted the **whole `ls -l` listing**: **30 lines**, **267 words**, **1808 bytes/characters** |
-| 2 | `ls -l \| wc \| wc -l` | `1` | The **middle `wc`** prints **one summary line** (`30 267 1808`). The **last `wc -l`** only counts **lines in that one line** → always **`1`** |
+| Step  | Command                | Output          | Meaning                                                                                                                                       |
+| :---: | :--------------------- | :-------------- | :-------------------------------------------------------------------------------------------------------------------------------------------- |
+|   1   | `ls -l \| wc`          | `30  267  1808` | **`wc`** counted the **whole `ls -l` listing**: **30 lines**, **267 words**, **1808 bytes/characters**                                        |
+|   2   | `ls -l \| wc \| wc -l` | `1`             | The **middle `wc`** prints **one summary line** (`30 267 1808`). The **last `wc -l`** only counts **lines in that one line** → always **`1`** |
 
 **Point by point:**
 
@@ -376,12 +376,12 @@ ls -l > outputData.txt | cat outputData.txt | wc -l
 ls -l /etc > outputData.txt | cat outputData.txt | wc -l
 ```
 
-| # | What happens |
-| :---: | :--- |
-| 1 | **`ls -l`** (or **`ls -l /etc`**) runs with **`> outputData.txt`** |
-| 2 | **All listing output** goes **into the file** — stdout is **not** sent to the pipe |
-| 3 | The **`|`** still runs the next commands, but they get **empty stdin** from that stage |
-| 4 | **`wc -l`** counts lines from the pipe → **`0`** |
+|   #   | What happens                                                                       |
+| :---: | :--------------------------------------------------------------------------------- |
+|   1   | **`ls -l`** (or **`ls -l /etc`**) runs with **`> outputData.txt`**                 |
+|   2   | **All listing output** goes **into the file** — stdout is **not** sent to the pipe |
+|   3   | The **`                                                                            | `** still runs the next commands, but they get **empty stdin** from that stage |
+|   4   | **`wc -l`** counts lines from the pipe → **`0`**                                   |
 
 **Step B — prove the file is not empty:**
 
@@ -399,11 +399,11 @@ You see the full listing (e.g. **`total 1208`** and many lines under **`/etc`**)
 cat outputData.txt | wc -l
 ```
 
-| # | What happens |
-| :---: | :--- |
-| 1 | **`cat outputData.txt`** reads the **file** and sends lines to **stdout** |
-| 2 | **`|`** connects that stdout to **`wc -l`** |
-| 3 | Output is the real line count (example from lab: **`246`**) |
+|   #   | What happens                                                              |
+| :---: | :------------------------------------------------------------------------ |
+|   1   | **`cat outputData.txt`** reads the **file** and sends lines to **stdout** |
+|   2   | **`                                                                       | `** connects that stdout to **`wc -l`** |
+|   3   | Output is the real line count (example from lab: **`246`**)               |
 
 ![Terminal: cat outputData.txt | wc -l → 246](../assets/pipe-cat-outputData-wc-l-246-terminal.png)
 
@@ -433,11 +433,11 @@ ls -l | tee output.txt | wc
 
 > In piping, if we want to **save the output of one command to a file** and we want to **pass that same output as input to the next command simultaneously**, we should use the **`tee`** command.
 
-| Piece | Role |
-| :--- | :--- |
+| Piece       | Role                           |
+| :---------- | :----------------------------- |
 | **`ls -l`** | Produces listing on **stdout** |
-| **`| tee output.txt`** | **Copies** that stream → **file** **and** → stdout for the rest of the pipe |
-| **`| wc`** | Reads the **same** listing lines from stdin (counts lines/words/bytes) |
+| **`         | tee output.txt`**              | **Copies** that stream → **file** **and** → stdout for the rest of the pipe |
+| **`         | wc`**                          | Reads the **same** listing lines from stdin (counts lines/words/bytes)      |
 
 **Not valid for this goal:** `ls -l > output.txt | wc` — redirect eats stdout; pipe gets nothing ([§9](#9-when-piping-breaks--before-)).
 
@@ -445,10 +445,10 @@ ls -l | tee output.txt | wc
 
 Durga Sir compares three cases before putting **`tee`** in the middle of a pipe:
 
-| Case | Command | Where does `ls -l` output go? |
-| :---: | :--- | :--- |
-| **A** | `ls -l` | **Terminal only** — you see the listing on screen; **no** file |
-| **B** | `ls -l > output.txt` | **File only** — saved in **`output.txt`**; **not** shown on the terminal (stdout was redirected) |
+| Case  | Command                            | Where does `ls -l` output go?                                                                                                       |
+| :---: | :--------------------------------- | :---------------------------------------------------------------------------------------------------------------------------------- |
+| **A** | `ls -l`                            | **Terminal only** — you see the listing on screen; **no** file                                                                      |
+| **B** | `ls -l > output.txt`               | **File only** — saved in **`output.txt`**; **not** shown on the terminal (stdout was redirected)                                    |
 | **C** | `ls -l \| tee output.txt \| wc -l` | **File and pipe** — copy in **`output.txt`**, **same** lines also go to **`wc -l`** (and you still see **`wc`**’s result on screen) |
 
 **Class wording for case B:** *“It will save the output to `output.txt` and won’t be displayed to the terminal.”*
@@ -482,11 +482,11 @@ flowchart LR
     class F orange
 ```
 
-| Arrow in class slide | Meaning |
-| :--- | :--- |
+| Arrow in class slide  | Meaning                                              |
+| :-------------------- | :--------------------------------------------------- |
 | **Into left of pipe** | Output of **`ls`** (or any command) enters **`tee`** |
-| **Out to the right** | Same data continues to **`wc`**, **`head`**, etc. |
-| **Down the branch** | Same data is **written** to **`output.txt`** |
+| **Out to the right**  | Same data continues to **`wc`**, **`head`**, etc.    |
+| **Down the branch**   | Same data is **written** to **`output.txt`**         |
 
 ### Flowchart — `ls | tee abc.txt | wc` (board version)
 
@@ -523,10 +523,10 @@ ls -l /etc | tee outputData.txt | wc -l
 cat outputData.txt
 ```
 
-| Step | What you should see |
-| :--- | :--- |
-| **`ls -l /etc \| tee outputData.txt \| wc -l`** | **`246`** on screen — the pipe still works; **`tee`** wrote to the file **and** passed lines to **`wc -l`** |
-| **`cat outputData.txt`** | Full **`/etc`** listing in the file (starts with **`total 1208`**, then `ModemManager`, `NetworkManager`, …) — proof the **same** data was saved while the pipeline ran |
+| Step                                            | What you should see                                                                                                                                                     |
+| :---------------------------------------------- | :---------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| **`ls -l /etc \| tee outputData.txt \| wc -l`** | **`246`** on screen — the pipe still works; **`tee`** wrote to the file **and** passed lines to **`wc -l`**                                                             |
+| **`cat outputData.txt`**                        | Full **`/etc`** listing in the file (starts with **`total 1208`**, then `ModemManager`, `NetworkManager`, …) — proof the **same** data was saved while the pipeline ran |
 
 ![Terminal: ls -l /etc | tee outputData.txt | wc -l → 246, then cat outputData.txt shows listing](../assets/tee-ls-etc-outputData-wc-l-cat-verify-terminal.png)
 
@@ -598,11 +598,11 @@ After [§10](#10-tee--write-to-file-and-screen), **`tee`** saves the **listing**
 ls -l | tee output.txt | wc > wc.txt
 ```
 
-| Piece | Role |
-| :--- | :--- |
-| **`ls -l`** | Produces the listing on stdout |
-| **`| tee output.txt`** | Writes that listing to **`output.txt`** and passes the **same** lines to **`wc`** |
-| **`| wc`** | Reads the listing from the pipe; prints line/word/byte counts on stdout |
+| Piece          | Role                                                                   |
+| :------------- | :--------------------------------------------------------------------- |
+| **`ls -l`**    | Produces the listing on stdout                                         |
+| **`            | tee output.txt`**                                                      | Writes that listing to **`output.txt`** and passes the **same** lines to **`wc`** |
+| **`            | wc`**                                                                  | Reads the listing from the pipe; prints line/word/byte counts on stdout           |
 | **`> wc.txt`** | Sends **`wc`**’s output **only** to **`wc.txt`** (not to the terminal) |
 
 You end with **two files**: **`output.txt`** (full listing) and **`wc.txt`** (three numbers from **`wc`**). That is different from [§10](#10-tee--write-to-file-and-screen) where **`wc -l`** printed **`246`** on screen — here the **last** stage uses **`>`**, so verify with **`cat wc.txt`**.
@@ -617,10 +617,10 @@ ls -l | tee outputData.txt | wc > wordCount.txt
 cat wordCount.txt
 ```
 
-| Step | What you should see |
-| :--- | :--- |
-| **`ls -l \| tee outputData.txt \| wc > wordCount.txt`** | **No** listing on screen — **`tee`** filled **`outputData.txt`** in the background; **`wc`**’s result went to **`wordCount.txt`** |
-| **`cat wordCount.txt`** | One line of counts, e.g. **`33 294 1976`** → **33** lines, **294** words, **1976** bytes for the **`ls -l`** listing in that directory |
+| Step                                                    | What you should see                                                                                                                    |
+| :------------------------------------------------------ | :------------------------------------------------------------------------------------------------------------------------------------- |
+| **`ls -l \| tee outputData.txt \| wc > wordCount.txt`** | **No** listing on screen — **`tee`** filled **`outputData.txt`** in the background; **`wc`**’s result went to **`wordCount.txt`**      |
+| **`cat wordCount.txt`**                                 | One line of counts, e.g. **`33 294 1976`** → **33** lines, **294** words, **1976** bytes for the **`ls -l`** listing in that directory |
 
 ![Terminal: ls -l | tee outputData.txt | wc > wordCount.txt, then cat wordCount.txt → 33 294 1976](../assets/tee-ls-tee-outputData-wc-wordCount-terminal.png)
 
@@ -637,9 +637,9 @@ Optional check: **`cat outputData.txt`** shows the **`ls -l`** lines that **`tee
 
 So “multiple tee” in Durga Sir’s session means two related ideas:
 
-| Idea | What it means | Example |
-| :--- | :--- | :--- |
-| **Several files from one `tee`** | One **`tee`** can open **many** file names; each gets the **same** snapshot of the stream **at that point** | `cmd \| tee a.txt b.txt \| wc` |
+| Idea                                       | What it means                                                                                                              | Example                                         |
+| :----------------------------------------- | :------------------------------------------------------------------------------------------------------------------------- | :---------------------------------------------- |
+| **Several files from one `tee`**           | One **`tee`** can open **many** file names; each gets the **same** snapshot of the stream **at that point**                | `cmd \| tee a.txt b.txt \| wc`                  |
 | **Several `tee` commands in one pipeline** | Each **`tee`** is at a **different stage** — it logs **whatever output exists there** (listing vs counts vs filtered text) | `ls -l \| tee list.txt \| wc \| tee counts.txt` |
 
 **Mental model — two T-junctions in one line:**
@@ -712,12 +712,12 @@ cat inputData.txt | tee file{1..10}.txt
 ls
 ```
 
-| Piece | Role |
-| :--- | :--- |
-| **`cat inputData.txt`** | Sends the list file’s contents to stdout (e.g. `filedata.txt`, `fileinfo.txt`, `logfile.sh`) |
-| **`tee file{1..10}.txt`** | Expands to **`file1.txt` … `file10.txt`** — **same** text copied into **all ten** files |
-| **Terminal** | **`tee`** also prints that stream on screen (three lines in the lab screenshot) |
-| **`ls`** | Confirms **`file1.txt`–`file10.txt`** were created alongside existing lab files |
+| Piece                     | Role                                                                                         |
+| :------------------------ | :------------------------------------------------------------------------------------------- |
+| **`cat inputData.txt`**   | Sends the list file’s contents to stdout (e.g. `filedata.txt`, `fileinfo.txt`, `logfile.sh`) |
+| **`tee file{1..10}.txt`** | Expands to **`file1.txt` … `file10.txt`** — **same** text copied into **all ten** files      |
+| **Terminal**              | **`tee`** also prints that stream on screen (three lines in the lab screenshot)              |
+| **`ls`**                  | Confirms **`file1.txt`–`file10.txt`** were created alongside existing lab files              |
 
 ![Terminal: cat inputData.txt | tee file{1..10}.txt — output on screen; ls shows file1.txt through file10.txt](../assets/tee-lab-cat-inputData-tee-file-brace-1-10-terminal.png)
 
@@ -729,10 +729,10 @@ ls
 cat marks.txt | sort | tee sorted-snapshot.txt | uniq -c | tee summary.txt
 ```
 
-| File | Contents |
-| :--- | :--- |
-| **`sorted-snapshot.txt`** | Lines **after** **`sort`**, **before** **`uniq -c`** |
-| **`summary.txt`** | Final **`uniq -c`** table (and terminal if you omit a final **`>`**) |
+| File                      | Contents                                                             |
+| :------------------------ | :------------------------------------------------------------------- |
+| **`sorted-snapshot.txt`** | Lines **after** **`sort`**, **before** **`uniq -c`**                 |
+| **`summary.txt`**         | Final **`uniq -c`** table (and terminal if you omit a final **`>`**) |
 
 **Example 6 — debug a long pipe (log intermediate steps)**
 
@@ -768,9 +768,9 @@ cat wordCount.txt    # e.g. 33 294 1976
 ls -l | tee outputData.txt | wc | tee wordCount.txt
 ```
 
-| Compare | What happens to **`wc`** output |
-| :--- | :--- |
-| **`wc > wordCount.txt`** | Goes **only** to the file — **nothing** from **`wc`** on the terminal |
+| Compare                       | What happens to **`wc`** output                                                       |
+| :---------------------------- | :------------------------------------------------------------------------------------ |
+| **`wc > wordCount.txt`**      | Goes **only** to the file — **nothing** from **`wc`** on the terminal                 |
 | **`wc \| tee wordCount.txt`** | **Copied** to **`wordCount.txt`** **and** printed on the terminal (**`33 294 1976`**) |
 
 **Points to remember:**
@@ -800,8 +800,8 @@ ls /dev > file1.txt
 ls /bin > file2.txt
 ```
 
-| File | Contents |
-| :--- | :--- |
+| File            | Contents                          |
+| :-------------- | :-------------------------------- |
 | **`file1.txt`** | One name per line from **`/dev`** |
 | **`file2.txt`** | One name per line from **`/bin`** |
 
@@ -814,10 +814,10 @@ cat file1.txt file2.txt > file3.txt
 sort -r file3.txt > sorted.txt
 ```
 
-| Step | What happens |
-| :--- | :--- |
-| **`cat … > file3.txt`** | **Merged** listing saved; stdout went **only** to **`file3.txt`** (nothing left for a pipe) |
-| **`sort -r file3.txt > sorted.txt`** | **`sort`** reads **`file3.txt`** from disk; reverse-sorted result in **`sorted.txt`** |
+| Step                                 | What happens                                                                                |
+| :----------------------------------- | :------------------------------------------------------------------------------------------ |
+| **`cat … > file3.txt`**              | **Merged** listing saved; stdout went **only** to **`file3.txt`** (nothing left for a pipe) |
+| **`sort -r file3.txt > sorted.txt`** | **`sort`** reads **`file3.txt`** from disk; reverse-sorted result in **`sorted.txt`**       |
 
 Works, but you **run two steps** and **`sort`** must **open `file3.txt`** again.
 
@@ -827,12 +827,12 @@ Works, but you **run two steps** and **`sort`** must **open `file3.txt`** again.
 cat file1.txt file2.txt | tee file3.txt | sort -r > sorted.txt
 ```
 
-| Piece | Role |
-| :--- | :--- |
-| **`cat file1.txt file2.txt`** | Streams **dev names**, then **bin names**, on stdout |
-| **`| tee file3.txt`** | Writes that **same** merged stream to **`file3.txt`** **and** passes it on |
-| **`| sort -r`** | Sorts the piped lines in **reverse** order |
-| **`> sorted.txt`** | Saves sorted output to **`sorted.txt`** (not to the terminal) |
+| Piece                         | Role                                                          |
+| :---------------------------- | :------------------------------------------------------------ |
+| **`cat file1.txt file2.txt`** | Streams **dev names**, then **bin names**, on stdout          |
+| **`                           | tee file3.txt`**                                              | Writes that **same** merged stream to **`file3.txt`** **and** passes it on |
+| **`                           | sort -r`**                                                    | Sorts the piped lines in **reverse** order                                 |
+| **`> sorted.txt`**            | Saves sorted output to **`sorted.txt`** (not to the terminal) |
 
 **Why `tee` here:** You need **`file3.txt`** (unsorted merge) **and** **`sorted.txt`** (sorted merge) from **one** run of **`cat`**. Redirect-only **`>`** after **`cat`** would fill **`file3.txt`** but **break** the pipe to **`sort`** — same lesson as [§9](#9-when-piping-breaks--before-).
 
@@ -852,13 +852,13 @@ wc alltypefiles.txt
 
 ![Terminal: devfiles + binfiles, tee alltypefiles.txt, sort -r sorted.txt; head/tail/wc](../assets/tee-lab-dev-bin-tee-alltype-sort-terminal.png)
 
-| Check | Expected |
-| :--- | :--- |
-| **`alltypefiles.txt`** | **Combined** `/dev` + `/bin` names in **cat order** (not sorted) — e.g. **`head`** shows early **`/dev`** entries like `acpi_thermal_rel`, `autofs`, … |
-| **`sorted.txt`** | **Same lines**, **reverse-sorted** — not shown in full in the screenshot; created by **`sort -r`** on the pipe |
-| **`tail -5 alltypefiles.txt`** | End of **unsorted** merge (lab shows names like `zstd`, `zstdcat`, … from the **`/bin`** side) |
-| **`wc alltypefiles.txt`** | Lab example: **`1942` lines** — both directories contributed many entries |
-| **Typo note** | `head -5 alltypesfiles.txt` fails (extra **`s`**); correct name is **`alltypefiles.txt`** |
+| Check                          | Expected                                                                                                                                               |
+| :----------------------------- | :----------------------------------------------------------------------------------------------------------------------------------------------------- |
+| **`alltypefiles.txt`**         | **Combined** `/dev` + `/bin` names in **cat order** (not sorted) — e.g. **`head`** shows early **`/dev`** entries like `acpi_thermal_rel`, `autofs`, … |
+| **`sorted.txt`**               | **Same lines**, **reverse-sorted** — not shown in full in the screenshot; created by **`sort -r`** on the pipe                                         |
+| **`tail -5 alltypefiles.txt`** | End of **unsorted** merge (lab shows names like `zstd`, `zstdcat`, … from the **`/bin`** side)                                                         |
+| **`wc alltypefiles.txt`**      | Lab example: **`1942` lines** — both directories contributed many entries                                                                              |
+| **Typo note**                  | `head -5 alltypesfiles.txt` fails (extra **`s`**); correct name is **`alltypefiles.txt`**                                                              |
 
 Repo copies (for study without re-running **`ls /dev`**): [`devfiles.txt`](../../scripts/linuxbasics/devfiles.txt), [`binfiles.txt`](../../scripts/linuxbasics/binfiles.txt), [`alltypefiles.txt`](../../scripts/linuxbasics/alltypefiles.txt), [`sorted.txt`](../../scripts/linuxbasics/sorted.txt).
 
@@ -872,9 +872,9 @@ Repo copies (for study without re-running **`ls /dev`**): [`devfiles.txt`](../..
 
 ![Class notes: stream from cat vs rm expecting arguments; cat input.txt | rm needs xargs](../assets/xargs-class-reason-stream-vs-arguments.png)
 
-| Example | How input is delivered |
-| :--- | :--- |
-| **`cat input.txt`** | Reads the file; writes contents to **standard output** (a **stream**) |
+| Example                                | How input is delivered                                                                  |
+| :------------------------------------- | :-------------------------------------------------------------------------------------- |
+| **`cat input.txt`**                    | Reads the file; writes contents to **standard output** (a **stream**)                   |
 | **`rm file1.txt file2.txt file3.txt`** | **`rm`** expects **file names on the command line** — **arguments** (`argv`), not stdin |
 
 **Key lines from class:**
@@ -908,11 +908,11 @@ cat inputData.txt | rm
 
 ![Terminal: ls in linuxbasics; cat inputData.txt | rm → missing operand (and cat error if file missing)](../assets/xargs-lab-cat-pipe-rm-fails-terminal.png)
 
-| What the lab shows | Meaning |
-| :--- | :--- |
-| **`ls`** | Files in **`scripts/linuxbasics`** (scripts, **`outputData.txt`**, **`wordCount.txt`**, etc.) |
-| **`cat inputData.txt \| rm`** | **`rm: missing operand`** — **`rm`** got **no** file names as **arguments**; the pipe does **not** turn stream text into **`rm file1 file2`** automatically |
-| **`cat: inputData.txt: No such file or directory`** (if shown) | Fix the file name for your lab (e.g. create **`inputData.txt`** with one file name per line) — the **`rm`** error still illustrates the **xargs** lesson |
+| What the lab shows                                             | Meaning                                                                                                                                                     |
+| :------------------------------------------------------------- | :---------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| **`ls`**                                                       | Files in **`scripts/linuxbasics`** (scripts, **`outputData.txt`**, **`wordCount.txt`**, etc.)                                                               |
+| **`cat inputData.txt \| rm`**                                  | **`rm: missing operand`** — **`rm`** got **no** file names as **arguments**; the pipe does **not** turn stream text into **`rm file1 file2`** automatically |
+| **`cat: inputData.txt: No such file or directory`** (if shown) | Fix the file name for your lab (e.g. create **`inputData.txt`** with one file name per line) — the **`rm`** error still illustrates the **xargs** lesson    |
 
 **Takeaway:** Piping works for commands that **read stdin** (`wc`, `sort`, `head`). Commands that only accept **argv** (`rm`, `touch`, `mv`, …) need **`xargs`** (or similar) to turn **lines from a pipe** into **arguments**.
 
@@ -950,11 +950,11 @@ Board flow (no extra screenshot — same idea as [§13](#13-reason-for-xargs), s
 cat input.txt | xargs rm
 ```
 
-| Step | What happens |
-| :--- | :--- |
-| **`cat input.txt`** | Prints the three names to stdout |
-| **`| xargs`** | Collects them (by default, whitespace-separated lines/words) |
-| **`rm`** | Gets **`file1.txt file2.txt file3.txt`** as **arguments** and deletes those files |
+| Step                | What happens                                                                      |
+| :------------------ | :-------------------------------------------------------------------------------- |
+| **`cat input.txt`** | Prints the three names to stdout                                                  |
+| **`                 | xargs`**                                                                          | Collects them (by default, whitespace-separated lines/words) |
+| **`rm`**            | Gets **`file1.txt file2.txt file3.txt`** as **arguments** and deletes those files |
 
 Related class example (limit how many names per **`rm`** invocation): `cat input.txt | head -3 | xargs rm` — only the **first three lines** from the file are passed to **`rm`**.
 
@@ -991,10 +991,10 @@ ls
 
 ![Lab: cat inputData.txt | xargs rm; cat inputData.txt still lists names; ls shows file1–file5 gone](../assets/xargs-lab-cat-xargs-rm-verify-terminal.png)
 
-| Check | Expected |
-| :--- | :--- |
+| Check                         | Expected                                                      |
+| :---------------------------- | :------------------------------------------------------------ |
 | **`ls`** after **`xargs rm`** | **`file1.txt` … `file5.txt`** are **gone** from the directory |
-| **`cat inputData.txt`** | Still shows **`file1.txt` … `file5.txt`** as **text lines** |
+| **`cat inputData.txt`**       | Still shows **`file1.txt` … `file5.txt`** as **text lines**   |
 
 **Discussion (lab screenshot 4):**
 
@@ -1075,11 +1075,11 @@ cat a.txt b.txt c.txt
 cat input.txt | xargs cat
 ```
 
-| Step | Role |
-| :--- | :--- |
-| **`cat input.txt`** | Prints file names to stdout — a **stream** of lines |
-| **`| xargs`** | Converts that stream into **command-line arguments** ([§14](#14-xargs--build-command-lines-from-stdin)) |
-| **`cat`** (second) | Runs like **`cat a.txt b.txt c.txt`** — prints **each file’s contents** to the terminal, one after another |
+| Step                | Role                                                                                                       |
+| :------------------ | :--------------------------------------------------------------------------------------------------------- |
+| **`cat input.txt`** | Prints file names to stdout — a **stream** of lines                                                        |
+| **`                 | xargs`**                                                                                                   | Converts that stream into **command-line arguments** ([§14](#14-xargs--build-command-lines-from-stdin)) |
+| **`cat`** (second)  | Runs like **`cat a.txt b.txt c.txt`** — prints **each file’s contents** to the terminal, one after another |
 
 Same pattern as **`cat input.txt | xargs rm`** in [§14](#14-xargs--build-command-lines-from-stdin), but the command after **`xargs`** is **`cat`** (read/display) instead of **`rm`** (delete).
 
@@ -1111,10 +1111,10 @@ cat inputData.txt | xargs cat
 
 ![Lab: cat inputData.txt | xargs cat — concatenated contents of filedata, fileinfo, logfile.sh](../assets/xargs-eg2-lab-cat-inputData-xargs-cat-terminal.png)
 
-| What you see on screen | Meaning |
-| :--- | :--- |
-| Repeated lines from **`filedata.txt`** / **`fileinfo.txt`** | **`xargs cat`** passed those paths to **`cat`**; output is **file contents**, not file names |
-| **`logfile.sh`** script body (`#!/bin/bash`, `timestamp=…`, etc.) | Third argument from the list — **`cat`** prints the script source like any text file |
+| What you see on screen                                            | Meaning                                                                                      |
+| :---------------------------------------------------------------- | :------------------------------------------------------------------------------------------- |
+| Repeated lines from **`filedata.txt`** / **`fileinfo.txt`**       | **`xargs cat`** passed those paths to **`cat`**; output is **file contents**, not file names |
+| **`logfile.sh`** script body (`#!/bin/bash`, `timestamp=…`, etc.) | Third argument from the list — **`cat`** prints the script source like any text file         |
 
 **Note:** If a name in **`inputData.txt`** is wrong or the file is missing, **`cat`** reports an error for that operand. Keep **one file name per line** and paths relative to **`scripts/linuxbasics`** (or use full paths in the list).
 
@@ -1124,9 +1124,9 @@ cat inputData.txt | xargs cat
 
 After [§15](#15-eg2--display-contents-of-files-named-in-an-input-file), you have seen **`xargs`** turn a **stream** into **arguments** for **`cat`** and **`rm`**. The same idea works with **`echo`** — useful because **`echo` does not read stdin** from a pipe.
 
-| Command | Why `xargs`? |
-| :--- | :--- |
-| **`date \| echo`** | **`echo`** ignores the pipe → **no** date on screen |
+| Command                  | Why `xargs`?                                                                    |
+| :----------------------- | :------------------------------------------------------------------------------ |
+| **`date \| echo`**       | **`echo`** ignores the pipe → **no** date on screen                             |
 | **`date \| xargs echo`** | **`xargs`** passes the date string as **arguments** to **`echo`** → date prints |
 
 **Lab — `scripts/linuxbasics`:**
@@ -1139,10 +1139,10 @@ cal | xargs echo
 
 ![Terminal: date | xargs echo and cal | xargs echo — cal flattened to one line](../assets/xargs-lab-date-cal-xargs-echo-terminal.png)
 
-| Command | What you see |
-| :--- | :--- |
+| Command                  | What you see                                                                                                         |
+| :----------------------- | :------------------------------------------------------------------------------------------------------------------- |
 | **`date \| xargs echo`** | One line, e.g. **`Mon Oct 26 22:26:13 IST 2026`** — same idea as **`date \| xargs`** (default command is **`echo`**) |
-| **`cal \| xargs echo`** | **One long line** — month title, weekday headers, and all day numbers in a single row (grid newlines removed) |
+| **`cal \| xargs echo`**  | **One long line** — month title, weekday headers, and all day numbers in a single row (grid newlines removed)        |
 
 **Points:**
 
@@ -1155,11 +1155,11 @@ cal | xargs echo
 
 ## 17. Pipe vs redirection vs `tee`
 
-| Mechanism | Symbol / command | Connects to |
-| :--- | :--- | :--- |
-| **Pipe** | **`|`** | **Next command’s stdin** |
-| **Redirect** | **`>`**, **`>>`**, **`2>`** | **File** |
-| **tee** | **`tee file`** | **Terminal and file(s)** at once |
+| Mechanism    | Symbol / command            | Connects to                      |
+| :----------- | :-------------------------- | :------------------------------- |
+| **Pipe**     | **`                         | `**                              | **Next command’s stdin** |
+| **Redirect** | **`>`**, **`>>`**, **`2>`** | **File**                         |
+| **tee**      | **`tee file`**              | **Terminal and file(s)** at once |
 
 Combine when needed:
 
@@ -1191,16 +1191,16 @@ ls -l /etc | tee etclist.txt | wc -l
 
 ## 19. Script index
 
-| Script | Topic |
-| :--- | :--- |
-| [`PipingTeeXargs.sh`](../../scripts/PipingTeeXargs.sh) | Run all Session 12 demos |
-| [`pipe-ls-head-wc-demo.sh`](../../scripts/PipingTeeXargs/pipe-ls-head-wc-demo.sh) | `ls \| head`, `ls \| wc -l` |
-| [`pipe-filters-sort-uniq-demo.sh`](../../scripts/PipingTeeXargs/pipe-filters-sort-uniq-demo.sh) | `sort \| uniq` |
-| [`pipe-stdout-only-not-stderr-demo.sh`](../../scripts/PipingTeeXargs/pipe-stdout-only-not-stderr-demo.sh) | stderr not piped |
-| [`tee-screen-and-file-demo.sh`](../../scripts/PipingTeeXargs/tee-screen-and-file-demo.sh) | `tee` to file + screen |
-| [`tee-append-multiple-files-demo.sh`](../../scripts/PipingTeeXargs/tee-append-multiple-files-demo.sh) | `tee -a`, multiple files |
-| [`xargs-build-command-line-demo.sh`](../../scripts/PipingTeeXargs/xargs-build-command-line-demo.sh) | `xargs touch`, `-n` |
-| [`xargs-with-find-style-demo.sh`](../../scripts/PipingTeeXargs/xargs-with-find-style-demo.sh) | `ls *.sh \| xargs wc -l` |
+| Script                                                                                                    | Topic                       |
+| :-------------------------------------------------------------------------------------------------------- | :-------------------------- |
+| [`PipingTeeXargs.sh`](../../scripts/PipingTeeXargs.sh)                                                    | Run all Session 12 demos    |
+| [`pipe-ls-head-wc-demo.sh`](../../scripts/PipingTeeXargs/pipe-ls-head-wc-demo.sh)                         | `ls \| head`, `ls \| wc -l` |
+| [`pipe-filters-sort-uniq-demo.sh`](../../scripts/PipingTeeXargs/pipe-filters-sort-uniq-demo.sh)           | `sort \| uniq`              |
+| [`pipe-stdout-only-not-stderr-demo.sh`](../../scripts/PipingTeeXargs/pipe-stdout-only-not-stderr-demo.sh) | stderr not piped            |
+| [`tee-screen-and-file-demo.sh`](../../scripts/PipingTeeXargs/tee-screen-and-file-demo.sh)                 | `tee` to file + screen      |
+| [`tee-append-multiple-files-demo.sh`](../../scripts/PipingTeeXargs/tee-append-multiple-files-demo.sh)     | `tee -a`, multiple files    |
+| [`xargs-build-command-line-demo.sh`](../../scripts/PipingTeeXargs/xargs-build-command-line-demo.sh)       | `xargs touch`, `-n`         |
+| [`xargs-with-find-style-demo.sh`](../../scripts/PipingTeeXargs/xargs-with-find-style-demo.sh)             | `ls *.sh \| xargs wc -l`    |
 
 Full command tables: [`scripts-execution-summary/PipingTeeXargs.md`](../../scripts-execution-summary/PipingTeeXargs.md).
 
