@@ -278,7 +278,7 @@ ll | wc
 ls -l | wc
 ```
 
-See [Bash Built-in Commands.md — `alias`](Bash%20Built-in%20Commands.md) for how aliases are defined.
+See [commandAliasing.md](commandAliasing.md) (Session 13) and [Bash Built-in Commands.md — `alias`](Bash%20Built-in%20Commands.md) for how aliases are defined.
 
 ```bash
 cd scripts/linuxbasics
@@ -1217,7 +1217,7 @@ Durga Sir — Session 12 recap (piping, **`tee`**, **`xargs`**). Short answers f
 
 See [§3](#3-need-of-piping) and [§4](#4-what-is-a-pipe-).
 
-**Q2. How do you pipe the standard output of command **X** to the standard input of command **Y**?**
+**Q2. How do you pipe the standard output of command `X` to the standard input of command `Y`?**
 
 ```bash
 X | Y

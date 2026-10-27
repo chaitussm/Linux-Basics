@@ -21,6 +21,7 @@ python3 scripts-execution-summary/tools/build_execution_summaries.py
 | [wordCountCommand.md](wordCountCommand.md) | [`wordCountCommand/`](../scripts/wordCountCommand/) | [wordCountCommand.md](../../docs/topics/wordCountCommand.md) (Video 10) |
 | [redirectionScriptSummary.md](redirectionScriptSummary.md) | [`redirection.sh`](../scripts/redirection.sh), [`redirection/`](../scripts/redirection/), [`Redirection/`](../scripts/Redirection/) | [redirection.md](../../docs/topics/redirection.md) (Video 11) |
 | [PipingTeeXargs.md](PipingTeeXargs.md) | [`PipingTeeXargs.sh`](../scripts/PipingTeeXargs.sh), [`PipingTeeXargs/`](../scripts/PipingTeeXargs/) | [PipingTeeXargs.md](../../docs/topics/PipingTeeXargs.md) (Video 12) |
+| [commandAliasing.md](commandAliasing.md) | [`commandAliasing.sh`](../scripts/commandAliasing.sh), [`commandAliasing/`](../scripts/commandAliasing/) | [commandAliasing.md](../../docs/topics/commandAliasing.md) (Video 13) |
 | [Redirection.md](Redirection.md) | [`Redirection/`](../scripts/Redirection/) | [EOF and Redirection.md](../../docs/topics/EOF%20and%20Redirection.md) |
 
 ```bash

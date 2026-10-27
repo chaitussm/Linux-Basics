@@ -349,6 +349,33 @@ flowchart LR
     class A,B,C,F,D,X,E darkGrey
 ```""",
     },
+    {
+        "file": "commandAliasing.md",
+        "title": "# Execution summary — Session 13 command aliasing",
+        "topic": "**Topic:** [commandAliasing.md](../docs/topics/commandAliasing.md) (Video 13)  ",
+        "dir_line": "**Scripts:** [`../scripts/commandAliasing.sh`](../scripts/commandAliasing.sh) · [`../scripts/commandAliasing/`](../scripts/commandAliasing/)",
+        "dirs": ["scripts/commandAliasing"],
+        "extra": ["scripts/commandAliasing.sh"],
+        "pie": f"""```mermaid
+{PIE_CHART_INIT}
+pie title Session 13 alias demos
+    "alias define list" : 25
+    "type unalias" : 25
+    "class labs d20f current" : 30
+    "persistence hint" : 20
+```""",
+        "flow": f"""```mermaid
+{MERMAID_GREY}
+flowchart LR
+    A[alias name=cmd] --> U[use nickname]
+    U --> R[real command runs]
+    A --> L[alias list]
+    U --> UN[unalias]
+
+    classDef darkGrey fill:#5c5c5c,stroke:#3d3d3d,color:#ffffff,stroke-width:2px
+    class A,U,R,L,UN darkGrey
+```""",
+    },
 ]
 
 
