@@ -21,6 +21,8 @@ Scripts are grouped in folders that match **`docs/topics/*.md`** notes (one fold
 | [`redirection.sh`](redirection.sh) | [redirection.md](../docs/topics/redirection.md) | Orchestrator — runs `redirection/` then `Redirection/` |
 | [`PipingTeeXargs/`](PipingTeeXargs/) | [PipingTeeXargs.md](../docs/topics/PipingTeeXargs.md) | Pipe, `tee`, `xargs` (Video 12) |
 | [`PipingTeeXargs.sh`](PipingTeeXargs.sh) | [PipingTeeXargs.md](../docs/topics/PipingTeeXargs.md) | Orchestrator — all Session 12 demos |
+| [`commandAliasing/`](commandAliasing/) | [commandAliasing.md](../docs/topics/commandAliasing.md) | `alias`, `unalias`, `type` (Video 13) |
+| [`commandAliasing.sh`](commandAliasing.sh) | [commandAliasing.md](../docs/topics/commandAliasing.md) | Orchestrator — all Session 13 demos |
 | [`Redirection/`](Redirection/) | [EOF and Redirection.md](../docs/topics/EOF%20and%20Redirection.md) | `>`, `>>`, `<`, `<<EOF` (overwrite vs append) |
 | [`scripts-execution-summary/`](../scripts-execution-summary/) | Per-topic **execution summary** `.md` files | Explains every command in each `.sh` |
 
