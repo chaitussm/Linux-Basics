@@ -1,28 +1,33 @@
-total 1156
+total 1228
 -rw-rw-r-- 1 surya surya 124493 Oct 23 19:51 $@Vs$*.png
 -rw-rw-r-- 1 surya surya     90 Oct 23 22:47 23-10-2026-22:47:S.log
 -rw-rw-r-- 1 surya surya  46243 Oct 24 14:25 CopyAndAppendDataOneFiletoAnother.png
 -rw-rw-r-- 1 surya surya 222565 Oct 22 22:39 How to execute linux file.png
 -rw-rw-r-- 1 surya surya  86912 Oct 24 17:48 afterheadCommand.png
+-rw-rw-r-- 1 surya surya  18906 Oct 26 22:51 alltypefiles.txt
 -rw-rw-r-- 1 surya surya      5 Oct 24 14:31 appendData.sh
+-rw-rw-r-- 1 surya surya  17142 Oct 26 22:50 binfiles.txt
 -rw-rw-r-- 1 surya surya 165695 Oct 24 14:21 copydataFiletoAnother.png
 -rw-rw-r-- 1 surya surya   1842 Oct 24 15:54 data.txt
 -rw-rw-r-- 1 surya surya    222 Oct 24 21:19 datfile.txt
+-rw-rw-r-- 1 surya surya   1764 Oct 26 22:50 devfiles.txt
 -rw-rw-r-- 1 surya surya     32 Oct 25 13:09 errorRedir.txt
 -rw-rw-r-- 1 surya surya    135 Oct 24 21:18 filedata.txt
 -rw-rw-r-- 1 surya surya    135 Oct 24 20:57 fileinfo.txt
 -rw-rw-r-- 1 surya surya 161910 Oct 24 17:35 headCommand.png
+-rw-rw-r-- 1 surya surya     37 Oct 26 22:25 inputData.txt
 -rw-rw-r-- 1 surya surya    135 Oct 25 14:22 inputToOutput.txt
 -rw-rw-r-- 1 surya surya    319 Oct 23 22:46 logfile.sh
--rw-rw-r-- 1 surya surya      0 Oct 26 16:15 outputData.txt
+-rw-rw-r-- 1 surya surya      0 Oct 27 21:55 outputData.txt
 -rw-rw-r-- 1 surya surya    135 Oct 25 14:21 outputRedir.txt
 -rw-rw-r-- 1 surya surya      7 Oct 23 21:29 overrideData.sh
 -rw-rw-r-- 1 surya surya    193 Oct 23 20:45 printString.sh
 -rw-rw-r-- 1 surya surya     46 Oct 23 20:14 printStringWithoutNewline.sh
 -rw-rw-r-- 1 surya surya  73707 Oct 23 20:14 printStrings.png
 -rw-rw-r-- 1 surya surya     67 Oct 25 14:27 resultsErrcombo.txt
+-rw-rw-r-- 1 surya surya  18906 Oct 26 22:51 sorted.txt
 -rw-rw-r-- 1 surya surya    365 Oct 23 21:09 substitutionOfVandC.sh
--rw-rw-r-- 1 surya surya     59 Oct 26 16:09 tee
+-rw-rw-r-- 1 surya surya     59 Oct 26 16:20 tee
 -rw-rw-r-- 1 surya surya    105 Oct 23 19:50 testOne.sh
 -rw-rw-r-- 1 surya surya   1842 Oct 24 15:29 testThree.sh
 -rw-rw-r-- 1 surya surya    210 Oct 24 14:24 testTwo.sh
@@ -30,4 +35,4 @@ total 1156
 -rw-rw-r-- 1 surya surya    161 Oct 24 14:29 timeStamp.sh
 -rw-rw-r-- 1 surya surya 108977 Oct 23 22:48 timestamp.png
 -rw-rw-r-- 1 surya surya  89850 Oct 24 17:52 totalLines.png
--rw-rw-r-- 1 surya surya      0 Oct 26 16:15 wordCount.txt
+-rw-rw-r-- 1 surya surya     24 Oct 26 16:20 wordCount.txt

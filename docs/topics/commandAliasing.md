@@ -18,22 +18,27 @@ bash scripts/commandAliasing.sh
 
 **Table of contents**
 
-- [1. Goal of this session](#1-goal-of-this-session)
-- [2. What is command aliasing?](#2-what-is-command-aliasing)
-- [3. `alias` — define a nickname](#3-alias--define-a-nickname)
-- [4. List all aliases](#4-list-all-aliases)
-- [5. `unalias` — remove aliases](#5-unalias--remove-aliases)
-- [6. Original command still works](#6-original-command-still-works)
-- [7. `type` — check a name before you define an alias](#7-type--check-a-name-before-you-define-an-alias)
-- [8. Overwrite, multiple nicknames, alias of alias](#8-overwrite-multiple-nicknames-alias-of-alias)
-- [9. Case sensitivity and `man`](#9-case-sensitivity-and-man)
-- [10. Where we use aliases (five use cases)](#10-where-we-use-aliases-five-use-cases)
-- [11. Class examples — `d20f` and `current`](#11-class-examples--d20f-and-current)
-- [12. Temporary vs permanent aliases](#12-temporary-vs-permanent-aliases)
-- [13. `~/.bashrc` and `~/.bash_aliases`](#13-bashrc-and-bash_aliases)
-- [14. Exam-style recap](#14-exam-style-recap)
-- [15. Session checklist](#15-session-checklist)
-- [16. Script index](#16-script-index)
+- [Command aliasing (Session 13)](#command-aliasing-session-13)
+  - [1. Goal of this session](#1-goal-of-this-session)
+  - [2. What is command aliasing?](#2-what-is-command-aliasing)
+  - [3. `alias` — define a nickname](#3-alias--define-a-nickname)
+  - [4. List all aliases](#4-list-all-aliases)
+  - [5. `unalias` — remove aliases](#5-unalias--remove-aliases)
+  - [6. Original command still works](#6-original-command-still-works)
+  - [7. `type` — check a name before you define an alias](#7-type--check-a-name-before-you-define-an-alias)
+  - [](#)
+  - [8. Overwrite, multiple nicknames, alias of alias](#8-overwrite-multiple-nicknames-alias-of-alias)
+  - [](#-1)
+  - [9. Case sensitivity and `man`](#9-case-sensitivity-and-man)
+  - [10. Where we use aliases (five use cases)](#10-where-we-use-aliases-five-use-cases)
+  - [11. Class examples — `d20f` and `current`](#11-class-examples--d20f-and-current)
+    - [`d20f` — directory + 20 files in one shot](#d20f--directory--20-files-in-one-shot)
+    - [`current` — list cwd, save listing, print line count](#current--list-cwd-save-listing-print-line-count)
+  - [12. Temporary vs permanent aliases](#12-temporary-vs-permanent-aliases)
+  - [13. `~/.bashrc` and `~/.bash_aliases`](#13-bashrc-and-bash_aliases)
+  - [14. Exam-style recap](#14-exam-style-recap)
+  - [15. Session checklist](#15-session-checklist)
+  - [16. Script index](#16-script-index)
 
 ---
 
@@ -41,11 +46,11 @@ bash scripts/commandAliasing.sh
 
 After [Session 12](PipingTeeXargs.md), Durga Sir covers **command aliasing**: giving **short, comfortable names** to **long or unfamiliar commands**. When you type the nickname, the shell runs the **real command** behind it.
 
-| Idea | Command | One-line role |
-| :--- | :--- | :--- |
-| **Define / list** | **`alias`** | Create a shortcut **or** print all aliases |
-| **Remove** | **`unalias`** | Drop one alias **or** all (`-a`) |
-| **Check name** | **`type`** | See if a name is already a command, alias, or file |
+| Idea              | Command       | One-line role                                      |
+| :---------------- | :------------ | :------------------------------------------------- |
+| **Define / list** | **`alias`**   | Create a shortcut **or** print all aliases         |
+| **Remove**        | **`unalias`** | Drop one alias **or** all (`-a`)                   |
+| **Check name**    | **`type`**    | See if a name is already a command, alias, or file |
 
 ```mermaid
 %%{init: {'theme': 'base', 'themeVariables': {'pie1': '#FF9800', 'pie2': '#1E88E5', 'pie3': '#FFFFFF', 'pie4': '#FF9800', 'pieTitleTextColor': '#212121', 'pieSectionTextColor': '#212121', 'pieStrokeColor': '#424242'}}}%%
@@ -66,11 +71,11 @@ pie title Session 13 — alias lifecycle
 
 **Alias** = **alternate name** (nickname) for a Unix/Linux **command**.
 
-| Durga Sir wording | Meaning |
-| :--- | :--- |
-| Nickname / pet name | You type **`cls`**; shell runs **`clear`** |
-| Avoid long commands every time | One short name replaces a long line you repeat |
-| Internal execution | The **full original command** still runs — the shell expands the alias first |
+| Durga Sir wording              | Meaning                                                                      |
+| :----------------------------- | :--------------------------------------------------------------------------- |
+| Nickname / pet name            | You type **`cls`**; shell runs **`clear`**                                   |
+| Avoid long commands every time | One short name replaces a long line you repeat                               |
+| Internal execution             | The **full original command** still runs — the shell expands the alias first |
 
 Unlike Python (where rebinding a name can hide the original), in Linux **both** the **alias** and the **original command** usually remain available after you define an alias.
 
@@ -84,11 +89,11 @@ Unlike Python (where rebinding a name can hide the original), in Linux **both** 
 alias nickname=original_command
 ```
 
-| Part | Rule |
-| :--- | :--- |
-| **`nickname`** | What you type at the prompt |
-| **`=`** | **No spaces** before or after `=` (most common class mistake) |
-| **`original_command`** | The real command (often quoted) |
+| Part                   | Rule                                                          |
+| :--------------------- | :------------------------------------------------------------ |
+| **`nickname`**         | What you type at the prompt                                   |
+| **`=`**                | **No spaces** before or after `=` (most common class mistake) |
+| **`original_command`** | The real command (often quoted)                               |
 
 **Valid (class board):**
 
@@ -113,6 +118,12 @@ alias cls clear=mv    # space after alias name
 alias cls=clear
 cls          # works on Linux after alias; plain cls fails without it
 ```
+
+**Lab screenshot:** run `alias` to list, add `alias cls='clear'` manually, then run `alias` again — `cls='clear'` now appears in the list.
+
+![alias lab: list aliases, add cls='clear', list again](../assets/alias-cls-lab-terminal.png)
+
+
 
 Quotes are **optional** for simple commands; use quotes when the replacement contains **spaces**, **pipes**, or **`;`**.
 
@@ -141,12 +152,21 @@ With **no arguments**, **`alias`** prints **every** alias in the **current shell
 
 ## 5. `unalias` — remove aliases
 
-| Command | Effect |
-| :--- | :--- |
-| **`unalias cls`** | Remove **only** the **`cls`** alias |
-| **`unalias -a`** | Remove **all** aliases in **this shell** (including many **default** ones — use carefully) |
+| Command           | Effect                                                                                     |
+| :---------------- | :----------------------------------------------------------------------------------------- |
+| **`unalias cls`** | Remove **only** the **`cls`** alias                                                        |
+| **`unalias -a`**  | Remove **all** aliases in **this shell** (including many **default** ones — use carefully) |
 
 After **`unalias cls`**, **`cls`** fails; **`clear`** still works.
+
+**Lab screenshot:** run `unalias` to list, add `alias cls='clear'` manually, then run `alias` again — `cls='clear'` won't appears in the list.
+
+![alias lab: list aliases, add cls='clear', list again](../assets/unaliasing.png)
+
+**Lab screenshot:** run `unalias -a` it will remove all alias` 
+
+![alias lab: list aliases, add cls='clear', list again](../assets/unalias-all.png)
+
 
 ---
 
@@ -167,24 +187,43 @@ type cls
 type cls1
 ```
 
-| Output | Meaning |
-| :--- | :--- |
-| **`cls is aliased to 'clear'`** | Name already used as alias |
+| Output                            | Meaning                                       |
+| :-------------------------------- | :-------------------------------------------- |
+| **`cls is aliased to 'clear'`**   | Name already used as alias                    |
 | **`bash: type: cls1: not found`** | Safe to use **`cls1`** as a new alias (class) |
 
 Durga Sir: use **`type`** + your proposed name — not a separate “alias check” subcommand.
 
+**Lab screenshot:** run ` to check if any word we have already aliased or not  
+
+alias cls='clear' now we need to check if we can override it with alias cls='date'
+
+![alias lab: list aliases, add cls='clear', list again](../assets/checkAlias.png)
 ---
 
 ## 8. Overwrite, multiple nicknames, alias of alias
 
-| Topic | Durga Sir rule |
-| :--- | :--- |
-| **Same alias name, new command** | Like **`x=10`** then **`x=20`** — **last definition wins** (`alias cls=clear` then `alias cls=date` → **`cls`** runs **`date`**) |
-| **Several aliases, one command** | Allowed — e.g. two nicknames for **`mv`** |
-| **One alias name, two commands** | **Not** two targets at once — duplicate name → **conflict**; last wins |
-| **Alias of alias** | Allowed: `alias cls=clear` then `alias C=cls` → **`C`** runs **`clear`** (class: **`C`** → **`cls`** → **`date`** in one demo). If **`type C`** fails on your Bash, use **`alias \| grep C`** or a longer nickname like **`cc`**. |
+| Topic                            | Durga Sir rule                                                                                                                                                                                                                    |
+| :------------------------------- | :-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| **Same alias name, new command** | Like **`x=10`** then **`x=20`** — **last definition wins** (`alias cls=clear` then `alias cls=date` → **`cls`** runs **`date`**)                                                                                                  |
+| **Several aliases, one command** | Allowed — e.g. two nicknames for **`mv`**                                                                                                                                                                                         |
+| **One alias name, two commands** | **Not** two targets at once — duplicate name → **conflict**; last wins                                                                                                                                                            |
+| **Alias of alias**               | Allowed: `alias cls=clear` then `alias C=cls` → **`C`** runs **`clear`** (class: **`C`** → **`cls`** → **`date`** in one demo). If **`type C`** fails on your Bash, use **`alias \| grep C`** or a longer nickname like **`cc`**. |
 
+**Lab screenshot:** run ` to we have already used 
+
+alias cls='clear' now we need to it if we can override it with alias cls='date'
+
+![alias lab: list aliases, add cls='clear', list again](../assets/overwriteCommandAlias.png)
+
+
+**Lab screenshot:** run ` to check if we alias the aliased command
+
+![alias lab: list aliases, add cls='clear', list again](../assets/aliasingAlias.png)
+
+**Lab screenshot:** run ` usage of aliasing 
+
+![alias lab: list aliases, add cls='clear', list again](../assets/usageOfAliasing.png)
 ---
 
 ## 9. Case sensitivity and `man`
@@ -198,13 +237,13 @@ Durga Sir: use **`type`** + your proposed name — not a separate “alias check
 
 Durga Sir lists **application areas**:
 
-| # | Use case | Example |
-| :---: | :--- | :--- |
-| **1** | **Long command repeated often** | Short name for mkdir + many `touch` lines |
-| **2** | **Your OS commands on Linux** | `alias cls=clear`, `alias rename=mv` |
-| **3** | **Typos / swapped letters** | `alias grp=grep` so **`grp`** still runs **`grep`** |
-| **4** | **Language / comfort words** | `alias datm=date`, `alias ky=cp`, `alias jaru=mv` (Telugu/German examples in class) |
-| **5** | **Pipelines you run in every folder** | Alias wrapping `ls`, `tee`, `wc` ([§11](#11-class-examples--d20f-and-current)) |
+|   #   | Use case                              | Example                                                                             |
+| :---: | :------------------------------------ | :---------------------------------------------------------------------------------- |
+| **1** | **Long command repeated often**       | Short name for mkdir + many `touch` lines                                           |
+| **2** | **Your OS commands on Linux**         | `alias cls=clear`, `alias rename=mv`                                                |
+| **3** | **Typos / swapped letters**           | `alias grp=grep` so **`grp`** still runs **`grep`**                                 |
+| **4** | **Language / comfort words**          | `alias datm=date`, `alias ky=cp`, `alias jaru=mv` (Telugu/German examples in class) |
+| **5** | **Pipelines you run in every folder** | Alias wrapping `ls`, `tee`, `wc` ([§11](#11-class-examples--d20f-and-current))      |
 
 ---
 
@@ -246,10 +285,10 @@ Uses [§10 `tee`](PipingTeeXargs.md#10-tee--write-to-file-and-screen) from Sessi
 
 ## 12. Temporary vs permanent aliases
 
-| | Session alias | Permanent alias |
-| :--- | :--- | :--- |
-| **Lifetime** | **Current terminal / shell only** | Survives **new terminals** and **reboot** |
-| **Default** | **`alias` at prompt** | Must add to startup files |
+|                          | Session alias                            | Permanent alias                                                  |
+| :----------------------- | :--------------------------------------- | :--------------------------------------------------------------- |
+| **Lifetime**             | **Current terminal / shell only**        | Survives **new terminals** and **reboot**                        |
+| **Default**              | **`alias` at prompt**                    | Must add to startup files                                        |
 | **After close terminal** | **Gone** (`cls`, `current`, `d20f` lost) | Still there if saved in **`~/.bashrc`** or **`~/.bash_aliases`** |
 
 Durga Sir demo: close terminal → open new → custom aliases missing; built-in defaults like **`ll`** may still exist from system files.
@@ -283,13 +322,13 @@ Durga Sir demo: close terminal → open new → custom aliases missing; built-in
 
 **Valid alias definitions?**
 
-| Line | Valid? |
-| :--- | :---: |
-| `alias rename=mv` | Yes |
-| `alias rename='mv'` | Yes |
-| `alias rename="mv"` | Yes |
-| `alias rename =mv` | No (space before `=`) |
-| `alias rename= mv` | No (space after `=`) |
+| Line                 |           Valid?            |
+| :------------------- | :-------------------------: |
+| `alias rename=mv`    |             Yes             |
+| `alias rename='mv'`  |             Yes             |
+| `alias rename="mv"`  |             Yes             |
+| `alias rename =mv`   |    No (space before `=`)    |
+| `alias rename= mv`   |    No (space after `=`)     |
 | `alias rename mv=mv` | No (space after alias name) |
 
 **`alias` command purposes:** (1) **define** (2) **list**
@@ -316,16 +355,16 @@ Durga Sir demo: close terminal → open new → custom aliases missing; built-in
 
 ## 16. Script index
 
-| Script | Topic |
-| :--- | :--- |
-| [`commandAliasing.sh`](../../scripts/commandAliasing.sh) | Run all Session 13 demos |
-| [`alias-define-list-demo.sh`](../../scripts/commandAliasing/alias-define-list-demo.sh) | Define `cls`, list, quoting |
-| [`alias-syntax-spacing-demo.sh`](../../scripts/commandAliasing/alias-syntax-spacing-demo.sh) | Valid `=` spacing |
-| [`alias-type-unalias-demo.sh`](../../scripts/commandAliasing/alias-type-unalias-demo.sh) | `type`, `unalias`, overwrite |
-| [`alias-chain-demo.sh`](../../scripts/commandAliasing/alias-chain-demo.sh) | Alias of alias |
-| [`alias-long-d20f-demo.sh`](../../scripts/commandAliasing/alias-long-d20f-demo.sh) | `d20f` lab |
-| [`alias-current-pipeline-demo.sh`](../../scripts/commandAliasing/alias-current-pipeline-demo.sh) | `current` + `tee` |
-| [`alias-typo-and-os-demo.sh`](../../scripts/commandAliasing/alias-typo-and-os-demo.sh) | `grp=grep`, `rename=mv` |
-| [`alias-persistence-hint-demo.sh`](../../scripts/commandAliasing/alias-persistence-hint-demo.sh) | Permanent files hint |
+| Script                                                                                           | Topic                        |
+| :----------------------------------------------------------------------------------------------- | :--------------------------- |
+| [`commandAliasing.sh`](../../scripts/commandAliasing.sh)                                         | Run all Session 13 demos     |
+| [`alias-define-list-demo.sh`](../../scripts/commandAliasing/alias-define-list-demo.sh)           | Define `cls`, list, quoting  |
+| [`alias-syntax-spacing-demo.sh`](../../scripts/commandAliasing/alias-syntax-spacing-demo.sh)     | Valid `=` spacing            |
+| [`alias-type-unalias-demo.sh`](../../scripts/commandAliasing/alias-type-unalias-demo.sh)         | `type`, `unalias`, overwrite |
+| [`alias-chain-demo.sh`](../../scripts/commandAliasing/alias-chain-demo.sh)                       | Alias of alias               |
+| [`alias-long-d20f-demo.sh`](../../scripts/commandAliasing/alias-long-d20f-demo.sh)               | `d20f` lab                   |
+| [`alias-current-pipeline-demo.sh`](../../scripts/commandAliasing/alias-current-pipeline-demo.sh) | `current` + `tee`            |
+| [`alias-typo-and-os-demo.sh`](../../scripts/commandAliasing/alias-typo-and-os-demo.sh)           | `grp=grep`, `rename=mv`      |
+| [`alias-persistence-hint-demo.sh`](../../scripts/commandAliasing/alias-persistence-hint-demo.sh) | Permanent files hint         |
 
 Full command tables: [`scripts-execution-summary/commandAliasing.md`](../../scripts-execution-summary/commandAliasing.md).
