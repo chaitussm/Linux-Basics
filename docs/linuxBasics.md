@@ -14,6 +14,7 @@ Each topic has its own **`.md` file** under [`topics/`](topics/). Runnable **`.s
 | 2 | [**Components of Unix.md**](topics/Components%20of%20Unix.md) | [Session 2](https://www.youtube.com/watch?v=2zfh8eC7cY0&list=PLd3UqWTnYXOloH0vWBs4BtSbP84WcC2NY&index=2) |
 | 3 | [**TypesOfFilesInLinux.md**](topics/TypesOfFilesInLinux.md) | [Session 3](https://www.youtube.com/watch?v=-Y4bjL-fBMY&list=PLd3UqWTnYXOloH0vWBs4BtSbP84WcC2NY&index=3) |
 | 4 | [**File System Navigation Commands And Hierarchy.md**](topics/File%20System%20Navigation%20Commands%20And%20Hierarchy.md) | [Session 4](https://www.youtube.com/watch?v=Aqx97d4NSbg&list=PLd3UqWTnYXOloH0vWBs4BtSbP84WcC2NY&index=4) |
+| 5 | [**fileSystemsPartTwo.md**](topics/fileSystem/fileSystemsPartTwo.md) | [Durga Soft — Session 5 (course portal)](https://www.durgasoftonline.com/s/courses/5e7ae04f0cf29f148a043786/take) |
 | 7 | [**ls Command and its options.md**](topics/ls%20Command%20and%20its%20options.md) | [Session 7](https://www.youtube.com/watch?v=rpxT2L3t1a8&list=PLd3UqWTnYXOloH0vWBs4BtSbP84WcC2NY&index=7) |
 | 8 | [**Date and Cal commands.md**](topics/Date%20and%20Cal%20commands.md) | [Session 8](https://www.youtube.com/watch?v=NmJyVY1Mvww&list=PLd3UqWTnYXOloH0vWBs4BtSbP84WcC2NY&index=8) |
 | 9 | [**viewContentOfFiles.md**](topics/viewContentOfFiles.md) | [Session 9](https://www.youtube.com/watch?v=FuzpoZwDcZU&list=PLd3UqWTnYXOloH0vWBs4BtSbP84WcC2NY&index=9) |
@@ -30,7 +31,8 @@ Each topic has its own **`.md` file** under [`topics/`](topics/). Runnable **`.s
 | [**Components of Unix.md**](topics/Components%20of%20Unix.md) | Shell, kernel, execution flow, first script (Video 2) |
 | [**Bash Built-in Commands.md**](topics/Bash%20Built-in%20Commands.md) | Full `help` list — each builtin with example |
 | [**TypesOfFilesInLinux.md**](topics/TypesOfFilesInLinux.md) | Normal, directory, device files; `ls -l`, `file`, `tty` |
-| [**File System Navigation Commands And Hierarchy.md**](topics/File%20System%20Navigation%20Commands%20And%20Hierarchy.md) | `pwd`, `cd`, paths, `.` / `..`, FHS under `/` (Video 4) |
+| [**File System Navigation Commands And Hierarchy.md**](topics/File%20System%20Navigation%20Commands%20And%20Hierarchy.md) | `pwd`, `cd`, paths, `.` / `..`, FHS under `/` (Session 4) |
+| [**fileSystemsPartTwo.md**](topics/fileSystem/fileSystemsPartTwo.md) | FHS continued: `/tmp`, `/dev`, `/mnt` & `/media`, `/var`, `/proc`, `/usr`, … (Session 5 — [paid course](https://www.durgasoftonline.com/s/courses/5e7ae04f0cf29f148a043786/take)) |
 | [**ls Command and its options.md**](topics/ls%20Command%20and%20its%20options.md) | `ls`, `man`, `-l`, `-a`, `-A`, `-F`, `-R`, `-i`, `-h`, pipes (Video 7) |
 | [**pipeCommands.md**](topics/pipeCommands.md) | Pipe `\|`, `ls -l /etc \| head`, broken pipe |
 | [**Date and Cal commands.md**](topics/Date%20and%20Cal%20commands.md) | `date`, `date +format`, `cal`, options (Video 8) |
