@@ -2,8 +2,8 @@
 
 **Course:** [Linux with Shell Programming — Session 5 (paid portal)](https://www.durgasoftonline.com/s/courses/5e7ae04f0cf29f148a043786/take)  
 **Instructor:** Durga Sir  
-**Source recordings (repo):** [`ScreenRecordings/fileSystem1.webm`](../../../ScreenRecordings/fileSystem1.webm) · [`ScreenRecordings/fileSystem2.webm`](../../../ScreenRecordings/fileSystem2.webm)  
-*(Screen capture only — no audio track; notes below match on-screen `linux_online_running_notes.txt` and live demos.)*
+**Source recordings (repo):** [`ScreenRecordings/fileSystem1.webm`](../../../ScreenRecordings/fileSystem1.webm) · [`ScreenRecordings/fileSystem2.webm`](../../../ScreenRecordings/fileSystem2.webm) · [`ScreenRecordings/Screencast From 2026-11-04 15-06-45.webm`](../../../ScreenRecordings/Screencast%20From%202026-11-04%2015-06-45.webm)  
+*(Screen capture only — no audio track; notes match on-screen `linux_online_running_notes.txt` and live demos.)*
 
 **Part one (Session 4):** [File System Navigation Commands And Hierarchy.md](../File%20System%20Navigation%20Commands%20And%20Hierarchy.md) — **`/bin`**, **`/sbin`**, **`/etc`**, navigation, FHS intro.
 
@@ -15,7 +15,7 @@
 
 **Table of contents**
 
-- [0. How the two recordings map to this session](#0-how-the-two-recordings-map-to-this-session)
+- [0. How the recordings map to this session](#0-how-the-recordings-map-to-this-session)
 - [1. Diagram — full hierarchy (Diagram-3)](#1-diagram--full-hierarchy-diagram-3)
 - [2. `4. tmp` directory](#2-4-tmp-directory)
 - [3. `5. dev` directory](#3-5-dev-directory)
@@ -35,24 +35,27 @@
 
 ---
 
-## 0. How the two recordings map to this session
+## 0. How the recordings map to this session
 
 | Recording | Approx. length | Main content in class |
 | :--- | :--- | :--- |
 | **`fileSystem1.webm`** | ~34 min | **`4. tmp`** notes; **Diagram-3** FHS tree; some terminal recap (home, permissions) |
-| **`fileSystem2.webm`** | ~73 min | **`5. dev`** through **`14. boot`** (+ **`15. usr`** & summary); **`/dev`** & **`/proc`** demos; Windows **This PC** comparison |
+| **`fileSystem2.webm`** | ~73 min | **`5. dev`** through **`14. boot`** start; **`/dev`** & **`/proc`** demos; Windows **This PC** comparison |
+| **`Screencast From 2026-11-04 15-06-45.webm`** | ~7 min | **End of Session 5:** **`/home`** / **`/root`** recap; **`14. boot`** + **Note** block; **file-system type names**; live **boot diagram**; class Q&amp;A on **`/etc`**, **`/bin`**, **`lost+found`** |
 
 ```mermaid
 %%{init: {'theme': 'base', 'themeVariables': {'primaryColor': '#5c5c5c', 'primaryTextColor': '#ffffff', 'primaryBorderColor': '#3d3d3d', 'lineColor': '#b0b0b0'}}}%%
 flowchart LR
     P1["fileSystem1.webm<br/>tmp + Diagram-3"]
-    P2["fileSystem2.webm<br/>dev → usr + demos"]
+    P2["fileSystem2.webm<br/>dev → boot start"]
+    P3["Screencast 2026-11-04<br/>boot Note + FS types"]
     MD["fileSystemsPartTwo.md"]
     P1 --> MD
     P2 --> MD
+    P3 --> MD
 
     classDef darkGrey fill:#5c5c5c,stroke:#3d3d3d,color:#ffffff,stroke-width:2px
-    class P1,P2,MD darkGrey
+    class P1,P2,P3,MD darkGrey
 ```
 
 ---
@@ -255,6 +258,13 @@ flowchart LR
 | Contents | **This directory contains all 3rd party software installation files.** |
 | Example | **google chrome** (explicit third-party install) |
 
+**Extra example (`Screencast From 2026-11-04 15-06-45.webm`):**
+
+| Package | Class note |
+| :--- | :--- |
+| **OpenJDK** | **openjdk is available from ubuntu.com** (distro / repo style) |
+| **Oracle JDK 11** | **oracle jdk 11 ===> 3rd party** (fits under **`/opt`**-style optional installs) |
+
 ---
 
 ## 7. `9. lib` directory
@@ -379,21 +389,61 @@ flowchart LR
 | Heading | **14. boot directory** |
 | Purpose | **The files which are required to boot linux os** |
 
-*(Class also shows **`ps -ef`** output above this heading — processes for user **`durga`** before moving to boot.)*
+Before this heading, notes often show **`ps -ef`** lines for user **`durga`** (background **`gvfs`** / desktop services) — a bridge from **`/proc`** / **`ps`** to **`/boot`**.
+
+### Closing `Note:` block (typed live — `Screencast From 2026-11-04 15-06-45.webm`)
+
+Durga Sir draws a **red box diagram** on the whiteboard (boot-related layout), then types:
+
+| Line (class) | Text |
+| :--- | :--- |
+| **Note:** | *(heading)* |
+| | **operating system can locate files very easily.** |
+| | **For every file system a separate name will be assigned.** |
+| | **ext2,ext3, ext4 ,XFS are names of Linux File Systems** |
+| | **NTFS,FAT are names of windows file systems** |
+
+*(These closing lines also tie to **`/usr`** and the overall FHS advantage — see [§13](#13-15-usr-directory-and-closing-notes).)*
+
+```mermaid
+%%{init: {'theme': 'base', 'themeVariables': {'primaryColor': '#5c5c5c', 'primaryTextColor': '#ffffff', 'primaryBorderColor': '#3d3d3d', 'lineColor': '#b0b0b0'}}}%%
+flowchart TB
+    PWR["Power on"]
+    PWR --> BL["Bootloader files in /boot"]
+    BL --> KERN["Linux kernel loaded"]
+    KERN --> INIT["init / userspace"]
+    INIT --> TREE["Rest of FHS: /etc, /bin, /usr, …"]
+
+    classDef darkGrey fill:#5c5c5c,stroke:#3d3d3d,color:#ffffff,stroke-width:2px
+    class PWR,BL,KERN,INIT,TREE darkGrey
+```
+
+### Live class Q&amp;A (same screencast)
+
+Students repeat directories already covered in Session 4 / earlier in Session 5 — Durga Sir uses this as revision:
+
+| Mentioned in chat | Reminder |
+| :--- | :--- |
+| **`/etc`**, **`etc`** | System **configuration** — Session 4 |
+| **`/bin`**, **`bin`** | Normal-user **command binaries** — Session 4 |
+| **`lost+found`** | File-system recovery area (admin topic; name appeared in chat) |
 
 ---
 
 ## 13. `15. usr` directory and closing notes
 
-**From Durga Soft class material (same session topic block):**
-
 | Point | Wording |
 | :--- | :--- |
 | **`/usr`** | **usr means user** — contains **user-related software** / programs and related files |
-| **Advantage 1** | Linux file system layout helps the OS **locate required files very easily** |
-| **Advantage 2** | Every file system has a **type name** |
-| **Linux types** | **ext2, ext3, ext4, XFS** |
-| **Windows types** | **NTFS, FAT** |
+
+The **Note** lines typed after **`/boot`** in [`Screencast From 2026-11-04 15-06-45.webm`](../../../ScreenRecordings/Screencast%20From%202026-11-04%2015-06-45.webm) are the session summary:
+
+| # | Wording (on screen) |
+| :--- | :--- |
+| 1 | **operating system can locate files very easily.** |
+| 2 | **For every file system a separate name will be assigned.** |
+| 3 | **ext2,ext3, ext4 ,XFS are names of Linux File Systems** |
+| 4 | **NTFS,FAT are names of windows file systems** |
 
 ```mermaid
 %%{init: {'theme': 'base', 'themeVariables': {'pie1': '#FF9800', 'pie2': '#1E88E5', 'pie3': '#43A047', 'pie4': '#8E24AA', 'pieTitleTextColor': '#212121', 'pieSectionTextColor': '#212121', 'pieStrokeColor': '#424242'}}}%%
@@ -416,6 +466,9 @@ pie title File system type names (class list)
 | **`ps -ef`** | `fileSystem2` | Process status listing |
 | Windows **This PC** | `fileSystem2` | **C:/D:/E:** vs Linux mount idea |
 | **`exit` from root → `who`** | `fileSystem2` | **`/root`** vs normal user **`durga`** (identity before **`/root`** topic) |
+| **`/home` + `/root` recap** | `Screencast 2026-11-04` | **`/home/durga`**, **`/home/ravi`**, **`/root`**; Q **`/` vs root** |
+| **Boot + Note + FS types** | `Screencast 2026-11-04` | **`14. boot`**, advantage note, **ext2/3/4/XFS**, **NTFS/FAT**, live diagram |
+| **OpenJDK vs Oracle JDK** | `Screencast 2026-11-04` | Repo vs **3rd party** example for **`/opt`** |
 
 ---
 

@@ -9,7 +9,7 @@ that tree rather than appearing as separate drive letters.
 > [Linux File System course page](https://www.durgasoftonline.com/s/courses/5e7ae04f0cf29f148a043786/take).
 
 For **Session 5 — LINUX File System Continued**, see
-[fileSystemsPartTwo.md](fileSystemsPartTwo.md) (aligned with [`ScreenRecordings/fileSystem1.webm`](../../../ScreenRecordings/fileSystem1.webm) and [`fileSystem2.webm`](../../../ScreenRecordings/fileSystem2.webm)).
+[fileSystemsPartTwo.md](fileSystemsPartTwo.md) (aligned with [`ScreenRecordings/`](../../../ScreenRecordings/) — `fileSystem1.webm`, `fileSystem2.webm`, and the 2026-11-04 follow-up screencast).
 
 ## Table of contents
 
