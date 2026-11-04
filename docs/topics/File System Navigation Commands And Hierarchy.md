@@ -496,7 +496,7 @@ You should be able to explain:
 8. Tree hierarchy; user folders under **`/home`**.  
 9. **`/bin`** (binary, normal user), **`/sbin`** (system/root), **`/etc`** (configuration, `passwd`, `group`, `hosts`).  
 
-**Next (Video 5):** **`/tmp`** and related topics — see [`linuxBasics.md`](../linuxBasics.md).
+**Next (Session 5 — paid course):** [**fileSystemsPartTwo.md**](fileSystem/fileSystemsPartTwo.md) — from [`ScreenRecordings/`](../../../ScreenRecordings/) **`fileSystem1.webm`** + **`fileSystem2.webm`** (on-screen notes).
 
 ---
 
