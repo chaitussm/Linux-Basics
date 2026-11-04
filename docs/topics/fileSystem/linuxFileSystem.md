@@ -8,8 +8,8 @@ that tree rather than appearing as separate drive letters.
 > reference notes on the Linux file system, not a transcript of the lesson:
 > [Linux File System course page](https://www.durgasoftonline.com/s/courses/5e7ae04f0cf29f148a043786/take).
 
-For detailed navigation examples, see
-[File System Navigation Commands & Linux File System Hierarchy](File%20System%20Navigation%20Commands%20And%20Hierarchy.md).
+For **Session 5 — LINUX File System Continued**, see
+[fileSystemsPartTwo.md](fileSystemsPartTwo.md) (aligned with [`ScreenRecordings/fileSystem1.webm`](../../../ScreenRecordings/fileSystem1.webm) and [`fileSystem2.webm`](../../../ScreenRecordings/fileSystem2.webm)).
 
 ## Table of contents
 
