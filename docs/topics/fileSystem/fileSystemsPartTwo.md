@@ -6,6 +6,8 @@
 
 **Part one (same course, Session 4):** [File System Navigation Commands And Hierarchy.md](../File%20System%20Navigation%20Commands%20And%20Hierarchy.md) — navigation (`pwd`, `cd`, `ls -a`), tree under `/`, **`/bin`**, **`/sbin`**, **`/etc`**, **`/home`** overview.
 
+**Related overview:** [linuxFileSystem.md](linuxFileSystem.md) — short FHS reference in this folder.
+
 **Prerequisites:** [TypesOfFilesInLinux.md](../TypesOfFilesInLinux.md) (device files, `ls -l` first character) · Part one above.
 
 **Practice folder:** [`scripts/file-system-navigation-and-hierarchy/`](../../../scripts/file-system-navigation-and-hierarchy/)

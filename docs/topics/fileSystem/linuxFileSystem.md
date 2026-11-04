@@ -11,6 +11,9 @@ that tree rather than appearing as separate drive letters.
 For detailed navigation examples, see
 [File System Navigation Commands & Linux File System Hierarchy](File%20System%20Navigation%20Commands%20And%20Hierarchy.md).
 
+For **Session 5 — LINUX File System Continued** (Durga Soft paid course), see
+[fileSystemsPartTwo.md](fileSystemsPartTwo.md).
+
 ## Table of contents
 
 - [The directory tree](#the-directory-tree)
