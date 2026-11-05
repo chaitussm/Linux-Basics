@@ -139,6 +139,13 @@ pie title Example default permission bits (one ordinary file)
 
 ![Creating a file in the /tmp folder](../../assets/creationOfFileIntmpFolder.png)
 
+Generally files created in tmp folder will be removed automatically once we restart or log off the machine.I will add one screenshot after logging back again.
+
+
+**Lab screenshot:** Checking if the ile in the `/tmp` folder after restarting the machine .
+
+![Checking if the ile in the /tmp folder after restarting the machine](../../assets/tmpAfterRestart.png)
+
 ---
 
 ## 3. `5. dev` directory
