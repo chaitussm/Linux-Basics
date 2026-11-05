@@ -182,6 +182,42 @@ To restore: `chmod u+rw demo.txt` (back to `-rw-r--r--`, i.e. `644`).
 
 ![gedit cannot open demo.txt - permission error](../../assets/changingFilePermissionsV2.png)
 
+**Lab screenshot (V3):** restoring the owner's permission and proving the file is usable again (prompt `surya@suryathinkpad:~/linuxbasics$`).
+
+![Restoring permissions with chmod u+rw and appending a line](../../assets/changePermissionsV3.png)
+
+**What the screenshot shows (line by line):**
+
+1. `chmod u+rw demo.txt` → `u` = owner, `+` = add, `rw` = read and write. The owner's bits go from `---` back to `rw-`, so the file is `-rw-r--r--` (`644`) again. The command prints nothing on success.
+2. `cat >> demo.txt` → `>>` is the *append* redirection. `cat` with no file argument reads from the keyboard (stdin) and appends what is typed to the end of `demo.txt` (the file is not overwritten, unlike `>`). Appending needs **write** permission, which the owner has again.
+3. `This is the fourth line` → the text typed after the command; `Enter` ends the line and `Ctrl+D` ends the input. This is the content appended to the file.
+4. `cat demo.txt` → now succeeds, because the owner has **read** permission again (earlier it gave `Permission denied`).
+5. `this is the first line`, `this is the second line`, `this is the third line` → the original content of the file.
+6. An empty line → a blank line that was already in the file before the append.
+7. `This is the fourth line` → the line just appended in step 2. This proves both **write** (append) and **read** work after `chmod u+rw`.
+8. The final `$` prompt → the shell is ready for the next command.
+
+**Key takeaway:** `chmod u-rw` removes access and `chmod u+rw` restores it. Read (`cat`) and write (`>>`) are controlled independently by the owner's `r` and `w` bits.
+
+```mermaid
+flowchart TD
+    A["Start: ----r--r--<br/>owner has no access"] --> B["chmod u+rw demo.txt"]
+    B --> C["Owner bits = rw-<br/>file is -rw-r--r-- (644)"]
+    C --> D["cat >> demo.txt<br/>needs write (w)"]
+    D --> E["Type: This is the fourth line<br/>Ctrl+D to finish"]
+    E --> F["Line appended to end of file"]
+    C --> G["cat demo.txt<br/>needs read (r)"]
+    F --> G
+    G --> H["Prints lines 1-3, blank line,<br/>and the fourth line"]
+
+    classDef start fill:#1E88E5,stroke:#0D47A1,color:#ffffff,stroke-width:2px
+    classDef cmd fill:#FF9800,stroke:#E65100,color:#212121,stroke-width:2px
+    classDef ok fill:#43A047,stroke:#1B5E20,color:#ffffff,stroke-width:2px
+    class A,C start
+    class B,D,E,G cmd
+    class F,H ok
+```
+
 ```mermaid
 flowchart TD
     A["ls -l demo.txt<br/>-rw-r--r--"] --> B["chmod u-rw demo.txt"]
