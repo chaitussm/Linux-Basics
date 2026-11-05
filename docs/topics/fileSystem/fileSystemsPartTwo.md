@@ -15,33 +15,39 @@
 
 **Table of contents**
 
-- [0. How the recordings map to this session](#0-how-the-recordings-map-to-this-session)
-- [1. Diagram — full hierarchy (Diagram-3)](#1-diagram--full-hierarchy-diagram-3)
-- [2. `4. tmp` directory](#2-4-tmp-directory)
-- [3. `5. dev` directory](#3-5-dev-directory)
-- [4. `6. mnt` and `7. media` — mounting](#4-6-mnt-and-7-media--mounting)
-- [5. Windows drives vs Linux tree](#5-windows-drives-vs-linux-tree)
-- [6. `8. opt` directory](#6-8-opt-directory)
-- [7. `9. lib` directory](#7-9-lib-directory)
-- [8. `10. var` directory](#8-10-var-directory)
-- [9. `11. home` directory](#9-11-home-directory)
-- [10. `12. root` directory and Q: `/` vs root](#10-12-root-directory-and-q--vs-root)
-- [11. `13. proc` directory and `ps`](#11-13-proc-directory-and-ps)
-- [12. `14. boot` directory](#12-14-boot-directory)
-- [13. `15. usr` directory and closing notes](#13-15-usr-directory-and-closing-notes)
-- [14. Live demos from the recordings](#14-live-demos-from-the-recordings)
-- [15. Session checklist & interview Q&amp;A](#15-session-checklist--interview-qa)
-- [16. Scripts](#16-scripts)
+- [LINUX File System Continued (Part Two)](#linux-file-system-continued-part-two)
+  - [0. How the recordings map to this session](#0-how-the-recordings-map-to-this-session)
+  - [1. Diagram — full hierarchy (Diagram-3)](#1-diagram--full-hierarchy-diagram-3)
+  - [2. `4. tmp` directory](#2-4-tmp-directory)
+  - [3. `5. dev` directory](#3-5-dev-directory)
+  - [4. `6. mnt` and `7. media` — mounting](#4-6-mnt-and-7-media--mounting)
+    - [`6. mnt` directory](#6-mnt-directory)
+    - [`7. media` directory](#7-media-directory)
+    - [Interview question (class)](#interview-question-class)
+  - [5. Windows drives vs Linux tree](#5-windows-drives-vs-linux-tree)
+  - [6. `8. opt` directory](#6-8-opt-directory)
+  - [7. `9. lib` directory](#7-9-lib-directory)
+  - [8. `10. var` directory](#8-10-var-directory)
+  - [9. `11. home` directory](#9-11-home-directory)
+  - [10. `12. root` directory and Q: `/` vs root](#10-12-root-directory-and-q--vs-root)
+  - [11. `13. proc` directory and `ps`](#11-13-proc-directory-and-ps)
+  - [12. `14. boot` directory](#12-14-boot-directory)
+    - [Closing `Note:` block (typed live — `Screencast From 2026-11-04 15-06-45.webm`)](#closing-note-block-typed-live--screencast-from-2026-11-04-15-06-45webm)
+    - [Live class Q\&A (same screencast)](#live-class-qa-same-screencast)
+  - [13. `15. usr` directory and closing notes](#13-15-usr-directory-and-closing-notes)
+  - [14. Live demos from the recordings](#14-live-demos-from-the-recordings)
+  - [15. Session checklist \& interview Q\&A](#15-session-checklist--interview-qa)
+  - [16. Scripts](#16-scripts)
 
 ---
 
 ## 0. How the recordings map to this session
 
-| Recording | Approx. length | Main content in class |
-| :--- | :--- | :--- |
-| **`fileSystem1.webm`** | ~34 min | **`4. tmp`** notes; **Diagram-3** FHS tree; some terminal recap (home, permissions) |
-| **`fileSystem2.webm`** | ~73 min | **`5. dev`** through **`14. boot`** start; **`/dev`** & **`/proc`** demos; Windows **This PC** comparison |
-| **`Screencast From 2026-11-04 15-06-45.webm`** | ~7 min | **End of Session 5:** **`/home`** / **`/root`** recap; **`14. boot`** + **Note** block; **file-system type names**; live **boot diagram**; class Q&amp;A on **`/etc`**, **`/bin`**, **`lost+found`** |
+| Recording                                      | Approx. length | Main content in class                                                                                                                                                                                |
+| :--------------------------------------------- | :------------- | :--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| **`fileSystem1.webm`**                         | ~34 min        | **`4. tmp`** notes; **Diagram-3** FHS tree; some terminal recap (home, permissions)                                                                                                                  |
+| **`fileSystem2.webm`**                         | ~73 min        | **`5. dev`** through **`14. boot`** start; **`/dev`** & **`/proc`** demos; Windows **This PC** comparison                                                                                            |
+| **`Screencast From 2026-11-04 15-06-45.webm`** | ~7 min         | **End of Session 5:** **`/home`** / **`/root`** recap; **`14. boot`** + **Note** block; **file-system type names**; live **boot diagram**; class Q&amp;A on **`/etc`**, **`/bin`**, **`lost+found`** |
 
 ```mermaid
 %%{init: {'theme': 'base', 'themeVariables': {'primaryColor': '#5c5c5c', 'primaryTextColor': '#ffffff', 'primaryBorderColor': '#3d3d3d', 'lineColor': '#b0b0b0'}}}%%
@@ -98,11 +104,11 @@ flowchart TB
 
 **From class notes (`fileSystem1.webm`):**
 
-| Point | Durga Sir wording |
-| :--- | :--- |
-| Meaning | **tmp means temporary.** |
-| Use | If any file or directory is required **just for temporary purpose in our current session** … |
-| Lifetime | These files will be **deleted automatically at the time of system shutdown.** |
+| Point    | Durga Sir wording                                                                                                    |
+| :------- | :------------------------------------------------------------------------------------------------------------------- |
+| Meaning  | **tmp means temporary.**                                                                                             |
+| Use      | If any file or directory is required **just for temporary purpose in our current session** …                         |
+| Lifetime | These files will be **deleted automatically at the time of system shutdown.**                                        |
 | Contrast | **`Desktop ===> demo.txt`** (normal persistent location) vs **`tmp ===> a.txt b.txt c.txt`** (session scratch files) |
 
 **Permission example shown with the tmp scenario** (same notes): default file triplet **`rw-`**, **`r--`**, **`r--`** (owner read/write; group and others read-only).
@@ -129,30 +135,34 @@ pie title Example default permission bits (one ordinary file)
     "Others: read only (r--)" : 30
 ```
 
+**Lab screenshot:** creating a file inside the `/tmp` folder.
+
+![Creating a file in the /tmp folder](../../assets/creationOfFileIntmpFolder.png)
+
 ---
 
 ## 3. `5. dev` directory
 
 **From class notes (`fileSystem2.webm`):**
 
-| Point | Durga Sir wording |
-| :--- | :--- |
-| Meaning | **dev means device.** |
-| Rule | **Every device in Linux is treated as file.** |
+| Point    | Durga Sir wording                                             |
+| :------- | :------------------------------------------------------------ |
+| Meaning  | **dev means device.**                                         |
+| Rule     | **Every device in Linux is treated as file.**                 |
 | Location | All device-related files are stored **inside dev directory.** |
-| Purpose | **By using these files we can communicate with that device.** |
+| Purpose  | **By using these files we can communicate with that device.** |
 
 **Examples listed in notes:**
 
-| Name | Meaning (class) |
-| :--- | :--- |
-| **`tty`** | Terminal-related file |
-| **`fd`** | Floppy drive related file |
-| **`hd`** | Hard disk related file |
-| **`ram`** | RAM related file |
-| **`stdin`** | Standard **input** device file (**keyboard**) |
+| Name         | Meaning (class)                                        |
+| :----------- | :----------------------------------------------------- |
+| **`tty`**    | Terminal-related file                                  |
+| **`fd`**     | Floppy drive related file                              |
+| **`hd`**     | Hard disk related file                                 |
+| **`ram`**    | RAM related file                                       |
+| **`stdin`**  | Standard **input** device file (**keyboard**)          |
 | **`stdout`** | Standard **output** device file (**terminal/monitor**) |
-| **`stderr`** | Standard **error** device file (**terminal/monitor**) |
+| **`stderr`** | Standard **error** device file (**terminal/monitor**)  |
 
 **Demo:** `ls` under **`/dev`** shows **`stdin`**, **`stdout`**, **`stderr`**, many **`tty`** entries, **`loop*`**, **`sr0`**, etc. Use **`ls -l /dev`** to see **`c`** (character) devices and **`l`** (symlinks) — see [TypesOfFilesInLinux.md](../TypesOfFilesInLinux.md).
 
@@ -179,26 +189,26 @@ flowchart LR
 
 ### `6. mnt` directory
 
-| Point | Durga Sir wording |
-| :--- | :--- |
-| Meaning | **mnt means mounting.** |
-| Old OS | In old operating systems, mounting was done **manually**. |
-| New OS | In newer operating systems, mounting is performed **automatically**. |
+| Point      | Durga Sir wording                                                                     |
+| :--------- | :------------------------------------------------------------------------------------ |
+| Meaning    | **mnt means mounting.**                                                               |
+| Old OS     | In old operating systems, mounting was done **manually**.                             |
+| New OS     | In newer operating systems, mounting is performed **automatically**.                  |
 | **`/mnt`** | **mnt directory contains files which are available just because of manual mounting.** |
 
 ### `7. media` directory
 
-| Point | Durga Sir wording |
-| :--- | :--- |
+| Point        | Durga Sir wording                                                          |
+| :----------- | :------------------------------------------------------------------------- |
 | **`/media`** | **The files of automatic mounting will be placed inside media directory.** |
 
 ### Interview question (class)
 
 **Q. What is the difference between mnt and media directories?**
 
-| Directory | Answer (class) |
-| :--- | :--- |
-| **`mnt`** | **contains manual mounting files** |
+| Directory   | Answer (class)                        |
+| :---------- | :------------------------------------ |
+| **`mnt`**   | **contains manual mounting files**    |
 | **`media`** | **contains automatic mounting files** |
 
 ```mermaid
@@ -252,26 +262,26 @@ flowchart LR
 
 ## 6. `8. opt` directory
 
-| Point | Durga Sir wording |
-| :--- | :--- |
-| Meaning | **opt means optional.** |
+| Point    | Durga Sir wording                                                      |
+| :------- | :--------------------------------------------------------------------- |
+| Meaning  | **opt means optional.**                                                |
 | Contents | **This directory contains all 3rd party software installation files.** |
-| Example | **google chrome** (explicit third-party install) |
+| Example  | **google chrome** (explicit third-party install)                       |
 
 **Extra example (`Screencast From 2026-11-04 15-06-45.webm`):**
 
-| Package | Class note |
-| :--- | :--- |
-| **OpenJDK** | **openjdk is available from ubuntu.com** (distro / repo style) |
+| Package           | Class note                                                                       |
+| :---------------- | :------------------------------------------------------------------------------- |
+| **OpenJDK**       | **openjdk is available from ubuntu.com** (distro / repo style)                   |
 | **Oracle JDK 11** | **oracle jdk 11 ===> 3rd party** (fits under **`/opt`**-style optional installs) |
 
 ---
 
 ## 7. `9. lib` directory
 
-| Point | Durga Sir wording |
-| :--- | :--- |
-| Meaning | **lib means library** |
+| Point    | Durga Sir wording                                                     |
+| :------- | :-------------------------------------------------------------------- |
+| Meaning  | **lib means library**                                                 |
 | Contents | **The libraries which are required by our commands and applications** |
 
 ```mermaid
@@ -289,11 +299,11 @@ flowchart LR
 
 ## 8. `10. var` directory
 
-| Point | Durga Sir wording |
-| :--- | :--- |
-| Meaning | **var means variable data.** |
-| Rule | If any data **keeps on changing**, such variable data is stored **inside var directory.** |
-| Example | **log files** — **eg: log files** |
+| Point   | Durga Sir wording                                                                         |
+| :------ | :---------------------------------------------------------------------------------------- |
+| Meaning | **var means variable data.**                                                              |
+| Rule    | If any data **keeps on changing**, such variable data is stored **inside var directory.** |
+| Example | **log files** — **eg: log files**                                                         |
 
 ```mermaid
 %%{init: {'theme': 'base', 'themeVariables': {'pie1': '#FF9800', 'pie2': '#1E88E5', 'pie3': '#43A047', 'pieTitleTextColor': '#212121', 'pieSectionTextColor': '#212121', 'pieStrokeColor': '#424242'}}}%%
@@ -307,12 +317,12 @@ pie title /var — typical changing data (conceptual)
 
 ## 9. `11. home` directory
 
-| Point | Durga Sir wording |
-| :--- | :--- |
-| Multi-user | **As linux multi user operating system.** |
-| Per user | **For every user a separate directory will be created** to hold his specific data like **videos, images, documents** etc. |
-| Location | **All these user directories will be stored inside home directory.** |
-| Example | **`/home/durga`** — durga user home; contains **Desktop, Downloads, Movies, Pictures**, etc. (class also shows **`/home/ravi`**, **`ls /home`** with many users) |
+| Point      | Durga Sir wording                                                                                                                                                |
+| :--------- | :--------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| Multi-user | **As linux multi user operating system.**                                                                                                                        |
+| Per user   | **For every user a separate directory will be created** to hold his specific data like **videos, images, documents** etc.                                        |
+| Location   | **All these user directories will be stored inside home directory.**                                                                                             |
+| Example    | **`/home/durga`** — durga user home; contains **Desktop, Downloads, Movies, Pictures**, etc. (class also shows **`/home/ravi`**, **`ls /home`** with many users) |
 
 **Demo (`fileSystem2.webm`):** File manager under **`/home/durga`** — Desktop, Documents, Downloads, scripts, sample **`.txt`**, **`.sh`**, **`.mp4`**, etc.
 
@@ -322,18 +332,18 @@ pie title /var — typical changing data (conceptual)
 
 **From notes:**
 
-| Path | Meaning (class) |
-| :--- | :--- |
-| **`/home/durga`** | durga user home directory |
-| **`/home/ravi`** | ravi user home directory |
-| **`/root`** | **home directory of root user / super user** |
+| Path              | Meaning (class)                              |
+| :---------------- | :------------------------------------------- |
+| **`/home/durga`** | durga user home directory                    |
+| **`/home/ravi`**  | ravi user home directory                     |
+| **`/root`**       | **home directory of root user / super user** |
 
 **Q. What is the difference between `/` and root directories?**
 
-| Symbol / path | Answer (class) |
-| :--- | :--- |
-| **`/`** | **acts as root for Linux file system. It is the topmost directory of linux file system.** |
-| **`root`** | **subdirectory of `/`, which acts as home directory for the super user.** |
+| Symbol / path | Answer (class)                                                                            |
+| :------------ | :---------------------------------------------------------------------------------------- |
+| **`/`**       | **acts as root for Linux file system. It is the topmost directory of linux file system.** |
+| **`root`**    | **subdirectory of `/`, which acts as home directory for the super user.**                 |
 
 ```mermaid
 %%{init: {'theme': 'base', 'themeVariables': {'primaryColor': '#5c5c5c', 'primaryTextColor': '#ffffff', 'primaryBorderColor': '#3d3d3d', 'lineColor': '#b0b0b0'}}}%%
@@ -352,12 +362,12 @@ flowchart TB
 
 ## 11. `13. proc` directory and `ps`
 
-| Point | Durga Sir wording |
-| :--- | :--- |
-| Meaning | **proc ===> means process** |
+| Point     | Durga Sir wording                                                                                               |
+| :-------- | :-------------------------------------------------------------------------------------------------------------- |
+| Meaning   | **proc ===> means process**                                                                                     |
 | Behaviour | **In linux multiple processes running simultaneously.** For each process a **unique id** will be there: **PID** |
-| Layout | Process data **inside proc directory** (numeric PID folders) |
-| Command | **`ps` command ===> process status** |
+| Layout    | Process data **inside proc directory** (numeric PID folders)                                                    |
+| Command   | **`ps` command ===> process status**                                                                            |
 
 **Demo (`fileSystem2.webm`):**
 
@@ -384,9 +394,9 @@ flowchart LR
 
 ## 12. `14. boot` directory
 
-| Point | Durga Sir wording |
-| :--- | :--- |
-| Heading | **14. boot directory** |
+| Point   | Durga Sir wording                                 |
+| :------ | :------------------------------------------------ |
+| Heading | **14. boot directory**                            |
 | Purpose | **The files which are required to boot linux os** |
 
 Before this heading, notes often show **`ps -ef`** lines for user **`durga`** (background **`gvfs`** / desktop services) — a bridge from **`/proc`** / **`ps`** to **`/boot`**.
@@ -395,13 +405,13 @@ Before this heading, notes often show **`ps -ef`** lines for user **`durga`** (b
 
 Durga Sir draws a **red box diagram** on the whiteboard (boot-related layout), then types:
 
-| Line (class) | Text |
-| :--- | :--- |
-| **Note:** | *(heading)* |
-| | **operating system can locate files very easily.** |
-| | **For every file system a separate name will be assigned.** |
-| | **ext2,ext3, ext4 ,XFS are names of Linux File Systems** |
-| | **NTFS,FAT are names of windows file systems** |
+| Line (class) | Text                                                        |
+| :----------- | :---------------------------------------------------------- |
+| **Note:**    | *(heading)*                                                 |
+|              | **operating system can locate files very easily.**          |
+|              | **For every file system a separate name will be assigned.** |
+|              | **ext2,ext3, ext4 ,XFS are names of Linux File Systems**    |
+|              | **NTFS,FAT are names of windows file systems**              |
 
 *(These closing lines also tie to **`/usr`** and the overall FHS advantage — see [§13](#13-15-usr-directory-and-closing-notes).)*
 
@@ -422,28 +432,28 @@ flowchart TB
 
 Students repeat directories already covered in Session 4 / earlier in Session 5 — Durga Sir uses this as revision:
 
-| Mentioned in chat | Reminder |
-| :--- | :--- |
-| **`/etc`**, **`etc`** | System **configuration** — Session 4 |
-| **`/bin`**, **`bin`** | Normal-user **command binaries** — Session 4 |
-| **`lost+found`** | File-system recovery area (admin topic; name appeared in chat) |
+| Mentioned in chat     | Reminder                                                       |
+| :-------------------- | :------------------------------------------------------------- |
+| **`/etc`**, **`etc`** | System **configuration** — Session 4                           |
+| **`/bin`**, **`bin`** | Normal-user **command binaries** — Session 4                   |
+| **`lost+found`**      | File-system recovery area (admin topic; name appeared in chat) |
 
 ---
 
 ## 13. `15. usr` directory and closing notes
 
-| Point | Wording |
-| :--- | :--- |
+| Point      | Wording                                                                              |
+| :--------- | :----------------------------------------------------------------------------------- |
 | **`/usr`** | **usr means user** — contains **user-related software** / programs and related files |
 
 The **Note** lines typed after **`/boot`** in [`Screencast From 2026-11-04 15-06-45.webm`](../../../ScreenRecordings/Screencast%20From%202026-11-04%2015-06-45.webm) are the session summary:
 
-| # | Wording (on screen) |
-| :--- | :--- |
-| 1 | **operating system can locate files very easily.** |
-| 2 | **For every file system a separate name will be assigned.** |
-| 3 | **ext2,ext3, ext4 ,XFS are names of Linux File Systems** |
-| 4 | **NTFS,FAT are names of windows file systems** |
+| #    | Wording (on screen)                                         |
+| :--- | :---------------------------------------------------------- |
+| 1    | **operating system can locate files very easily.**          |
+| 2    | **For every file system a separate name will be assigned.** |
+| 3    | **ext2,ext3, ext4 ,XFS are names of Linux File Systems**    |
+| 4    | **NTFS,FAT are names of windows file systems**              |
 
 ```mermaid
 %%{init: {'theme': 'base', 'themeVariables': {'pie1': '#FF9800', 'pie2': '#1E88E5', 'pie3': '#43A047', 'pie4': '#8E24AA', 'pieTitleTextColor': '#212121', 'pieSectionTextColor': '#212121', 'pieStrokeColor': '#424242'}}}%%
@@ -456,19 +466,19 @@ pie title File system type names (class list)
 
 ## 14. Live demos from the recordings
 
-| Demo | Recording | What Durga Sir shows |
-| :--- | :--- | :--- |
-| FHS tree diagram | `fileSystem1` | Diagram-3 with **`/` → home → users → Desktop…** |
-| **`tmp` vs Desktop** | `fileSystem1` | **`tmp===>a.txt b.txt c.txt`** vs **`Desktop===>demo.txt`** |
-| **`ls /home`** | `fileSystem2` | Multiple user directories |
-| **`ls` / `ls -l` in `/dev`** | `fileSystem2` | Device files, **`stdin`/`stdout`/`stderr`**, character devices |
-| **`ls` in `/proc`** | `fileSystem2` | PID directories and virtual files |
-| **`ps -ef`** | `fileSystem2` | Process status listing |
-| Windows **This PC** | `fileSystem2` | **C:/D:/E:** vs Linux mount idea |
-| **`exit` from root → `who`** | `fileSystem2` | **`/root`** vs normal user **`durga`** (identity before **`/root`** topic) |
-| **`/home` + `/root` recap** | `Screencast 2026-11-04` | **`/home/durga`**, **`/home/ravi`**, **`/root`**; Q **`/` vs root** |
-| **Boot + Note + FS types** | `Screencast 2026-11-04` | **`14. boot`**, advantage note, **ext2/3/4/XFS**, **NTFS/FAT**, live diagram |
-| **OpenJDK vs Oracle JDK** | `Screencast 2026-11-04` | Repo vs **3rd party** example for **`/opt`** |
+| Demo                         | Recording               | What Durga Sir shows                                                         |
+| :--------------------------- | :---------------------- | :--------------------------------------------------------------------------- |
+| FHS tree diagram             | `fileSystem1`           | Diagram-3 with **`/` → home → users → Desktop…**                             |
+| **`tmp` vs Desktop**         | `fileSystem1`           | **`tmp===>a.txt b.txt c.txt`** vs **`Desktop===>demo.txt`**                  |
+| **`ls /home`**               | `fileSystem2`           | Multiple user directories                                                    |
+| **`ls` / `ls -l` in `/dev`** | `fileSystem2`           | Device files, **`stdin`/`stdout`/`stderr`**, character devices               |
+| **`ls` in `/proc`**          | `fileSystem2`           | PID directories and virtual files                                            |
+| **`ps -ef`**                 | `fileSystem2`           | Process status listing                                                       |
+| Windows **This PC**          | `fileSystem2`           | **C:/D:/E:** vs Linux mount idea                                             |
+| **`exit` from root → `who`** | `fileSystem2`           | **`/root`** vs normal user **`durga`** (identity before **`/root`** topic)   |
+| **`/home` + `/root` recap**  | `Screencast 2026-11-04` | **`/home/durga`**, **`/home/ravi`**, **`/root`**; Q **`/` vs root**          |
+| **Boot + Note + FS types**   | `Screencast 2026-11-04` | **`14. boot`**, advantage note, **ext2/3/4/XFS**, **NTFS/FAT**, live diagram |
+| **OpenJDK vs Oracle JDK**    | `Screencast 2026-11-04` | Repo vs **3rd party** example for **`/opt`**                                 |
 
 ---
 
@@ -484,11 +494,11 @@ You should explain **items 4–15** above and:
 6. **`ps`** — process status; **`/proc`** and **PID**.  
 7. **ext2/3/4, XFS** vs **NTFS, FAT**.
 
-| Question | Short answer |
-| :--- | :--- |
-| **mnt vs media?** | **mnt → manual** · **media → automatic** |
-| **`/` vs root?** | **`/` → FS root** · **`/root` → superuser home** |
-| **bin vs sbin?** | *(Session 4)* normal user vs superuser command binaries |
+| Question          | Short answer                                            |
+| :---------------- | :------------------------------------------------------ |
+| **mnt vs media?** | **mnt → manual** · **media → automatic**                |
+| **`/` vs root?**  | **`/` → FS root** · **`/root` → superuser home**        |
+| **bin vs sbin?**  | *(Session 4)* normal user vs superuser command binaries |
 
 **Next on portal:** Session 6 — VirtualBox & Ubuntu installation.
 
@@ -496,11 +506,11 @@ You should explain **items 4–15** above and:
 
 ## 16. Scripts
 
-| Script | Demonstrates |
-| :--- | :--- |
+| Script                                                                                                                           | Demonstrates                                                                         |
+| :------------------------------------------------------------------------------------------------------------------------------- | :----------------------------------------------------------------------------------- |
 | [`fhs-directories-tour-part2-demo.sh`](../../../scripts/file-system-navigation-and-hierarchy/fhs-directories-tour-part2-demo.sh) | **`/usr`**, **`/var`**, **`/tmp`**, **`/opt`**, **`/mnt`**, **`/proc`**, **`/root`** |
-| [`tty-and-dev-demo.sh`](../../../scripts/types-of-files-in-linux/tty-and-dev-demo.sh) | **`tty`**, **`/dev`** |
-| [`fhs-root-directories-demo.sh`](../../../scripts/file-system-navigation-and-hierarchy/fhs-root-directories-demo.sh) | **`ls -l /`** |
+| [`tty-and-dev-demo.sh`](../../../scripts/types-of-files-in-linux/tty-and-dev-demo.sh)                                            | **`tty`**, **`/dev`**                                                                |
+| [`fhs-root-directories-demo.sh`](../../../scripts/file-system-navigation-and-hierarchy/fhs-root-directories-demo.sh)             | **`ls -l /`**                                                                        |
 
 ```bash
 cd /path/to/Linux-Basics
