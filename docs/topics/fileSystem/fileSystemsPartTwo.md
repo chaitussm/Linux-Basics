@@ -19,6 +19,7 @@
   - [0. How the recordings map to this session](#0-how-the-recordings-map-to-this-session)
   - [1. Diagram — full hierarchy (Diagram-3)](#1-diagram--full-hierarchy-diagram-3)
   - [2. `4. tmp` directory](#2-4-tmp-directory)
+  - [Changing permissions](#changing-permissions)
   - [3. `5. dev` directory](#3-5-dev-directory)
   - [4. `6. mnt` and `7. media` — mounting](#4-6-mnt-and-7-media--mounting)
     - [`6. mnt` directory](#6-mnt-directory)
@@ -145,6 +146,76 @@ Generally files created in tmp folder will be removed automatically once we rest
 **Lab screenshot:** Checking if the ile in the `/tmp` folder after restarting the machine .
 
 ![Checking if the ile in the /tmp folder after restarting the machine](../../assets/tmpAfterRestart.png)
+
+---
+
+## Changing permissions
+
+**Lab screenshot:** removing the owner's read/write permission with `chmod` and seeing the effect.
+
+![Changing file permissions with chmod](../../assets/changingFilePermissions.png)
+
+**What the screenshot shows (step by step):**
+
+1. `ls -l demo.txt` → `-rw-r--r-- 1 durga newgrp 105 Mar 25 11:15 demo.txt`
+   - `-` : regular file
+   - `rw-` : **owner** (`durga`) can read and write
+   - `r--` : **group** (`newgrp`) can only read
+   - `r--` : **others** can only read
+   - `1` = hard-link count, `durga` = owner, `newgrp` = group, `105` = size in bytes, `Mar 25 11:15` = last modified, `demo.txt` = name.
+2. `chmod u-rw demo.txt` → `u` = user (owner), `-` = remove, `rw` = read and write. Group and others are untouched.
+3. `ls -l demo.txt` again → `----r--r-- ...`: the owner now has **no** permissions (`---`), group and others still have `r--`.
+4. `cat demo.txt` → `cat: demo.txt: Permission denied`. Even the owner is blocked, because Linux checks only the owner's bits for the owner (group/other bits are not used as a fallback).
+5. `gedit demo.txt` → the GUI editor opens but shows a red banner (second screenshot below): *Could not open the file "/home/durga/Desktop/demo.txt". You do not have the permissions necessary to open the file.* The editor area stays empty and there is a **Retry** button. The GUI app runs as the same user, so it is blocked by the same owner bits.
+
+**`chmod` symbolic syntax:** `chmod [who][operator][permissions] file`
+
+| Part | Values | Meaning |
+|------|--------|---------|
+| who | `u` / `g` / `o` / `a` | owner / group / others / all |
+| operator | `+` / `-` / `=` | add / remove / set exactly |
+| permissions | `r` / `w` / `x` | read / write / execute |
+
+To restore: `chmod u+rw demo.txt` (back to `-rw-r--r--`, i.e. `644`).
+
+**Lab screenshot (V2):** `gedit demo.txt` failing after the owner's read/write permission was removed.
+
+![gedit cannot open demo.txt - permission error](../../assets/changingFilePermissionsV2.png)
+
+```mermaid
+flowchart TD
+    A["ls -l demo.txt<br/>-rw-r--r--"] --> B["chmod u-rw demo.txt"]
+    B --> C["ls -l demo.txt<br/>----r--r--"]
+    C --> D["cat demo.txt"]
+    D --> E["Permission denied"]
+    C --> F["gedit demo.txt"]
+    F --> E
+    E --> G["chmod u+rw demo.txt<br/>restores access"]
+    G --> A
+
+    classDef start fill:#1E88E5,stroke:#0D47A1,color:#ffffff,stroke-width:2px
+    classDef cmd fill:#FF9800,stroke:#E65100,color:#212121,stroke-width:2px
+    classDef bad fill:#E53935,stroke:#B71C1C,color:#ffffff,stroke-width:2px
+    class A,C start
+    class B,D,F,G cmd
+    class E bad
+```
+
+```mermaid
+%%{init: {'theme': 'base', 'themeVariables': {'pie1': '#FF9800', 'pie2': '#1E88E5', 'pie3': '#43A047', 'pieTitleTextColor': '#212121', 'pieSectionTextColor': '#212121', 'pieStrokeColor': '#424242'}}}%%
+pie title Permission bits before chmod u-rw (rw-r--r--) — granted bits per class
+    "Owner: rw- (2 bits)" : 2
+    "Group: r-- (1 bit)" : 1
+    "Others: r-- (1 bit)" : 1
+```
+
+```mermaid
+%%{init: {'theme': 'base', 'themeVariables': {'pie1': '#FF9800', 'pie2': '#1E88E5', 'pieTitleTextColor': '#212121', 'pieSectionTextColor': '#212121', 'pieStrokeColor': '#424242'}}}%%
+pie title Permission bits after chmod u-rw (---r--r--) — granted bits per class
+    "Owner: --- (0 bits)" : 0
+    "Group: r-- (1 bit)" : 1
+    "Others: r-- (1 bit)" : 1
+```
 
 ---
 
