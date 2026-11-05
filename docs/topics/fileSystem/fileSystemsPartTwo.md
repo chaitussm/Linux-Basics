@@ -543,7 +543,7 @@ flowchart TD
 | :-------- | :-------------------------------------------------------------------------------------------------------------- |
 | Meaning   | **proc ===> means process**                                                                                     |
 | Behaviour | **In linux multiple processes running simultaneously.** For each process a **unique id** will be there: **PID** |
-| Layout    | Process data **inside proc directory** (numeric PID folders)                                                    |
+| Layout    | Process data **inside proc directory** (numeric PID folders) — **for every process a separate folder is created to maintain information related to that process** |
 | Command   | **`ps` command ===> process status**                                                                            |
 
 **Demo (`fileSystem2.webm`):**
@@ -565,6 +565,204 @@ flowchart LR
 
     classDef darkGrey fill:#5c5c5c,stroke:#3d3d3d,color:#ffffff,stroke-width:2px
     class KERN,PROC,PS darkGrey
+```
+
+### Screenshot: `ps -ef` output
+
+**Lab screenshot:** the full-format process list on `surya@suryathinkpad` (only the top of the output is visible; the list continues below).
+
+![ps -ef process list](../../assets/processSystem.png)
+
+**What the screenshot shows (line by line):**
+
+1. `logout` → the previous root shell (from `sudo -i`) was closed, returning to the normal user.
+2. `surya@suryathinkpad:/$ ps -ef` → prompt is back to `$` (normal user) in `/`. `ps -ef` lists **every** process: `-e` = all processes, `-f` = full format.
+3. Header row `UID PID PPID C STIME TTY TIME CMD` → the column names (explained in the table below).
+4. `root 1 0 0 15:35 ? 00:00:04 /usr/lib/systemd/systemd --switched-root --system --deserialize=49 splash` → **PID 1**, the first process, started at boot (15:35). Its parent is `0` (the kernel itself). It is `systemd`, the init system that starts all other services. `--switched-root` means it took over after the initramfs stage; `splash` is the boot-splash option. It has used 4 seconds of CPU.
+5. `root 2 0 0 15:35 ? 00:00:00 [kthreadd]` → **PID 2**, the kernel thread daemon, also a child of `0`. It creates all other kernel threads.
+6. `[pool_workqueue_release]` (PID 3) and the `[kworker/R-...]` lines (PIDs 4-8, 13) → kernel worker threads (`rcu_gp`, `sync_wq`, `kvfree_rcu_reclaim`, `slub_flushwq`, `netns`, `mm_percpu_wq`). Their **PPID is `2`**, so they are children of `kthreadd`.
+7. `[kworker/0:0H-events_highpri]` (PID 10), `[kworker/4:0H-...]` (PID 32), `[kworker/6:0H-...]` (PID 38) → high-priority worker threads bound to CPUs 0, 4 and 6.
+8. `[ksoftirqd/0]`, `/2`, `/4`, `/6` (PIDs 14, 24, 30, 36) → one thread per CPU that handles deferred soft interrupts.
+9. `[rcu_preempt]` (PID 15) → the only visible entry with real CPU time (`00:00:31`); it handles RCU (read-copy-update) synchronisation inside the kernel.
+10. `[rcu_exp_par_gp_kthread_worker/0]` and `[rcu_exp_gp_kthread_worker]` (PIDs 16, 17) → more RCU helper threads.
+11. `[migration/N]`, `[idle_inject/N]`, `[cpuhp/N]` for CPUs 0, 2, 4, 6, 8 → per-CPU threads for moving tasks between CPUs, idle injection (thermal control) and CPU hot-plug.
+12. The bottom row (PID 41, `[migration/8]`) is cut off; the full list continues with more kernel threads, then system services and user processes.
+
+**Observations from the data:**
+
+- Every visible row has `UID = root`, `TTY = ?` and `STIME = 15:35`: kernel/system processes started at boot with no controlling terminal.
+- Names in **square brackets `[ ]`** are **kernel threads**; `systemd` (no brackets) is a normal user-space program.
+- Missing PIDs (9, 11, 12, 25, 26, 31, 37 ...) are threads that do not exist or are not shown.
+- Process data for each PID is also available in `/proc/<PID>/` (for example `/proc/1/`).
+- **For every process a separate folder is created** (named after its PID) inside `/proc` to maintain the information related to that process, for example `/proc/1/` for `systemd` and `/proc/2/` for `kthreadd`. The folder disappears when the process ends.
+
+**`ps -ef` columns:**
+
+| Column | Meaning | Example in screenshot |
+|---|---|---|
+| UID | User that owns the process | `root` |
+| PID | Unique process ID | `1`, `2`, `15` |
+| PPID | Parent process ID | `0` for PID 1/2, `2` for kernel threads |
+| C | Recent CPU usage (percent) | `0` |
+| STIME | Start time | `15:35` |
+| TTY | Controlling terminal (`?` = none) | `?` |
+| TIME | Total CPU time used | `00:00:31` for `rcu_preempt` |
+| CMD | Command / thread name | `/usr/lib/systemd/systemd ...`, `[kthreadd]` |
+
+```mermaid
+flowchart TD
+    K["Kernel (PID 0)"] --> S["PID 1: systemd<br/>init system, user-space parent"]
+    K --> T["PID 2: kthreadd<br/>kernel thread parent"]
+    S --> SV["System services<br/>and user sessions (later rows)"]
+    T --> W["kworker/* threads"]
+    T --> Q["ksoftirqd/N"]
+    T --> R["rcu_* threads"]
+    T --> M["migration/N, cpuhp/N,<br/>idle_inject/N"]
+
+    classDef kern fill:#1E88E5,stroke:#0D47A1,color:#ffffff,stroke-width:2px
+    classDef init fill:#43A047,stroke:#1B5E20,color:#ffffff,stroke-width:2px
+    classDef thr fill:#FF9800,stroke:#E65100,color:#212121,stroke-width:2px
+    class K kern
+    class S,SV init
+    class T,W,Q,R,M thr
+```
+
+```mermaid
+flowchart LR
+    A["Type: ps -ef"] --> B["ps reads /proc/PID/ entries"]
+    B --> C["Collect UID, PID, PPID,<br/>C, STIME, TTY, TIME, CMD"]
+    C --> D["Print header + one row per process"]
+    D --> E{"CMD in [ ] ?"}
+    E -->|Yes| F["Kernel thread"]
+    E -->|No| G["User-space program"]
+
+    classDef cmd fill:#FF9800,stroke:#E65100,color:#212121,stroke-width:2px
+    classDef dec fill:#8E24AA,stroke:#4A148C,color:#ffffff,stroke-width:2px
+    classDef res fill:#43A047,stroke:#1B5E20,color:#ffffff,stroke-width:2px
+    class A,B,C,D cmd
+    class E dec
+    class F,G res
+```
+
+### Screenshot: inside `/proc` (`cd /proc` and `ls`)
+
+**Lab screenshot:** listing the contents of the `/proc` directory.
+
+![Listing of the /proc directory](../../assets/procFolder.png)
+
+**What the screenshot shows (point by point):**
+
+1. `surya@suryathinkpad:/$ cd /proc` → moves from `/` into the `/proc` directory using an absolute path. The prompt changes to `/proc`.
+2. `ls` → lists everything inside `/proc`. The output has two kinds of entries.
+3. **Numeric entries (`1`, `2`, `3`, `10`, `100`, `1000`, `1059`, `3789`, `90417` ...)** → one folder per running process; the number is the **PID**. These are the same PIDs seen in `ps -ef` (`1` = systemd, `2` = kthreadd). They are shown in bold blue because they are directories. Because processes start and stop, the list is not continuous and the numbers change over time.
+4. **Non-numeric entries** → system-wide information, not tied to one process:
+
+| Entry | What it holds |
+|---|---|
+| `cmdline` | Command-line options passed to the kernel at boot |
+| `cpuinfo` | CPU details (model, cores, speed) |
+| `meminfo` | Memory usage (total, free, cached ...) |
+| `uptime` | Time since the system booted |
+| `version` / `version_signature` | Kernel version information |
+| `loadavg` | Load average of the system |
+| `devices` | Registered character and block devices |
+| `filesystems` | File system types supported by the kernel |
+| `partitions`, `diskstats` | Disk partitions and disk I/O statistics |
+| `mounts` | Currently mounted file systems (shown in a different colour because it is a symbolic link to `self/mounts`) |
+| `interrupts`, `softirqs`, `irq` | Interrupt counters and per-IRQ settings |
+| `ioports`, `iomem` | I/O port and memory address ranges in use |
+| `swaps` | Swap areas in use (here `swap.img`) |
+| `modules` | Loaded kernel modules |
+| `stat`, `vmstat`, `schedstat` | Kernel, virtual memory and scheduler statistics |
+| `net`, `scsi`, `tty`, `fs`, `sys`, `bus`, `driver`, `acpi`, `asound`, `sysvipc`, `irq`, `pressure` | Sub-directories for networking, SCSI, terminals, file systems, kernel tunables, buses, drivers, power, sound, IPC and pressure-stall info |
+| `self` | A link to the `/proc/<PID>` folder of the process that is reading it (for `ls`, that is the `ls` process itself) |
+| `thread-self` | Same idea for the current thread |
+
+5. **Colours:** bold blue / cyan names are directories or links, plain white names are regular (virtual) files.
+6. The final prompt `surya@suryathinkpad:/proc$` → still inside `/proc`, ready for the next command.
+
+**Key idea:** `/proc` is a **virtual file system**. Nothing is stored on disk; the kernel generates these files on the fly, so they show live process and system information.
+
+### Screenshot: inside one process folder (`cd 3789` and `ls`)
+
+**Lab screenshot:** entering the folder of process **3789** and listing it.
+
+![Contents of /proc/3789](../../assets/directoriesInProc.png)
+
+**What the screenshot shows (point by point):**
+
+1. `surya@suryathinkpad:/proc$ cd 3789` → enters the folder of the process with PID `3789`. This proves that **every process has its own separate folder** in `/proc`. The prompt changes to `/proc/3789`.
+2. `ls` → lists the files and folders holding the information about that one process.
+3. Important entries:
+
+| Entry | What it holds |
+|---|---|
+| `cmdline` | Full command line that started the process |
+| `comm` | Short name of the command |
+| `status` | Readable summary: name, state, PID, PPID, UID/GID, memory use |
+| `stat`, `statm` | Same data in machine-readable form (process and memory statistics) |
+| `environ` | Environment variables of the process |
+| `exe` (red) | Symbolic link to the executable file that is running |
+| `cwd` (red) | Symbolic link to the process's current working directory |
+| `root` (red) | Symbolic link to the root directory the process sees (normally `/`) |
+| `fd` | Folder of open file descriptors (files, sockets, pipes the process has open) |
+| `fdinfo` | Extra details for each open file descriptor |
+| `maps`, `smaps`, `smaps_rollup`, `pagemap` | Memory map of the process: which addresses are used and by what |
+| `mem` | Raw memory of the process (access is restricted) |
+| `limits` | Resource limits (open files, stack size ...) |
+| `io` | Bytes read and written by the process |
+| `mounts`, `mountinfo`, `mountstats` | Mounts visible to the process |
+| `net` | Network information as seen by the process |
+| `ns` | Namespaces the process belongs to |
+| `task` | One sub-folder per thread of the process |
+| `sched`, `schedstat` | Scheduler information |
+| `oom_score`, `oom_adj`, `oom_score_adj` | Out-of-memory killer ranking and tuning |
+| `cgroup`, `cpu_resctrl_groups` | Control group membership |
+| `attr` | Security attributes (for example AppArmor/SELinux) |
+| `syscall`, `stack`, `wchan` | What the process is waiting on or running in the kernel |
+| `uid_map`, `gid_map`, `setgroups`, `projid_map` | User/group ID mappings (user namespaces) |
+| `timers`, `timerslack_ns`, `timens_offsets` | Timer-related information |
+| `personality`, `sessionid`, `loginuid` | Execution domain, login session and login user ID |
+| `autogroup`, `auxv`, `coredump_filter`, `clear_refs`, `latency`, `patch_state`, `arch_status`, `ksm_*` | Scheduling group, ELF auxiliary vector, core-dump settings, memory/kernel tuning and diagnostic files |
+
+4. **Colours:** blue names (`attr`, `fd`, `fdinfo`, `map_files`, `net`, `ns`, `task`) are directories; red highlighted names (`exe`, `cwd`, `root`) are symbolic links; the rest are regular virtual files.
+5. The final prompt `surya@suryathinkpad:/proc/3789$` → still inside the process folder. Typing `cat status` here would show the details of PID 3789.
+
+**Key idea:** the numeric folder in the first screenshot is exactly this kind of per-process folder; it exists only while process 3789 is running.
+
+```mermaid
+flowchart TD
+    P["/proc  (virtual file system)"] --> N["Numeric folders<br/>one per process (PID)"]
+    P --> S["System-wide files and folders<br/>cpuinfo, meminfo, uptime, version,<br/>devices, mounts, net, sys ..."]
+    P --> SELF["self / thread-self<br/>link to the current process"]
+    N --> X["/proc/3789"]
+    X --> X1["Identity<br/>cmdline, comm, status, stat"]
+    X --> X2["Links<br/>exe, cwd, root"]
+    X --> X3["Open files<br/>fd, fdinfo"]
+    X --> X4["Memory<br/>maps, smaps, mem, statm"]
+    X --> X5["Threads and scheduling<br/>task, sched, schedstat"]
+    X --> X6["Limits and isolation<br/>limits, cgroup, ns, oom_score"]
+
+    classDef top fill:#1E88E5,stroke:#0D47A1,color:#ffffff,stroke-width:2px
+    classDef grp fill:#FF9800,stroke:#E65100,color:#212121,stroke-width:2px
+    classDef leaf fill:#43A047,stroke:#1B5E20,color:#ffffff,stroke-width:2px
+    class P top
+    class N,S,SELF,X grp
+    class X1,X2,X3,X4,X5,X6 leaf
+```
+
+```mermaid
+flowchart LR
+    A["cd /proc"] --> B["ls<br/>PID folders + system files"]
+    B --> C["pick a PID from ps -ef<br/>e.g. 3789"]
+    C --> D["cd 3789"]
+    D --> E["ls<br/>cmdline, status, exe, cwd, fd, maps ..."]
+    E --> F["cat status<br/>read that process's details"]
+
+    classDef cmd fill:#FF9800,stroke:#E65100,color:#212121,stroke-width:2px
+    classDef res fill:#43A047,stroke:#1B5E20,color:#ffffff,stroke-width:2px
+    class A,B,C,D,E cmd
+    class F res
 ```
 
 ---
