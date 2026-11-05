@@ -170,11 +170,11 @@ Generally files created in tmp folder will be removed automatically once we rest
 
 **`chmod` symbolic syntax:** `chmod [who][operator][permissions] file`
 
-| Part | Values | Meaning |
-|------|--------|---------|
-| who | `u` / `g` / `o` / `a` | owner / group / others / all |
-| operator | `+` / `-` / `=` | add / remove / set exactly |
-| permissions | `r` / `w` / `x` | read / write / execute |
+| Part        | Values                | Meaning                      |
+| ----------- | --------------------- | ---------------------------- |
+| who         | `u` / `g` / `o` / `a` | owner / group / others / all |
+| operator    | `+` / `-` / `=`       | add / remove / set exactly   |
+| permissions | `r` / `w` / `x`       | read / write / execute       |
 
 To restore: `chmod u+rw demo.txt` (back to `-rw-r--r--`, i.e. `644`).
 
@@ -470,6 +470,69 @@ flowchart TB
 
     classDef darkGrey fill:#5c5c5c,stroke:#3d3d3d,color:#ffffff,stroke-width:2px
     class ROOT,HOME,RT,U1,U2 darkGrey
+```
+
+### Screenshot: root user (super user) vs root directory (`/`)
+
+**Lab screenshot:** walking up to the top of the tree with `cd ..`, listing it, then switching to the root user with `sudo -i` (prompt `surya@suryathinkpad`; the title bar changes to `root@suryathinkpad: ~ — sudo -i`).
+
+![Root directory / listed with ls](../../assets/rootDirVsRootLinuxDir.png)
+
+**What the screenshot shows (line by line):**
+
+1. `cd ..` from `~/linuxbasics` → moves up one level to `~` (`/home/surya`).
+2. `cd ..` from `~` → moves up to `/home`. The prompt now shows `/home`.
+3. `cd ..` from `/home` → moves up to `/`, the **root directory**. The prompt shows `/`.
+4. `pwd` → prints `/`, confirming we are at the top of the file system tree. There is no parent above it, so `cd ..` here stays at `/`.
+5. `ls` → lists the top-level directories: `bin`, `boot`, `cdrom`, `dev`, `etc`, `home`, `lib`, `lib64`, `lost+found`, `media`, `mnt`, `opt`, `proc`, `root`, `run`, `sbin`, `snap`, `srv`, `swap.img` (a file), `sys`, `tmp` (green background = world-writable with sticky bit), `usr`, `var`.
+6. Notice that `root` appears **inside** `/`. That is the home directory of the root user (`/root`), a different thing from `/` itself.
+7. `sudo -i` → starts an interactive **login shell as the root (super) user** using your own `sudo` rights.
+8. `[sudo: authenticate] Password:` → `sudo` asks for **surya's own password** (not root's). Nothing is echoed while typing.
+9. `root@suryathinkpad:~#` → the prompt changed: user is now `root` and the symbol is `#` (super user) instead of `$` (normal user). The terminal title bar also turns red and shows `sudo -i`.
+10. `whoami` → prints `root`, confirming the current user is the super user.
+11. `pwd` → prints `/root`. A `sudo -i` login shell starts in root's **home directory** (`~` = `/root`), not in `/`.
+12. Final `root@suryathinkpad:~#` prompt → ready for the next command, with full privileges.
+
+**Key point:** earlier `pwd` printed `/` (the root *directory*), while after `sudo -i` it prints `/root` (the root *user's home*). Being the root user does not put you in `/`, and standing in `/` does not make you the root user. Use `exit` to return to `surya`.
+
+**Three different things called "root":**
+
+|                  | Root directory `/`                                     | Root user (super user)                       | Root's home `/root`                        |
+| ---------------- | ------------------------------------------------------ | -------------------------------------------- | ------------------------------------------ |
+| What it is       | Top of the whole directory tree                        | Account with UID `0` and unrestricted power  | Home folder of the root user               |
+| Type             | Directory                                              | User account                                 | Directory inside `/`                       |
+| Path / name      | `/`                                                    | `root`                                       | `/root`                                    |
+| Prompt symbol    | `surya@suryathinkpad:/$` (still `$` for a normal user) | `root@suryathinkpad:~#` (`#` instead of `$`) | `~` = `/root` when logged in as root       |
+| How to get there | `cd /` or `cd ..` repeatedly; `pwd` prints `/`         | `sudo -i` (then `whoami` prints `root`)      | `sudo -i` lands here; `pwd` prints `/root` |
+| Who can use it   | Everyone can read/traverse it                          | Only via `sudo`, `su` or direct login        | Only root (normally `700`)                 |
+| Analogy          | The ground floor of a building                         | The building owner with all keys             | The owner's private room                   |
+
+```mermaid
+flowchart TD
+    R["The word 'root' in Linux"] --> D["Root directory /"]
+    R --> U["Root user (super user)"]
+    D --> D1["Top of the file system tree"]
+    D --> D2["Contains bin, etc, home,<br/>usr, var, tmp, root ..."]
+    D --> D3["pwd prints /"]
+    U --> U1["UID 0, full control of the system"]
+    U --> U2["Used via sudo / su<br/>prompt ends with #"]
+    U --> U3["Home directory is /root"]
+    D2 --> H["/root"]
+    U3 --> H
+    H["/root = home of the root user<br/>(a directory INSIDE /)"]
+    D3 --> S["sudo -i + password"]
+    S --> W["root@host:~# whoami = root"]
+    W --> P["pwd = /root"]
+    P --> H
+
+    classDef top fill:#1E88E5,stroke:#0D47A1,color:#ffffff,stroke-width:2px
+    classDef dir fill:#FF9800,stroke:#E65100,color:#212121,stroke-width:2px
+    classDef usr fill:#E53935,stroke:#B71C1C,color:#ffffff,stroke-width:2px
+    classDef link fill:#43A047,stroke:#1B5E20,color:#ffffff,stroke-width:2px
+    class R top
+    class D,D1,D2,D3 dir
+    class U,U1,U2,U3 usr
+    class H,S,W,P link
 ```
 
 ---
