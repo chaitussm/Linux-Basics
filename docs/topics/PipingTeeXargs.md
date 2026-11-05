@@ -6,12 +6,12 @@
 
 **Prerequisites:** [redirection.md](redirection.md) (streams 0/1/2, `>`, `2>`) · [pipeCommands.md](pipeCommands.md) (first introduction to `|`) · [wordCountCommand.md](wordCountCommand.md) (`wc`) · [viewContentOfFiles.md](viewContentOfFiles.md) (`head`, `tail`, `cat`)
 
-**Scripts:** [`scripts/PipingTeeXargs.sh`](../../scripts/PipingTeeXargs.sh) · [`scripts/PipingTeeXargs/`](../../scripts/PipingTeeXargs/)  
+**Scripts:** [`scripts/piping-tee-xargs/run-all.sh`](../../scripts/piping-tee-xargs/run-all.sh) · [`scripts/piping-tee-xargs/`](../../scripts/piping-tee-xargs/)  
 **Execution summary:** [`PipingTeeXargs.md`](../../scripts-execution-summary/PipingTeeXargs.md)
 
 ```bash
 cd /path/to/Linux-Basics
-bash scripts/PipingTeeXargs.sh
+bash scripts/piping-tee-xargs/run-all.sh
 ```
 
 ---
@@ -133,7 +133,7 @@ flowchart LR
 **Lab command:**
 
 ```bash
-bash scripts/PipingTeeXargs/pipe-ls-head-wc-demo.sh
+bash scripts/piping-tee-xargs/pipe-ls-head-wc-demo.sh
 ```
 
 ---
@@ -169,12 +169,12 @@ If a command **only** accepts file names and **never** reads stdin, it is a **po
 
 ---
 
-### Your lab — `wc` (`scripts/linuxbasics`)
+### Your lab — `wc` (`scripts/linux-basics-practice`)
 
 **1) Input from the terminal (keyboard):**
 
 ```bash
-cd scripts/linuxbasics
+cd scripts/linux-basics-practice
 wc
 ```
 
@@ -252,7 +252,7 @@ cat marks.txt | sort | uniq -c
 **Lab command:**
 
 ```bash
-bash scripts/PipingTeeXargs/pipe-filters-sort-uniq-demo.sh
+bash scripts/piping-tee-xargs/pipe-filters-sort-uniq-demo.sh
 ```
 
 ### Example 5 — `ls` | `grep` (pattern)
@@ -269,7 +269,7 @@ ls -l | grep ".sh"
 
 Durga Sir stresses: **order matters** — each command reads what the **previous** command produced.
 
-### Your lab — `ls -l | wc` then `ls -l | wc | wc -l` (`scripts/linuxbasics`)
+### Your lab — `ls -l | wc` then `ls -l | wc | wc -l` (`scripts/linux-basics-practice`)
 
 **Short form:** On most Ubuntu/bash setups, **`ll`** is an **alias** for **`ls -l`** (long listing). Check with `type ll` — you often see `ll is aliased to 'ls -l'`. So these are the same idea:
 
@@ -281,7 +281,7 @@ ls -l | wc
 See [commandAliasing.md](commandAliasing.md) (Session 13) and [Bash Built-in Commands.md — `alias`](Bash%20Built-in%20Commands.md) for how aliases are defined.
 
 ```bash
-cd scripts/linuxbasics
+cd scripts/linux-basics-practice
 ls -l | wc
 ls -l | wc | wc -l
 ```
@@ -327,7 +327,7 @@ The **error message** still appears on the **terminal**; **`wc`** may get **no**
 **Lab command:**
 
 ```bash
-bash scripts/PipingTeeXargs/pipe-stdout-only-not-stderr-demo.sh
+bash scripts/piping-tee-xargs/pipe-stdout-only-not-stderr-demo.sh
 ```
 
 ---
@@ -364,14 +364,14 @@ flowchart LR
     class P,WC,T,P2,WC2 blue
 ```
 
-### Your lab — broken pipe vs correct count (`scripts/linuxbasics`)
+### Your lab — broken pipe vs correct count (`scripts/linux-basics-practice`)
 
 Use **`outputData.txt`** from [redirection.md §15](redirection.md#15-lab--add-and-remove-data-in-a-file-outputdatatxt).
 
 **Step A — piping looks connected, but count is `0`:**
 
 ```bash
-cd scripts/linuxbasics
+cd scripts/linux-basics-practice
 ls -l > outputData.txt | cat outputData.txt | wc -l
 ls -l /etc > outputData.txt | cat outputData.txt | wc -l
 ```
@@ -515,10 +515,10 @@ flowchart LR
 4. **Rightward branch** → **`wc`** receives a **copy** as **stdin** and prints counts.  
 5. Replacing **`tee`** with **`>`** breaks step 4 — that is exactly the **`0`** vs **`246`** lab in [§9](#9-when-piping-breaks--before-).
 
-### Your lab — `ls -l /etc | tee outputData.txt | wc -l` (`scripts/linuxbasics`)
+### Your lab — `ls -l /etc | tee outputData.txt | wc -l` (`scripts/linux-basics-practice`)
 
 ```bash
-cd scripts/linuxbasics
+cd scripts/linux-basics-practice
 ls -l /etc | tee outputData.txt | wc -l
 cat outputData.txt
 ```
@@ -574,8 +574,8 @@ echo "report" | tee file1.txt file2.txt
 **Repo demo scripts:**
 
 ```bash
-bash scripts/PipingTeeXargs/tee-screen-and-file-demo.sh
-bash scripts/PipingTeeXargs/tee-append-multiple-files-demo.sh
+bash scripts/piping-tee-xargs/tee-screen-and-file-demo.sh
+bash scripts/piping-tee-xargs/tee-append-multiple-files-demo.sh
 ```
 
 ---
@@ -607,12 +607,12 @@ ls -l | tee output.txt | wc > wc.txt
 
 You end with **two files**: **`output.txt`** (full listing) and **`wc.txt`** (three numbers from **`wc`**). That is different from [§10](#10-tee--write-to-file-and-screen) where **`wc -l`** printed **`246`** on screen — here the **last** stage uses **`>`**, so verify with **`cat wc.txt`**.
 
-### Lab test evidence — `scripts/linuxbasics`
+### Lab test evidence — `scripts/linux-basics-practice`
 
 Same pipeline in the repo lab folder (file names match your terminal):
 
 ```bash
-cd scripts/linuxbasics
+cd scripts/linux-basics-practice
 ls -l | tee outputData.txt | wc > wordCount.txt
 cat wordCount.txt
 ```
@@ -707,7 +707,7 @@ Both **`copy1.txt`** and **`copy2.txt`** get the **same** `ls -l` output; **`wc 
 **`tee`** accepts **more than two** file operands. Bash **brace expansion** `{1..10}` builds many names in one shot:
 
 ```bash
-cd scripts/linuxbasics
+cd scripts/linux-basics-practice
 cat inputData.txt | tee file{1..10}.txt
 ls
 ```
@@ -779,7 +779,7 @@ ls -l | tee outputData.txt | wc | tee wordCount.txt
 2. **Second `tee`** — can capture a **later** stage (here, the **three numbers** from **`wc`** in **`wordCount.txt`**) without breaking the pipe.
 3. **`tee`** can appear **multiple times**; order matters — each **`tee`** only sees what reached that point in the chain.
 4. Use **`>`** on the **last** step when you want a file **and** no terminal output; use **`tee`** on the last step when you want **file and screen** together.
-5. Same lab folder: **`scripts/linuxbasics`** — run both patterns and compare what appears on screen.
+5. Same lab folder: **`scripts/linux-basics-practice`** — run both patterns and compare what appears on screen.
 
 ![Terminal: redirect vs double tee — ls -l | tee outputData.txt | wc > wordCount.txt, cat; then ls -l | tee outputData.txt | wc | tee wordCount.txt shows 33 294 1976](../assets/tee-double-tee-listing-and-wc-counts-terminal.png)
 
@@ -836,12 +836,12 @@ cat file1.txt file2.txt | tee file3.txt | sort -r > sorted.txt
 
 **Why `tee` here:** You need **`file3.txt`** (unsorted merge) **and** **`sorted.txt`** (sorted merge) from **one** run of **`cat`**. Redirect-only **`>`** after **`cat`** would fill **`file3.txt`** but **break** the pipe to **`sort`** — same lesson as [§9](#9-when-piping-breaks--before-).
 
-### Lab test evidence — `scripts/linuxbasics` (answer)
+### Lab test evidence — `scripts/linux-basics-practice` (answer)
 
 Same pattern with lab file names (your terminal):
 
 ```bash
-cd scripts/linuxbasics
+cd scripts/linux-basics-practice
 ls /dev > devfiles.txt
 ls /bin > binfiles.txt
 cat devfiles.txt binfiles.txt | tee alltypefiles.txt | sort -r > sorted.txt
@@ -860,7 +860,7 @@ wc alltypefiles.txt
 | **`wc alltypefiles.txt`**      | Lab example: **`1942` lines** — both directories contributed many entries                                                                              |
 | **Typo note**                  | `head -5 alltypesfiles.txt` fails (extra **`s`**); correct name is **`alltypefiles.txt`**                                                              |
 
-Repo copies (for study without re-running **`ls /dev`**): [`devfiles.txt`](../../scripts/linuxbasics/devfiles.txt), [`binfiles.txt`](../../scripts/linuxbasics/binfiles.txt), [`alltypefiles.txt`](../../scripts/linuxbasics/alltypefiles.txt), [`sorted.txt`](../../scripts/linuxbasics/sorted.txt).
+Repo copies (for study without re-running **`ls /dev`**): [`devfiles.txt`](../../scripts/linux-basics-practice/devfiles.txt), [`binfiles.txt`](../../scripts/linux-basics-practice/binfiles.txt), [`alltypefiles.txt`](../../scripts/linux-basics-practice/alltypefiles.txt), [`sorted.txt`](../../scripts/linux-basics-practice/sorted.txt).
 
 ---
 
@@ -896,12 +896,12 @@ cat input.txt | xargs rm
 
 (Only use **`rm`** with **`xargs`** when you are sure every line in the file is a file you intend to delete — see [§14](#14-xargs--build-command-lines-from-stdin).)
 
-### Lab test evidence — `cat … | rm` fails (`scripts/linuxbasics`)
+### Lab test evidence — `cat … | rm` fails (`scripts/linux-basics-practice`)
 
 In the lab folder, the same idea is shown on a real terminal:
 
 ```bash
-cd scripts/linuxbasics
+cd scripts/linux-basics-practice
 ls
 cat inputData.txt | rm
 ```
@@ -910,7 +910,7 @@ cat inputData.txt | rm
 
 | What the lab shows                                             | Meaning                                                                                                                                                     |
 | :------------------------------------------------------------- | :---------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| **`ls`**                                                       | Files in **`scripts/linuxbasics`** (scripts, **`outputData.txt`**, **`wordCount.txt`**, etc.)                                                               |
+| **`ls`**                                                       | Files in **`scripts/linux-basics-practice`** (scripts, **`outputData.txt`**, **`wordCount.txt`**, etc.)                                                               |
 | **`cat inputData.txt \| rm`**                                  | **`rm: missing operand`** — **`rm`** got **no** file names as **arguments**; the pipe does **not** turn stream text into **`rm file1 file2`** automatically |
 | **`cat: inputData.txt: No such file or directory`** (if shown) | Fix the file name for your lab (e.g. create **`inputData.txt`** with one file name per line) — the **`rm`** error still illustrates the **xargs** lesson    |
 
@@ -958,12 +958,12 @@ cat input.txt | xargs rm
 
 Related class example (limit how many names per **`rm`** invocation): `cat input.txt | head -3 | xargs rm` — only the **first three lines** from the file are passed to **`rm`**.
 
-### Lab test evidence — `inputData.txt` and `xargs rm` (`scripts/linuxbasics`)
+### Lab test evidence — `inputData.txt` and `xargs rm` (`scripts/linux-basics-practice`)
 
 **Step 1 — create targets and build the list file**
 
 ```bash
-cd scripts/linuxbasics
+cd scripts/linux-basics-practice
 touch file{1..5}.txt
 ls
 gedit inputData.txt
@@ -1037,8 +1037,8 @@ Durga Sir warning: **`find … | xargs rm`** is dangerous — wrong matches dele
 **Lab commands:**
 
 ```bash
-bash scripts/PipingTeeXargs/xargs-build-command-line-demo.sh
-bash scripts/PipingTeeXargs/xargs-with-find-style-demo.sh
+bash scripts/piping-tee-xargs/xargs-build-command-line-demo.sh
+bash scripts/piping-tee-xargs/xargs-with-find-style-demo.sh
 ```
 
 ---
@@ -1083,12 +1083,12 @@ cat input.txt | xargs cat
 
 Same pattern as **`cat input.txt | xargs rm`** in [§14](#14-xargs--build-command-lines-from-stdin), but the command after **`xargs`** is **`cat`** (read/display) instead of **`rm`** (delete).
 
-### Lab test evidence — `inputData.txt` and `xargs cat` (`scripts/linuxbasics`)
+### Lab test evidence — `inputData.txt` and `xargs cat` (`scripts/linux-basics-practice`)
 
 **Step 1 — put target file names in the list file**
 
 ```bash
-cd scripts/linuxbasics
+cd scripts/linux-basics-practice
 cat inputData.txt    # optional: see current list
 gedit inputData.txt
 ```
@@ -1116,7 +1116,7 @@ cat inputData.txt | xargs cat
 | Repeated lines from **`filedata.txt`** / **`fileinfo.txt`**       | **`xargs cat`** passed those paths to **`cat`**; output is **file contents**, not file names |
 | **`logfile.sh`** script body (`#!/bin/bash`, `timestamp=…`, etc.) | Third argument from the list — **`cat`** prints the script source like any text file         |
 
-**Note:** If a name in **`inputData.txt`** is wrong or the file is missing, **`cat`** reports an error for that operand. Keep **one file name per line** and paths relative to **`scripts/linuxbasics`** (or use full paths in the list).
+**Note:** If a name in **`inputData.txt`** is wrong or the file is missing, **`cat`** reports an error for that operand. Keep **one file name per line** and paths relative to **`scripts/linux-basics-practice`** (or use full paths in the list).
 
 ---
 
@@ -1129,10 +1129,10 @@ After [§15](#15-eg2--display-contents-of-files-named-in-an-input-file), you hav
 | **`date \| echo`**       | **`echo`** ignores the pipe → **no** date on screen                             |
 | **`date \| xargs echo`** | **`xargs`** passes the date string as **arguments** to **`echo`** → date prints |
 
-**Lab — `scripts/linuxbasics`:**
+**Lab — `scripts/linux-basics-practice`:**
 
 ```bash
-cd scripts/linuxbasics
+cd scripts/linux-basics-practice
 date | xargs echo
 cal | xargs echo
 ```
@@ -1184,7 +1184,7 @@ ls -l /etc | tee etclist.txt | wc -l
 - [ ] Run `cat inputData.txt | xargs cat` (eg2 — [§15](#15-eg2--display-contents-of-files-named-in-an-input-file))
 - [ ] Run `date | xargs echo` and `cal | xargs echo`; compare with plain `date` and `cal` ([§16](#16-printing-date-and-cal-with-xargs-echo))
 - [ ] Run `echo "a b c" | xargs touch`
-- [ ] Run `bash scripts/PipingTeeXargs.sh`
+- [ ] Run `bash scripts/piping-tee-xargs/run-all.sh`
 - [ ] Add lab **screenshots** under each block after class (same workflow as `redirection.md`)
 
 ---
@@ -1193,14 +1193,14 @@ ls -l /etc | tee etclist.txt | wc -l
 
 | Script                                                                                                    | Topic                       |
 | :-------------------------------------------------------------------------------------------------------- | :-------------------------- |
-| [`PipingTeeXargs.sh`](../../scripts/PipingTeeXargs.sh)                                                    | Run all Session 12 demos    |
-| [`pipe-ls-head-wc-demo.sh`](../../scripts/PipingTeeXargs/pipe-ls-head-wc-demo.sh)                         | `ls \| head`, `ls \| wc -l` |
-| [`pipe-filters-sort-uniq-demo.sh`](../../scripts/PipingTeeXargs/pipe-filters-sort-uniq-demo.sh)           | `sort \| uniq`              |
-| [`pipe-stdout-only-not-stderr-demo.sh`](../../scripts/PipingTeeXargs/pipe-stdout-only-not-stderr-demo.sh) | stderr not piped            |
-| [`tee-screen-and-file-demo.sh`](../../scripts/PipingTeeXargs/tee-screen-and-file-demo.sh)                 | `tee` to file + screen      |
-| [`tee-append-multiple-files-demo.sh`](../../scripts/PipingTeeXargs/tee-append-multiple-files-demo.sh)     | `tee -a`, multiple files    |
-| [`xargs-build-command-line-demo.sh`](../../scripts/PipingTeeXargs/xargs-build-command-line-demo.sh)       | `xargs touch`, `-n`         |
-| [`xargs-with-find-style-demo.sh`](../../scripts/PipingTeeXargs/xargs-with-find-style-demo.sh)             | `ls *.sh \| xargs wc -l`    |
+| [`PipingTeeXargs.sh`](../../scripts/piping-tee-xargs/run-all.sh)                                                    | Run all Session 12 demos    |
+| [`pipe-ls-head-wc-demo.sh`](../../scripts/piping-tee-xargs/pipe-ls-head-wc-demo.sh)                         | `ls \| head`, `ls \| wc -l` |
+| [`pipe-filters-sort-uniq-demo.sh`](../../scripts/piping-tee-xargs/pipe-filters-sort-uniq-demo.sh)           | `sort \| uniq`              |
+| [`pipe-stdout-only-not-stderr-demo.sh`](../../scripts/piping-tee-xargs/pipe-stdout-only-not-stderr-demo.sh) | stderr not piped            |
+| [`tee-screen-and-file-demo.sh`](../../scripts/piping-tee-xargs/tee-screen-and-file-demo.sh)                 | `tee` to file + screen      |
+| [`tee-append-multiple-files-demo.sh`](../../scripts/piping-tee-xargs/tee-append-multiple-files-demo.sh)     | `tee -a`, multiple files    |
+| [`xargs-build-command-line-demo.sh`](../../scripts/piping-tee-xargs/xargs-build-command-line-demo.sh)       | `xargs touch`, `-n`         |
+| [`xargs-with-find-style-demo.sh`](../../scripts/piping-tee-xargs/xargs-with-find-style-demo.sh)             | `ls *.sh \| xargs wc -l`    |
 
 Full command tables: [`scripts-execution-summary/PipingTeeXargs.md`](../../scripts-execution-summary/PipingTeeXargs.md).
 

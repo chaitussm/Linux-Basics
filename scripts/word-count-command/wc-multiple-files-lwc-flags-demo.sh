@@ -2,7 +2,7 @@
 # Session 10 — wc -l / -w / -c on multiple files (per file + total)
 set -euo pipefail
 REPO="$(cd "$(dirname "$0")/../.." && pwd)"
-LAB="$REPO/scripts/linuxbasics"
+LAB="$REPO/scripts/linux-basics-practice"
 
 for f in fileinfo.txt filedata.txt datfile.txt; do
   if [[ ! -f "$LAB/$f" ]]; then

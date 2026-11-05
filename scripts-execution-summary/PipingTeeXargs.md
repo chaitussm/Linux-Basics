@@ -1,7 +1,7 @@
 # Execution summary — Session 12 piping, tee, xargs
 
 **Topic:** [PipingTeeXargs.md](../docs/topics/PipingTeeXargs.md) (Video 12)  
-**Scripts:** [`../scripts/PipingTeeXargs.sh`](../scripts/PipingTeeXargs.sh) · [`../scripts/PipingTeeXargs/`](../scripts/PipingTeeXargs/)
+**Scripts:** [`../scripts/piping-tee-xargs/run-all.sh`](../scripts/piping-tee-xargs/run-all.sh) · [`../scripts/piping-tee-xargs/`](../scripts/piping-tee-xargs/)
 
 ```mermaid
 %%{init: {'theme': 'base', 'themeVariables': {'pie1': '#FF9800', 'pie2': '#1E88E5', 'pie3': '#FFFFFF', 'pie4': '#FF9800', 'pie5': '#1E88E5', 'pieTitleTextColor': '#212121', 'pieSectionTextColor': '#212121', 'pieStrokeColor': '#424242'}}}%%
@@ -36,9 +36,9 @@ Each script section uses the same **four-part** model:
 
 ---
 
-## [`PipingTeeXargs.sh`](../scripts/PipingTeeXargs.sh)
+## [`PipingTeeXargs.sh`](../scripts/piping-tee-xargs/run-all.sh)
 
-**Run:** `bash scripts/PipingTeeXargs.sh`
+**Run:** `bash scripts/piping-tee-xargs/run-all.sh`
 
 ### In-depth command walkthrough
 
@@ -57,9 +57,9 @@ Each script section uses the same **four-part** model:
 
 ---
 
-## [`pipe-filters-sort-uniq-demo.sh`](../scripts/PipingTeeXargs/pipe-filters-sort-uniq-demo.sh)
+## [`pipe-filters-sort-uniq-demo.sh`](../scripts/piping-tee-xargs/pipe-filters-sort-uniq-demo.sh)
 
-**Run:** `bash scripts/PipingTeeXargs/pipe-filters-sort-uniq-demo.sh`
+**Run:** `bash scripts/piping-tee-xargs/pipe-filters-sort-uniq-demo.sh`
 
 ### In-depth command walkthrough
 
@@ -85,9 +85,9 @@ Each script section uses the same **four-part** model:
 
 ---
 
-## [`pipe-ls-head-wc-demo.sh`](../scripts/PipingTeeXargs/pipe-ls-head-wc-demo.sh)
+## [`pipe-ls-head-wc-demo.sh`](../scripts/piping-tee-xargs/pipe-ls-head-wc-demo.sh)
 
-**Run:** `bash scripts/PipingTeeXargs/pipe-ls-head-wc-demo.sh`
+**Run:** `bash scripts/piping-tee-xargs/pipe-ls-head-wc-demo.sh`
 
 ### In-depth command walkthrough
 
@@ -102,9 +102,9 @@ Each script section uses the same **four-part** model:
 
 ---
 
-## [`pipe-stdout-only-not-stderr-demo.sh`](../scripts/PipingTeeXargs/pipe-stdout-only-not-stderr-demo.sh)
+## [`pipe-stdout-only-not-stderr-demo.sh`](../scripts/piping-tee-xargs/pipe-stdout-only-not-stderr-demo.sh)
 
-**Run:** `bash scripts/PipingTeeXargs/pipe-stdout-only-not-stderr-demo.sh`
+**Run:** `bash scripts/piping-tee-xargs/pipe-stdout-only-not-stderr-demo.sh`
 
 ### In-depth command walkthrough
 
@@ -119,9 +119,9 @@ Each script section uses the same **four-part** model:
 
 ---
 
-## [`tee-append-multiple-files-demo.sh`](../scripts/PipingTeeXargs/tee-append-multiple-files-demo.sh)
+## [`tee-append-multiple-files-demo.sh`](../scripts/piping-tee-xargs/tee-append-multiple-files-demo.sh)
 
-**Run:** `bash scripts/PipingTeeXargs/tee-append-multiple-files-demo.sh`
+**Run:** `bash scripts/piping-tee-xargs/tee-append-multiple-files-demo.sh`
 
 ### In-depth command walkthrough
 
@@ -141,9 +141,9 @@ Each script section uses the same **four-part** model:
 
 ---
 
-## [`tee-screen-and-file-demo.sh`](../scripts/PipingTeeXargs/tee-screen-and-file-demo.sh)
+## [`tee-screen-and-file-demo.sh`](../scripts/piping-tee-xargs/tee-screen-and-file-demo.sh)
 
-**Run:** `bash scripts/PipingTeeXargs/tee-screen-and-file-demo.sh`
+**Run:** `bash scripts/piping-tee-xargs/tee-screen-and-file-demo.sh`
 
 ### In-depth command walkthrough
 
@@ -161,9 +161,9 @@ Each script section uses the same **four-part** model:
 
 ---
 
-## [`xargs-build-command-line-demo.sh`](../scripts/PipingTeeXargs/xargs-build-command-line-demo.sh)
+## [`xargs-build-command-line-demo.sh`](../scripts/piping-tee-xargs/xargs-build-command-line-demo.sh)
 
-**Run:** `bash scripts/PipingTeeXargs/xargs-build-command-line-demo.sh`
+**Run:** `bash scripts/piping-tee-xargs/xargs-build-command-line-demo.sh`
 
 ### In-depth command walkthrough
 
@@ -183,16 +183,16 @@ Each script section uses the same **four-part** model:
 
 ---
 
-## [`xargs-with-find-style-demo.sh`](../scripts/PipingTeeXargs/xargs-with-find-style-demo.sh)
+## [`xargs-with-find-style-demo.sh`](../scripts/piping-tee-xargs/xargs-with-find-style-demo.sh)
 
-**Run:** `bash scripts/PipingTeeXargs/xargs-with-find-style-demo.sh`
+**Run:** `bash scripts/piping-tee-xargs/xargs-with-find-style-demo.sh`
 
 ### In-depth command walkthrough
 
 | Command (as in script) | 1. What it is | 2. Added / configured | 3. Execution intent | 4. Output (terminal / file / pipeline) |
 | :--- | :--- | :--- | :--- | :--- |
 | `set -euo pipefail` | Bash strict-mode option bundle. | Written at top of script; not installed separately. | Tell Bash to stop on errors, treat unset variables as errors, and fail pipelines if any stage fails. | No visible output; changes how later commands affect exit status. |
-| `ROOT="$(cd "$(dirname "${BASH_SOURCE[0]}")/../linuxbasics" && pwd)"` | Shell syntax (variable, test, subshell, or function). | Defined in this script only. | Prepare path, branch on failure, or wrap commands. | Depends on line: may be silent or print via embedded commands. |
+| `ROOT="$(cd "$(dirname "${BASH_SOURCE[0]}")/../linux-basics-practice" && pwd)"` | Shell syntax (variable, test, subshell, or function). | Defined in this script only. | Prepare path, branch on failure, or wrap commands. | Depends on line: may be silent or print via embedded commands. |
 | `echo "=== ls *.sh in linuxbasics \| xargs wc -l ==="` | Section header for humans. | Literal string in script | **Print** section title | Title line on **stdout** before commands |
 | `ls "$ROOT"/*.sh \| xargs wc -l` | List directory contents. | Coreutils; options change columns, hidden files, sort. | Try to **show names** in cwd or given path. | Names on stdout; options add permissions, sizes, inodes. |
 
@@ -202,25 +202,25 @@ Each script section uses the same **four-part** model:
 
 | Script | Run |
 | :--- | :--- |
-| [`PipingTeeXargs.sh`](../scripts/PipingTeeXargs.sh) | `bash scripts/PipingTeeXargs.sh` |
-| [`pipe-filters-sort-uniq-demo.sh`](../scripts/PipingTeeXargs/pipe-filters-sort-uniq-demo.sh) | `bash scripts/PipingTeeXargs/pipe-filters-sort-uniq-demo.sh` |
-| [`pipe-ls-head-wc-demo.sh`](../scripts/PipingTeeXargs/pipe-ls-head-wc-demo.sh) | `bash scripts/PipingTeeXargs/pipe-ls-head-wc-demo.sh` |
-| [`pipe-stdout-only-not-stderr-demo.sh`](../scripts/PipingTeeXargs/pipe-stdout-only-not-stderr-demo.sh) | `bash scripts/PipingTeeXargs/pipe-stdout-only-not-stderr-demo.sh` |
-| [`tee-append-multiple-files-demo.sh`](../scripts/PipingTeeXargs/tee-append-multiple-files-demo.sh) | `bash scripts/PipingTeeXargs/tee-append-multiple-files-demo.sh` |
-| [`tee-screen-and-file-demo.sh`](../scripts/PipingTeeXargs/tee-screen-and-file-demo.sh) | `bash scripts/PipingTeeXargs/tee-screen-and-file-demo.sh` |
-| [`xargs-build-command-line-demo.sh`](../scripts/PipingTeeXargs/xargs-build-command-line-demo.sh) | `bash scripts/PipingTeeXargs/xargs-build-command-line-demo.sh` |
-| [`xargs-with-find-style-demo.sh`](../scripts/PipingTeeXargs/xargs-with-find-style-demo.sh) | `bash scripts/PipingTeeXargs/xargs-with-find-style-demo.sh` |
+| [`PipingTeeXargs.sh`](../scripts/piping-tee-xargs/run-all.sh) | `bash scripts/piping-tee-xargs/run-all.sh` |
+| [`pipe-filters-sort-uniq-demo.sh`](../scripts/piping-tee-xargs/pipe-filters-sort-uniq-demo.sh) | `bash scripts/piping-tee-xargs/pipe-filters-sort-uniq-demo.sh` |
+| [`pipe-ls-head-wc-demo.sh`](../scripts/piping-tee-xargs/pipe-ls-head-wc-demo.sh) | `bash scripts/piping-tee-xargs/pipe-ls-head-wc-demo.sh` |
+| [`pipe-stdout-only-not-stderr-demo.sh`](../scripts/piping-tee-xargs/pipe-stdout-only-not-stderr-demo.sh) | `bash scripts/piping-tee-xargs/pipe-stdout-only-not-stderr-demo.sh` |
+| [`tee-append-multiple-files-demo.sh`](../scripts/piping-tee-xargs/tee-append-multiple-files-demo.sh) | `bash scripts/piping-tee-xargs/tee-append-multiple-files-demo.sh` |
+| [`tee-screen-and-file-demo.sh`](../scripts/piping-tee-xargs/tee-screen-and-file-demo.sh) | `bash scripts/piping-tee-xargs/tee-screen-and-file-demo.sh` |
+| [`xargs-build-command-line-demo.sh`](../scripts/piping-tee-xargs/xargs-build-command-line-demo.sh) | `bash scripts/piping-tee-xargs/xargs-build-command-line-demo.sh` |
+| [`xargs-with-find-style-demo.sh`](../scripts/piping-tee-xargs/xargs-with-find-style-demo.sh) | `bash scripts/piping-tee-xargs/xargs-with-find-style-demo.sh` |
 
 
 **Run every script in this topic (from repo root):**
 
 ```bash
-bash scripts/PipingTeeXargs.sh
-bash scripts/PipingTeeXargs/pipe-filters-sort-uniq-demo.sh
-bash scripts/PipingTeeXargs/pipe-ls-head-wc-demo.sh
-bash scripts/PipingTeeXargs/pipe-stdout-only-not-stderr-demo.sh
-bash scripts/PipingTeeXargs/tee-append-multiple-files-demo.sh
-bash scripts/PipingTeeXargs/tee-screen-and-file-demo.sh
-bash scripts/PipingTeeXargs/xargs-build-command-line-demo.sh
-bash scripts/PipingTeeXargs/xargs-with-find-style-demo.sh
+bash scripts/piping-tee-xargs/run-all.sh
+bash scripts/piping-tee-xargs/pipe-filters-sort-uniq-demo.sh
+bash scripts/piping-tee-xargs/pipe-ls-head-wc-demo.sh
+bash scripts/piping-tee-xargs/pipe-stdout-only-not-stderr-demo.sh
+bash scripts/piping-tee-xargs/tee-append-multiple-files-demo.sh
+bash scripts/piping-tee-xargs/tee-screen-and-file-demo.sh
+bash scripts/piping-tee-xargs/xargs-build-command-line-demo.sh
+bash scripts/piping-tee-xargs/xargs-with-find-style-demo.sh
 ```

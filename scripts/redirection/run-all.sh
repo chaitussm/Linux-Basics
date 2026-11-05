@@ -1,6 +1,6 @@
 #!/bin/bash
 # Session 11 — Redirection (streams 0/1/2, >, 2>, <, &>)
-# Runs split demos under scripts/redirection/ then scripts/Redirection/ (EOF, Rama/Sita)
+# Runs all split demos in scripts/redirection/ (streams, >, 2>, <, &>, EOF/heredoc)
 set -euo pipefail
 
 ROOT="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
@@ -14,10 +14,6 @@ run_demo() {
   bash "$path"
 }
 
-for d in "$ROOT/redirection" "$ROOT/Redirection"; do
-  if [[ -d "$d" ]]; then
-    while IFS= read -r -d '' script; do
-      run_demo "$script"
-    done < <(find "$d" -maxdepth 1 -name '*-demo.sh' -print0 | sort -z)
-  fi
-done
+while IFS= read -r -d '' script; do
+  run_demo "$script"
+done < <(find "$ROOT" -maxdepth 1 -name '*-demo.sh' -print0 | sort -z)

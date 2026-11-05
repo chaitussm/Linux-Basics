@@ -2,7 +2,7 @@
 # Session 10 — wc -L : length of the longest line (capital L, not -l)
 set -euo pipefail
 REPO="$(cd "$(dirname "$0")/../.." && pwd)"
-FILE="$REPO/scripts/linuxbasics/fileinfo.txt"
+FILE="$REPO/scripts/linux-basics-practice/fileinfo.txt"
 
 if [[ ! -f "$FILE" ]]; then
   echo "Missing lab file: $FILE"

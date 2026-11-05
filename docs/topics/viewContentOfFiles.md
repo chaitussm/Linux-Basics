@@ -5,12 +5,12 @@
 
 **Prerequisites:** [TypesOfFilesInLinux.md](TypesOfFilesInLinux.md) (`touch`, create files) · [Bash Built-in Commands.md](Bash%20Built-in%20Commands.md) (`cat`, `gedit`) · [pipeCommands.md](pipeCommands.md) (pipes with `head`/`tail`)
 
-**Scripts folder:** [`viewContentOfFiles/`](../../scripts/viewContentOfFiles/)  
+**Scripts folder:** [`viewContentOfFiles/`](../../scripts/view-content-of-files/)  
 **Execution summary:** [Part 2 — below](#part-2--execution-summary-scriptsviewcontentoffiles)
 
 ```bash
 cd /path/to/Linux-Basics
-bash scripts/viewContentOfFiles/cat-view-file-demo.sh
+bash scripts/view-content-of-files/cat-view-file-demo.sh
 ```
 
 ---
@@ -97,7 +97,7 @@ cat < file1.txt    # optional < ; redirection chapter later
 | **`<` optional** | `cat < file` reads from file; `cat file` is the usual form |
 | **Empty lines**  | `cat` shows **blank lines** too                            |
 
-**Demo:** [`cat-view-file-demo.sh`](../../scripts/viewContentOfFiles/cat-view-file-demo.sh)
+**Demo:** [`cat-view-file-demo.sh`](../../scripts/view-content-of-files/cat-view-file-demo.sh)
 
 ---
 
@@ -117,7 +117,7 @@ cat -b abc.txt
 
 **Count lines without printing content?** Durga Sir: use **`wc`** (word count) — detailed in a later session; not the same job as `cat`.
 
-**Demo:** [`cat-n-and-b-line-numbers-demo.sh`](../../scripts/viewContentOfFiles/cat-n-and-b-line-numbers-demo.sh)
+**Demo:** [`cat-n-and-b-line-numbers-demo.sh`](../../scripts/view-content-of-files/cat-n-and-b-line-numbers-demo.sh)
 
 ---
 
@@ -130,7 +130,7 @@ cat file1.txt file2.txt
 **Concatenation:** output of **file1** then **file2** on the same stream (print together).  
 Not the same as **copying** files — see [§12](#12-cat-vs-cp-durga-sir).
 
-**Demo:** [`cat-multiple-files-concat-demo.sh`](../../scripts/viewContentOfFiles/cat-multiple-files-concat-demo.sh)
+**Demo:** [`cat-multiple-files-concat-demo.sh`](../../scripts/view-content-of-files/cat-multiple-files-concat-demo.sh)
 
 ---
 
@@ -154,7 +154,7 @@ tac abc.txt
 
 Less common in daily work, but **exam/class** topic.
 
-**Demo:** [`tac-reverse-lines-demo.sh`](../../scripts/viewContentOfFiles/tac-reverse-lines-demo.sh)
+**Demo:** [`tac-reverse-lines-demo.sh`](../../scripts/view-content-of-files/tac-reverse-lines-demo.sh)
 
 ---
 
@@ -175,7 +175,7 @@ rev abc.txt
 | **Line order** (vertical)           | `tac`   |
 | **Characters in line** (horizontal) | `rev`   |
 
-**Demo:** [`rev-reverse-line-chars-demo.sh`](../../scripts/viewContentOfFiles/rev-reverse-line-chars-demo.sh)
+**Demo:** [`rev-reverse-line-chars-demo.sh`](../../scripts/view-content-of-files/rev-reverse-line-chars-demo.sh)
 
 ---
 
@@ -339,10 +339,10 @@ pie title View commands in Session 9 (default behavior)
     "Modify file when using > >> or editor" : 15
 ```
 
-**Demo:** [`rev-tac-display-only-demo.sh`](../../scripts/viewContentOfFiles/rev-tac-display-only-demo.sh)
+**Demo:** [`rev-tac-display-only-demo.sh`](../../scripts/view-content-of-files/rev-tac-display-only-demo.sh)
 
 ```bash
-bash scripts/viewContentOfFiles/rev-tac-display-only-demo.sh
+bash scripts/view-content-of-files/rev-tac-display-only-demo.sh
 ```
 
 ---
@@ -364,9 +364,9 @@ head -n 5 abc.txt      # first 5 lines
 | **`head -n 5`** | Only **first 5** lines |
 ![alt text](headCommandV2.png)
 | **`head -n -5`** | **All lines except the last 5** (do not confuse!) |
-![alt text](../../scripts/linuxbasics/afterheadCommand.png)
+![alt text](../../scripts/linux-basics-practice/afterheadCommand.png)
 Actual lines in the code 
-![alt text](../../scripts/linuxbasics/totalLines.png)
+![alt text](../../scripts/linux-basics-practice/totalLines.png)
 After providng the command at line 
 
 
@@ -393,10 +393,10 @@ head -c 100 abc.txt
 | **`head -n 5 abc.txt`** | First **5 lines** |
 | **`head -c 100 abc.txt`** | First **100 characters** (= **100 bytes** in normal text) |
 
-**Lab (same `-c` idea on a real script):** from `scripts/linuxbasics/`, Durga Sir’s class often uses a file like **`printString.sh`**:
+**Lab (same `-c` idea on a real script):** from `scripts/linux-basics-practice/`, Durga Sir’s class often uses a file like **`printString.sh`**:
 
 ```bash
-cd ~/Study/Linux-Basics/scripts/linuxbasics
+cd ~/Study/Linux-Basics/scripts/linux-basics-practice
 head -c 100 printString.sh
 ```
 
@@ -404,7 +404,7 @@ Output stops after **100 bytes** — so you may see only **part** of a line (e.g
 
 ![Terminal: head -c 100 printString.sh shows first 100 bytes, then cat shows full script](../assets/head-c-100-printString-terminal.png)
 
-**Demo:** [`head-top-lines-demo.sh`](../../scripts/viewContentOfFiles/head-top-lines-demo.sh)
+**Demo:** [`head-top-lines-demo.sh`](../../scripts/view-content-of-files/head-top-lines-demo.sh)
 
 
 
@@ -431,10 +431,10 @@ tail testThree.sh
 
 Same idea as `head`: if you omit **`-n`**, Linux shows the **last 10 lines**.
 
-**Lab (`scripts/linuxbasics/`):** after you know what is in the file (`cat`), use **`tail`** to see only the **bottom** of the file:
+**Lab (`scripts/linux-basics-practice/`):** after you know what is in the file (`cat`), use **`tail`** to see only the **bottom** of the file:
 
 ```bash
-cd ~/Study/Linux-Basics/scripts/linuxbasics
+cd ~/Study/Linux-Basics/scripts/linux-basics-practice
 cat testThree.sh      # full file on screen
 tail testThree.sh     # last 10 lines only
 ```
@@ -480,7 +480,7 @@ tail -c 100 abc.txt
 **Lab (`printString.sh`):**
 
 ```bash
-cd ~/Study/Linux-Basics/scripts/linuxbasics
+cd ~/Study/Linux-Basics/scripts/linux-basics-practice
 tail -c 100 printString.sh
 cat printString.sh
 ```
@@ -505,7 +505,7 @@ head -5 printString.sh | tail -5
 On a short file, `head -5 | tail -5` often shows the **same first 5 lines**. On a **long** file, increase `head` then use `tail` to grab a **middle window** (example: `head -20 file | tail -5` ≈ lines **16–20**).
 
 ```bash
-cd ~/Study/Linux-Basics/scripts/linuxbasics
+cd ~/Study/Linux-Basics/scripts/linux-basics-practice
 head -5 printString.sh | tail -5
 cat printString.sh
 ```
@@ -514,7 +514,7 @@ cat printString.sh
 
 **Note:** GNU `tail` options like `tail -n +5` (start printing from line 5 onward) are advanced; class focuses on **last N lines** and **last N bytes**.
 
-**Demo:** [`tail-bottom-lines-demo.sh`](../../scripts/viewContentOfFiles/tail-bottom-lines-demo.sh)
+**Demo:** [`tail-bottom-lines-demo.sh`](../../scripts/view-content-of-files/tail-bottom-lines-demo.sh)
 
 ---
 
@@ -532,7 +532,7 @@ more /var/log/syslog
 
 **Interactive:** in automation/CI, pagers wait for a human; use `head`/`tail` in scripts unless you know you have a TTY.
 
-**Demo:** [`more-less-pager-hint-demo.sh`](../../scripts/viewContentOfFiles/more-less-pager-hint-demo.sh)
+**Demo:** [`more-less-pager-hint-demo.sh`](../../scripts/view-content-of-files/more-less-pager-hint-demo.sh)
 
 ---
 
@@ -557,7 +557,7 @@ flowchart LR
     class S,L,CAT,H,T,P darkGrey
 ```
 
-**Demo:** [`small-vs-large-file-view-demo.sh`](../../scripts/viewContentOfFiles/small-vs-large-file-view-demo.sh)
+**Demo:** [`small-vs-large-file-view-demo.sh`](../../scripts/view-content-of-files/small-vs-large-file-view-demo.sh)
 
 ---
 
@@ -605,20 +605,20 @@ You should be able to:
 
 | Script                                                                                                    | Topic                                |
 | :-------------------------------------------------------------------------------------------------------- | :----------------------------------- |
-| [`cat-view-file-demo.sh`](../../scripts/viewContentOfFiles/cat-view-file-demo.sh)                         | `cat`, optional `<`                  |
-| [`cat-n-and-b-line-numbers-demo.sh`](../../scripts/viewContentOfFiles/cat-n-and-b-line-numbers-demo.sh)   | `-n`, `-b`, blank lines              |
-| [`cat-multiple-files-concat-demo.sh`](../../scripts/viewContentOfFiles/cat-multiple-files-concat-demo.sh) | `cat f1 f2`                          |
-| [`tac-reverse-lines-demo.sh`](../../scripts/viewContentOfFiles/tac-reverse-lines-demo.sh)                 | `tac`                                |
-| [`rev-reverse-line-chars-demo.sh`](../../scripts/viewContentOfFiles/rev-reverse-line-chars-demo.sh)       | `rev`                                |
-| [`rev-tac-display-only-demo.sh`](../../scripts/viewContentOfFiles/rev-tac-display-only-demo.sh)           | `rev`/`tac` vs `cat`; file unchanged |
-| [`head-top-lines-demo.sh`](../../scripts/viewContentOfFiles/head-top-lines-demo.sh)                       | `head`, `-n`, negative `-n`          |
-| [`tail-bottom-lines-demo.sh`](../../scripts/viewContentOfFiles/tail-bottom-lines-demo.sh)                 | `tail`                               |
-| [`small-vs-large-file-view-demo.sh`](../../scripts/viewContentOfFiles/small-vs-large-file-view-demo.sh)   | cat vs head/tail                     |
-| [`more-less-pager-hint-demo.sh`](../../scripts/viewContentOfFiles/more-less-pager-hint-demo.sh)           | `more` / `less` hints                |
+| [`cat-view-file-demo.sh`](../../scripts/view-content-of-files/cat-view-file-demo.sh)                         | `cat`, optional `<`                  |
+| [`cat-n-and-b-line-numbers-demo.sh`](../../scripts/view-content-of-files/cat-n-and-b-line-numbers-demo.sh)   | `-n`, `-b`, blank lines              |
+| [`cat-multiple-files-concat-demo.sh`](../../scripts/view-content-of-files/cat-multiple-files-concat-demo.sh) | `cat f1 f2`                          |
+| [`tac-reverse-lines-demo.sh`](../../scripts/view-content-of-files/tac-reverse-lines-demo.sh)                 | `tac`                                |
+| [`rev-reverse-line-chars-demo.sh`](../../scripts/view-content-of-files/rev-reverse-line-chars-demo.sh)       | `rev`                                |
+| [`rev-tac-display-only-demo.sh`](../../scripts/view-content-of-files/rev-tac-display-only-demo.sh)           | `rev`/`tac` vs `cat`; file unchanged |
+| [`head-top-lines-demo.sh`](../../scripts/view-content-of-files/head-top-lines-demo.sh)                       | `head`, `-n`, negative `-n`          |
+| [`tail-bottom-lines-demo.sh`](../../scripts/view-content-of-files/tail-bottom-lines-demo.sh)                 | `tail`                               |
+| [`small-vs-large-file-view-demo.sh`](../../scripts/view-content-of-files/small-vs-large-file-view-demo.sh)   | cat vs head/tail                     |
+| [`more-less-pager-hint-demo.sh`](../../scripts/view-content-of-files/more-less-pager-hint-demo.sh)           | `more` / `less` hints                |
 
 ---
 
-## Part 2 — Execution summary (`scripts/viewContentOfFiles/`)
+## Part 2 — Execution summary (`scripts/view-content-of-files/`)
 
 Command-by-command walkthrough for every demo script (regenerate with `python3 scripts-execution-summary/tools/build_execution_summaries.py`).
 
@@ -643,9 +643,9 @@ Each script section uses the same **four-part** model:
 
 ---
 
-## [`cat-multiple-files-concat-demo.sh`](../../scripts/viewContentOfFiles/cat-multiple-files-concat-demo.sh)
+## [`cat-multiple-files-concat-demo.sh`](../../scripts/view-content-of-files/cat-multiple-files-concat-demo.sh)
 
-**Run:** `bash scripts/viewContentOfFiles/cat-multiple-files-concat-demo.sh`
+**Run:** `bash scripts/view-content-of-files/cat-multiple-files-concat-demo.sh`
 
 ### In-depth command walkthrough
 
@@ -665,9 +665,9 @@ Each script section uses the same **four-part** model:
 
 ---
 
-## [`cat-n-and-b-line-numbers-demo.sh`](../../scripts/viewContentOfFiles/cat-n-and-b-line-numbers-demo.sh)
+## [`cat-n-and-b-line-numbers-demo.sh`](../../scripts/view-content-of-files/cat-n-and-b-line-numbers-demo.sh)
 
-**Run:** `bash scripts/viewContentOfFiles/cat-n-and-b-line-numbers-demo.sh`
+**Run:** `bash scripts/view-content-of-files/cat-n-and-b-line-numbers-demo.sh`
 
 ### In-depth command walkthrough
 
@@ -697,9 +697,9 @@ Each script section uses the same **four-part** model:
 
 ---
 
-## [`cat-view-file-demo.sh`](../../scripts/viewContentOfFiles/cat-view-file-demo.sh)
+## [`cat-view-file-demo.sh`](../../scripts/view-content-of-files/cat-view-file-demo.sh)
 
-**Run:** `bash scripts/viewContentOfFiles/cat-view-file-demo.sh`
+**Run:** `bash scripts/view-content-of-files/cat-view-file-demo.sh`
 
 ### In-depth command walkthrough
 
@@ -723,9 +723,9 @@ Each script section uses the same **four-part** model:
 
 ---
 
-## [`head-top-lines-demo.sh`](../../scripts/viewContentOfFiles/head-top-lines-demo.sh)
+## [`head-top-lines-demo.sh`](../../scripts/view-content-of-files/head-top-lines-demo.sh)
 
-**Run:** `bash scripts/viewContentOfFiles/head-top-lines-demo.sh`
+**Run:** `bash scripts/view-content-of-files/head-top-lines-demo.sh`
 
 ### In-depth command walkthrough
 
@@ -751,9 +751,9 @@ Each script section uses the same **four-part** model:
 
 ---
 
-## [`more-less-pager-hint-demo.sh`](../../scripts/viewContentOfFiles/more-less-pager-hint-demo.sh)
+## [`more-less-pager-hint-demo.sh`](../../scripts/view-content-of-files/more-less-pager-hint-demo.sh)
 
-**Run:** `bash scripts/viewContentOfFiles/more-less-pager-hint-demo.sh`
+**Run:** `bash scripts/view-content-of-files/more-less-pager-hint-demo.sh`
 
 ### In-depth command walkthrough
 
@@ -775,9 +775,9 @@ Each script section uses the same **four-part** model:
 
 ---
 
-## [`rev-reverse-line-chars-demo.sh`](../../scripts/viewContentOfFiles/rev-reverse-line-chars-demo.sh)
+## [`rev-reverse-line-chars-demo.sh`](../../scripts/view-content-of-files/rev-reverse-line-chars-demo.sh)
 
-**Run:** `bash scripts/viewContentOfFiles/rev-reverse-line-chars-demo.sh`
+**Run:** `bash scripts/view-content-of-files/rev-reverse-line-chars-demo.sh`
 
 ### In-depth command walkthrough
 
@@ -799,9 +799,9 @@ Each script section uses the same **four-part** model:
 
 ---
 
-## [`rev-tac-display-only-demo.sh`](../../scripts/viewContentOfFiles/rev-tac-display-only-demo.sh)
+## [`rev-tac-display-only-demo.sh`](../../scripts/view-content-of-files/rev-tac-display-only-demo.sh)
 
-**Run:** `bash scripts/viewContentOfFiles/rev-tac-display-only-demo.sh`
+**Run:** `bash scripts/view-content-of-files/rev-tac-display-only-demo.sh`
 
 ### In-depth command walkthrough
 
@@ -835,9 +835,9 @@ Each script section uses the same **four-part** model:
 
 ---
 
-## [`small-vs-large-file-view-demo.sh`](../../scripts/viewContentOfFiles/small-vs-large-file-view-demo.sh)
+## [`small-vs-large-file-view-demo.sh`](../../scripts/view-content-of-files/small-vs-large-file-view-demo.sh)
 
-**Run:** `bash scripts/viewContentOfFiles/small-vs-large-file-view-demo.sh`
+**Run:** `bash scripts/view-content-of-files/small-vs-large-file-view-demo.sh`
 
 ### In-depth command walkthrough
 
@@ -863,9 +863,9 @@ Each script section uses the same **four-part** model:
 
 ---
 
-## [`tac-reverse-lines-demo.sh`](../../scripts/viewContentOfFiles/tac-reverse-lines-demo.sh)
+## [`tac-reverse-lines-demo.sh`](../../scripts/view-content-of-files/tac-reverse-lines-demo.sh)
 
-**Run:** `bash scripts/viewContentOfFiles/tac-reverse-lines-demo.sh`
+**Run:** `bash scripts/view-content-of-files/tac-reverse-lines-demo.sh`
 
 ### In-depth command walkthrough
 
@@ -891,9 +891,9 @@ Each script section uses the same **four-part** model:
 
 ---
 
-## [`tail-bottom-lines-demo.sh`](../../scripts/viewContentOfFiles/tail-bottom-lines-demo.sh)
+## [`tail-bottom-lines-demo.sh`](../../scripts/view-content-of-files/tail-bottom-lines-demo.sh)
 
-**Run:** `bash scripts/viewContentOfFiles/tail-bottom-lines-demo.sh`
+**Run:** `bash scripts/view-content-of-files/tail-bottom-lines-demo.sh`
 
 ### In-depth command walkthrough
 
@@ -920,31 +920,31 @@ Each script section uses the same **four-part** model:
 
 | Script | Run |
 | :--- | :--- |
-| [`cat-multiple-files-concat-demo.sh`](../../scripts/viewContentOfFiles/cat-multiple-files-concat-demo.sh) | `bash scripts/viewContentOfFiles/cat-multiple-files-concat-demo.sh` |
-| [`cat-n-and-b-line-numbers-demo.sh`](../../scripts/viewContentOfFiles/cat-n-and-b-line-numbers-demo.sh) | `bash scripts/viewContentOfFiles/cat-n-and-b-line-numbers-demo.sh` |
-| [`cat-view-file-demo.sh`](../../scripts/viewContentOfFiles/cat-view-file-demo.sh) | `bash scripts/viewContentOfFiles/cat-view-file-demo.sh` |
-| [`head-top-lines-demo.sh`](../../scripts/viewContentOfFiles/head-top-lines-demo.sh) | `bash scripts/viewContentOfFiles/head-top-lines-demo.sh` |
-| [`more-less-pager-hint-demo.sh`](../../scripts/viewContentOfFiles/more-less-pager-hint-demo.sh) | `bash scripts/viewContentOfFiles/more-less-pager-hint-demo.sh` |
-| [`rev-reverse-line-chars-demo.sh`](../../scripts/viewContentOfFiles/rev-reverse-line-chars-demo.sh) | `bash scripts/viewContentOfFiles/rev-reverse-line-chars-demo.sh` |
-| [`rev-tac-display-only-demo.sh`](../../scripts/viewContentOfFiles/rev-tac-display-only-demo.sh) | `bash scripts/viewContentOfFiles/rev-tac-display-only-demo.sh` |
-| [`small-vs-large-file-view-demo.sh`](../../scripts/viewContentOfFiles/small-vs-large-file-view-demo.sh) | `bash scripts/viewContentOfFiles/small-vs-large-file-view-demo.sh` |
-| [`tac-reverse-lines-demo.sh`](../../scripts/viewContentOfFiles/tac-reverse-lines-demo.sh) | `bash scripts/viewContentOfFiles/tac-reverse-lines-demo.sh` |
-| [`tail-bottom-lines-demo.sh`](../../scripts/viewContentOfFiles/tail-bottom-lines-demo.sh) | `bash scripts/viewContentOfFiles/tail-bottom-lines-demo.sh` |
+| [`cat-multiple-files-concat-demo.sh`](../../scripts/view-content-of-files/cat-multiple-files-concat-demo.sh) | `bash scripts/view-content-of-files/cat-multiple-files-concat-demo.sh` |
+| [`cat-n-and-b-line-numbers-demo.sh`](../../scripts/view-content-of-files/cat-n-and-b-line-numbers-demo.sh) | `bash scripts/view-content-of-files/cat-n-and-b-line-numbers-demo.sh` |
+| [`cat-view-file-demo.sh`](../../scripts/view-content-of-files/cat-view-file-demo.sh) | `bash scripts/view-content-of-files/cat-view-file-demo.sh` |
+| [`head-top-lines-demo.sh`](../../scripts/view-content-of-files/head-top-lines-demo.sh) | `bash scripts/view-content-of-files/head-top-lines-demo.sh` |
+| [`more-less-pager-hint-demo.sh`](../../scripts/view-content-of-files/more-less-pager-hint-demo.sh) | `bash scripts/view-content-of-files/more-less-pager-hint-demo.sh` |
+| [`rev-reverse-line-chars-demo.sh`](../../scripts/view-content-of-files/rev-reverse-line-chars-demo.sh) | `bash scripts/view-content-of-files/rev-reverse-line-chars-demo.sh` |
+| [`rev-tac-display-only-demo.sh`](../../scripts/view-content-of-files/rev-tac-display-only-demo.sh) | `bash scripts/view-content-of-files/rev-tac-display-only-demo.sh` |
+| [`small-vs-large-file-view-demo.sh`](../../scripts/view-content-of-files/small-vs-large-file-view-demo.sh) | `bash scripts/view-content-of-files/small-vs-large-file-view-demo.sh` |
+| [`tac-reverse-lines-demo.sh`](../../scripts/view-content-of-files/tac-reverse-lines-demo.sh) | `bash scripts/view-content-of-files/tac-reverse-lines-demo.sh` |
+| [`tail-bottom-lines-demo.sh`](../../scripts/view-content-of-files/tail-bottom-lines-demo.sh) | `bash scripts/view-content-of-files/tail-bottom-lines-demo.sh` |
 
 
 **Run every script in this topic (from repo root):**
 
 ```bash
-bash scripts/viewContentOfFiles/cat-multiple-files-concat-demo.sh
-bash scripts/viewContentOfFiles/cat-n-and-b-line-numbers-demo.sh
-bash scripts/viewContentOfFiles/cat-view-file-demo.sh
-bash scripts/viewContentOfFiles/head-top-lines-demo.sh
-bash scripts/viewContentOfFiles/more-less-pager-hint-demo.sh
-bash scripts/viewContentOfFiles/rev-reverse-line-chars-demo.sh
-bash scripts/viewContentOfFiles/rev-tac-display-only-demo.sh
-bash scripts/viewContentOfFiles/small-vs-large-file-view-demo.sh
-bash scripts/viewContentOfFiles/tac-reverse-lines-demo.sh
-bash scripts/viewContentOfFiles/tail-bottom-lines-demo.sh
+bash scripts/view-content-of-files/cat-multiple-files-concat-demo.sh
+bash scripts/view-content-of-files/cat-n-and-b-line-numbers-demo.sh
+bash scripts/view-content-of-files/cat-view-file-demo.sh
+bash scripts/view-content-of-files/head-top-lines-demo.sh
+bash scripts/view-content-of-files/more-less-pager-hint-demo.sh
+bash scripts/view-content-of-files/rev-reverse-line-chars-demo.sh
+bash scripts/view-content-of-files/rev-tac-display-only-demo.sh
+bash scripts/view-content-of-files/small-vs-large-file-view-demo.sh
+bash scripts/view-content-of-files/tac-reverse-lines-demo.sh
+bash scripts/view-content-of-files/tail-bottom-lines-demo.sh
 ```
 <!-- END EXECUTION_SUMMARY (generated) -->
 

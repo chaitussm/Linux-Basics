@@ -6,12 +6,12 @@
 
 **Prerequisites:** [PipingTeeXargs.md](PipingTeeXargs.md) (pipes, `tee`) · [Bash Built-in Commands.md](Bash%20Built-in%20Commands.md) (`alias`, `unalias`) · [redirection.md](redirection.md)
 
-**Scripts:** [`scripts/commandAliasing.sh`](../../scripts/commandAliasing.sh) · [`scripts/commandAliasing/`](../../scripts/commandAliasing/)  
+**Scripts:** [`scripts/command-aliasing/run-all.sh`](../../scripts/command-aliasing/run-all.sh) · [`scripts/command-aliasing/`](../../scripts/command-aliasing/)  
 **Execution summary:** [`commandAliasing.md`](../../scripts-execution-summary/commandAliasing.md)
 
 ```bash
 cd /path/to/Linux-Basics
-bash scripts/commandAliasing.sh
+bash scripts/command-aliasing/run-all.sh
 ```
 
 ---
@@ -63,7 +63,7 @@ pie title Session 13 — alias lifecycle
 
 **Important:** Aliases apply to **commands**, not to **file names** on disk (Durga Sir closing note).
 
-**In shell scripts:** Bash does **not** expand aliases in scripts unless you run **`shopt -s expand_aliases`** (see demo scripts under [`scripts/commandAliasing/`](../../scripts/commandAliasing/)). At the **interactive prompt**, aliases work as in class.
+**In shell scripts:** Bash does **not** expand aliases in scripts unless you run **`shopt -s expand_aliases`** (see demo scripts under [`scripts/command-aliasing/`](../../scripts/command-aliasing/)). At the **interactive prompt**, aliases work as in class.
 
 ---
 
@@ -349,7 +349,7 @@ Durga Sir demo: close terminal → open new → custom aliases missing; built-in
 - [ ] Define `alias d20f='mkdir -p dir1 && touch dir1/file{1..20}.txt'` and verify 20 files
 - [ ] Define `alias current='ls -l | tee output.txt | wc -l'` in a test folder
 - [ ] Explain temporary vs `~/.bashrc` / `~/.bash_aliases`
-- [ ] Run `bash scripts/commandAliasing.sh`
+- [ ] Run `bash scripts/command-aliasing/run-all.sh`
 
 ---
 
@@ -357,14 +357,14 @@ Durga Sir demo: close terminal → open new → custom aliases missing; built-in
 
 | Script                                                                                           | Topic                        |
 | :----------------------------------------------------------------------------------------------- | :--------------------------- |
-| [`commandAliasing.sh`](../../scripts/commandAliasing.sh)                                         | Run all Session 13 demos     |
-| [`alias-define-list-demo.sh`](../../scripts/commandAliasing/alias-define-list-demo.sh)           | Define `cls`, list, quoting  |
-| [`alias-syntax-spacing-demo.sh`](../../scripts/commandAliasing/alias-syntax-spacing-demo.sh)     | Valid `=` spacing            |
-| [`alias-type-unalias-demo.sh`](../../scripts/commandAliasing/alias-type-unalias-demo.sh)         | `type`, `unalias`, overwrite |
-| [`alias-chain-demo.sh`](../../scripts/commandAliasing/alias-chain-demo.sh)                       | Alias of alias               |
-| [`alias-long-d20f-demo.sh`](../../scripts/commandAliasing/alias-long-d20f-demo.sh)               | `d20f` lab                   |
-| [`alias-current-pipeline-demo.sh`](../../scripts/commandAliasing/alias-current-pipeline-demo.sh) | `current` + `tee`            |
-| [`alias-typo-and-os-demo.sh`](../../scripts/commandAliasing/alias-typo-and-os-demo.sh)           | `grp=grep`, `rename=mv`      |
-| [`alias-persistence-hint-demo.sh`](../../scripts/commandAliasing/alias-persistence-hint-demo.sh) | Permanent files hint         |
+| [`commandAliasing.sh`](../../scripts/command-aliasing/run-all.sh)                                         | Run all Session 13 demos     |
+| [`alias-define-list-demo.sh`](../../scripts/command-aliasing/alias-define-list-demo.sh)           | Define `cls`, list, quoting  |
+| [`alias-syntax-spacing-demo.sh`](../../scripts/command-aliasing/alias-syntax-spacing-demo.sh)     | Valid `=` spacing            |
+| [`alias-type-unalias-demo.sh`](../../scripts/command-aliasing/alias-type-unalias-demo.sh)         | `type`, `unalias`, overwrite |
+| [`alias-chain-demo.sh`](../../scripts/command-aliasing/alias-chain-demo.sh)                       | Alias of alias               |
+| [`alias-long-d20f-demo.sh`](../../scripts/command-aliasing/alias-long-d20f-demo.sh)               | `d20f` lab                   |
+| [`alias-current-pipeline-demo.sh`](../../scripts/command-aliasing/alias-current-pipeline-demo.sh) | `current` + `tee`            |
+| [`alias-typo-and-os-demo.sh`](../../scripts/command-aliasing/alias-typo-and-os-demo.sh)           | `grp=grep`, `rename=mv`      |
+| [`alias-persistence-hint-demo.sh`](../../scripts/command-aliasing/alias-persistence-hint-demo.sh) | Permanent files hint         |
 
 Full command tables: [`scripts-execution-summary/commandAliasing.md`](../../scripts-execution-summary/commandAliasing.md).

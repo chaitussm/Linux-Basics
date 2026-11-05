@@ -2,7 +2,7 @@
 # Session 13 — Command aliasing (orchestrator)
 set -euo pipefail
 
-DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")/commandAliasing" && pwd)"
+DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
 
 run_demo() {
   local name="$1"

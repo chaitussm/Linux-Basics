@@ -6,10 +6,30 @@ Hands-on companion for **Durga Sir**'s Linux course ([YouTube playlist](https://
 
 | Path | Description |
 | :--- | :--- |
-| [`docs/linuxBasics.md`](docs/linuxBasics.md) | Index to topic notes and scripts |
-| [`docs/topics/Components of Unix.md`](docs/topics/Components%20of%20Unix.md) | Video 2 — shell, kernel, execution flow |
+| [`docs/topics/linuxBasics.md`](docs/topics/linuxBasics.md) | Index to topic notes and scripts |
+| [`docs/topics/`](docs/topics/) | All topic notes (the complete discussion for each video) |
+| [`docs/troubleshooting/`](docs/troubleshooting/) | Git and tooling error resolutions |
+| [`docs/assets/`](docs/assets/) | Screenshots used by the notes |
 | [`exercises/`](exercises/) | Topic-based practice READMEs and sample data |
-| [`scripts/`](scripts/) | Topic folders with `.sh` demos (see [`scripts/README.md`](scripts/README.md)) |
+| [`scripts/`](scripts/) | One kebab-case folder per topic with `.sh` demos (see [`scripts/README.md`](scripts/README.md)) |
+| [`scripts-execution-summary/`](scripts-execution-summary/) | Generated run-through of every script |
+
+## Repository layout
+
+```text
+Linux-Basics/
+├── docs/
+│   ├── topics/            # notes (md) per topic
+│   ├── troubleshooting/   # git error fixes
+│   └── assets/            # screenshots
+├── exercises/             # 01-… to 06-… practice
+├── scripts/
+│   ├── <topic-name>/      # *-demo.sh files + run-all.sh where available
+│   └── linux-basics-practice/  # scratch scripts, sample text and screenshots
+└── scripts-execution-summary/
+```
+
+Naming rules: folders are lowercase `kebab-case`; demo scripts end in `-demo.sh`; a topic's orchestrator is `run-all.sh` inside the topic folder.
 
 ## Topics covered
 

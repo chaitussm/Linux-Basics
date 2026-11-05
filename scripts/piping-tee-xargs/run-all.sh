@@ -2,7 +2,7 @@
 # Session 12 — Piping, tee, xargs (orchestrator)
 set -euo pipefail
 
-DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")/PipingTeeXargs" && pwd)"
+DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
 
 run_demo() {
   local name="$1"

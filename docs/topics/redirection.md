@@ -9,12 +9,12 @@
 
 **Related (overwrite, append, heredoc):** [EOF and Redirection.md](EOF%20and%20Redirection.md) — Rama/Sita, `>>`, `<<EOF` in depth
 
-**Scripts:** [`scripts/redirection.sh`](../../scripts/redirection.sh) (orchestrator) · [`scripts/redirection/`](../../scripts/redirection/) (Session 11 demos) · [`scripts/Redirection/`](../../scripts/Redirection/) (`>`, `>>`, EOF)  
+**Scripts:** [`scripts/redirection/run-all.sh`](../../scripts/redirection/run-all.sh) (orchestrator) · [`scripts/redirection/`](../../scripts/redirection/) (Session 11 demos) · [`scripts/redirection/`](../../scripts/redirection/) (`>`, `>>`, EOF)  
 **Execution summary:** [`redirectionScriptSummary.md`](../../scripts-execution-summary/redirectionScriptSummary.md)
 
 ```bash
 cd /path/to/Linux-Basics
-bash scripts/redirection.sh
+bash scripts/redirection/run-all.sh
 # Or one demo:
 bash scripts/redirection/stderr-2-greater-demo.sh
 ```
@@ -128,10 +128,10 @@ ls > output.txt
 ls 1> output.txt         # same meaning
 ```
 
-**Your lab — `1>` overwrite, `1>>` append, and the “space” mistake (`scripts/linuxbasics`):**
+**Your lab — `1>` overwrite, `1>>` append, and the “space” mistake (`scripts/linux-basics-practice`):**
 
 ```bash
-cd scripts/linuxbasics
+cd scripts/linux-basics-practice
 cat 1> outputRedir.txt
 ```
 
@@ -233,10 +233,10 @@ cal 99999 2> error.txt     # error text in error.txt
 
 Use **`2>>`** to **append** errors to an existing log file.
 
-**Your lab — invalid `cal` year, capture stderr with `2>>` (`scripts/linuxbasics`):**
+**Your lab — invalid `cal` year, capture stderr with `2>>` (`scripts/linux-basics-practice`):**
 
 ```bash
-cd scripts/linuxbasics
+cd scripts/linux-basics-practice
 cal whihyo798 2>> errorRedir.txt
 cat errorRedir.txt
 gedit errorRedir.txt    # optional — same error text in the editor
@@ -274,7 +274,7 @@ cat a.txt
 bash scripts/redirection/stdin-combined-redirect-demo.sh
 ```
 
-Also: [`scripts/Redirection/input-less-than-demo.sh`](../../scripts/Redirection/input-less-than-demo.sh).
+Also: [`scripts/redirection/input-less-than-demo.sh`](../../scripts/redirection/input-less-than-demo.sh).
 
 ---
 
@@ -314,12 +314,12 @@ cat    a.txt  > result.txt  2>> error.txt
 
 ![Class notes: three combined cat forms; lab checklist for keyboard → a.txt, stdout → result.txt, stderr → error.txt](../assets/redirection-combined-three-streams-class-notes.png)
 
-### Your lab — `scripts/linuxbasics`
+### Your lab — `scripts/linux-basics-practice`
 
 **View a script using input redirect** (same output as `cat printString.sh`):
 
 ```bash
-cd scripts/linuxbasics
+cd scripts/linux-basics-practice
 cat < printString.sh
 ```
 
@@ -382,10 +382,10 @@ cal 2024 &> results1.txt
 cal 99999 &>> results1.txt    # invalid year — error appended to same file
 ```
 
-**Your lab — two bad `cal` years, append both errors (`scripts/linuxbasics`):**
+**Your lab — two bad `cal` years, append both errors (`scripts/linux-basics-practice`):**
 
 ```bash
-cd scripts/linuxbasics
+cd scripts/linux-basics-practice
 cal daifhaikf &>> resultsErrcombo.txt
 cat resultsErrcombo.txt
 
@@ -419,10 +419,10 @@ The **terminal window** you type in is also a **device file** under **`/dev/pts/
 | **`tty`** | Print the device file for **this** terminal session |
 | **`cal > /dev/pts/N`** | Send **`cal`** output to terminal **`N`** (replace with the path from the **other** window’s `tty`) |
 
-**Step 1 — sender terminal (`scripts/linuxbasics`):** see your own device, then redirect to the **other** pts:
+**Step 1 — sender terminal (`scripts/linux-basics-practice`):** see your own device, then redirect to the **other** pts:
 
 ```bash
-cd scripts/linuxbasics
+cd scripts/linux-basics-practice
 tty
 # example: /dev/pts/0  ← you are here
 
@@ -585,7 +585,7 @@ See [§11](#11-redirect-to-another-terminal-tty-devpts).
 
 ## 15. Lab — add and remove data in a file (`outputData.txt`)
 
-This lab ties **`touch`**, **`>>` (append)**, and **`>` (overwrite / truncate)** together in the order Durga Sir uses in class (`scripts/linuxbasics`).
+This lab ties **`touch`**, **`>>` (append)**, and **`>` (overwrite / truncate)** together in the order Durga Sir uses in class (`scripts/linux-basics-practice`).
 
 ```mermaid
 %%{init: {'theme': 'base', 'themeVariables': {'pie1': '#FF9800', 'pie2': '#1E88E5', 'pie3': '#FFFFFF', 'pie4': '#FF9800', 'pie5': '#1E88E5', 'pieTitleTextColor': '#212121', 'pieSectionTextColor': '#212121', 'pieStrokeColor': '#424242'}}}%%
@@ -629,7 +629,7 @@ flowchart TD
 ### Step 1 — **Add** data: `touch` then `ls -l >> outputData.txt`
 
 ```bash
-cd scripts/linuxbasics
+cd scripts/linux-basics-practice
 touch outputData.txt
 ls -l >> outputData.txt
 cat outputData          # wrong name — error
@@ -712,13 +712,13 @@ wc -c outputData.txt    # 0
 
 | Script                                                                                                       | Topic                                     |
 | :----------------------------------------------------------------------------------------------------------- | :---------------------------------------- |
-| [`redirection.sh`](../../scripts/redirection.sh)                                                             | Run all Session 11 + `Redirection/` demos |
+| [`redirection.sh`](../../scripts/redirection/run-all.sh)                                                             | Run all Session 11 + `Redirection/` demos |
 | [`streams-0-1-2-demo.sh`](../../scripts/redirection/streams-0-1-2-demo.sh)                                   | Streams 0, 1, 2                           |
 | [`stdout-greater-than-demo.sh`](../../scripts/redirection/stdout-greater-than-demo.sh)                       | `>`, `>>`, `1>`                           |
 | [`stderr-2-greater-demo.sh`](../../scripts/redirection/stderr-2-greater-demo.sh)                             | `2>` vs `>`                               |
 | [`stdin-combined-redirect-demo.sh`](../../scripts/redirection/stdin-combined-redirect-demo.sh)               | `<`, combined line                        |
 | [`both-streams-ampersand-greater-demo.sh`](../../scripts/redirection/both-streams-ampersand-greater-demo.sh) | `&>`, `&>>`                               |
 | [`tty-devpts-hint-demo.sh`](../../scripts/redirection/tty-devpts-hint-demo.sh)                               | `tty`, `/dev/pts`                         |
-| [`Redirection/*.sh`](../../scripts/Redirection/)                                                             | `>`, `>>`, `<<EOF`, pipe hint             |
+| [`Redirection/*.sh`](../../scripts/redirection/)                                                             | `>`, `>>`, `<<EOF`, pipe hint             |
 
 Full command-by-command tables: [`redirectionScriptSummary.md`](../../scripts-execution-summary/redirectionScriptSummary.md).
