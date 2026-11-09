@@ -15,15 +15,19 @@
 
 **Table of contents**
 
-- [0. How the two recordings map to this session](#0-how-the-two-recordings-map-to-this-session)
-- [1. `mkdir` basics (Part 1)](#1-mkdir-basics-part-1)
-- [2. `mkdir -p`, `tree`, and restructuring (Part 1)](#2-mkdir--p-tree-and-restructuring-part-1)
-- [3. Case study — Heroines Schedule Manager (Part 1 → Part 2)](#3-case-study--heroines-schedule-manager-part-1--part-2)
-- [4. Brace expansion practice (Part 2)](#4-brace-expansion-practice-part-2)
-- [5. Case study — Diagram4 X / Y tree (Part 2)](#5-case-study--diagram4-x--y-tree-part-2)
-- [6. Interview Q&amp;A — `mkdir` vs `mkdir -p`](#6-interview-qa--mkdir-vs-mkdir--p)
-- [7. Chronological outline (full timeline)](#7-chronological-outline-full-timeline)
-- [8. Quick reference table](#8-quick-reference-table)
+- [Creation of Directories (`mkdir`) — Session 10](#creation-of-directories-mkdir--session-10)
+  - [0. How the two recordings map to this session](#0-how-the-two-recordings-map-to-this-session)
+  - [1. `mkdir` basics (Part 1)](#1-mkdir-basics-part-1)
+  - [2. `mkdir -p` and restructuring (Part 1)](#2-mkdir--p-and-restructuring-part-1)
+  - [3. `tree` (Part 1)](#3-tree-part-1)
+  - [4. Case study — Heroines Schedule Manager (Part 1 → Part 2)](#4-case-study--heroines-schedule-manager-part-1--part-2)
+  - [5. Brace expansion practice (Part 2)](#5-brace-expansion-practice-part-2)
+  - [6. Case study — Diagram4 X / Y tree (Part 2)](#6-case-study--diagram4-x--y-tree-part-2)
+  - [7. Interview Q\&A — `mkdir` vs `mkdir -p`](#7-interview-qa--mkdir-vs-mkdir--p)
+  - [8. Chronological outline (full timeline)](#8-chronological-outline-full-timeline)
+    - [Part 1 — `Screencast From 2026-11-09 17-32-23.webm`](#part-1--screencast-from-2026-11-09-17-32-23webm)
+    - [Part 2 — `Screencast From 2026-11-09 18-12-23.webm`](#part-2--screencast-from-2026-11-09-18-12-23webm)
+  - [9. Quick reference table](#9-quick-reference-table)
 
 ---
 
@@ -31,10 +35,10 @@
 
 Watch **Part 1 first**, then **Part 2**. Frame references below use **`f_NNNN`** ≈ **(N − 1) × 90 s** from the start of **that** file.
 
-| Recording | Approx. length | Main content |
-| :-------- | :------------- | :----------- |
-| **`Screencast … 17-32-23.webm`** | ~39 min | `mkdir` syntax, **`-p`**, **`tree`**, **Heroines** case study through first `mkdir -p` one-liner |
-| **`Screencast … 18-12-23.webm`** | ~32 min | GUI verify heroines tree, **`touch`** + `{1..31}`, **`tree`** counts, **dir{1..5}**, **X/Y** diagram, **`mkdir -p`** shortcuts, interview answer |
+| Recording                        | Approx. length | Main content                                                                                                                                     |
+| :------------------------------- | :------------- | :----------------------------------------------------------------------------------------------------------------------------------------------- |
+| **`Screencast … 17-32-23.webm`** | ~39 min        | `mkdir` syntax, **`-p`**, **`tree`**, **Heroines** case study through first `mkdir -p` one-liner                                                 |
+| **`Screencast … 18-12-23.webm`** | ~32 min        | GUI verify heroines tree, **`touch`** + `{1..31}`, **`tree`** counts, **dir{1..5}**, **X/Y** diagram, **`mkdir -p`** shortcuts, interview answer |
 
 ```mermaid
 %%{init: {'theme': 'base', 'themeVariables': {'primaryColor': '#5c5c5c', 'primaryTextColor': '#ffffff', 'primaryBorderColor': '#3d3d3d', 'lineColor': '#b0b0b0'}}}%%
@@ -93,12 +97,25 @@ flowchart TD
 ```text
 mkdir: cannot create directory 'dir1/dir2/dir3': No such file or directory
 ```
+CMD lab reports with sample screenshots 
+
+If we try to create the directories by providing `mkdir dir1/dir2/dir3` we will get bewlo error 
+
+![Creating a file in the /tmp folder](../assets/mkdirError.png)
+
+if we want to create multiple directories we have use below command 
+
+`mkdir -p dir1/dir2/dir3`
+
+-p means path of directories , dir1 created , dir2 will be created inisde dir1, dir3 will be created in dir2
+
+![Creating a file in the /tmp folder](../assets/createMultipleDir.png)
 
 Class Q&amp;A: Linux paths use **forward slash** `/`, not Windows `\`.
 
 ---
 
-## 2. `mkdir -p`, `tree`, and restructuring (Part 1)
+## 2. `mkdir -p` and restructuring (Part 1)
 
 **~09:00 (f_0007):** `mkdir -p dir1/dir2/dir3` — **`-p` means parent path of directories** — create the **full chain** as needed.
 
@@ -121,19 +138,26 @@ flowchart LR
 - `mkdir -p dir0/dir1/dir2/dir3`, **or**
 - `mkdir dir0` then `mv dir1/dir2/dir3 dir0`
 
-**~15:00–19:30 (f_0011–f_0014)** — install and use **`tree`**:
+---
+
+## 3. `tree` (Part 1)
+
+**~15:00–19:30 (f_0011–f_0014)** — install and use **`tree`** to display a directory hierarchy:
 
 ```bash
 sudo apt install tree
 mkdir -p dir1/dir2/dir3
 tree dir1
 ```
+After installing tree we can see the tree diagram
+
+![Creating a file in the /tmp folder](../assets/treeDiagram.png)
 
 Example output in notes: under `dir1` — `a.txt`, `b.txt`, `c.txt`, and `dir2` → `dir3`.
 
----
+The `tree` command is useful for checking the nested directories created with `mkdir -p`.
 
-## 3. Case study — Heroines Schedule Manager (Part 1 → Part 2)
+## 4. Case study — Heroines Schedule Manager (Part 1 → Part 2)
 
 **~22:30–27:00 (f_0016–f_0019)** — required layout:
 
@@ -177,7 +201,7 @@ flowchart TB
 
 ---
 
-## 4. Brace expansion practice (Part 2)
+## 5. Brace expansion practice (Part 2)
 
 **~12:00 (f_0009)** — question: create **dir1 … dir5**, each with **a.txt, b.txt, c.txt**.
 
@@ -192,7 +216,7 @@ touch dir{1..5}/{a..c}.txt
 
 ---
 
-## 5. Case study — Diagram4 X / Y tree (Part 2)
+## 6. Case study — Diagram4 X / Y tree (Part 2)
 
 **~16:30 (f_0012)** — target tree (class **Diagram4**):
 
@@ -232,94 +256,94 @@ mkdir -p x/x1/x1{1,2}
 
 ---
 
-## 6. Interview Q&amp;A — `mkdir` vs `mkdir -p`
+## 7. Interview Q&amp;A — `mkdir` vs `mkdir -p`
 
 **~30:00 (f_0021–f_0022):**
 
-| Command | Behavior |
-| :------ | :------- |
-| `mkdir dir1/dir2/dir3` | Only **`dir3`** is created; **`dir1`** and **`dir2`** must **already exist**. |
-| `mkdir -p dir1/dir2/dir3` | The **complete path** of directories is created as needed. |
+| Command                   | Behavior                                                                      |
+| :------------------------ | :---------------------------------------------------------------------------- |
+| `mkdir dir1/dir2/dir3`    | Only **`dir3`** is created; **`dir1`** and **`dir2`** must **already exist**. |
+| `mkdir -p dir1/dir2/dir3` | The **complete path** of directories is created as needed.                    |
 
 ---
 
-## 7. Chronological outline (full timeline)
+## 8. Chronological outline (full timeline)
 
 ### Part 1 — `Screencast From 2026-11-09 17-32-23.webm`
 
-| Approx. time | Frame | Source | Content | Topic |
-| :----------- | :---- | :----- | :------ | :---- |
-| 00:00 | f_0001 | EditPlus | `Working with Directories:` (section header after `ls`, `date`, `cal`) | Transition into directory operations |
-| 01:30 | f_0002 | VM GUI | Ubuntu Files on **Desktop** — folder empty | Demo workspace on `~/Desktop` |
-| 03:00 | f_0003 | EditPlus | **1.** `mkdir dir1` · **2.** `mkdir dir1 dir2 dir3` · **3.** `mkdir dir1/dir2/dir3` (started) | Basic `mkdir` syntax |
-| 04:30 | f_0004 | EditPlus | Continues point 3 | Nested path syntax |
-| 06:00 | f_0005 | EditPlus | Only **dir3** created; parents must exist | Relative path rule |
-| 07:30 | f_0006 | EditPlus + Q&amp;A | `mkdir: cannot create directory ... No such file or directory` | Missing parents; `/` vs `\` |
-| 09:00 | f_0007 | EditPlus | `4. mkdir -p dir1/dir2/dir3` | **`-p` (parents)** |
-| 10:30 | f_0008 | Terminal | `cd ../../..`, `pwd`, `mkdir -p dir1/dir2/dir3` | Live **`-p`** demo |
-| 12:00 | f_0009 | EditPlus | Q: insert **dir0** above existing tree | Restructuring |
-| 13:30 | f_0010 | EditPlus | `mkdir -p dir0/...` **or** `mkdir dir0` + `mv` | **`-p` vs `mv`** |
-| 15:00 | f_0011 | Terminal | `sudo apt install tree` | Install **`tree`** |
-| 16:30 | f_0012 | Terminal | Same install | |
-| 18:00 | f_0013 | EditPlus | `tree dir1` example output | Notes |
-| 19:30 | f_0014 | Terminal | `mkdir -p` + `tree dir1` | Demo |
-| 21:00 | f_0015 | EditPlus | `mkdir -p` recap | |
-| 22:30 | f_0016 | EditPlus | **Heroines Schedule Manager** intro | Case study |
-| 24:00 | f_0017 | EditPlus | 3 years of month folders per heroine | |
-| 25:30 | f_0018 | EditPlus | `schedule_1` … `schedule_31` per month | **`touch`** later |
-| 27:00 | f_0019 | EditPlus | Full spec block | Requirements |
-| 28:30 | f_0020 | EditPlus | `$ mkdir heroines` | Step 1 |
-| 30:00 | f_0021 | EditPlus | Manual heroine dirs; Q on `-p` with slashes | **Q&amp;A** |
-| 31:30 | f_0022 | EditPlus | Long manual month `mkdir` lists | Tedious path |
-| 33:00 | f_0023 | EditPlus | `mkdir -p heroines/{sunny,katrina,kareena,karishma}` | Brace expansion |
-| 34:30 | f_0024 | EditPlus | Same (highlighted) | Emphasis |
-| 36:00 | f_0025 | EditPlus | Full nested brace one-liner | All months × years |
-| 37:30 | f_0026 | EditPlus | Sample expanded paths | |
-| 39:00 | f_0027 | Terminal | Live `mkdir -p heroines/{...}/..._202{0,1,2}` | Run on Desktop |
+| Approx. time | Frame  | Source             | Content                                                                                       | Topic                                |
+| :----------- | :----- | :----------------- | :-------------------------------------------------------------------------------------------- | :----------------------------------- |
+| 00:00        | f_0001 | EditPlus           | `Working with Directories:` (section header after `ls`, `date`, `cal`)                        | Transition into directory operations |
+| 01:30        | f_0002 | VM GUI             | Ubuntu Files on **Desktop** — folder empty                                                    | Demo workspace on `~/Desktop`        |
+| 03:00        | f_0003 | EditPlus           | **1.** `mkdir dir1` · **2.** `mkdir dir1 dir2 dir3` · **3.** `mkdir dir1/dir2/dir3` (started) | Basic `mkdir` syntax                 |
+| 04:30        | f_0004 | EditPlus           | Continues point 3                                                                             | Nested path syntax                   |
+| 06:00        | f_0005 | EditPlus           | Only **dir3** created; parents must exist                                                     | Relative path rule                   |
+| 07:30        | f_0006 | EditPlus + Q&amp;A | `mkdir: cannot create directory ... No such file or directory`                                | Missing parents; `/` vs `\`          |
+| 09:00        | f_0007 | EditPlus           | `4. mkdir -p dir1/dir2/dir3`                                                                  | **`-p` (parents)**                   |
+| 10:30        | f_0008 | Terminal           | `cd ../../..`, `pwd`, `mkdir -p dir1/dir2/dir3`                                               | Live **`-p`** demo                   |
+| 12:00        | f_0009 | EditPlus           | Q: insert **dir0** above existing tree                                                        | Restructuring                        |
+| 13:30        | f_0010 | EditPlus           | `mkdir -p dir0/...` **or** `mkdir dir0` + `mv`                                                | **`-p` vs `mv`**                     |
+| 15:00        | f_0011 | Terminal           | `sudo apt install tree`                                                                       | Install **`tree`**                   |
+| 16:30        | f_0012 | Terminal           | Same install                                                                                  |                                      |
+| 18:00        | f_0013 | EditPlus           | `tree dir1` example output                                                                    | Notes                                |
+| 19:30        | f_0014 | Terminal           | `mkdir -p` + `tree dir1`                                                                      | Demo                                 |
+| 21:00        | f_0015 | EditPlus           | `mkdir -p` recap                                                                              |                                      |
+| 22:30        | f_0016 | EditPlus           | **Heroines Schedule Manager** intro                                                           | Case study                           |
+| 24:00        | f_0017 | EditPlus           | 3 years of month folders per heroine                                                          |                                      |
+| 25:30        | f_0018 | EditPlus           | `schedule_1` … `schedule_31` per month                                                        | **`touch`** later                    |
+| 27:00        | f_0019 | EditPlus           | Full spec block                                                                               | Requirements                         |
+| 28:30        | f_0020 | EditPlus           | `$ mkdir heroines`                                                                            | Step 1                               |
+| 30:00        | f_0021 | EditPlus           | Manual heroine dirs; Q on `-p` with slashes                                                   | **Q&amp;A**                          |
+| 31:30        | f_0022 | EditPlus           | Long manual month `mkdir` lists                                                               | Tedious path                         |
+| 33:00        | f_0023 | EditPlus           | `mkdir -p heroines/{sunny,katrina,kareena,karishma}`                                          | Brace expansion                      |
+| 34:30        | f_0024 | EditPlus           | Same (highlighted)                                                                            | Emphasis                             |
+| 36:00        | f_0025 | EditPlus           | Full nested brace one-liner                                                                   | All months × years                   |
+| 37:30        | f_0026 | EditPlus           | Sample expanded paths                                                                         |                                      |
+| 39:00        | f_0027 | Terminal           | Live `mkdir -p heroines/{...}/..._202{0,1,2}`                                                 | Run on Desktop                       |
 
 ### Part 2 — `Screencast From 2026-11-09 18-12-23.webm`
 
-| Approx. time | Frame | Source | Content | Topic |
-| :----------- | :---- | :----- | :------ | :---- |
-| 00:00 | f_0001 | Files GUI | `Desktop/heroines/sunny` — 36 month folders | Verify **Part 1** |
-| 01:30 | f_0002 | EditPlus | Manual vs `mkdir -p` recap | |
-| 03:00 | f_0003 | EditPlus | `mkdir -p` one-liner; start `touch schecule_` | **`touch`** |
-| 04:30 | f_0004 | EditPlus | Full `touch .../schecule_{1..31}.txt` | **`{1..31}`** |
-| 06:00 | f_0005 | Files GUI | Under `may_2020` | GUI exploration |
-| 07:30 | f_0006 | EditPlus | Complete automation lines | |
-| 09:00 | f_0007 | Terminal | `tree` → 148 dirs, 4464 files | Scale proof |
-| 10:30 | f_0008 | EditPlus | *Linux...smart, powerful, strong* | |
-| 12:00 | f_0009 | EditPlus | Practice **Q:** dir1–dir5 + a/b/c files | Question |
-| 13:30 | f_0010 | EditPlus | **A:** `mkdir dir{1..5}` | Range brace |
-| 15:00 | f_0011 | Terminal | `ls`, `mkdir dir{1..5}` | Live |
-| 16:30 | f_0012 | Diagram | **Diagram4** X/Y tree | Case study |
-| 18:00 | f_0013 | Diagram + Q&amp;A | Red marks; `tree dir{1..5}` suggestion | Class chat |
-| 19:30 | f_0014 | EditPlus | `touch dir{1..5}/{a..c}.txt`; start manual X/Y | Answers |
-| 21:00 | f_0015 | Terminal | `touch dir{1..5}/{a..c}.txt` | 15 files |
-| 22:30 | f_0016 | Terminal | Manual `mkdir`/`cd` for X and Y | Stepwise build |
-| 24:00 | f_0017 | Terminal | Empty `~/Desktop` prompt | Pause |
-| 25:30 | f_0018 | EditPlus | `mkdir -p {x,y}` | Top-level brace |
-| 27:00 | f_0019 | EditPlus | `mkdir -p x/x1/x1{1,2}` | **`-p` + brace** |
-| 28:30 | f_0020 | Files GUI | `Desktop/y/y1` | GUI check |
-| 30:00 | f_0021 | EditPlus | **Q:** `mkdir dir1/dir2/dir3` vs `mkdir -p ...` | Interview |
-| 31:30 | f_0022 | EditPlus | **A.** parents required vs full path | Summary |
+| Approx. time | Frame  | Source            | Content                                         | Topic             |
+| :----------- | :----- | :---------------- | :---------------------------------------------- | :---------------- |
+| 00:00        | f_0001 | Files GUI         | `Desktop/heroines/sunny` — 36 month folders     | Verify **Part 1** |
+| 01:30        | f_0002 | EditPlus          | Manual vs `mkdir -p` recap                      |                   |
+| 03:00        | f_0003 | EditPlus          | `mkdir -p` one-liner; start `touch schecule_`   | **`touch`**       |
+| 04:30        | f_0004 | EditPlus          | Full `touch .../schecule_{1..31}.txt`           | **`{1..31}`**     |
+| 06:00        | f_0005 | Files GUI         | Under `may_2020`                                | GUI exploration   |
+| 07:30        | f_0006 | EditPlus          | Complete automation lines                       |                   |
+| 09:00        | f_0007 | Terminal          | `tree` → 148 dirs, 4464 files                   | Scale proof       |
+| 10:30        | f_0008 | EditPlus          | *Linux...smart, powerful, strong*               |                   |
+| 12:00        | f_0009 | EditPlus          | Practice **Q:** dir1–dir5 + a/b/c files         | Question          |
+| 13:30        | f_0010 | EditPlus          | **A:** `mkdir dir{1..5}`                        | Range brace       |
+| 15:00        | f_0011 | Terminal          | `ls`, `mkdir dir{1..5}`                         | Live              |
+| 16:30        | f_0012 | Diagram           | **Diagram4** X/Y tree                           | Case study        |
+| 18:00        | f_0013 | Diagram + Q&amp;A | Red marks; `tree dir{1..5}` suggestion          | Class chat        |
+| 19:30        | f_0014 | EditPlus          | `touch dir{1..5}/{a..c}.txt`; start manual X/Y  | Answers           |
+| 21:00        | f_0015 | Terminal          | `touch dir{1..5}/{a..c}.txt`                    | 15 files          |
+| 22:30        | f_0016 | Terminal          | Manual `mkdir`/`cd` for X and Y                 | Stepwise build    |
+| 24:00        | f_0017 | Terminal          | Empty `~/Desktop` prompt                        | Pause             |
+| 25:30        | f_0018 | EditPlus          | `mkdir -p {x,y}`                                | Top-level brace   |
+| 27:00        | f_0019 | EditPlus          | `mkdir -p x/x1/x1{1,2}`                         | **`-p` + brace**  |
+| 28:30        | f_0020 | Files GUI         | `Desktop/y/y1`                                  | GUI check         |
+| 30:00        | f_0021 | EditPlus          | **Q:** `mkdir dir1/dir2/dir3` vs `mkdir -p ...` | Interview         |
+| 31:30        | f_0022 | EditPlus          | **A.** parents required vs full path            | Summary           |
 
 ---
 
-## 8. Quick reference table
+## 9. Quick reference table
 
-| # | Syntax / command | Meaning |
-| :- | :----------------- | :------ |
-| 1 | `mkdir dir1` | Single directory in CWD |
-| 2 | `mkdir dir1 dir2 dir3` | Multiple **sibling** directories |
-| 3 | `mkdir dir1/dir2/dir3` | Create **only** `dir3` if parents exist |
-| 4 | `mkdir -p dir1/dir2/dir3` | Create **full path** as needed |
-| 5 | `mkdir dir0` + `mv dir1/dir2/dir3 dir0` | Wrap existing subtree |
-| 6 | `mkdir dir{1..5}` | Numeric brace — `dir1` … `dir5` |
-| 7 | `mkdir -p heroines/{sunny,katrina,kareena,karishma}` | List brace under one parent |
-| 8 | Nested `{...}` + `_202{0,1,2}` | Heroines months × years |
-| 9 | `mkdir -p x/x1/x1{1,2}` | `x11`, `x12` under `x/x1/` |
-| 10 | `touch dir{1..5}/{a..c}.txt` | Files inside dirs from `mkdir` |
+| #    | Syntax / command                                     | Meaning                                 |
+| :--- | :--------------------------------------------------- | :-------------------------------------- |
+| 1    | `mkdir dir1`                                         | Single directory in CWD                 |
+| 2    | `mkdir dir1 dir2 dir3`                               | Multiple **sibling** directories        |
+| 3    | `mkdir dir1/dir2/dir3`                               | Create **only** `dir3` if parents exist |
+| 4    | `mkdir -p dir1/dir2/dir3`                            | Create **full path** as needed          |
+| 5    | `mkdir dir0` + `mv dir1/dir2/dir3 dir0`              | Wrap existing subtree                   |
+| 6    | `mkdir dir{1..5}`                                    | Numeric brace — `dir1` … `dir5`         |
+| 7    | `mkdir -p heroines/{sunny,katrina,kareena,karishma}` | List brace under one parent             |
+| 8    | Nested `{...}` + `_202{0,1,2}`                       | Heroines months × years                 |
+| 9    | `mkdir -p x/x1/x1{1,2}`                              | `x11`, `x12` under `x/x1/`              |
+| 10   | `touch dir{1..5}/{a..c}.txt`                         | Files inside dirs from `mkdir`          |
 
 **Related commands this session:** `cd`, `pwd`, `cd ..`, `ls`, `mv`, `sudo apt install tree`, `tree`, `touch`.
 
