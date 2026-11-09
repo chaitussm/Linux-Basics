@@ -144,18 +144,51 @@ Example output in notes: under `dir1` — `a.txt`, `b.txt`, `c.txt`, and `dir2` 
 
 **Manual path (tedious):** `mkdir heroines` → `cd heroines` → `mkdir sunny katrina kareena karishma` → per heroine `cd` and long month lists.
 
-**Smart path — ~33:00–37:30 (f_0023–f_0026):**
+**Smart path (class one-liner) — ~33:00–37:30 (f_0023–f_0026):**
 
 ```bash
 mkdir -p heroines/{sunny,katrina,kareena,karishma}/{jan,feb,mar,apr,may,jun,jul,aug,sep,oct,nov,dec}_202{0,1,2}
 ```
 
+**Same layout, easier to read (two short commands):**
+
+```bash
+mkdir -p heroines/{sunny,katrina,kareena,karishma}
+for y in 2020 2021 2022; do
+  mkdir -p heroines/{sunny,katrina,kareena,karishma}/{jan,feb,mar,apr,may,jun,jul,aug,sep,oct,nov,dec}_$y
+done
+```
+
+**Or smallest steps (no nested braces on the first line):**
+
+```bash
+mkdir heroines
+cd heroines
+for h in sunny katrina kareena karishma; do
+  for y in 2020 2021 2022; do
+    mkdir -p "$h"/{jan,feb,mar,apr,may,jun,jul,aug,sep,oct,nov,dec}_$y
+  done
+done
+```
+
 **Class Q:** `mkdir -p heroines/sunny/katrina/...` creates a **nested chain**, not four **sibling** folders under `heroines`.
 
-**Part 2 — ~04:30 (f_0004)** — create all schedule files:
+**Part 2 — ~04:30 (f_0004)** — create all schedule files (class one-liner):
 
 ```bash
 touch heroines/{sunny,katrina,kareena,karishma}/{jan,feb,mar,apr,may,jun,jul,aug,sep,oct,nov,dec}_202{0,1,2}/schecule_{1..31}.txt
+```
+
+**Simpler `touch` (small loop — one line per month folder):**
+
+```bash
+for h in sunny katrina kareena karishma; do
+  for y in 2020 2021 2022; do
+    for m in jan feb mar apr may jun jul aug sep oct nov dec; do
+      touch "heroines/$h/${m}_$y/schecule_{1..31}.txt"
+    done
+  done
+done
 ```
 
 **~09:00 (f_0007)** — `tree` summary: **148 directories, 4464 files**.
