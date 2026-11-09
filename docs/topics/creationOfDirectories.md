@@ -198,6 +198,21 @@ flowchart TB
     classDef darkGrey fill:#5c5c5c,stroke:#3d3d3d,color:#ffffff,stroke-width:2px
     class H,S,K1,K2,K3,M,F darkGrey
 ```
+I will be taking panchanga srvanam and masam it will be like this 
+
+1. Ruthuvu (Seasons) in main list 
+2. Inside each season masam (month) will be there (this one we can do only for shell scripting) skipping this for time being
+3. For month all thithis(days) will be there 
+
+mkdir -p Ruthuvulu/{Vasantha,Greeshma,Varsha,Shard,Hemantha,Shishira}/{Ekadashi,Dwadashi,Trayodashi,Chaturdashi,Purnima,Amavasya}
+
+![Creating a file in the /tmp folder](../assets/seasonsTreePart1.png)
+
+![Creating a file in the /tmp folder](../assets/seasonsTreePart2.png)
+
+![Creating a file in the /tmp folder](../assets/seasonsTreePart3.png)
+
+
 
 ---
 
