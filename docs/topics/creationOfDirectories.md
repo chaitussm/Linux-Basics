@@ -269,6 +269,11 @@ mkdir -p x/x1/x1{1,2}
 
 (Analogous patterns apply for the `y` branch in class discussion.)
 
+For the above lets create one example to understand the flow 
+
+`mkdir -p Ayanams/{Uttarayanam/{1_Pushya_Masam,2_Magha_Masam,3_Phalguna_Masam},Dakshinayanam/{1_Ashadha_Masam,2_Shravana_Masam,3_Bhadrapada_Masam,4_Ashwayuja_Masam}} && touch Ayanams/Uttarayanam/1_Pushya_Masam/{Makara_Sankranthi,Kanuma} Ayanams/Dakshinayanam/1_Ashadha_Masam/{Bonalu,Guru_Purnima}`
+
+![Creating a file in the /tmp folder](../assets/Ayanams.png)
 ---
 
 ## 7. Interview Q&amp;A — `mkdir` vs `mkdir -p`
