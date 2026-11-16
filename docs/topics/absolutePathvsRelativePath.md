@@ -16,30 +16,33 @@
 
 **Table of contents**
 
-- [0. What this recording covers](#0-what-this-recording-covers)
-- [1. Why we need two kinds of path — real-world analogy](#1-why-we-need-two-kinds-of-path--real-world-analogy)
-- [2. Definitions — absolute vs relative](#2-definitions--absolute-vs-relative)
-- [3. Small example — run `test.sh` from `/home/durga`](#3-small-example--run-testsh-from-homedurga)
-- [4. Practice tree on Desktop (`x` / `y` branches)](#4-practice-tree-on-desktop-x--y-branches)
-- [5. Example 1 — you are in `x11`, `cd` to `y2`](#5-example-1--you-are-in-x11-cd-to-y2)
-- [6. Example 2 — you are in `y2`, `cd` to `x11`](#6-example-2--you-are-in-y2-cd-to-x11)
-- [7. Example 3 — stay in `x11`, create `y21` under `y2` without `cd` there](#7-example-3--stay-in-x11-create-y21-under-y2-without-cd-there)
-- [8. Terminal proof — `mkdir` with absolute path does not change `pwd`](#8-terminal-proof--mkdir-with-absolute-path-does-not-change-pwd)
-- [9. One-line summary](#9-one-line-summary)
-- [10. Class Q&amp;A — paths when you cannot enter a folder](#10-class-qa--paths-when-you-cannot-enter-a-folder)
-- [Appendix — recording time map](#appendix--recording-time-map)
+- [Absolute Path vs Relative Path](#absolute-path-vs-relative-path)
+  - [0. What this recording covers](#0-what-this-recording-covers)
+  - [1. Why we need two kinds of path — real-world analogy](#1-why-we-need-two-kinds-of-path--real-world-analogy)
+  - [2. Definitions — absolute vs relative](#2-definitions--absolute-vs-relative)
+  - [3. Small example — run `test.sh` from `/home/durga`](#3-small-example--run-testsh-from-homedurga)
+  - [4. Practice tree on Desktop (`x` / `y` branches)](#4-practice-tree-on-desktop-x--y-branches)
+  - [5. Example 1 — you are in `x11`, `cd` to `y2`](#5-example-1--you-are-in-x11-cd-to-y2)
+  - [6. Example 2 — you are in `y2`, `cd` to `x11`](#6-example-2--you-are-in-y2-cd-to-x11)
+  - [](#)
+  - [7. Example 3 — stay in `x11`, create `y21` under `y2` without `cd` there](#7-example-3--stay-in-x11-create-y21-under-y2-without-cd-there)
+  - [8. Terminal proof — `mkdir` with absolute path does not change `pwd`](#8-terminal-proof--mkdir-with-absolute-path-does-not-change-pwd)
+  - [9. One-line summary](#9-one-line-summary)
+  - [](#-1)
+  - [10. Class Q\&A — paths when you cannot enter a folder](#10-class-qa--paths-when-you-cannot-enter-a-folder)
+  - [Appendix — recording time map](#appendix--recording-time-map)
 
 ---
 
 ## 0. What this recording covers
 
-| Approx. time | Section in this doc |
-| :----------- | :------------------ |
-| 00:00–06:00 | §1 analogy → §3 `test.sh` paths |
-| 07:30–10:30 | §2 definitions |
-| 12:00–15:00 | §4 tree + `mkdir -p` one-liner |
-| 16:30–28:30 | §5–§6 `cd` examples |
-| 30:00–36:00 | §7–§9 `mkdir` relative/absolute + summary |
+| Approx. time | Section in this doc                       |
+| :----------- | :---------------------------------------- |
+| 00:00–06:00  | §1 analogy → §3 `test.sh` paths           |
+| 07:30–10:30  | §2 definitions                            |
+| 12:00–15:00  | §4 tree + `mkdir -p` one-liner            |
+| 16:30–28:30  | §5–§6 `cd` examples                       |
+| 30:00–36:00  | §7–§9 `mkdir` relative/absolute + summary |
 
 ```mermaid
 %%{init: {'theme': 'base', 'themeVariables': {'primaryColor': '#5c5c5c', 'primaryTextColor': '#ffffff', 'primaryBorderColor': '#3d3d3d'}}}%%
@@ -80,10 +83,10 @@ Linux uses the same idea: **`/`** is the root of the filesystem tree (like “Wo
 
 **What the screenshot shows:**
 
-| Kind | Class wording | Meaning in plain language |
-| :--- | :------------ | :------------------------ |
+| Kind              | Class wording                                              | Meaning in plain language                                   |
+| :---------------- | :--------------------------------------------------------- | :---------------------------------------------------------- |
 | **Absolute path** | Path from **root (`/`)** to destination; **complete** path | Same answer no matter which directory you are “standing in” |
-| **Relative path** | Path from **current working directory** to destination | Changes when you **`cd`** somewhere else |
+| **Relative path** | Path from **current working directory** to destination     | Changes when you **`cd`** somewhere else                    |
 
 **Commands that care:**
 
@@ -110,11 +113,11 @@ flowchart LR
 
 **Setup in notes:** File exists at **`/home/durga/scripts/test.sh`**. You are **in** **`/home/durga`** (your **current working directory**).
 
-| Command | Path type | Why |
-| :------ | :-------- | :-- |
-| `./scripts/test.sh` | Relative | **`.`** = current directory; then go into `scripts/` |
-| `scripts/test.sh` | Relative | Many shells resolve this relative to **cwd** (same idea as above without `./`) |
-| `/home/durga/scripts/test.sh` | **Absolute** | Starts at **`/`** — full path from root |
+| Command                       | Path type    | Why                                                                            |
+| :---------------------------- | :----------- | :----------------------------------------------------------------------------- |
+| `./scripts/test.sh`           | Relative     | **`.`** = current directory; then go into `scripts/`                           |
+| `scripts/test.sh`             | Relative     | Many shells resolve this relative to **cwd** (same idea as above without `./`) |
+| `/home/durga/scripts/test.sh` | **Absolute** | Starts at **`/`** — full path from root                                        |
 
 **Line-by-line idea:**
 
@@ -239,6 +242,7 @@ cd ./../../x/x1/x11
 
 **My observation:** Mirror the class paths on your tree — screenshot with `pwd` before/after.
 
+![differences between absolute and relative path](../assets/absoluteVsRelative.png)
 ---
 
 ## 7. Example 3 — stay in `x11`, create `y21` under `y2` without `cd` there
@@ -289,13 +293,16 @@ mkdir ../../../../y/y2/y21   # variant in notes — check with ls
 
 ![Closing summary in EditPlus](../assets/absolute-path-summary-notes.png)
 
-| Term | Short form in class |
-| :--- | :------------------ |
-| **Absolute path** | **w.r.t.** root location **`/`** |
+| Term              | Short form in class                     |
+| :---------------- | :-------------------------------------- |
+| **Absolute path** | **w.r.t.** root location **`/`**        |
 | **Relative path** | **w.r.t.** **current location** (`pwd`) |
 
 **My observation:** In your own words, one paragraph — no screenshot required unless you want one.
 
+Here we have the screenshot which contains the command `cd -` which explains the previous working directory used
+
+![funtionality regardiung previous working directory](../assets/previousWorkingDirectory.png)
 ---
 
 ## 10. Class Q&amp;A — paths when you cannot enter a folder
@@ -308,18 +315,27 @@ mkdir /home/durga/Desktop/y/y2/y21
 
 **My observation:** Only test permission ideas on folders you control.
 
+
+
+![mkdir with absolute path ](../assets/mkdirWithabsolutePath.png)
+
+Now same example with relative xpath 
+
+![mkdir with relative path ](../assets/mkdirWithRelativePath.png)
+
+
 ---
 
 ## Appendix — recording time map
 
-| Approx. time | Frame (90s spacing) | Topic |
-| :----------- | :------------------ | :---- |
-| 00:00 | f_0001 | Session title |
-| 07:30 | f_0006–f_0008 | §3–§2 `test.sh` + definitions |
-| 12:00–15:00 | f_0009–f_0011 | §4 tree |
-| 16:30–22:30 | f_0012–f_0016 | §5 eg1 |
-| 24:00–28:30 | f_0017–f_0020 | §6 eg2 |
-| 30:00–36:00 | f_0021–f_0025 | §7–§9 |
+| Approx. time | Frame (90s spacing) | Topic                         |
+| :----------- | :------------------ | :---------------------------- |
+| 00:00        | f_0001              | Session title                 |
+| 07:30        | f_0006–f_0008       | §3–§2 `test.sh` + definitions |
+| 12:00–15:00  | f_0009–f_0011       | §4 tree                       |
+| 16:30–22:30  | f_0012–f_0016       | §5 eg1                        |
+| 24:00–28:30  | f_0017–f_0020       | §6 eg2                        |
+| 30:00–36:00  | f_0021–f_0025       | §7–§9                         |
 
 *Frames after ~36:08 repeat the summary slide in the recording file.*
 
