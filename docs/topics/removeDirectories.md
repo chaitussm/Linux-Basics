@@ -13,33 +13,37 @@
 
 **Table of contents**
 
-- [0. What this recording covers](#0-what-this-recording-covers)
-- [1. `rmdir` — remove one or many **empty** directories](#1-rmdir--remove-one-or-many-empty-directories)
-- [2. `rmdir` fails when the directory is not empty](#2-rmdir-fails-when-the-directory-is-not-empty)
-- [3. Plain `rm` on a directory — *Is a directory*](#3-plain-rm-on-a-directory--is-a-directory)
-- [4. `rm -r` / `rm -R` — remove a directory and everything inside](#4-rm--r--rm--r--remove-a-directory-and-everything-inside)
-- [5. Why use `rm` instead of `rmdir`?](#5-why-use-rm-instead-of-rmdir)
-- [6. Deleted files and directories do not come back](#6-deleted-files-and-directories-do-not-come-back)
-- [7. Interactive removal — `rm -i` / `rm -ri`](#7-interactive-removal--rm--i--rm--ri)
-- [8. Force removal — `rm -f` / `rm -rf`](#8-force-removal--rm--f--rm--rf)
-- [9. Verbose removal — `rm -v` / `rm -rv`](#9-verbose-removal--rm--v--rm--rv)
-- [10. Remove only a nested folder (leave parents)](#10-remove-only-a-nested-folder-leave-parents)
-- [11. `rm` option summary (flowchart)](#11-rm-option-summary-flowchart)
-- [12. Class practice questions (Q1–Q3)](#12-class-practice-questions-q1q3)
-- [13. Remove many directories — `{1..10}` and `{2,4,6}`](#13-remove-many-directories--110-and-246)
-- [14. `rmdir` with wildcards (`d*`, `d*n`)](#14-rmdir-with-wildcards-d-dn)
-- [Appendix — recording time map](#appendix--recording-time-map)
+- [Remove Directories (`rmdir`, `rm -r`)](#remove-directories-rmdir-rm--r)
+  - [0. What this recording covers](#0-what-this-recording-covers)
+  - [1. `rmdir` — remove one or many **empty** directories](#1-rmdir--remove-one-or-many-empty-directories)
+  - [2. `rmdir` fails when the directory is not empty](#2-rmdir-fails-when-the-directory-is-not-empty)
+  - [3. Plain `rm` on a directory — *Is a directory*](#3-plain-rm-on-a-directory--is-a-directory)
+  - [4. `rm -r` / `rm -R` — remove a directory and everything inside](#4-rm--r--rm--r--remove-a-directory-and-everything-inside)
+  - [5. Why use `rm` instead of `rmdir`?](#5-why-use-rm-instead-of-rmdir)
+  - [6. Deleted files and directories do not come back](#6-deleted-files-and-directories-do-not-come-back)
+  - [7. Interactive removal — `rm -i` / `rm -ri`](#7-interactive-removal--rm--i--rm--ri)
+  - [8. Force removal — `rm -f` / `rm -rf`](#8-force-removal--rm--f--rm--rf)
+  - [9. Verbose removal — `rm -v` / `rm -rv`](#9-verbose-removal--rm--v--rm--rv)
+  - [10. Remove only a nested folder (leave parents)](#10-remove-only-a-nested-folder-leave-parents)
+  - [11. `rm` option summary (flowchart)](#11-rm-option-summary-flowchart)
+  - [12. Class practice questions (Q1–Q3)](#12-class-practice-questions-q1q3)
+    - [Q1 — `dir1` is **empty**](#q1--dir1-is-empty)
+    - [Q2 — `dir1` is **not empty**](#q2--dir1-is-not-empty)
+    - [Q3 — non-empty **`dir1`** and file **`abc.txt`**](#q3--non-empty-dir1-and-file-abctxt)
+  - [13. Remove many directories — `{1..10}` and `{2,4,6}`](#13-remove-many-directories--110-and-246)
+  - [14. `rmdir` with wildcards (`d*`, `d*n`)](#14-rmdir-with-wildcards-d-dn)
+  - [Appendix — recording time map](#appendix--recording-time-map)
 
 ---
 
 ## 0. What this recording covers
 
-| Approx. time | Content |
-| :----------- | :------ |
-| 00:00–02:30 | End of `mkdir` recap → heading **How to remove directories** |
-| 03:00–39:00 | `rmdir`, `rm -r`, options `-i` / `-f` / `-v`, safety, MCQ Q1–Q3 |
-| 40:30+ | `mkdir` review questions (Q4–Q7) — see `creationOfDirectories.md`, not this file |
-| 51:00–55:00 | Bulk `rm -r dir{1..10}`, `rmdir d*`, `rmdir d*n` |
+| Approx. time | Content                                                                          |
+| :----------- | :------------------------------------------------------------------------------- |
+| 00:00–02:30  | End of `mkdir` recap → heading **How to remove directories**                     |
+| 03:00–39:00  | `rmdir`, `rm -r`, options `-i` / `-f` / `-v`, safety, MCQ Q1–Q3                  |
+| 40:30+       | `mkdir` review questions (Q4–Q7) — see `creationOfDirectories.md`, not this file |
+| 51:00–55:00  | Bulk `rm -r dir{1..10}`, `rmdir d*`, `rmdir d*n`                                 |
 
 ```mermaid
 %%{init: {'theme': 'base', 'themeVariables': {'primaryColor': '#5c5c5c', 'primaryTextColor': '#ffffff', 'primaryBorderColor': '#3d3d3d', 'lineColor': '#b0b0b0'}}}%%
@@ -74,6 +78,10 @@ flowchart LR
 **Lab screenshot (class terminal ~07:30):**
 
 ![rmdir dir1 fails with Directory not empty](../assets/remove-rmdir-failed-terminal.png)
+
+**My Local Screenshot as per the durga sir class 
+
+![functionality realted to remove directory](../assets/rmdirFuntions.png)
 
 **What the screenshot shows (line by line):**
 
@@ -131,10 +139,10 @@ Setup in class (~01:30): `mkdir dir1 dir2 dir3 dir4` — some folders hold files
 
 **Class Q (~13:30–15:00):**
 
-| Command | Works when |
-| :------ | :--------- |
+| Command     | Works when                          |
+| :---------- | :---------------------------------- |
 | **`rm -r`** | Directory is **empty or not empty** |
-| **`rmdir`** | Directory is **empty only** |
+| **`rmdir`** | Directory is **empty only**         |
 
 **Answer in one line:** `rm` (with `-r`) can remove a full tree; `rmdir` is only for empty folders.
 
@@ -245,12 +253,12 @@ rm -r dir1/dir2
 
 ## 11. `rm` option summary (flowchart)
 
-| Option | Meaning in class |
-| :----- | :--------------- |
+| Option              | Meaning in class                                       |
+| :------------------ | :----------------------------------------------------- |
 | **`-r`** / **`-R`** | Required for directories — delete contents recursively |
-| **`-i`** | Interactive — ask before each step |
-| **`-f`** | Force — no errors for missing files; no prompts |
-| **`-v`** | Verbose — print each removed path |
+| **`-i`**            | Interactive — ask before each step                     |
+| **`-f`**            | Force — no errors for missing files; no prompts        |
+| **`-v`**            | Verbose — print each removed path                      |
 
 ```mermaid
 flowchart TD
@@ -276,24 +284,24 @@ Each question is its **own** check — do not merge the answers.
 
 Which command removes `dir1`?
 
-| Option | Verdict |
-| :----- | :------ |
-| A) `rm dir1` | Wrong — *Is a directory* |
-| B) `remove dir1` | Not a standard Linux command |
-| C) **`rmdir dir1`** | **Correct** |
-| D) `del dir1` | Not standard on Linux |
+| Option              | Verdict                      |
+| :------------------ | :--------------------------- |
+| A) `rm dir1`        | Wrong — *Is a directory*     |
+| B) `remove dir1`    | Not a standard Linux command |
+| C) **`rmdir dir1`** | **Correct**                  |
+| D) `del dir1`       | Not standard on Linux        |
 
 **Ans: C**
 
 ### Q2 — `dir1` is **not empty**
 
-| Option | Verdict |
-| :----- | :------ |
-| A) `rmdir dir1` | Fails — not empty |
+| Option             | Verdict                                                                    |
+| :----------------- | :------------------------------------------------------------------------- |
+| A) `rmdir dir1`    | Fails — not empty                                                          |
 | B) **`rm -R dir`** | **Correct** (class answer; needs `-r` and correct name `dir1` in real use) |
-| C) `rm -i dir` | `-i` alone does not recurse into a non-empty directory |
-| D) `rm -f dir` | Same |
-| E) `rm -v dir` | Same |
+| C) `rm -i dir`     | `-i` alone does not recurse into a non-empty directory                     |
+| D) `rm -f dir`     | Same                                                                       |
+| E) `rm -v dir`     | Same                                                                       |
 
 **Ans: B** — use **`rm -r`** / **`rm -R`** for a non-empty directory.
 
@@ -354,18 +362,18 @@ Shell expands `*` to matching names; **every** match must still be **empty** or 
 
 Quick jump guide for [`Screencast From 2026-11-10 08-56-09.webm`](../../ScreenRecordings/Screencast%20From%202026-11-10%2008-56-09.webm) (frame ≈ 90s spacing).
 
-| Approx. time | Section in this doc |
-| :----------- | :------------------ |
-| 03:00 | §1 `rmdir` syntax |
-| 06:00–07:30 | §2 not empty |
-| 09:00–10:30 | §3–§4 `rm` / `rm -r` |
-| 13:30–18:00 | §5–§6 Q&A and safety |
-| 22:00–22:30 | §7 `rm -ri` |
-| 25:30 | §8 `rm -rf` |
-| 28:30 | §9 `rm -rv` |
-| 30:00 | §10 nested path |
-| 34:30–39:00 | §12 Q1–Q3 |
-| 51:00–54:00 | §13–§14 bulk / wildcards |
+| Approx. time | Section in this doc      |
+| :----------- | :----------------------- |
+| 03:00        | §1 `rmdir` syntax        |
+| 06:00–07:30  | §2 not empty             |
+| 09:00–10:30  | §3–§4 `rm` / `rm -r`     |
+| 13:30–18:00  | §5–§6 Q&A and safety     |
+| 22:00–22:30  | §7 `rm -ri`              |
+| 25:30        | §8 `rm -rf`              |
+| 28:30        | §9 `rm -rv`              |
+| 30:00        | §10 nested path          |
+| 34:30–39:00  | §12 Q1–Q3                |
+| 51:00–54:00  | §13–§14 bulk / wildcards |
 
 ---
 
