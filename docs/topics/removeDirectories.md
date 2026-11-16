@@ -20,16 +20,21 @@
   - [3. Plain `rm` on a directory — *Is a directory*](#3-plain-rm-on-a-directory--is-a-directory)
   - [4. `rm -r` / `rm -R` — remove a directory and everything inside](#4-rm--r--rm--r--remove-a-directory-and-everything-inside)
   - [5. Why use `rm` instead of `rmdir`?](#5-why-use-rm-instead-of-rmdir)
+  - [](#)
   - [6. Deleted files and directories do not come back](#6-deleted-files-and-directories-do-not-come-back)
   - [7. Interactive removal — `rm -i` / `rm -ri`](#7-interactive-removal--rm--i--rm--ri)
+  - [](#-1)
   - [8. Force removal — `rm -f` / `rm -rf`](#8-force-removal--rm--f--rm--rf)
+  - [](#-2)
   - [9. Verbose removal — `rm -v` / `rm -rv`](#9-verbose-removal--rm--v--rm--rv)
+  - [](#-3)
   - [10. Remove only a nested folder (leave parents)](#10-remove-only-a-nested-folder-leave-parents)
   - [11. `rm` option summary (flowchart)](#11-rm-option-summary-flowchart)
   - [12. Class practice questions (Q1–Q3)](#12-class-practice-questions-q1q3)
     - [Q1 — `dir1` is **empty**](#q1--dir1-is-empty)
     - [Q2 — `dir1` is **not empty**](#q2--dir1-is-not-empty)
     - [Q3 — non-empty **`dir1`** and file **`abc.txt`**](#q3--non-empty-dir1-and-file-abctxt)
+  - [](#-4)
   - [13. Remove many directories — `{1..10}` and `{2,4,6}`](#13-remove-many-directories--110-and-246)
   - [14. `rmdir` with wildcards (`d*`, `d*n`)](#14-rmdir-with-wildcards-d-dn)
   - [Appendix — recording time map](#appendix--recording-time-map)
@@ -123,6 +128,8 @@ flowchart TD
 
 **My observation:** *(screenshot of `rm dir1` error on your machine.)*
 
+![rm funtionality](../assets/rmCommand.png)
+
 ---
 
 ## 4. `rm -r` / `rm -R` — remove a directory and everything inside
@@ -146,6 +153,10 @@ Setup in class (~01:30): `mkdir dir1 dir2 dir3 dir4` — some folders hold files
 
 **Answer in one line:** `rm` (with `-r`) can remove a full tree; `rmdir` is only for empty folders.
 
+**Lab Practice in my machine ***
+
+
+![rm -r and rm - R funtionality](../assets/rmWith-rAndR.png)
 ---
 
 ## 6. Deleted files and directories do not come back
@@ -193,6 +204,9 @@ flowchart TD
     class S,P1,P2,P3,D step
 ```
 
+**Observation using my linux mnachine 
+
+![rm -ri dir1 with y prompts](../assets/rm-iCommand.png)
 ---
 
 ## 8. Force removal — `rm -f` / `rm -rf`
@@ -211,6 +225,7 @@ flowchart TD
 
 **My observation:** *(screenshot `rm -rf` on a typo path — notice silence.)*
 
+![rm -ri dir1 with y prompts](../assets/rm-rfCommand.png)
 ---
 
 ## 9. Verbose removal — `rm -v` / `rm -rv`
@@ -229,6 +244,7 @@ flowchart TD
 
 **My observation:** *(compare output with `tree` before/after.)*
 
+![rm -rv dir1 with y prompts](../assets/rm-rvVerboseCommand.png)
 ---
 
 ## 10. Remove only a nested folder (leave parents)
@@ -317,6 +333,7 @@ rm -r abc.txt dir1
 
 **My observation:** *(run Q1–Q3 on a test folder — three small screenshots.)*
 
+![to rewmove non-empty Directory and file together](../assets/rm-rToDeletetxtAndDirectory.png)
 ---
 
 ## 13. Remove many directories — `{1..10}` and `{2,4,6}`
