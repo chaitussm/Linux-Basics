@@ -244,5 +244,7 @@ git config --global credential.helper store    # remember it
 | `You have unstaged changes` during pull | Commit or `git stash` first |
 | `CONFLICT (content)` | See [Step 5](#step-5-resolve-conflicts-if-any) |
 | `unable to get password from user` | See [Authentication Errors](#5-authentication-errors-on-push) |
+| `exceeds GitHub's file size limit of 100.00 MB` | [pushScreenRecordings.md](pushScreenRecordings.md) — enable **Git LFS** |
+| Screen recording not on GitHub after push | [pushScreenRecordings.md](pushScreenRecordings.md) — may have been deleted in an `updated changes` commit |
 
 [⬆ Back to top](#table-of-contents)
