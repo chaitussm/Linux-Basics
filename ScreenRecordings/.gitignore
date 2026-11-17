@@ -1,0 +1,9 @@
+# Keep screencasts on your machine only — do not commit/push large videos.
+*.webm
+*.mp4
+*.mkv
+*.mov
+
+# Keep these in git:
+!README.md
+!.gitignore
