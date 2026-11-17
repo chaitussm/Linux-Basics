@@ -1,0 +1,5 @@
+# Large class recordings — use Git LFS (see ScreenRecordings/README.md)
+ScreenRecordings/** filter=lfs diff=lfs merge=lfs -text
+*.webm filter=lfs diff=lfs merge=lfs -text
+*.mp4 filter=lfs diff=lfs merge=lfs -text
+*.mkv filter=lfs diff=lfs merge=lfs -text

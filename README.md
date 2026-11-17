@@ -8,7 +8,8 @@ Hands-on companion for **Durga Sir**'s Linux course ([YouTube playlist](https://
 | :--- | :--- |
 | [`docs/topics/linuxBasics.md`](docs/topics/linuxBasics.md) | Index to topic notes and scripts |
 | [`docs/topics/`](docs/topics/) | All topic notes (the complete discussion for each video) |
-| [`docs/troubleshooting/`](docs/troubleshooting/) | Git and tooling error resolutions |
+| [`docs/troubleshooting/`](docs/troubleshooting/) | Git and tooling error resolutions ([push screen recordings](docs/troubleshooting/pushScreenRecordings.md)) |
+| [`ScreenRecordings/`](ScreenRecordings/) | Class screencasts (**Git LFS** — see [README](ScreenRecordings/README.md)) |
 | [`docs/assets/`](docs/assets/) | Screenshots used by the notes |
 | [`exercises/`](exercises/) | Topic-based practice READMEs and sample data |
 | [`scripts/`](scripts/) | One kebab-case folder per topic with `.sh` demos (see [`scripts/README.md`](scripts/README.md)) |
