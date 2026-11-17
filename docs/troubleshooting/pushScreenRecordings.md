@@ -1,5 +1,7 @@
 # Git: Pushing screen recordings (mp4 / webm)
 
+> **Current policy:** recordings stay under **`/home/surya/Videos/Screencasts/`** — **do not** commit videos. Push only notes and PNGs. See [**screencastWorkflow.md**](../topics/screencastWorkflow.md).
+
 ## What went wrong on this repo (Nov 2026)
 
 Several commits titled **`updated changes`** on `master` **removed** files from `ScreenRecordings/` on GitHub (delete commits with `Bin … -> 0 bytes`). The folder is **empty on `origin/master`** even if you still have videos on your PC.

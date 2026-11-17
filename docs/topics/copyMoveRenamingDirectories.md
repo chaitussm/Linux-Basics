@@ -4,8 +4,8 @@
 **Instructor:** Durga Sir  
 
 **Source recording (local — not on GitHub):**  
-`~/Study/Linux-Basics/ScreenRecordings/Screencast From 2026-11-17 10-13-53.webm`  
-*(Keep this file on your PC only; see [`ScreenRecordings/README.md`](../../ScreenRecordings/README.md).)*
+`/home/surya/Videos/Screencasts/Screencast From 2026-11-17 10-13-53.webm`  
+*(Policy: [`screencastWorkflow.md`](screencastWorkflow.md).)*
 
 **Prior topics:** [removeDirectories.md](removeDirectories.md) · [absolutePathvsRelativePath.md](absolutePathvsRelativePath.md)
 
@@ -276,12 +276,13 @@ flowchart TD
 
 ## Appendix — map frames from your screencast
 
-Run on your PC (`~/Study/Linux-Basics`):
+Run on your PC:
 
 ```bash
+VIDEO="/home/surya/Videos/Screencasts/Screencast From 2026-11-17 10-13-53.webm"
+cd ~/Study/Linux-Basics
 bash scripts/file-system-navigation-and-hierarchy/extract-screencast-frames.sh \
-  "ScreenRecordings/Screencast From 2026-11-17 10-13-53.webm" \
-  /tmp/copy-move-frames
+  "$VIDEO" /tmp/copy-move-frames
 ```
 
 Frame **`f_NNNN`** ≈ **(N − 1) × 90 s** in the video. Drop chosen PNGs into `docs/assets/` (e.g. `copy-cp-r-notes.png`) and link them in the sections above.

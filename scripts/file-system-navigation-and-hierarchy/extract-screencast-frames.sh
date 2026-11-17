@@ -1,12 +1,17 @@
 #!/usr/bin/env bash
 # Extract PNG frames every 90s from a local screencast (for topic notes).
-# Run on YOUR PC where the .webm lives — videos are not stored on GitHub.
+# Videos stay under /home/surya/Videos/Screencasts/ — not in git.
 set -euo pipefail
 
+SCREENCAST_DIR="${SCREENCAST_DIR:-/home/surya/Videos/Screencasts}"
+
 if [[ $# -lt 1 ]]; then
-  echo "Usage: $0 \"/path/Screencast ....webm\" [output-dir]"
+  echo "Usage: $0 \"/path/to/file.webm\" [output-dir]"
+  echo ""
+  echo "Canonical screencast directory:"
+  echo "  $SCREENCAST_DIR"
   echo "Example:"
-  echo "  $0 \"\$HOME/Study/Linux-Basics/ScreenRecordings/Screencast From 2026-11-17 10-13-53.webm\""
+  echo "  $0 \"$SCREENCAST_DIR/Screencast From 2026-11-17 10-13-53.webm\""
   exit 1
 fi
 
@@ -15,6 +20,7 @@ OUT="${2:-/tmp/screencast-frames}"
 
 if [[ ! -f "$VIDEO" ]]; then
   echo "File not found: $VIDEO"
+  echo "Expected location: $SCREENCAST_DIR/"
   exit 1
 fi
 

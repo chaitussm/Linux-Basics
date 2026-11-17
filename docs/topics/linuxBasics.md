@@ -4,6 +4,8 @@
 
 Each topic has its own **`.md` file** under [`topics/`](topics/). Runnable **`.sh`** demos live under [`../scripts/`](../scripts/) in **topic folders** (same name as the lesson, e.g. `scripts/components-of-unix/`). See [`scripts/README.md`](../scripts/README.md). For **what each script runs**, see [`scripts-execution-summary/README.md`](../scripts-execution-summary/README.md).
 
+**Screencasts (local only):** observe recordings under **`/home/surya/Videos/Screencasts/`** — push **`.md` + `docs/assets`**, not video files. [**screencastWorkflow.md**](screencastWorkflow.md)
+
 ---
 
 ## Video index

@@ -1,40 +1,24 @@
-# Screen recordings (local only — not pushed to GitHub)
+# ScreenRecordings (repo folder — no videos)
 
-Large screencasts stay **on your machine** so `git push` stays fast and small. Git **ignores** `*.webm`, `*.mp4`, and `*.mkv` in this folder (see [`.gitignore`](.gitignore)).
+This folder is **intentionally empty** of video files in git.
 
-## Where your file lives
+## Where recordings live
 
-Example (your latest session):
+**Canonical path on your PC:**
 
 ```text
-~/Study/Linux-Basics/ScreenRecordings/Screencast From 2026-11-17 10-13-53.webm
+/home/surya/Videos/Screencasts/
 ```
 
-Topic notes link to this **local path** and use **`docs/assets/`** PNGs (terminal captures), which **do** get pushed.
+Record screencasts there. **Do not** `git add` `.webm` / `.mp4` from this repo.
 
-## Extract frames for notes (on your PC)
+Full workflow: [**screencastWorkflow.md**](../docs/topics/screencastWorkflow.md)
 
-```bash
-cd ~/Study/Linux-Basics
-chmod +x scripts/file-system-navigation-and-hierarchy/extract-screencast-frames.sh
-bash scripts/file-system-navigation-and-hierarchy/extract-screencast-frames.sh \
-  "ScreenRecordings/Screencast From 2026-11-17 10-13-53.webm" \
-  /tmp/copy-move-frames
-```
+## What to push
 
-Copy useful PNGs into `docs/assets/` and reference them in the matching `docs/topics/*.md` file.
+- `docs/topics/<topic>.md`
+- `docs/assets/*.png` from your lab or extracted frames
 
-## Push only notes + screenshots
+## Legacy
 
-```bash
-git add docs/topics/copyMoveRenamingDirectories.md docs/assets/
-git commit -m "Update copy/move/rename notes and lab screenshots"
-git pull --rebase origin master
-git push origin master
-```
-
-Do **not** `git add` files under `ScreenRecordings/*.webm` — they stay untracked by design.
-
-## Troubleshooting push
-
-See [docs/troubleshooting/pushScreenRecordings.md](../docs/troubleshooting/pushScreenRecordings.md) and [gitDivergedBranchFix.md](../docs/troubleshooting/gitDivergedBranchFix.md). Remember remote name **`origin`** (not `orgin`).
+Older notes may reference files that were once under `ScreenRecordings/` in git; those links are historical only.
