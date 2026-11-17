@@ -2,6 +2,25 @@
 
 **From Nov 2026 onward**, class recordings are **not** stored in this GitHub repo.
 
+## How you name the next topic
+
+For **every upcoming video**, you give the **exact markdown filename** (that is also the **topic name**):
+
+| You say | We create |
+| :------ | :-------- |
+| `copyMoveRenamingDirectories.md` | `docs/topics/copyMoveRenamingDirectories.md` |
+| `absolutePathvsRelativePath.md` | `docs/topics/absolutePathvsRelativePath.md` |
+
+**Rules:**
+
+1. **One screencast → one `.md`** file with the name **you** choose (usually camelCase, no spaces).
+2. **Do not merge** many sessions into one giant file — **one `##` section per sub-topic** inside that file.
+3. After each new file, add a row to [**linuxBasics.md**](linuxBasics.md) (video index + topic table).
+
+**Example request to the agent:**
+
+> Watch the latest file in `/home/surya/Videos/Screencasts/`, build **`touchCommand.md`** like `removeDirectories.md` (screenshots, line-by-line, flowcharts, *My observation*), open a PR. Do not push the video.
+
 ---
 
 ## Single source of truth (your PC)
@@ -75,10 +94,41 @@ Remote name is **`origin`** (not `orgin`).
 
 ## Topic file header template
 
+Filename: **`docs/topics/<YourTopicName>.md`** (same as you requested).
+
 ```markdown
+# <Human title from class, e.g. Copy, Move, and Renaming (`cp`, `mv`)>
+
 **Source recording (local — not on GitHub):**  
-`/home/surya/Videos/Screencasts/<filename>.webm`
+`/home/surya/Videos/Screencasts/<exact-screencast-filename>.webm`
 ```
+
+---
+
+## Standard layout (every upcoming video)
+
+Match [**removeDirectories.md**](removeDirectories.md) / [**copyMoveRenamingDirectories.md**](copyMoveRenamingDirectories.md):
+
+| Piece | What to include |
+| :---- | :-------------- |
+| **§0** | What this recording covers + time map |
+| **§1…n** | **One section per Durga topic** (not one merged timeline blob) |
+| **Screenshot** | Class terminal/EditPlus → `docs/assets/` + line-by-line under image |
+| **Mermaid** | Where the idea is non-obvious (flow / decision) |
+| **My observation** | Empty slot for **your** lab PNG/commands |
+| **Scripts** | Add or link `scripts/.../*-demo.sh` when useful |
+| **Git** | PR with **`.md` + PNG only** |
+
+---
+
+## Agent checklist (each new screencast)
+
+1. User supplies **`Something.md`** = topic name.
+2. Pick video from **`/home/surya/Videos/Screencasts/`** (user names file or “latest”).
+3. Create **`docs/topics/Something.md`** with sections above.
+4. Update **`docs/topics/linuxBasics.md`**.
+5. **No** video in git — optional: user pushes frame PNGs to `docs/assets/`.
+6. Branch `cursor/<short-name>-29a8` → PR.
 
 ---
 
