@@ -13,9 +13,11 @@ For **every upcoming video**, you give the **exact markdown filename** (that is 
 
 **Rules:**
 
-1. **One screencast → one `.md`** file with the name **you** choose (usually camelCase, no spaces).
-2. **Do not merge** many sessions into one giant file — **one `##` section per sub-topic** inside that file.
-3. After each new file, add a row to [**linuxBasics.md**](linuxBasics.md) (video index + topic table).
+1. **One Durga Soft session → one `.md`** file (match the course sidebar: Session 14 = creation of files only, Session 15 = viewing only, …). See [**workingWithFiles.md**](workingWithFiles.md) for the **9 syllabus topics**.
+2. **Do not merge sessions** — e.g. do **not** put `touch` + `head`/`tail` + `cp` in one topic file unless it is truly **one** video.
+3. Inside that file: **one `##` section per sub-topic** (one command idea per section).
+4. **Every section:** **Durga Sir class lab screenshot** + **My observation** PNG (or Pending block until you add PNGs).
+5. After each new file, update [**linuxBasics.md**](linuxBasics.md) and [**workingWithFiles.md**](workingWithFiles.md).
 
 **Example request to the agent:**
 

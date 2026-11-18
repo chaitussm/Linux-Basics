@@ -1,14 +1,20 @@
-# Create Files by `touch` and `cat`
+# Creation of Files — Session 14 (`touch`, `cat`, editors)
 
 **Course:** [Linux with Shell Programming — Durga Soft online](https://www.durgasoftonline.com/s/courses/5e7ae04f0cf29f148a043786/take)  
 **Instructor:** Durga Sir  
 
+**Syllabus:** [workingWithFiles.md](workingWithFiles.md) — topic **#1 · Creation of Files** only (not viewing, copy, or delete in this file).  
+**Durga Soft session:** **Session 14** — *Creation of Files by using cat, touch commands and editors (gedit, vi, nano)*
+
 **Source recording (local — not on GitHub):**  
-`/home/surya/Videos/Screencasts/` — *use your newest screencast for this session* (e.g. `Screencast From 2026-11-17 ….webm`; update this line with the exact filename from your folder).  
+`/home/surya/Videos/Screencasts/<Session-14-screencast>.webm` — update with your exact filename.
 
 **Policy:** [`screencastWorkflow.md`](screencastWorkflow.md) — push **this `.md` + PNGs**, not the video.
 
-**Related:** [TypesOfFilesInLinux.md](TypesOfFilesInLinux.md) (`touch`, normal files) · [redirection.md](redirection.md) (`cat >`, `>>`) · [viewContentOfFiles.md](viewContentOfFiles.md) (`cat` to display)
+**Next topic (separate file):** [viewingOfFiles.md](viewingOfFiles.md) — Session 15.  
+**Do not mix:** `head`/`tail` viewing, `cp` file copy, or `rm` file delete belong in their own syllabus topics.
+
+**Related background:** [TypesOfFilesInLinux.md](TypesOfFilesInLinux.md) · [redirection.md](redirection.md) (`cat >`, `>>`)
 
 **Practice:** [`create-file-cat-touch-demo.sh`](../../scripts/file-system-navigation-and-hierarchy/create-file-cat-touch-demo.sh) · [`command-execution-touch-demo.sh`](../../scripts/components-of-unix/command-execution-touch-demo.sh) · [`cat-view-file-demo.sh`](../../scripts/view-content-of-files/cat-view-file-demo.sh)
 
@@ -30,8 +36,11 @@ Each section has **two** screenshot areas:
 - [6. `cat > file` — create content from the keyboard](#6-cat--file--create-content-from-the-keyboard)
 - [7. `cat >> file` — append without erasing](#7-cat--file--append-without-erasing)
 - [8. `touch` then `cat` — typical class lab order](#8-touch-then-cat--typical-class-lab-order)
-- [9. `touch` vs `cat` vs editors](#9-touch-vs-cat-vs-editors)
-- [10. Practice questions](#10-practice-questions)
+- [9. Quick compare — `touch` vs `cat`](#9-quick-compare--touch-vs-cat)
+- [10. `gedit` — GUI create/edit](#10-gedit--gui-createedit)
+- [11. `nano` — simple terminal editor](#11-nano--simple-terminal-editor)
+- [12. `vi` / `vim` — intro from class](#12-vi--vim--intro-from-class)
+- [13. Practice questions](#13-practice-questions)
 - [Appendix — extract class frames from your screencast](#appendix--extract-class-frames-from-your-screencast)
 
 ---
@@ -275,21 +284,85 @@ pie title Class lab steps (approximate focus)
 
 ---
 
-## 9. `touch` vs `cat` vs editors
+## 9. Quick compare — `touch` vs `cat`
 
 | Tool | Creates empty? | Puts text in? | Typical use |
 | :--- | :------------- | :------------ | :---------- |
 | **`touch`** | Yes (0 bytes) | No | Placeholder, scripts, `>>` target |
 | **`cat >`** | Yes + content | Yes (keyboard) | Quick few lines |
-| **`gedit` / `nano`** | Yes + GUI | Yes | Longer editing |
 
-**Durga Sir class lab screenshot:** *(comparison table in EditPlus.)*
+**Durga Sir class lab screenshot:**
 
-**My observation:** `which gedit`; if snap missing, use `nano demo.txt` — screenshot (ties to gedit install fix).
+> **Pending:** `../assets/createFile-touch-vs-cat-class.png` (EditPlus table).
+
+**My observation:** One terminal with `touch empty.txt` and `cat > filled.txt` — screenshot.
 
 ---
 
-## 10. Practice questions
+## 10. `gedit` — GUI create/edit
+
+```bash
+gedit demo.txt &
+```
+
+**Class rule:** Editor opens a window; **Save** writes bytes to disk (file need not exist before first save).
+
+**Durga Sir class lab screenshot:**
+
+> **Pending:** `../assets/createFile-gedit-class.png` (EditPlus + VM with gedit open).
+
+**What the screenshot should show (line by line):**
+
+1. `gedit demo.txt` or icon launch.  
+2. Text typed in window.  
+3. After save, `ls -l demo.txt` shows **non-zero** size.
+
+**My observation:**
+
+> **Pending:** `../assets/createFile-gedit-my.png`  
+> *(If `gedit` missing: `sudo apt install gedit` — not snap path.)*
+
+---
+
+## 11. `nano` — simple terminal editor
+
+```bash
+nano demo.txt
+```
+
+**Class rule:** On-screen shortcuts (^O save, ^X exit) at bottom.
+
+**Durga Sir class lab screenshot:**
+
+> **Pending:** `../assets/createFile-nano-class.png`
+
+**My observation:**
+
+> **Pending:** `../assets/createFile-nano-my.png`
+
+---
+
+## 12. `vi` / `vim` — intro from class
+
+**Class rule:** **Command mode** vs **insert mode** — `i` to insert, `Esc` then `:wq` to save and quit (wording as Durga Sir gives).
+
+```bash
+vi demo.txt
+```
+
+**Durga Sir class lab screenshot:**
+
+> **Pending:** `../assets/createFile-vi-class.png`
+
+**My observation:**
+
+> **Pending:** `../assets/createFile-vi-my.png` (minimal open → insert one line → save).
+
+**Deeper editing (syllabus #9):** [editingOfFiles.md](editingOfFiles.md) when that session is recorded.
+
+---
+
+## 13. Practice questions
 
 **Q1.** Command to create **empty** `a.txt`?
 
@@ -334,6 +407,9 @@ git push origin master
 | ~06:00 | `createFile-touch-multiple-class.png` | §3 |
 | ~12:00 | `createFile-cat-greater-class.png` | §6 |
 | ~18:00 | `createFile-cat-append-class.png` | §7 |
+| ~22:00 | `createFile-gedit-class.png` | §10 |
+| ~30:00 | `createFile-nano-class.png` | §11 |
+| ~36:00 | `createFile-vi-class.png` | §12 |
 
 *(Adjust times after you watch once.)*
 
