@@ -84,9 +84,9 @@ flowchart LR
 
 ![rmdir dir1 fails with Directory not empty](../assets/remove-rmdir-failed-terminal.png)
 
-**My Local Screenshot as per the durga sir class 
+**My local screenshot (Durga Sir class lab):**
 
-![functionality realted to remove directory](../assets/rmdirFuntions.png)
+![functionality related to remove directory](../assets/rmdirFuntions.png)
 
 **What the screenshot shows (line by line):**
 
@@ -153,10 +153,10 @@ Setup in class (~01:30): `mkdir dir1 dir2 dir3 dir4` — some folders hold files
 
 **Answer in one line:** `rm` (with `-r`) can remove a full tree; `rmdir` is only for empty folders.
 
-**Lab Practice in my machine ***
+**Lab practice on my machine:**
 
+![rm -r and rm -R functionality](../assets/rmWith-rAndR.png)
 
-![rm -r and rm - R funtionality](../assets/rmWith-rAndR.png)
 ---
 
 ## 6. Deleted files and directories do not come back
@@ -204,9 +204,10 @@ flowchart TD
     class S,P1,P2,P3,D step
 ```
 
-**Observation using my linux mnachine 
+**My observation (interactive `rm -i` on my Linux machine):**
 
-![rm -ri dir1 with y prompts](../assets/rm-iCommand.png)
+![rm -ri dir1 with y prompts — my machine](../assets/rm-iCommand.png)
+
 ---
 
 ## 8. Force removal — `rm -f` / `rm -rf`
@@ -225,7 +226,8 @@ flowchart TD
 
 **My observation:** *(screenshot `rm -rf` on a typo path — notice silence.)*
 
-![rm -ri dir1 with y prompts](../assets/rm-rfCommand.png)
+![rm -rf on my machine](../assets/rm-rfCommand.png)
+
 ---
 
 ## 9. Verbose removal — `rm -v` / `rm -rv`
@@ -244,7 +246,8 @@ flowchart TD
 
 **My observation:** *(compare output with `tree` before/after.)*
 
-![rm -rv dir1 with y prompts](../assets/rm-rvVerboseCommand.png)
+![rm -rv verbose output — my machine](../assets/rm-rvVerboseCommand.png)
+
 ---
 
 ## 10. Remove only a nested folder (leave parents)
@@ -333,7 +336,8 @@ rm -r abc.txt dir1
 
 **My observation:** *(run Q1–Q3 on a test folder — three small screenshots.)*
 
-![to rewmove non-empty Directory and file together](../assets/rm-rToDeletetxtAndDirectory.png)
+![remove non-empty directory and file together](../assets/rm-rToDeletetxtAndDirectory.png)
+
 ---
 
 ## 13. Remove many directories — `{1..10}` and `{2,4,6}`

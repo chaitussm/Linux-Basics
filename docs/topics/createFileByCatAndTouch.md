@@ -103,9 +103,10 @@ ls -l demo.txt
 
 **Durga Sir class lab screenshot:**
 
-![Placeholder — replace with frame from screencast: touch demo on VM Desktop](../assets/createFile-touch-zero-byte-class.png)
-
-*(Until you add `createFile-touch-zero-byte-class.png`, use the command block above in your lab.)*
+> **Pending:** Save a frame from your screencast as `docs/assets/createFile-touch-zero-byte-class.png`, then add:
+> `![touch demo on VM Desktop](../assets/createFile-touch-zero-byte-class.png)`
+>
+> Until then, use the command block above in your lab.
 
 **What the class screenshot should show (line by line):**
 
@@ -115,9 +116,7 @@ ls -l demo.txt
 
 **My observation:**
 
-![Your lab: touch on linuxbasics folder](../assets/createFile-touch-zero-byte-my.png)
-
-*(Add **`createFile-touch-zero-byte-my.png`** from your machine, or paste a screenshot here later.)*
+> **Pending:** Add your terminal capture as `docs/assets/createFile-touch-zero-byte-my.png`, then link it here with `../assets/createFile-touch-zero-byte-my.png`.
 
 ---
 
@@ -130,7 +129,7 @@ touch file{1..5}.txt
 
 **Durga Sir class lab screenshot:**
 
-![Placeholder — class: touch multiple names](../assets/createFile-touch-multiple-class.png)
+> **Pending:** `docs/assets/createFile-touch-multiple-class.png` (class terminal: several names from one `touch`).
 
 **What the class screenshot should show:**
 
@@ -154,7 +153,7 @@ ls -l demo.txt
 
 **Durga Sir class lab screenshot:**
 
-![Placeholder — ls -l before/after second touch](../assets/createFile-touch-timestamp-class.png)
+> **Pending:** `docs/assets/createFile-touch-timestamp-class.png` (`ls -l` before/after second `touch`).
 
 **My observation:** `sleep 2; touch demo.txt; ls -l` — compare mtime.
 
@@ -170,7 +169,7 @@ Class ties **`touch`** to **`ls -l`**:
 
 **Durga Sir class lab screenshot:**
 
-![Placeholder — EditPlus + terminal ls -l explanation](../assets/createFile-ls-l-after-touch-class.png)
+> **Pending:** `docs/assets/createFile-ls-l-after-touch-class.png` (EditPlus + `ls -l`).
 
 **My observation:** Same listing on `~/Study/Linux-Basics/scripts/linuxbasics`.
 
@@ -190,7 +189,7 @@ cat notes.txt
 
 **Durga Sir class lab screenshot:**
 
-![Placeholder — cat > typing lines, Ctrl+D](../assets/createFile-cat-greater-class.png)
+> **Pending:** `docs/assets/createFile-cat-greater-class.png` (`cat >` lines, Ctrl+D).
 
 **What the class screenshot should show (line by line):**
 
@@ -233,7 +232,7 @@ echo "fourth line" >> notes.txt
 
 **Durga Sir class lab screenshot:**
 
-![Placeholder — cat >> demo in class](../assets/createFile-cat-append-class.png)
+> **Pending:** `docs/assets/createFile-cat-append-class.png` (`cat >>` demo).
 
 **My observation:**
 
