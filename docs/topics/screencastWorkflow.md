@@ -115,7 +115,8 @@ Match [**removeDirectories.md**](removeDirectories.md) / [**copyMoveRenamingDire
 | **§1…n** | **One section per Durga topic** (not one merged timeline blob) |
 | **Screenshot** | Class terminal/EditPlus → `docs/assets/` + line-by-line under image |
 | **Mermaid** | Where the idea is non-obvious (flow / decision) |
-| **My observation** | Empty slot for **your** lab PNG/commands |
+| **Durga Sir class lab screenshot** | PNG from screencast → `docs/assets/` (required) |
+| **My observation** | **Your** terminal PNG/commands (required — separate from class) |
 | **Scripts** | Add or link `scripts/.../*-demo.sh` when useful |
 | **Git** | PR with **`.md` + PNG only** |
 

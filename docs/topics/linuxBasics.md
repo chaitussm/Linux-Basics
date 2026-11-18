@@ -20,7 +20,8 @@ Each topic has its own **`.md` file** under [`topics/`](topics/). Runnable **`.s
 | 6 | [**creationOfDirectories.md**](topics/creationOfDirectories.md) | [Durga Soft — `mkdir`](https://www.durgasoftonline.com/s/courses/5e7ae04f0cf29f148a043786/take) · repo [`ScreenRecordings/`](ScreenRecordings/) |
 | 6b | [**removeDirectories.md**](topics/removeDirectories.md) | [Durga Soft — `rmdir` / `rm -r`](https://www.durgasoftonline.com/s/courses/5e7ae04f0cf29f148a043786/take) · [`Screencast … 2026-11-10 08-56-09`](../../ScreenRecordings/Screencast%20From%202026-11-10%2008-56-09.webm) |
 | 6c | [**absolutePathvsRelativePath.md**](topics/absolutePathvsRelativePath.md) | [Durga Soft — paths](https://www.durgasoftonline.com/s/courses/5e7ae04f0cf29f148a043786/take) · local screencast (see `ScreenRecordings/README.md`) |
-| 6d | [**copyMoveRenamingDirectories.md**](topics/copyMoveRenamingDirectories.md) | [Durga Soft — `cp` / `mv`](https://www.durgasoftonline.com/s/courses/5e7ae04f0cf29f148a043786/take) · local `Screencast … 2026-11-17 10-13-53.webm` |
+| 6d | [**copyMoveRenamingDirectories.md**](topics/copyMoveRenamingDirectories.md) | [Durga Soft — `cp` / `mv`](https://www.durgasoftonline.com/s/courses/5e7ae04f0cf29f148a043786/take) · local screencast |
+| 6e | [**createFileByCatAndTouch.md**](topics/createFileByCatAndTouch.md) | [Durga Soft — `touch` / `cat`](https://www.durgasoftonline.com/s/courses/5e7ae04f0cf29f148a043786/take) · `/home/surya/Videos/Screencasts/` (latest) |
 | 7 | [**ls Command and its options.md**](topics/ls%20Command%20and%20its%20options.md) | [Session 7](https://www.youtube.com/watch?v=rpxT2L3t1a8&list=PLd3UqWTnYXOloH0vWBs4BtSbP84WcC2NY&index=7) |
 | 8 | [**Date and Cal commands.md**](topics/Date%20and%20Cal%20commands.md) | [Session 8](https://www.youtube.com/watch?v=NmJyVY1Mvww&list=PLd3UqWTnYXOloH0vWBs4BtSbP84WcC2NY&index=8) |
 | 9 | [**viewContentOfFiles.md**](topics/viewContentOfFiles.md) | [Session 9](https://www.youtube.com/watch?v=FuzpoZwDcZU&list=PLd3UqWTnYXOloH0vWBs4BtSbP84WcC2NY&index=9) |
@@ -42,7 +43,8 @@ Each topic has its own **`.md` file** under [`topics/`](topics/). Runnable **`.s
 | [**creationOfDirectories.md**](topics/creationOfDirectories.md) | `mkdir`, `mkdir -p`, brace expansion, `tree`, case studies — lab screenshots in topic file |
 | [**removeDirectories.md**](topics/removeDirectories.md) | `rmdir`, `rm -r`, `-i` / `-f` / `-v`, safety, MCQs — from `Screencast … 2026-11-10 08-56-09.webm` |
 | [**absolutePathvsRelativePath.md**](topics/absolutePathvsRelativePath.md) | Absolute vs relative paths, `cd` / `mkdir` examples on x/y tree — local screencast |
-| [**copyMoveRenamingDirectories.md**](topics/copyMoveRenamingDirectories.md) | `cp`, `cp -r`, `mv` rename/move, paths — local `Screencast … 2026-11-17 10-13-53.webm` |
+| [**copyMoveRenamingDirectories.md**](topics/copyMoveRenamingDirectories.md) | `cp`, `cp -r`, `mv` rename/move, paths — local screencast |
+| [**createFileByCatAndTouch.md**](topics/createFileByCatAndTouch.md) | `touch`, `cat >`, `cat >>`, `ls -l` — class lab + **My observation** screenshots |
 | [**ls Command and its options.md**](topics/ls%20Command%20and%20its%20options.md) | `ls`, `man`, `-l`, `-a`, `-A`, `-F`, `-R`, `-i`, `-h`, pipes (Video 7) |
 | [**pipeCommands.md**](topics/pipeCommands.md) | Pipe `\|`, `ls -l /etc \| head`, broken pipe |
 | [**Date and Cal commands.md**](topics/Date%20and%20Cal%20commands.md) | `date`, `date +format`, `cal`, options (Video 8) |
