@@ -302,9 +302,12 @@ pie title Class lab steps (approximate focus)
 
 **Durga Sir class lab screenshot:**
 
-> **Pending:** `../assets/createFile-touch-vs-cat-class.png` (EditPlus table).
-
 **My observation:** One terminal with `touch empty.txt` and `cat > filled.txt` — screenshot.
+
+Main difference between `cat` and `touch` is 
+
+`cat` to create the file and add data 
+`touch` to create an empty file and to change the timestamp
 
 ---
 
@@ -328,8 +331,10 @@ gedit demo.txt &
 
 **My observation:**
 
-> **Pending:** `../assets/createFile-gedit-my.png`  
-> *(If `gedit` missing: `sudo apt install gedit` — not snap path.)*
+![Creating a file using gedit command](../assets/geditToCreateFilePartOne.png)
+
+![Creating a file using gedit command](../assets/geditToCreateFilePartTwo.png)
+
 
 ---
 
@@ -341,13 +346,22 @@ nano demo.txt
 
 **Class rule:** On-screen shortcuts (^O save, ^X exit) at bottom.
 
-**Durga Sir class lab screenshot:**
-
-> **Pending:** `../assets/createFile-nano-class.png`
-
 **My observation:**
 
-> **Pending:** `../assets/createFile-nano-my.png`
+When we are trying to create the file using `nano` command 
+
+1. enter the command `nano filename.txt` and press `Enter` we will get bewlo screen 
+
+![Creating a file using nano command](../assets/nanoToCreateFile1.png)
+
+2. After providing details we will get like this 
+
+![Creating a file using nano command](../assets/nanoCreateFile2.png)
+
+3. this press `ctrl+o` and then `ctrl+x` to exit then we will get like this 
+
+![Creating a file using nano command](../assets/nanoCreateFileFinal.png)
+
 
 ---
 
@@ -365,9 +379,25 @@ vi demo.txt
 
 **My observation:**
 
-> **Pending:** `../assets/createFile-vi-my.png` (minimal open → insert one line → save).
+Whenever we are trying to create file using `vi` command we have follow few steps 
 
-**Deeper editing (syllabus #9):** [§9 — Editing of Files](#9-editing-of-files) when that session is recorded.
+1. Enter `vi filename.txt` command then we will get below format 
+
+![Creating a file using vi command](../assets/viToCreateFilePart1.png)
+
+2. Then click on `i` and provide data 
+
+![Creating a file using vi command](../assets/viToCreateFilePart2.png)
+
+3. Then press `Esc` button and type `:wq`
+
+![Creating a file using vi command](../assets/viToCreateFilePart3.png)
+
+4. Once the datra is create we can check by using `cat` command 
+   
+![Creating a file using vi command](../assets/viToCreateFileFinal.png)
+
+
 
 ---
 
