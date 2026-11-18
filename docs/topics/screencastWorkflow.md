@@ -13,9 +13,10 @@ For **every upcoming video**, you give the **exact markdown filename** (that is 
 
 **Rules:**
 
-1. **One screencast → one `.md`** file with the name **you** choose (usually camelCase, no spaces).
-2. **Do not merge** many sessions into one giant file — **one `##` section per sub-topic** inside that file.
-3. After each new file, add a row to [**linuxBasics.md**](linuxBasics.md) (video index + topic table).
+1. **“Working with Files” (syllabus 1–9)** → **one file:** [**workingWithFiles.md**](workingWithFiles.md). Each syllabus item = **`##` section**; each command = **`###`** subsection (class PNG + My observation).
+2. **Other sessions** (mkdir, rmdir, paths, cp/mv **directories**) → **their own `.md`** as now (`creationOfDirectories.md`, …).
+3. **Do not** create nine separate `.md` files for syllabus items 1–9.
+4. After updates, run `validate-docs-assets.sh` and update [**linuxBasics.md**](linuxBasics.md).
 
 **Example request to the agent:**
 
