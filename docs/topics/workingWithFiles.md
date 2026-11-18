@@ -40,13 +40,13 @@ Each **`###`** subsection: **Durga Sir class lab screenshot** + **My observation
 
 ### 0. What this session covers
 
-| Topic | Command / idea |
-| :---- | :------------- |
-| Empty file | `touch name.txt` |
-| Many empties | `touch f1 f2 f3` or `touch file{1..5}.txt` |
-| Create with text | `cat > file` then type lines, **Ctrl+D** |
-| Append | `cat >> file` or `echo line >> file` |
-| Verify | `ls -l`, `cat file`, `file file` |
+| Topic            | Command / idea                             |
+| :--------------- | :----------------------------------------- |
+| Empty file       | `touch name.txt`                           |
+| Many empties     | `touch f1 f2 f3` or `touch file{1..5}.txt` |
+| Create with text | `cat > file` then type lines, **Ctrl+D**   |
+| Append           | `cat >> file` or `echo line >> file`       |
+| Verify           | `ls -l`, `cat file`, `file file`           |
 
 ```mermaid
 %%{init: {'theme': 'base', 'themeVariables': {'primaryColor': '#5c5c5c', 'primaryTextColor': '#ffffff', 'primaryBorderColor': '#3d3d3d'}}}%%
@@ -98,10 +98,10 @@ ls -l demo.txt
 
 **What it means:**
 
-| Part | Meaning |
-| :--- | :------ |
+| Part             | Meaning                                                               |
+| :--------------- | :-------------------------------------------------------------------- |
 | `touch demo.txt` | Create **`demo.txt`** if missing; if it exists, update **timestamps** |
-| `ls -l` | Size **0** until you add content |
+| `ls -l`          | Size **0** until you add content                                      |
 
 **Durga Sir class lab screenshot:**
 
@@ -202,6 +202,14 @@ cat notes.txt
 
 **My observation:** Repeat on `notes.txt` in your practice folder — screenshot.
 
+![Creating a file using cat command](../assets/createFileWithCatCommand.png)
+
+While writing the data by using cat command if the file and data inside the file is already present after executing the 
+
+`cat > filename.txt` then this command will overwrite the existing data 
+
+![Creating a file using cat command](../assets/catWithOverWritingOldData.png)
+
 ```mermaid
 flowchart TD
     S["cat > notes.txt"] --> T["Type lines + Enter"]
@@ -238,7 +246,7 @@ echo "fourth line" >> notes.txt
 
 **My observation:**
 
-![Lab: touch, ls -l >> outputData.txt, cat outputData.txt](../assets/outputData-touch-ls-append-terminal.png)
+![Creating a file using cat command](../assets/catWithoutOverWritingData.png)
 
 **What this screenshot shows (line by line):**
 
@@ -279,10 +287,10 @@ pie title Class lab steps (approximate focus)
 
 ### 9. Quick compare — `touch` vs `cat`
 
-| Tool | Creates empty? | Puts text in? | Typical use |
-| :--- | :------------- | :------------ | :---------- |
-| **`touch`** | Yes (0 bytes) | No | Placeholder, scripts, `>>` target |
-| **`cat >`** | Yes + content | Yes (keyboard) | Quick few lines |
+| Tool        | Creates empty? | Puts text in?  | Typical use                       |
+| :---------- | :------------- | :------------- | :-------------------------------- |
+| **`touch`** | Yes (0 bytes)  | No             | Placeholder, scripts, `>>` target |
+| **`cat >`** | Yes + content  | Yes (keyboard) | Quick few lines                   |
 
 **Durga Sir class lab screenshot:**
 
@@ -394,15 +402,15 @@ git commit -m "Add cat/touch class screenshots from screencast"
 git push origin master
 ```
 
-| Suggested frame time | Asset name | Section |
-| :------------------- | :--------- | :------ |
-| ~03:00 | `createFile-touch-zero-byte-class.png` | §2 |
-| ~06:00 | `createFile-touch-multiple-class.png` | §3 |
-| ~12:00 | `createFile-cat-greater-class.png` | §6 |
-| ~18:00 | `createFile-cat-append-class.png` | §7 |
-| ~22:00 | `createFile-gedit-class.png` | §10 |
-| ~30:00 | `createFile-nano-class.png` | §11 |
-| ~36:00 | `createFile-vi-class.png` | §12 |
+| Suggested frame time | Asset name                             | Section |
+| :------------------- | :------------------------------------- | :------ |
+| ~03:00               | `createFile-touch-zero-byte-class.png` | §2      |
+| ~06:00               | `createFile-touch-multiple-class.png`  | §3      |
+| ~12:00               | `createFile-cat-greater-class.png`     | §6      |
+| ~18:00               | `createFile-cat-append-class.png`      | §7      |
+| ~22:00               | `createFile-gedit-class.png`           | §10     |
+| ~30:00               | `createFile-nano-class.png`            | §11     |
+| ~36:00               | `createFile-vi-class.png`              | §12     |
 
 *(Adjust times after you watch once.)*
 
@@ -420,15 +428,15 @@ git push origin master
 
 ### Overview — what Session 15 covers
 
-| Idea | Commands |
-| :--- | :------- |
-| Show all lines | `cat file` |
-| Show many files in order | `cat f1 f2` |
-| Number lines | `cat -n`, `cat -b` |
-| Last line on top | `tac` |
-| Each line backwards | `rev` |
-| Top of file | `head`, `head -n` |
-| Bottom of file | `tail`, `tail -n` |
+| Idea                     | Commands           |
+| :----------------------- | :----------------- |
+| Show all lines           | `cat file`         |
+| Show many files in order | `cat f1 f2`        |
+| Number lines             | `cat -n`, `cat -b` |
+| Last line on top         | `tac`              |
+| Each line backwards      | `rev`              |
+| Top of file              | `head`, `head -n`  |
+| Bottom of file           | `tail`, `tail -n`  |
 
 **Durga Sir class lab screenshot:**
 
@@ -662,10 +670,10 @@ cp a.txt b.txt c.txt targetDir/
 
 ### Common mistakes (`cp` on files)
 
-| Mistake | Result |
-| :------ | :----- |
-| `cp file.txt` (no dest) | Usage error |
-| Overwrite without `-i` | Silent replace |
+| Mistake                 | Result         |
+| :---------------------- | :------------- |
+| `cp file.txt` (no dest) | Usage error    |
+| Overwrite without `-i`  | Silent replace |
 
 **Durga Sir class lab screenshot:**
 
