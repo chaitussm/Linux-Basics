@@ -257,6 +257,14 @@ echo "fourth line" >> notes.txt
 
 ---
 
+***Lab Screenshot** with touch command examples 
+
+When we use `touch` command for already existing file with data there won't be any error or change in the existing data 
+
+But `timestamp` will be changed
+
+![Creating a file using cat command](../assets/touchCommandWithExistingfile.png)
+
 ### 8. `touch` then `cat` — typical class lab order
 
 Durga Sir often:
