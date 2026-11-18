@@ -13,11 +13,10 @@ For **every upcoming video**, you give the **exact markdown filename** (that is 
 
 **Rules:**
 
-1. **One Durga Soft session → one `.md`** file (match the course sidebar: Session 14 = creation of files only, Session 15 = viewing only, …). See [**workingWithFiles.md**](workingWithFiles.md) for the **9 syllabus topics**.
-2. **Do not merge sessions** — e.g. do **not** put `touch` + `head`/`tail` + `cp` in one topic file unless it is truly **one** video.
-3. Inside that file: **one `##` section per sub-topic** (one command idea per section).
-4. **Every section:** **Durga Sir class lab screenshot** + **My observation** PNG (or Pending block until you add PNGs).
-5. After each new file, update [**linuxBasics.md**](linuxBasics.md) and [**workingWithFiles.md**](workingWithFiles.md).
+1. **“Working with Files” (syllabus 1–9)** → **one file:** [**workingWithFiles.md**](workingWithFiles.md). Each syllabus item = **`##` section**; each command = **`###`** subsection (class PNG + My observation).
+2. **Other sessions** (mkdir, rmdir, paths, cp/mv **directories**) → **their own `.md`** as now (`creationOfDirectories.md`, …).
+3. **Do not** create nine separate `.md` files for syllabus items 1–9.
+4. After updates, run `validate-docs-assets.sh` and update [**linuxBasics.md**](linuxBasics.md).
 
 **Example request to the agent:**
 

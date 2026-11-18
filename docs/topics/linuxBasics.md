@@ -6,7 +6,7 @@ Each topic has its own **`.md` file** under [`topics/`](topics/). Runnable **`.s
 
 **Screencasts (local only):** observe **`/home/surya/Videos/Screencasts/`** — you choose the topic **`.md` filename**; we create `docs/topics/<that-name>.md` for each new video (push notes + PNGs only). [**screencastWorkflow.md**](screencastWorkflow.md)
 
-**Working with Files (Durga Sir syllabus):** one **session = one topic file** — [**workingWithFiles.md**](workingWithFiles.md) (topics 1–9; Session 14–…).
+**Working with Files (Durga Sir syllabus 1–9):** **one file** [**workingWithFiles.md**](workingWithFiles.md) — separate **`##`** section per topic, **`###`** per command + lab screenshots.
 
 ---
 
@@ -23,9 +23,8 @@ Each topic has its own **`.md` file** under [`topics/`](topics/). Runnable **`.s
 | 6b | [**removeDirectories.md**](topics/removeDirectories.md) | [Durga Soft — `rmdir` / `rm -r`](https://www.durgasoftonline.com/s/courses/5e7ae04f0cf29f148a043786/take) · [`Screencast … 2026-11-10 08-56-09`](../../ScreenRecordings/Screencast%20From%202026-11-10%2008-56-09.webm) |
 | 6c | [**absolutePathvsRelativePath.md**](topics/absolutePathvsRelativePath.md) | [Durga Soft — paths](https://www.durgasoftonline.com/s/courses/5e7ae04f0cf29f148a043786/take) · local screencast (see `ScreenRecordings/README.md`) |
 | 6d | [**copyMoveRenamingDirectories.md**](topics/copyMoveRenamingDirectories.md) | [Durga Soft — `cp` / `mv`](https://www.durgasoftonline.com/s/courses/5e7ae04f0cf29f148a043786/take) · local screencast |
-| 6e | [**createFileByCatAndTouch.md**](topics/createFileByCatAndTouch.md) | **Session 14** — creation (`touch`, `cat`, `gedit`, `vi`, `nano`) · [workingWithFiles #1](topics/workingWithFiles.md) |
-| 6f | [**viewingOfFiles.md**](topics/viewingOfFiles.md) | **Session 15** — viewing (`cat`, `tac`, `rev`, `head`, `tail`) · [workingWithFiles #2](topics/workingWithFiles.md) |
-| 6g | [**workingWithFiles.md**](topics/workingWithFiles.md) | Map of syllabus topics 1–9 → topic files (copy, compare, rename, delete, hidden, links, editing) |
+| 6e | [**workingWithFiles.md**](topics/workingWithFiles.md) | **Syllabus 1–9** in one file (`##` per topic). Session 14 = [§1](topics/workingWithFiles.md#1-creation-of-files--session-14), Session 15 = [§2](topics/workingWithFiles.md#2-viewing-of-files--session-15) |
+| 6e′ | [**createFileByCatAndTouch.md**](topics/createFileByCatAndTouch.md) | Redirect → `workingWithFiles.md` §1 |
 | 7 | [**ls Command and its options.md**](topics/ls%20Command%20and%20its%20options.md) | [Session 7](https://www.youtube.com/watch?v=rpxT2L3t1a8&list=PLd3UqWTnYXOloH0vWBs4BtSbP84WcC2NY&index=7) |
 | 8 | [**Date and Cal commands.md**](topics/Date%20and%20Cal%20commands.md) | [Session 8](https://www.youtube.com/watch?v=NmJyVY1Mvww&list=PLd3UqWTnYXOloH0vWBs4BtSbP84WcC2NY&index=8) |
 | 9 | [**viewContentOfFiles.md**](topics/viewContentOfFiles.md) | [Session 9](https://www.youtube.com/watch?v=FuzpoZwDcZU&list=PLd3UqWTnYXOloH0vWBs4BtSbP84WcC2NY&index=9) |
@@ -48,16 +47,8 @@ Each topic has its own **`.md` file** under [`topics/`](topics/). Runnable **`.s
 | [**removeDirectories.md**](topics/removeDirectories.md) | `rmdir`, `rm -r`, `-i` / `-f` / `-v`, safety, MCQs — from `Screencast … 2026-11-10 08-56-09.webm` |
 | [**absolutePathvsRelativePath.md**](topics/absolutePathvsRelativePath.md) | Absolute vs relative paths, `cd` / `mkdir` examples on x/y tree — local screencast |
 | [**copyMoveRenamingDirectories.md**](topics/copyMoveRenamingDirectories.md) | `cp`, `cp -r`, `mv` rename/move, paths — local screencast |
-| [**workingWithFiles.md**](topics/workingWithFiles.md) | **Index** — 9 “Working with Files” topics; one markdown file each |
-| [**createFileByCatAndTouch.md**](topics/createFileByCatAndTouch.md) | **Session 14** — `touch`, `cat >` / `>>`, `gedit`, `nano`, `vi` — class + **My observation** per `##` |
-| [**viewingOfFiles.md**](topics/viewingOfFiles.md) | **Session 15** — view files (`cat`, `tac`, `rev`, `head`, `tail`) |
-| [**copyingOfFiles.md**](topics/copyingOfFiles.md) | Syllabus #3 — copy **files** (not Session 13 directories) |
-| [**comparisonOfFiles.md**](topics/comparisonOfFiles.md) | Syllabus #4 — `cmp`, `diff` (fill from video) |
-| [**renamingOfFiles.md**](topics/renamingOfFiles.md) | Syllabus #5 — rename **files** with `mv` |
-| [**deletingFiles.md**](topics/deletingOfFiles.md) | Syllabus #6 — delete **files** with `rm` |
-| [**hiddenFilesAndDirectories.md**](topics/hiddenFilesAndDirectories.md) | Syllabus #7 — dot files and `ls -a` |
-| [**creationOfLinkFiles.md**](topics/creationOfLinkFiles.md) | Syllabus #8 — hard and symbolic links |
-| [**editingOfFiles.md**](topics/editingOfFiles.md) | Syllabus #9 — editing in depth |
+| [**workingWithFiles.md**](topics/workingWithFiles.md) | **9 syllabus topics** in **one** file: `##` sections 1–9 (create, view, copy, compare, rename, delete, hidden, links, edit) + `###` + dual screenshots |
+| [**createFileByCatAndTouch.md**](topics/createFileByCatAndTouch.md) | Pointer to `workingWithFiles.md` §1 (keeps old links working) |
 | [**ls Command and its options.md**](topics/ls%20Command%20and%20its%20options.md) | `ls`, `man`, `-l`, `-a`, `-A`, `-F`, `-R`, `-i`, `-h`, pipes (Video 7) |
 | [**pipeCommands.md**](topics/pipeCommands.md) | Pipe `\|`, `ls -l /etc \| head`, broken pipe |
 | [**Date and Cal commands.md**](topics/Date%20and%20Cal%20commands.md) | `date`, `date +format`, `cal`, options (Video 8) |
