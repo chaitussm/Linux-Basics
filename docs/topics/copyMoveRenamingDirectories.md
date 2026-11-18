@@ -17,19 +17,22 @@
 
 **Table of contents**
 
-- [0. What this session covers](#0-what-this-session-covers)
-- [1. `cp` — copy files (same directory)](#1-cp--copy-files-same-directory)
-- [2. `cp` — copy into another directory](#2-cp--copy-into-another-directory)
-- [3. Absolute vs relative paths with `cp`](#3-absolute-vs-relative-paths-with-cp)
-- [4. `cp -r` — copy directories recursively](#4-cp--r--copy-directories-recursively)
-- [5. Useful `cp` options (`-i`, `-v`, `-u`)](#5-useful-cp-options--i--v--u)
-- [6. `mv` — rename in the same place](#6-mv--rename-in-the-same-place)
-- [7. `mv` — move file or directory](#7-mv--move-file-or-directory)
-- [8. `mv` with absolute and relative paths](#8-mv-with-absolute-and-relative-paths)
-- [9. `cp` vs `mv` — when to use which](#9-cp-vs-mv--when-to-use-which)
-- [10. Case study — reorganise Desktop folders](#10-case-study--reorganise-desktop-folders)
-- [11. Common mistakes (class)](#11-common-mistakes-class)
-- [Appendix — map frames from your screencast](#appendix--map-frames-from-your-screencast)
+- [Copy, Move, and Renaming (`cp`, `mv`)](#copy-move-and-renaming-cp-mv)
+  - [0. What this session covers](#0-what-this-session-covers)
+  - [1. `cp` — copy files (same directory)](#1-cp--copy-files-same-directory)
+  - [2. `cp` — copy into another directory](#2-cp--copy-into-another-directory)
+  - [](#)
+  - [3. Absolute vs relative paths with `cp`](#3-absolute-vs-relative-paths-with-cp)
+  - [4. `cp -r` — copy directories recursively](#4-cp--r--copy-directories-recursively)
+  - [5. Useful `cp` options (`-i`, `-v`, `-u`)](#5-useful-cp-options--i--v--u)
+  - [6. `mv` — rename in the same place](#6-mv--rename-in-the-same-place)
+  - [7. `mv` — move file or directory](#7-mv--move-file-or-directory)
+  - [](#-1)
+  - [8. `mv` with absolute and relative paths](#8-mv-with-absolute-and-relative-paths)
+  - [9. `cp` vs `mv` — when to use which](#9-cp-vs-mv--when-to-use-which)
+  - [10. Case study — reorganise Desktop folders](#10-case-study--reorganise-desktop-folders)
+  - [11. Common mistakes (class)](#11-common-mistakes-class)
+  - [Appendix — map frames from your screencast](#appendix--map-frames-from-your-screencast)
 
 ---
 
@@ -37,14 +40,14 @@
 
 Typical Durga Soft order after **create / remove / paths**:
 
-| Topic | Command ideas |
-| :---- | :-------------- |
-| Copy files | `cp src dest` |
-| Copy many files into one folder | `cp f1 f2 f3 targetDir/` |
-| Copy trees | `cp -r dir1 dir2` |
-| Rename | `mv oldname newname` (same directory) |
-| Move | `mv file otherDir/` |
-| Paths | Same **absolute** (`/home/...`) and **relative** (`../`, `./`) rules as [absolutePathvsRelativePath.md](absolutePathvsRelativePath.md) |
+| Topic                           | Command ideas                                                                                                                          |
+| :------------------------------ | :------------------------------------------------------------------------------------------------------------------------------------- |
+| Copy files                      | `cp src dest`                                                                                                                          |
+| Copy many files into one folder | `cp f1 f2 f3 targetDir/`                                                                                                               |
+| Copy trees                      | `cp -r dir1 dir2`                                                                                                                      |
+| Rename                          | `mv oldname newname` (same directory)                                                                                                  |
+| Move                            | `mv file otherDir/`                                                                                                                    |
+| Paths                           | Same **absolute** (`/home/...`) and **relative** (`../`, `./`) rules as [absolutePathvsRelativePath.md](absolutePathvsRelativePath.md) |
 
 ```mermaid
 %%{init: {'theme': 'base', 'themeVariables': {'primaryColor': '#5c5c5c', 'primaryTextColor': '#ffffff', 'primaryBorderColor': '#3d3d3d'}}}%%
@@ -83,6 +86,8 @@ cp file1 file2
 
 **My observation:** `touch a.txt; echo one > a.txt; cp a.txt b.txt; cat a.txt b.txt` — screenshot.
 
+![cp command basics](../assets/cpCommand.png)
+
 ---
 
 ## 2. `cp` — copy into another directory
@@ -100,17 +105,26 @@ Rules:
 
 **My observation:** screenshot `ls` before and after.
 
+![cp command to copy data from one directory to other directory](../assets/cpToOtherDirectory.png)
+
+Lab Screenshot to copy multiple files to single directory 
+
+![cp command to copy multiple files to single directory](../assets/cpMultipleFilesToSingleDirectory.png)
+
+Lab Screenshot to copy all files of one directory to another directory 
+
+![cp command to copy multiple files to single directory](../assets/cpAllfilesFromOneDirToOther.png)
 ---
 
 ## 3. Absolute vs relative paths with `cp`
 
 From **`/home/durga`** (example cwd in class):
 
-| Style | Example |
-| :---- | :------ |
-| Relative | `cp scripts/test.sh scripts/test.bak` |
-| Relative with `.` | `cp ./scripts/test.sh ./backup/test.sh` |
-| Absolute | `cp /home/durga/scripts/test.sh /home/durga/backup/test.sh` |
+| Style             | Example                                                     |
+| :---------------- | :---------------------------------------------------------- |
+| Relative          | `cp scripts/test.sh scripts/test.bak`                       |
+| Relative with `.` | `cp ./scripts/test.sh ./backup/test.sh`                     |
+| Absolute          | `cp /home/durga/scripts/test.sh /home/durga/backup/test.sh` |
 
 **My observation:** copy one file using **only** `~/…` and **only** `../…` — two screenshots.
 
@@ -145,14 +159,18 @@ cp -r dir1 dir2
 
 **My observation:** `mkdir -p src/a; touch src/a/x; cp -r src dst; tree` — screenshot.
 
+Lab Screenshot to copy directories to a single directory 
+
+![cp command to copy multiple files to single directory](../assets/cp-rCommand.png)
+
 ---
 
 ## 5. Useful `cp` options (`-i`, `-v`, `-u`)
 
-| Option | Class meaning |
-| :----- | :-------------- |
-| **`-i`** | Interactive — ask before **overwrite** |
-| **`-v`** | Verbose — print each file copied |
+| Option   | Class meaning                                              |
+| :------- | :--------------------------------------------------------- |
+| **`-i`** | Interactive — ask before **overwrite**                     |
+| **`-v`** | Verbose — print each file copied                           |
 | **`-u`** | Update — copy only if source is **newer** than destination |
 
 Examples:
@@ -180,6 +198,16 @@ This is **rename**, not a second copy. **`ls`** shows only **`newname.txt`**.
 
 **My observation:** `mv a.txt alpha.txt; ls` — screenshot.
 
+Lab Screenshot to rename the file 
+
+![mv command to rename the file](../assets/renameFile.png)
+
+Lab Screenshot to rename the directory
+
+![mv command to rename the directory](../assets/renameDirectory.png)
+
+
+
 ---
 
 ## 7. `mv` — move file or directory
@@ -198,8 +226,15 @@ mv projects archive/
 
 **Watch out:** If **`archive/`** already exists, **`mv projects archive/`** puts **`projects`** **inside** `archive/projects`, not rename **`projects`** → **`archive`**. Class uses **`ls`** first to avoid surprises.
 
-**My observation:** demonstrate move vs accidental nest — two screenshots.
+**My observation:** demonstrate move one directory to other 
 
+`NOTE` : Here after executing mv command the contents of first directory will be removed and added to the other directory 
+
+![mv command to move one directory to other directory](../assets/mvOneDirToOther.png)
+
+**My Observation:*** demonstrate moving multiple files into directory 
+
+![mv command to move multiple files to single directory](../assets/mvMulitpleFilesToDirectory.png)
 ---
 
 ## 8. `mv` with absolute and relative paths
@@ -224,12 +259,12 @@ mv dir1/dir2/dir3 dir0
 
 ## 9. `cp` vs `mv` — when to use which
 
-| Goal | Command | Result |
-| :--- | :------ | :----- |
-| Keep two copies | **`cp`** | Original **and** destination exist |
-| One name only | **`mv`** | Source path **gone**, dest has the data |
-| Duplicate tree | **`cp -r`** | Two trees |
-| Shift tree | **`mv`** | One tree at new location |
+| Goal            | Command     | Result                                  |
+| :-------------- | :---------- | :-------------------------------------- |
+| Keep two copies | **`cp`**    | Original **and** destination exist      |
+| One name only   | **`mv`**    | Source path **gone**, dest has the data |
+| Duplicate tree  | **`cp -r`** | Two trees                               |
+| Shift tree      | **`mv`**    | One tree at new location                |
 
 **My observation:** `wc -c` on before/after `mv` vs `cp` — screenshot optional.
 
@@ -262,13 +297,13 @@ flowchart TD
 
 ## 11. Common mistakes (class)
 
-| Mistake | Fix |
-| :------ | :-- |
-| `cp` directory without **`-r`** | Use **`cp -r`** |
-| `cp` into wrong place (relative path) | Check **`pwd`** first |
+| Mistake                                      | Fix                                                                                 |
+| :------------------------------------------- | :---------------------------------------------------------------------------------- |
+| `cp` directory without **`-r`**              | Use **`cp -r`**                                                                     |
+| `cp` into wrong place (relative path)        | Check **`pwd`** first                                                               |
 | `mv dir existingDir` nests instead of rename | `ls -ld existingDir`; use a **new** name or **`mv dir existingDir/`** intentionally |
-| Overwrite without warning | **`cp -i`** / **`mv -i`** |
-| Expect undo | No Trash from plain **`rm`**; **`mv`** to Trash folder if you use GUI habits |
+| Overwrite without warning                    | **`cp -i`** / **`mv -i`**                                                           |
+| Expect undo                                  | No Trash from plain **`rm`**; **`mv`** to Trash folder if you use GUI habits        |
 
 **My observation:** paste one mistake you hit in lab.
 
@@ -287,13 +322,13 @@ bash scripts/file-system-navigation-and-hierarchy/extract-screencast-frames.sh \
 
 Frame **`f_NNNN`** ≈ **(N − 1) × 90 s** in the video. Drop chosen PNGs into `docs/assets/` (e.g. `copy-cp-r-notes.png`) and link them in the sections above.
 
-| Approx. time | Suggested section |
-| :----------- | :---------------- |
-| 00:00–05:00 | §0 title / §1 `cp` |
-| 05:00–12:00 | §2–§3 paths |
-| 12:00–22:00 | §4 `cp -r` |
-| 22:00–35:00 | §5 options, §6–§7 `mv` |
-| 35:00+ | §8–§11 case study & Q&A |
+| Approx. time | Suggested section       |
+| :----------- | :---------------------- |
+| 00:00–05:00  | §0 title / §1 `cp`      |
+| 05:00–12:00  | §2–§3 paths             |
+| 12:00–22:00  | §4 `cp -r`              |
+| 22:00–35:00  | §5 options, §6–§7 `mv`  |
+| 35:00+       | §8–§11 case study & Q&A |
 
 *(Replace this table after you align frames with EditPlus headings in your recording.)*
 
