@@ -462,7 +462,7 @@ git push origin master
 
 **Recording:** `/home/surya/Videos/Screencasts/<Session-15>.webm`
 
-**Extra depth:** [viewContentOfFiles.md](viewContentOfFiles.md)
+**Full notes (continuation):** [viewContentOfFiles.md — Part 3 Session 15](viewContentOfFiles.md#part-3--durga-soft-session-15-screencast-continuation) (formulas, MCQs, screenshots). Below = short index only.
 
 ### Overview — what Session 15 covers
 
