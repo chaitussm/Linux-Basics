@@ -27,7 +27,7 @@ Each topic has its own **`.md` file** under [`topics/`](topics/). Runnable **`.s
 | 6e′ | [**createFileByCatAndTouch.md**](topics/createFileByCatAndTouch.md) | Redirect → `workingWithFiles.md` §1 |
 | 7 | [**ls Command and its options.md**](topics/ls%20Command%20and%20its%20options.md) | [Session 7](https://www.youtube.com/watch?v=rpxT2L3t1a8&list=PLd3UqWTnYXOloH0vWBs4BtSbP84WcC2NY&index=7) |
 | 8 | [**Date and Cal commands.md**](topics/Date%20and%20Cal%20commands.md) | [Session 8](https://www.youtube.com/watch?v=NmJyVY1Mvww&list=PLd3UqWTnYXOloH0vWBs4BtSbP84WcC2NY&index=8) |
-| 9 | [**viewContentOfFiles.md**](topics/viewContentOfFiles.md) | [Session 9](https://www.youtube.com/watch?v=FuzpoZwDcZU&list=PLd3UqWTnYXOloH0vWBs4BtSbP84WcC2NY&index=9) |
+| 9 | [**viewContentOfFiles.md**](topics/viewContentOfFiles.md) | [YouTube Session 9](https://www.youtube.com/watch?v=FuzpoZwDcZU&list=PLd3UqWTnYXOloH0vWBs4BtSbP84WcC2NY&index=9) · **Durga Soft Session 15** — [Part 3](topics/viewContentOfFiles.md#part-3--durga-soft-session-15-screencast-continuation) |
 | 10 | [**wordCountCommand.md**](topics/wordCountCommand.md) | [Session 10 — `wc`](https://www.youtube.com/watch?v=hmPHZBR-9Wk&list=PLd3UqWTnYXOloH0vWBs4BtSbP84WcC2NY&index=10) |
 | 11 | [**redirection.md**](topics/redirection.md) | [Session 11 — Redirection](https://www.youtube.com/watch?v=f_B6BIxlYFw&list=PLd3UqWTnYXOloH0vWBs4BtSbP84WcC2NY&index=11) |
 | 12 | [**PipingTeeXargs.md**](topics/PipingTeeXargs.md) | [Session 12 — Pipe, tee, xargs](https://www.youtube.com/watch?v=Ko3VktocAQw&list=PLd3UqWTnYXOloH0vWBs4BtSbP84WcC2NY&index=12) |

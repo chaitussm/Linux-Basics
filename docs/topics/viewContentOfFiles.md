@@ -1,7 +1,11 @@
 # View Content of Files
 
-**Video:** [Session 9 — View Content of Files](https://www.youtube.com/watch?v=FuzpoZwDcZU&list=PLd3UqWTnYXOloH0vWBs4BtSbP84WcC2NY&index=9)  
-**Instructor:** Durga Sir
+**Video (playlist):** [Session 9 — View Content of Files](https://www.youtube.com/watch?v=FuzpoZwDcZU&list=PLd3UqWTnYXOloH0vWBs4BtSbP84WcC2NY&index=9)  
+**Durga Soft online:** **Session 15** — *View Content of Files by using cat, tac, rev, head and tail commands*  
+**Local screencast (not in git):** `/home/surya/Videos/Screencasts/<your-Session-15-recording>.webm`  
+**Instructor:** Durga Sir  
+
+**How to read this file:** Sections **1–15** = full theory + labs (playlist + class notes). **Part 3** = **continuation** aligned to your **new Session 15 screencast** (formulas, rules, MCQs, screenshot slots). **Part 2** = script execution tables.
 
 **Prerequisites:** [TypesOfFilesInLinux.md](TypesOfFilesInLinux.md) (`touch`, create files) · [Bash Built-in Commands.md](Bash%20Built-in%20Commands.md) (`cat`, `gedit`) · [pipeCommands.md](pipeCommands.md) (pipes with `head`/`tail`)
 
@@ -33,6 +37,21 @@ bash scripts/view-content-of-files/cat-view-file-demo.sh
 - [13. Preview: wc and redirection](#13-preview-wc-and-redirection)
 - [14. Session checklist](#14-session-checklist)
 - [15. Script index](#15-script-index)
+- [Part 3 — Session 15 screencast continuation](#part-3--durga-soft-session-15-screencast-continuation)
+  - [P3.1 Master map & formulas](#p31-master-command-map--formulas-durga-sir)
+  - [P3.2 `cat`](#p32-cat--session-15-lab)
+  - [P3.3 `cat -n` / `cat -b`](#p33-cat--n--cat--b)
+  - [P3.4 Multiple files](#p34-cat--multiple-files)
+  - [P3.5 `tac`](#p35-tac)
+  - [P3.6 `rev`](#p36-rev)
+  - [P3.7 `head`](#p37-head--all-forms-durga-formulas)
+  - [P3.8 `tail`](#p38-tail--all-forms-durga-formulas)
+  - [P3.9 `head` \| `tail` — middle lines](#p39-head--tail--extract-middle-lines-formula)
+  - [P3.10 Read-only viewing](#p310-read-only-viewing-exam-table)
+  - [P3.11 Small vs large files](#p311-small-vs-large-file--rule)
+  - [P3.12 `cat` vs `cp`](#p312-cat-vs-cp)
+  - [P3.13 MCQs & practice](#p313-class-practice-questions-session-15)
+  - [P3.14 Screencast frame map](#p314-screencast-frame-map--png-names)
 - [Part 2 — Execution summary](#part-2--execution-summary-scriptsviewcontentoffiles)
 
 ---
@@ -362,15 +381,19 @@ head -n 5 abc.txt      # first 5 lines
 | Command         | Meaning                |
 | :-------------- | :--------------------- |
 | **`head -n 5`** | Only **first 5** lines |
-![alt text](headCommandV2.png)
 | **`head -n -5`** | **All lines except the last 5** (do not confuse!) |
-![alt text](../../scripts/linux-basics-practice/afterheadCommand.png)
-Actual lines in the code 
-![alt text](../../scripts/linux-basics-practice/totalLines.png)
-After providng the command at line 
 
+**Formula (negative `n` on `head`):** if the file has **L** lines, `head -n -K` prints the **first (L − K)** lines — everything **except the last K** lines.
 
-Durga Sir stresses this — easy to mix up in exams.
+```bash
+seq 1 20 > abc.txt
+head -n 5 abc.txt      # 1 2 3 4 5
+head -n -5 abc.txt     # 1 … 15 (drops last five: 16–20)
+```
+
+**Durga Sir stresses this — easy to mix up in exams.** Full Session 15 recap: [Part 3 §P3.7](#p37-head--all-forms-durga-formulas).
+
+**Lab (bytes from top):** see [§8 `head -c`](#8-head--top-of-file) and ![head -c 100 printString.sh](../assets/head-c-100-printString-terminal.png).
 
 ### Characters from top — `head -c` (Durga Sir)
 
@@ -615,6 +638,443 @@ You should be able to:
 | [`tail-bottom-lines-demo.sh`](../../scripts/view-content-of-files/tail-bottom-lines-demo.sh)                 | `tail`                               |
 | [`small-vs-large-file-view-demo.sh`](../../scripts/view-content-of-files/small-vs-large-file-view-demo.sh)   | cat vs head/tail                     |
 | [`more-less-pager-hint-demo.sh`](../../scripts/view-content-of-files/more-less-pager-hint-demo.sh)           | `more` / `less` hints                |
+
+---
+
+## Part 3 — Durga Soft Session 15 (screencast continuation)
+
+**Syllabus block:** *2. Viewing of Files* (after [Creation of Files](workingWithFiles.md#1-creation-of-files--session-14) in [workingWithFiles.md](workingWithFiles.md)).
+
+**Policy:** [screencastWorkflow.md](screencastWorkflow.md) — class PNG + **My observation** PNG per subsection; do **not** push `.webm` to git.
+
+Each **P3.\*** block below matches Durga Sir’s **Session 15** order. Fill **Pending** images from your newest file in `/home/surya/Videos/Screencasts/`.
+
+```bash
+VIDEO="/home/surya/Videos/Screencasts/<Session-15>.webm"
+bash scripts/file-system-navigation-and-hierarchy/extract-screencast-frames.sh \
+  "$VIDEO" /tmp/view-session15-frames
+```
+
+---
+
+### P3.1 Master command map & formulas (Durga Sir)
+
+**One-line job:** *Display* what is stored in a normal file — **without** changing the file (unless you redirect or edit).
+
+| Command | Direction / idea | Default if no option |
+| :------ | :--------------- | :------------------- |
+| **`cat`** | Full file (small files) | All lines to stdout |
+| **`cat -n`** | Line numbers on every line | — |
+| **`cat -b`** | Line numbers on non-blank lines only | — |
+| **`tac`** | **Line order** reversed (last line first) | — |
+| **`rev`** | **Characters** reversed on each line | — |
+| **`head`** | From **top** of file | **First 10 lines** |
+| **`tail`** | From **bottom** of file | **Last 10 lines** |
+
+**Byte vs line (Durga Sir):**
+
+| Option family | Counts | Applies to |
+| :------------ | :----- | :--------- |
+| **`-n N`** (head/tail) | **Lines** | Top or bottom |
+| **`-c N`** (head/tail) | **Bytes** (chars in plain ASCII) | Top or bottom |
+
+**Relationship:**
+
+```text
+cat  ←→  tac     (forward vs reverse LINE order)
+         rev     (reverse CHARACTERS per line — different from tac)
+head ←→  tail     (top vs bottom of file)
+```
+
+**Durga Sir class lab screenshot:**
+
+> **Pending:** `../assets/viewSession15-editplus-overview-class.png`
+
+**My observation:**
+
+> **Pending:** `../assets/viewSession15-overview-my.png`
+
+---
+
+### P3.2 `cat` — Session 15 lab
+
+**Syntax:**
+
+```bash
+cat file                    # usual form
+cat < file                  # optional; same idea (stdin from file)
+cat file1 file2 file3       # concatenate onto stdout
+```
+
+| Rule | Detail |
+| :--- | :--- |
+| **Purpose** | Send file content to **stdout** (screen) |
+| **Empty lines** | Shown as blank lines |
+| **Does not copy** | Printing ≠ `cp` — see [§12](#12-cat-vs-cp-durga-sir) and [P3.12](#p312-cat-vs-cp) |
+
+```bash
+cat notes.txt
+```
+
+**What the class terminal should show (line by line):**
+
+1. `cat notes.txt` — entire small file scrolls; prompt returns at end.  
+2. No change on disk.
+
+**Durga Sir class lab screenshot:**
+
+> **Pending:** `../assets/viewSession15-cat-basic-class.png`
+
+**My observation:** Use `~/Study/Linux-Basics/scripts/linux-basics-practice/printString.sh` or your `viewLab.txt`.
+
+> **Pending:** `../assets/viewSession15-cat-basic-my.png`
+
+**Demo:** [`cat-view-file-demo.sh`](../../scripts/view-content-of-files/cat-view-file-demo.sh)
+
+---
+
+### P3.3 `cat -n` / `cat -b`
+
+| Option | Formula / rule |
+| :----- | :------------- |
+| **`cat -n file`** | Prefix **every** line with line number (including blank lines) |
+| **`cat -b file`** | Number **non-empty** lines only; blank lines **not** numbered |
+
+```bash
+cat -n abc.txt
+cat -b abc.txt
+```
+
+**Class trick:** same file with `java`, `python`, and **blank** lines — compare `-n` vs `-b` side by side.
+
+**Durga Sir class lab screenshot:**
+
+> **Pending:** `../assets/viewSession15-cat-n-b-class.png`
+
+**My observation:**
+
+> **Pending:** `../assets/viewSession15-cat-n-b-my.png`
+
+**Demo:** [`cat-n-and-b-line-numbers-demo.sh`](../../scripts/view-content-of-files/cat-n-and-b-line-numbers-demo.sh)
+
+**Count lines without printing body?** → **`wc -l file`** ([wordCountCommand.md](wordCountCommand.md)) — not `cat`.
+
+---
+
+### P3.4 `cat` — multiple files
+
+```bash
+cat part1.txt part2.txt
+```
+
+**Formula:** output = **contents(file1)** immediately followed by **contents(file2)** on **one** stdout stream (concatenation).
+
+**Durga Sir class lab screenshot:**
+
+> **Pending:** `../assets/viewSession15-cat-multi-class.png`
+
+**My observation:**
+
+> **Pending:** `../assets/viewSession15-cat-multi-my.png`
+
+**Demo:** [`cat-multiple-files-concat-demo.sh`](../../scripts/view-content-of-files/cat-multiple-files-concat-demo.sh)
+
+---
+
+### P3.5 `tac`
+
+**Vertical reverse** — **line order** only (not characters within a line).
+
+| `cat` order (top → bottom) | `tac` order (top → bottom on screen) |
+| :------------------------- | :----------------------------------- |
+| line 1                     | last line of file                    |
+| line 2                     | …                                    |
+| last line                  | first line of file                   |
+
+```bash
+tac abc.txt
+```
+
+**Durga Sir class lab screenshot:**
+
+> **Pending:** `../assets/viewSession15-tac-class.png`
+
+**My observation:**
+
+> **Pending:** `../assets/viewSession15-tac-my.png`
+
+**Demo:** [`tac-reverse-lines-demo.sh`](../../scripts/view-content-of-files/tac-reverse-lines-demo.sh)
+
+---
+
+### P3.6 `rev`
+
+**Horizontal reverse** — each **line’s characters** left ↔ right.
+
+```bash
+# line on disk: chini
+rev abc.txt    # on screen: inihc
+```
+
+| Mistake in exam | Correct |
+| :-------------- | :------ |
+| `rev` reverses **line order** | **No** — that is **`tac`** |
+| `tac` reverses **spelling on one line** | **No** — that is **`rev`** |
+
+**Durga Sir class lab screenshot:**
+
+> **Pending:** `../assets/viewSession15-rev-class.png`
+
+**My observation:**
+
+> **Pending:** `../assets/viewSession15-rev-my.png`
+
+**Demo:** [`rev-reverse-line-chars-demo.sh`](../../scripts/view-content-of-files/rev-reverse-line-chars-demo.sh)
+
+**Proof file unchanged:** [§7A](#7a-display-only-viewing--cat--rev--tac-do-not-change-the-file) · [`rev-tac-display-only-demo.sh`](../../scripts/view-content-of-files/rev-tac-display-only-demo.sh)
+
+---
+
+### P3.7 `head` — all forms (Durga formulas)
+
+**Opposite of `tail`** — read from **start** of file.
+
+| Command | Meaning |
+| :------ | :------ |
+| **`head file`** | First **10** lines (default) |
+| **`head -n N file`** / **`head -N file`** | First **N** lines |
+| **`head -n -K file`** | All lines **except the last K** (negative N) |
+| **`head -c N file`** | First **N** bytes from **top** |
+
+**Durga Sir (bytes):**
+
+> Every character in normal text ≈ **one byte**. `head -c 100` = first **100 bytes** (may cut **mid-line**).
+
+```bash
+cd ~/Study/Linux-Basics/scripts/linux-basics-practice
+head -c 100 printString.sh
+cat printString.sh
+```
+
+![head -c 100 — partial output vs full cat](../assets/head-c-100-printString-terminal.png)
+
+**Negative `n` worked example:**
+
+```bash
+seq 1 20 > abc.txt
+head -n -5 abc.txt   # lines 1–15 only
+```
+
+**Durga Sir class lab screenshot:**
+
+> **Pending:** `../assets/viewSession15-head-n-negative-class.png`
+
+**My observation:**
+
+> **Pending:** `../assets/viewSession15-head-n-negative-my.png`
+
+**Demo:** [`head-top-lines-demo.sh`](../../scripts/view-content-of-files/head-top-lines-demo.sh)
+
+---
+
+### P3.8 `tail` — all forms (Durga formulas)
+
+| Command | Meaning |
+| :------ | :------ |
+| **`tail file`** | Last **10** lines (default) |
+| **`tail -n N file`** / **`tail -N file`** | Last **N** lines |
+| **`tail -c N file`** | Last **N** bytes from **end** of file |
+
+**Durga Sir (bytes):**
+
+> `tail -c 100` = last **100 bytes** (may start **mid-line**).
+
+```bash
+tail -c 100 printString.sh
+cat printString.sh
+```
+
+![tail -c 100 vs full file](../assets/tail-c-100-printString-terminal.png)
+
+**Last N lines lab:**
+
+```bash
+tail testThree.sh
+tail -5 testThree.sh
+cat testThree.sh
+```
+
+![tail default and tail -5 vs cat](../assets/tail-default-testThree-terminal.png)  
+![tail -5 only](../assets/tail-5-testThree-terminal.png)
+
+**Durga Sir class lab screenshot:**
+
+> **Pending:** `../assets/viewSession15-tail-class.png`
+
+**My observation:**
+
+> **Pending:** `../assets/viewSession15-tail-my.png`
+
+**Demo:** [`tail-bottom-lines-demo.sh`](../../scripts/view-content-of-files/tail-bottom-lines-demo.sh)
+
+**Advanced (GNU, mention in class):** `tail -n +5 file` prints from **line 5 to EOF** — different from `tail -5` (last 5 lines).
+
+---
+
+### P3.9 `head` \| `tail` — extract middle lines (formula)
+
+**Pattern:** take **first B** lines, then keep **last W** lines of that chunk → approximates a **window** near the top.
+
+| Goal | Pipeline | When file has ≥ B lines |
+| :--- | :------- | :------------------------ |
+| First 5 lines only | `head -5 file` | Same as `head -5 file \| tail -5` on short files |
+| Lines **16–20** of a long file | `head -20 file \| tail -5` | Last 5 of first 20 = lines 16–20 |
+
+```bash
+head -5 printString.sh | tail -5
+cat printString.sh
+```
+
+![head -5 pipe tail -5 then cat](../assets/head-tail-pipe-printString-terminal.png)
+
+**Pipes with `ls` (class habit):**
+
+```bash
+ls -l /etc | head -5
+```
+
+![ls /etc piped to head -5](../assets/piping1-head-keyboard-ls-etc-head5-terminal.png)
+
+**Durga Sir class lab screenshot:**
+
+> **Pending:** `../assets/viewSession15-head-pipe-tail-class.png`
+
+**My observation:**
+
+> **Pending:** `../assets/viewSession15-head-pipe-tail-my.png`
+
+---
+
+### P3.10 Read-only viewing (exam table)
+
+| Command | Changes file on disk? |
+| :------ | :-------------------: |
+| `cat`, `tac`, `rev`, `head`, `tail`, `more`, `less` | **No** (display only) |
+| `cat file > other` | **Yes** — writes **other** |
+| `rev file > file` | **Yes** — **dangerous** (can corrupt same file) |
+| `gedit` / `nano` / `vi` save | **Yes** |
+
+**Why `cat` after `rev` shows “normal” text:** `rev` only changed the **screen**; **disk** unchanged ([§7A](#7a-display-only-viewing--cat--rev--tac-do-not-change-the-file)).
+
+**Durga Sir class lab screenshot:**
+
+> **Pending:** `../assets/viewSession15-readonly-class.png`
+
+**My observation:** `rev file; wc -l file; cat file` — one screenshot.
+
+---
+
+### P3.11 Small vs large file — rule
+
+| File size | Durga Sir choice |
+| :-------- | :--------------- |
+| **Small** (fits one screen) | **`cat`** |
+| **Large** (logs, `man`, `/etc`) | **`head`**, **`tail`**, **`less`** / **`more`** — avoid flooding terminal |
+
+**Demo:** [`small-vs-large-file-view-demo.sh`](../../scripts/view-content-of-files/small-vs-large-file-view-demo.sh)
+
+**Durga Sir class lab screenshot:**
+
+> **Pending:** `../assets/viewSession15-small-vs-large-class.png`
+
+**My observation:**
+
+> **Pending:** `../assets/viewSession15-small-vs-large-my.png`
+
+---
+
+### P3.12 `cat` vs `cp`
+
+| Need | Use |
+| :--- | :-- |
+| **Show** content on terminal | **`cat`** |
+| **Duplicate** file to another path/name | **`cp`** |
+| **Create** empty file | **`touch`** (creation session) |
+
+Same spelling in conversation — **different purpose**. See [§12](#12-cat-vs-cp-durga-sir).
+
+---
+
+### P3.13 Class practice questions (Session 15)
+
+*(Add exact wording from your screencast MCQs; starters below match Durga pattern.)*
+
+**Q1.** Command to display **last 5 lines** of `log.txt`?
+
+- **Ans:** `tail -5 log.txt` or `tail -n 5 log.txt`
+
+**Q2.** Command to show **first 100 bytes** of a file?
+
+- **Ans:** `head -c 100 file`
+
+**Q3.** Which command prints **last line first**?
+
+- **Ans:** **`tac`** (not `rev`)
+
+**Q4.** Which command prints **`hello` as `olleh`** on one line?
+
+- **Ans:** **`rev`**
+
+**Q5.** `head -n -3` on a 20-line file prints how many lines?
+
+- **Ans:** **17** (all except last 3)
+
+**Q6.** Does `cat myfile` change `myfile` on disk?
+
+- **Ans:** **No**
+
+**Durga Sir class lab screenshot:**
+
+> **Pending:** `../assets/viewSession15-mcq-class.png`
+
+**My observation:** Answer Q1–Q4 in one terminal — screenshot.
+
+---
+
+### P3.14 Screencast frame map & PNG names
+
+After you watch once, map frames → `docs/assets/` and link here (replace **Pending** above).
+
+| Approx. time | PNG name | Section |
+| :----------- | :------- | :------ |
+| ~00:00–02:00 | `viewSession15-editplus-overview-class.png` | P3.1 |
+| ~05:00 | `viewSession15-cat-basic-class.png` | P3.2 |
+| ~10:00 | `viewSession15-cat-n-b-class.png` | P3.3 |
+| ~15:00 | `viewSession15-tac-class.png` | P3.5 |
+| ~18:00 | `viewSession15-rev-class.png` | P3.6 |
+| ~25:00 | `viewSession15-head-n-negative-class.png` | P3.7 |
+| ~32:00 | `viewSession15-tail-class.png` | P3.8 |
+| ~38:00 | `viewSession15-head-pipe-tail-class.png` | P3.9 |
+| ~42:00 | `viewSession15-mcq-class.png` | P3.13 |
+
+```bash
+git add docs/topics/viewContentOfFiles.md docs/assets/viewSession15-*.png
+git commit -m "Session 15 viewing: class + lab screenshots"
+git push origin master
+bash scripts/file-system-navigation-and-hierarchy/validate-docs-assets.sh
+```
+
+**Session 15 checklist (nothing skipped):**
+
+1. `cat` / `cat -n` / `cat -b` / multiple files  
+2. `tac` vs `rev` (vertical vs horizontal)  
+3. `head` default, `-n`, **`-n -K`**, `-c`  
+4. `tail` default, `-n`, `-c`  
+5. `head \| tail` window + pipe with `ls`  
+6. View commands **do not** modify file  
+7. Small vs large file rule  
+8. `cat` vs `cp`  
+9. MCQs answered on your VM + PNGs pushed  
 
 ---
 
