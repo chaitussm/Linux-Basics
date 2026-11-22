@@ -352,7 +352,7 @@ When we are trying to create the file using `nano` command
 
 1. enter the command `nano filename.txt` and press `Enter` we will get bewlo screen 
 
-![Creating a file using nano command](../assets/nanoToCreateFile1.png)
+> **Pending:** `../assets/nanoToCreateFile1.png` (empty `nano` editor — step 1)
 
 2. After providing details we will get like this 
 
