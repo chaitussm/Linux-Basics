@@ -47,11 +47,14 @@ bash scripts/view-content-of-files/cat-view-file-demo.sh
   - [P3.7 `head`](#p37-head--all-forms-durga-formulas)
   - [P3.8 `tail`](#p38-tail--all-forms-durga-formulas)
   - [P3.9 `head` \| `tail` — middle lines](#p39-head--tail--extract-middle-lines-formula)
-  - [P3.10 Read-only viewing](#p310-read-only-viewing-exam-table)
-  - [P3.11 Small vs large files](#p311-small-vs-large-file--rule)
-  - [P3.12 `cat` vs `cp`](#p312-cat-vs-cp)
-  - [P3.13 MCQs & practice](#p313-class-practice-questions-session-15)
-  - [P3.14 Screencast frame map](#p314-screencast-frame-map--png-names)
+  - [P3.10 `more` — forward pager](#p310-more--forward-pager-durga-sir)
+  - [P3.11 `less` — full pager](#p311-less--full-pager-durga-sir)
+  - [P3.12 `more` vs `less` vs `cat`](#p312-more-vs-less-vs-cat--durga-sir)
+  - [P3.13 Read-only viewing](#p313-read-only-viewing-exam-table)
+  - [P3.14 Small vs large files](#p314-small-vs-large-file--rule)
+  - [P3.15 `cat` vs `cp`](#p315-cat-vs-cp)
+  - [P3.16 MCQs & practice](#p316-class-practice-questions-session-15)
+  - [P3.17 Screencast frame map](#p317-screencast-frame-map--png-names)
 - [Part 2 — Execution summary](#part-2--execution-summary-scriptsviewcontentoffiles)
 
 ---
@@ -541,19 +544,165 @@ cat printString.sh
 
 ---
 
-## 10. more and less — pagers
+## 10. more and less — pagers (Durga Sir)
 
-| Pager      | Behavior                                                             |
-| :--------- | :------------------------------------------------------------------- |
-| **`more`** | Move **forward** through a long file (Space / Enter)                 |
-| **`less`** | Forward **and backward** (Page Up / Page Down) — **preferred** today |
+**Why pagers exist:** **`cat`** on a **large** file dumps **everything at once**. The screen **fills** and you only catch the **end**. Durga Sir: for **big** files use a **pager** — show **one screen (page) at a time**.
 
-```bash
-less /var/log/syslog    # q to quit
-more /var/log/syslog
+**Durga Sir wording (memory aid):** *“**less** is **more**”* — **`less`** is the **modern** pager with **more** features than **`more`**.
+
+### When to use which (summary)
+
+| Situation | Durga Sir choice |
+| :-------- | :--------------- |
+| Small file (few lines) | **`cat`** |
+| Large file, only need start/end sample | **`head`** / **`tail`** |
+| Large file, **read interactively** page by page | **`less`** (preferred) or **`more`** |
+| Huge command output | **`command \| less`** or **`command \| more`** |
+| **`man`** pages | Opens **`less`** by default (pager) |
+
+```mermaid
+%%{init: {'theme': 'base', 'themeVariables': {'pie1': '#FF9800', 'pie2': '#1E88E5', 'pie3': '#FFFFFF', 'pie4': '#FF9800', 'pie5': '#1E88E5', 'pieTitleTextColor': '#212121', 'pieSectionTextColor': '#212121', 'pieStrokeColor': '#424242'}}}%%
+flowchart TB
+    BIG[Large file or long output]
+    BIG --> CAT{cat entire file?}
+    CAT -->|yes| BAD[Terminal floods — hard to read]
+    CAT -->|no| PAGER[more or less]
+    PAGER --> LESS[less — forward + backward]
+    PAGER --> MORE[more — mainly forward]
+
+    classDef bad fill:#c62828,stroke:#b71c1c,color:#fff
+    classDef ok fill:#43A047,stroke:#1B5E20,color:#fff
+    class BAD bad
+    class BIG,CAT,PAGER,LESS,MORE ok
 ```
 
-**Interactive:** in automation/CI, pagers wait for a human; use `head`/`tail` in scripts unless you know you have a TTY.
+### `more` — syntax (class)
+
+```bash
+more filename
+more file1 file2 file3          # multiple files; :n next file in some setups
+more -5 filename                 # show 5 lines per “page” (GNU more)
+more +10 filename                # start display at line 10
+more +/pattern filename          # start at first match of pattern
+ls -l /etc | more                # pipe long listing through pager
+```
+
+| Keys (typical in `more`) | Action |
+| :----------------------- | :----- |
+| **Space** | Next **page** (screen) |
+| **Enter** | Next **line** |
+| **b** | Back one **page** (often **files only**, not always with **pipes**) |
+| **q** | **Quit** — return to shell prompt |
+| **h** | Help (if available) |
+
+**What you see on screen (Durga demo on a big file):**
+
+1. First screen of file content.  
+2. Bottom line: **`--More--(46%)`** (or similar) — **not** end of file; **46%** read so far.  
+3. **Space** → next page; percentage **increases**.  
+4. **`q`** → prompt returns.
+
+**Class file examples (Durga Sir habit):**
+
+```bash
+more /etc/passwd
+more /etc/services
+more outputData.txt              # after redirection labs
+cat verylarge.txt                # contrast: everything scrolls — avoid
+```
+
+**Pipe example (class):**
+
+```bash
+ls -l /usr/bin | more
+```
+
+**Limitation (exam):** with **piped** input, **`more`** often cannot scroll **backward** the way **`less`** can.
+
+**My observation:**
+
+> **Pending:** `../assets/viewSession15-more-passwd-class.png`  
+> **Pending:** `../assets/viewSession15-more-passwd-my.png`
+
+**Demo (non-interactive hint):** [`more-less-pager-hint-demo.sh`](../../scripts/view-content-of-files/more-less-pager-hint-demo.sh)
+
+---
+
+### `less` — syntax (class)
+
+```bash
+less filename
+less -N filename                 # show line numbers (GNU less)
+less -F filename                 # quit if entire file fits one screen
+ls -l /etc | less                # pipe — can scroll back in less
+man cat                          # man uses less (or $PAGER)
+```
+
+| Keys (Durga Sir teaches — remember for lab) | Action |
+| :------------------------------------------ | :----- |
+| **Space** / **Page Down** / **f** | Forward **one page** |
+| **Enter** / **j** | Forward **one line** |
+| **b** / **Page Up** | Backward **one page** |
+| **k** | Backward **one line** |
+| **g** | Jump to **beginning** of file |
+| **G** | Jump to **end** of file |
+| **/** *text* **Enter** | **Search forward** for *text* |
+| **n** | **Next** search match |
+| **N** | Previous search match |
+| **q** | **Quit** |
+
+**Durga Sir points:**
+
+- **`less`** starts quickly on **huge** files — it does **not** load the whole file into memory first.  
+- **`less`** can move **backward** through the file (unlike **`more`** in many pipe situations).  
+- If content fits **one screen**, **`less`** may still wait at a **colon prompt** — press **`q`** to leave (or use **`-F`** for “quit if one screen”).  
+- **`man command`** — when you read manuals, you are already inside **`less`**.
+
+**Class comparison line by line:**
+
+```bash
+# Same file — try both on your VM
+more /etc/passwd    # forward paging; --More-- at bottom
+less /etc/passwd    # forward + backward; filename shown at bottom prompt
+```
+
+**My observation:**
+
+> **Pending:** `../assets/viewSession15-less-passwd-class.png`  
+> **Pending:** `../assets/viewSession15-less-passwd-my.png`  
+> **Pending:** `../assets/viewSession15-man-cat-pager-my.png` (`man cat` then **`q`**)
+
+---
+
+### `more` vs `less` — Durga Sir table
+
+| Feature | **`more`** | **`less`** |
+| :------ | :--------- | :--------- |
+| Age | Older pager | Newer; **replaces** `more` in practice |
+| Forward paging | Yes | Yes |
+| Backward paging | Limited; **often no** on **pipes** | Yes (files **and** pipes) |
+| Start at line **N** | **`more +N file`** | **`less +N file`** (GNU) |
+| Search in file | **`more +/word file`** | **`/word`** inside less |
+| **`man`** | — | Default pager on Ubuntu |
+| Changes file on disk? | **No** | **No** |
+
+```mermaid
+%%{init: {'theme': 'base', 'themeVariables': {'pie1': '#FF9800', 'pie2': '#1E88E5', 'pie3': '#FFFFFF', 'pie4': '#FF9800', 'pie5': '#1E88E5', 'pieTitleTextColor': '#212121', 'pieSectionTextColor': '#212121', 'pieStrokeColor': '#424242'}}}%%
+pie title Durga Sir: which pager today?
+    "less (preferred)" : 70
+    "more (legacy / class history)" : 30
+```
+
+### Scripts and automation (class warning)
+
+**Pagers need a human at the keyboard** (TTY). In a **script** or **Cursor CI**, `less file` may appear to **hang**. Use **`head`**, **`tail`**, or redirect to a file instead:
+
+```bash
+head -20 /etc/passwd          # script-safe sample
+less /etc/passwd              # interactive lab only
+```
+
+**Full Session 15 lab write-up:** [Part 3 §P3.10–P3.12](#p310-more--forward-pager-durga-sir).
 
 **Demo:** [`more-less-pager-hint-demo.sh`](../../scripts/view-content-of-files/more-less-pager-hint-demo.sh)
 
@@ -620,7 +769,8 @@ You should be able to:
 5. Use **`head`** / **`tail`** defaults and **`-n`**.  
 6. Explain **`head -n -5`** vs **`head -n 5`**.  
 7. Choose **`cat`** vs **`head`/`tail`/`less`** for small vs large files.  
-8. Name **`more`** and **`less`** and when they are used.
+8. Name **`more`** and **`less`**, **`--More--`**, keys **Space / Enter / b / q**, and why **`less`** beats **`more`** on pipes.  
+9. Open **`man`** and quit with **`q`** (pager = **`less`**).
 
 ---
 
@@ -955,7 +1105,153 @@ ls -l /etc | head -5
 
 ---
 
-### P3.10 Read-only viewing (exam table)
+### P3.10 `more` — forward pager (Durga Sir)
+
+**Job:** Display a **large** file **one screen at a time** (older pager).
+
+**Syntax (all class forms):**
+
+```bash
+more file
+more -5 file              # 5 lines per page (GNU)
+more +10 file             # start at line 10
+more +/nfs file           # start at first line matching pattern
+more f1 f2 f3             # multiple files (class mentions)
+ls -l /etc | more         # pipe long output
+```
+
+**Durga Sir explanation (what to say in the exam):**
+
+1. **`cat`** on a **big** file → content **runs past**; you miss the top.  
+2. **`more file`** → only **one screen** visible; bottom shows **`--More--(xx%)`**.  
+3. **`xx%`** = how much of the file you have **already passed**.  
+4. **Not** the same as “percentage remaining” in all versions — treat it as **progress indicator**.
+
+| Key | Durga Sir action |
+| :-- | :--------------- |
+| **Space** | Next **page** |
+| **Enter** | Next **line** |
+| **b** | Previous **page** (especially on **files**) |
+| **q** | **Quit** pager |
+
+**Class examples (run on VM):**
+
+```bash
+more /etc/passwd
+more /etc/services
+more outputData.txt
+ls -l /usr/bin | more
+```
+
+**Contrast (Durga shows why not `cat`):**
+
+```bash
+cat /etc/services    # entire file — very long scroll
+more /etc/services   # controlled paging
+```
+
+**What the class terminal should show (line by line):**
+
+1. `more /etc/passwd` — first screen of accounts.  
+2. Last line on screen: **`--More--`** or **`--More--(10%)`**.  
+3. Press **Space** — next screen; **%** increases.  
+4. Press **`q`** — normal `$` prompt returns.
+
+**Durga Sir class lab screenshot:**
+
+> **Pending:** `../assets/viewSession15-more-passwd-class.png`
+
+**My observation:**
+
+> **Pending:** `../assets/viewSession15-more-passwd-my.png`
+
+**Pipe limitation (exam):** `ls -l | more` — **backward** scroll is **weak or missing** compared to **`less`**.
+
+---
+
+### P3.11 `less` — full pager (Durga Sir)
+
+**Job:** Same as **`more`**, but **more powerful** — Durga: *“**less** is **more**”* (more features).
+
+**Syntax:**
+
+```bash
+less file
+less -N file              # line numbers on left
+less +10 file             # open at line 10 (GNU)
+less -F file              # quit if one screen enough
+ls -l /etc | less         # pipe; scroll **back** with Page Up / b
+man head                  # manual → pager (usually less)
+```
+
+**Durga Sir — keys to practice on lab:**
+
+| Key | Action |
+| :-- | :----- |
+| **Space** / **Page Down** | Forward **page** |
+| **Enter** / **j** | Forward **line** |
+| **b** / **Page Up** | Back **page** |
+| **k** | Back **line** |
+| **g** | Top of file |
+| **G** | End of file |
+| **/** *word* | Search forward |
+| **n** / **N** | Next / previous match |
+| **q** | Quit |
+
+**Why Durga prefers `less`:**
+
+| Point | Detail |
+| :---- | :----- |
+| **Backward** | Re-read earlier lines (**`more`** weak on **pipes**) |
+| **Large files** | Does not need full file in memory before display |
+| **`man`** | Student already uses **`less`** daily |
+
+**Class demo sequence (do in order):**
+
+```bash
+less /etc/passwd
+# Space few times, then b to go back, then g, then G, then q
+
+man ls
+# same keys; q to exit man
+```
+
+**What `man cat` teaches (ties to §13):** manual text is **paged** — Durga may redirect **`man cat > file`** in redirection session; viewing uses **`less`**.
+
+**Durga Sir class lab screenshot:**
+
+> **Pending:** `../assets/viewSession15-less-passwd-class.png`
+
+**My observation:**
+
+> **Pending:** `../assets/viewSession15-less-passwd-my.png`  
+> **Pending:** `../assets/viewSession15-man-cat-pager-my.png`
+
+---
+
+### P3.12 `more` vs `less` vs `cat` — Durga Sir
+
+| Need | Command |
+| :--- | :------ |
+| Small file, full dump once | **`cat file`** |
+| Large file, **interactive** read | **`less file`** (best) |
+| Large file, **forward-only** paging | **`more file`** |
+| One-shot **sample** in script | **`head`** / **`tail`** |
+| Long **`ls`** listing | **`ls -l dir \| less`** |
+
+**Memory sentence (class):** *Use **`cat`** for **small**; use **`head`/`tail`** for **ends**; use **`less`** (or **`more`**) when the file is **too big** for one screen.*
+
+**Does pager change the file?** **No** — display only ([P3.13](#p313-read-only-viewing-exam-table)).
+
+**Durga Sir class lab screenshot:**
+
+> **Pending:** `../assets/viewSession15-more-vs-less-class.png`
+
+**My observation:** One screenshot: `wc -l /etc/passwd` then `less /etc/passwd` (first screen).
+
+---
+
+### P3.13 Read-only viewing (exam table)
 
 | Command | Changes file on disk? |
 | :------ | :-------------------: |
@@ -974,7 +1270,7 @@ ls -l /etc | head -5
 
 ---
 
-### P3.11 Small vs large file — rule
+### P3.14 Small vs large file — rule
 
 | File size | Durga Sir choice |
 | :-------- | :--------------- |
@@ -993,7 +1289,7 @@ ls -l /etc | head -5
 
 ---
 
-### P3.12 `cat` vs `cp`
+### P3.15 `cat` vs `cp`
 
 | Need | Use |
 | :--- | :-- |
@@ -1005,7 +1301,7 @@ Same spelling in conversation — **different purpose**. See [§12](#12-cat-vs-c
 
 ---
 
-### P3.13 Class practice questions (Session 15)
+### P3.16 Class practice questions (Session 15)
 
 *(Add exact wording from your screencast MCQs; starters below match Durga pattern.)*
 
@@ -1033,15 +1329,35 @@ Same spelling in conversation — **different purpose**. See [§12](#12-cat-vs-c
 
 - **Ans:** **No**
 
+**Q7.** Default pager for **`man`** on Ubuntu?
+
+- **Ans:** **`less`** (via `$PAGER` / `man` config)
+
+**Q8.** Which key quits **`more`** and **`less`**?
+
+- **Ans:** **`q`**
+
+**Q9.** Bottom message **`--More--(30%)`** in **`more`** means?
+
+- **Ans:** You are **paging** through a large file; about **30%** of the file has been **displayed** so far (progress), **not** finished.
+
+**Q10.** Command to page through output of **`ls -l /etc`**?
+
+- **Ans:** `ls -l /etc | less` or `ls -l /etc | more` (class accepts both; **`less`** preferred)
+
+**Q11.** Can **`less`** scroll **backward** after **`ls | less`**?
+
+- **Ans:** **Yes** (typical GNU **less** — contrast **`more`** on pipes)
+
 **Durga Sir class lab screenshot:**
 
 > **Pending:** `../assets/viewSession15-mcq-class.png`
 
-**My observation:** Answer Q1–Q4 in one terminal — screenshot.
+**My observation:** Answer Q1–Q4 and Q10 on your VM — one screenshot.
 
 ---
 
-### P3.14 Screencast frame map & PNG names
+### P3.17 Screencast frame map & PNG names
 
 After you watch once, map frames → `docs/assets/` and link here (replace **Pending** above).
 
@@ -1055,7 +1371,10 @@ After you watch once, map frames → `docs/assets/` and link here (replace **Pen
 | ~25:00 | `viewSession15-head-n-negative-class.png` | P3.7 |
 | ~32:00 | `viewSession15-tail-class.png` | P3.8 |
 | ~38:00 | `viewSession15-head-pipe-tail-class.png` | P3.9 |
-| ~42:00 | `viewSession15-mcq-class.png` | P3.13 |
+| ~40:00 | `viewSession15-more-passwd-class.png` | P3.10 |
+| ~44:00 | `viewSession15-less-passwd-class.png` | P3.11 |
+| ~46:00 | `viewSession15-more-vs-less-class.png` | P3.12 |
+| ~48:00 | `viewSession15-mcq-class.png` | P3.16 |
 
 ```bash
 git add docs/topics/viewContentOfFiles.md docs/assets/viewSession15-*.png
@@ -1071,10 +1390,13 @@ bash scripts/file-system-navigation-and-hierarchy/validate-docs-assets.sh
 3. `head` default, `-n`, **`-n -K`**, `-c`  
 4. `tail` default, `-n`, `-c`  
 5. `head \| tail` window + pipe with `ls`  
-6. View commands **do not** modify file  
-7. Small vs large file rule  
-8. `cat` vs `cp`  
-9. MCQs answered on your VM + PNGs pushed  
+6. **`more`** — `--More--`, Space, Enter, **q**  
+7. **`less`** — forward/back, **g**/**G**, **/** search, **q**; **`man`** uses it  
+8. **`more` vs `less` vs `cat`** for small/large files  
+9. View commands **do not** modify file  
+10. Small vs large file rule  
+11. `cat` vs `cp`  
+12. MCQs (including pagers) on your VM + PNGs pushed  
 
 ---
 
