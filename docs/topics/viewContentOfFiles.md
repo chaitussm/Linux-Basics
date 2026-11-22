@@ -820,6 +820,8 @@ bash scripts/file-system-navigation-and-hierarchy/extract-screencast-frames.sh \
 | **`rev`** | **Characters** reversed on each line | — |
 | **`head`** | From **top** of file | **First 10 lines** |
 | **`tail`** | From **bottom** of file | **Last 10 lines** |
+| **`more`** | Pager — mainly **forward** | One **screen** at a time |
+| **`less`** | Pager — forward **and** back | One **screen** at a time; used by **`man`** |
 
 **Byte vs line (Durga Sir):**
 
