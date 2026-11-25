@@ -21,41 +21,75 @@ bash scripts/view-content-of-files/cat-view-file-demo.sh
 
 **Table of contents**
 
-- [1. Goal of this session](#1-goal-of-this-session)
-- [2. Command map (remember these)](#2-command-map-remember-these)
-- [3. cat — print file on screen](#3-cat--print-file-on-screen)
-- [4. cat -n and cat -b](#4-cat--n-and-cat--b)
-- [5. cat multiple files](#5-cat-multiple-files)
-- [6. tac — reverse line order](#6-tac--reverse-line-order)
-- [7. rev — reverse each line](#7-rev--reverse-each-line)
-- [7A. Display-only viewing — `cat` / `rev` / `tac` do **not** change the file](#7a-display-only-viewing--cat--rev--tac-do-not-change-the-file)
-- [8. head — top of file](#8-head--top-of-file)
-- [9. tail — bottom of file](#9-tail--bottom-of-file)
-- [10. more and less — pagers](#10-more-and-less--pagers)
-- [11. Small file vs large file](#11-small-file-vs-large-file)
-- [12. cat vs cp (Durga Sir)](#12-cat-vs-cp-durga-sir)
-- [13. Preview: wc and redirection](#13-preview-wc-and-redirection)
-- [14. Session checklist](#14-session-checklist)
-- [15. Script index](#15-script-index)
-- [Part 3 — Session 15 screencast continuation](#part-3--durga-soft-session-15-screencast-continuation)
-  - [P3.1 Master map & formulas](#p31-master-command-map--formulas-durga-sir)
-  - [P3.2 `cat`](#p32-cat--session-15-lab)
-  - [P3.3 `cat -n` / `cat -b`](#p33-cat--n--cat--b)
-  - [P3.4 Multiple files](#p34-cat--multiple-files)
-  - [P3.5 `tac`](#p35-tac)
-  - [P3.6 `rev`](#p36-rev)
-  - [P3.7 `head`](#p37-head--all-forms-durga-formulas)
-  - [P3.8 `tail`](#p38-tail--all-forms-durga-formulas)
-  - [P3.9 `head` \| `tail` — middle lines](#p39-head--tail--extract-middle-lines-formula)
-  - [P3.10 `more` — forward pager](#p310-more--forward-pager-durga-sir)
-  - [P3.11 `less` — full pager](#p311-less--full-pager-durga-sir)
-  - [P3.12 `more` vs `less` vs `cat`](#p312-more-vs-less-vs-cat--durga-sir)
-  - [P3.13 Read-only viewing](#p313-read-only-viewing-exam-table)
-  - [P3.14 Small vs large files](#p314-small-vs-large-file--rule)
-  - [P3.15 `cat` vs `cp`](#p315-cat-vs-cp)
-  - [P3.16 MCQs & practice](#p316-class-practice-questions-session-15)
-  - [P3.17 Screencast frame map](#p317-screencast-frame-map--png-names)
-- [Part 2 — Execution summary](#part-2--execution-summary-scriptsviewcontentoffiles)
+- [View Content of Files](#view-content-of-files)
+  - [1. Goal of this session](#1-goal-of-this-session)
+  - [2. Command map (remember these)](#2-command-map-remember-these)
+  - [3. cat — print file on screen](#3-cat--print-file-on-screen)
+  - [4. cat -n and cat -b](#4-cat--n-and-cat--b)
+  - [5. cat multiple files](#5-cat-multiple-files)
+  - [6. tac — reverse line order](#6-tac--reverse-line-order)
+  - [7. rev — reverse each line](#7-rev--reverse-each-line)
+  - [7A. Display-only viewing — `cat` / `rev` / `tac` do **not** change the file](#7a-display-only-viewing--cat--rev--tac-do-not-change-the-file)
+    - [Two places to think about](#two-places-to-think-about)
+    - [Your `testThree.sh` example (step by step)](#your-testthreesh-example-step-by-step)
+    - [`rev` vs `tac` — both read-only; different “mirror”](#rev-vs-tac--both-read-only-different-mirror)
+    - [When **does** the file content change?](#when-does-the-file-content-change)
+    - [Why `rev` on a `.sh` file looks scary (but is harmless to the file)](#why-rev-on-a-sh-file-looks-scary-but-is-harmless-to-the-file)
+    - [If `cat` shows the **same block repeated** many times](#if-cat-shows-the-same-block-repeated-many-times)
+    - [Memory table (exam + lab)](#memory-table-exam--lab)
+  - [8. head — top of file](#8-head--top-of-file)
+    - [Important: `head -n -5` (negative n)](#important-head--n--5-negative-n)
+    - [Characters from top — `head -c` (Durga Sir)](#characters-from-top--head--c-durga-sir)
+  - [9. tail — bottom of file](#9-tail--bottom-of-file)
+    - [Default — last 10 lines](#default--last-10-lines)
+    - [Last N lines — `tail -n` / `tail -5`](#last-n-lines--tail--n--tail--5)
+    - [Last N characters — `tail -c` (Durga Sir)](#last-n-characters--tail--c-durga-sir)
+    - [`head` and `tail` together (pipe) — line selection](#head-and-tail-together-pipe--line-selection)
+  - [10. more and less — pagers (Durga Sir)](#10-more-and-less--pagers-durga-sir)
+    - [When to use which (summary)](#when-to-use-which-summary)
+    - [`more` — syntax (class)](#more--syntax-class)
+    - [`less` — syntax (class)](#less--syntax-class)
+    - [`more` vs `less` — Durga Sir table](#more-vs-less--durga-sir-table)
+    - [Scripts and automation (class warning)](#scripts-and-automation-class-warning)
+  - [11. Small file vs large file](#11-small-file-vs-large-file)
+  - [12. cat vs cp (Durga Sir)](#12-cat-vs-cp-durga-sir)
+  - [13. Preview: wc and redirection](#13-preview-wc-and-redirection)
+  - [14. Session checklist](#14-session-checklist)
+  - [15. Script index](#15-script-index)
+  - [Part 3 — Durga Soft Session 15 (screencast continuation)](#part-3--durga-soft-session-15-screencast-continuation)
+    - [P3.1 Master command map \& formulas (Durga Sir)](#p31-master-command-map--formulas-durga-sir)
+    - [P3.2 `cat` — Session 15 lab](#p32-cat--session-15-lab)
+    - [P3.3 `cat -n` / `cat -b`](#p33-cat--n--cat--b)
+    - [P3.4 `cat` — multiple files](#p34-cat--multiple-files)
+    - [P3.5 `tac`](#p35-tac)
+    - [P3.6 `rev`](#p36-rev)
+    - [P3.7 `head` — all forms (Durga formulas)](#p37-head--all-forms-durga-formulas)
+    - [P3.8 `tail` — all forms (Durga formulas)](#p38-tail--all-forms-durga-formulas)
+    - [P3.9 `head` | `tail` — extract middle lines (formula)](#p39-head--tail--extract-middle-lines-formula)
+    - [P3.10 `more` — forward pager (Durga Sir)](#p310-more--forward-pager-durga-sir)
+    - [P3.11 `less` — full pager (Durga Sir)](#p311-less--full-pager-durga-sir)
+  - [Part 2 — Execution summary (`scripts/view-content-of-files/`)](#part-2--execution-summary-scriptsview-content-of-files)
+  - [`cat-multiple-files-concat-demo.sh`](#cat-multiple-files-concat-demosh)
+    - [In-depth command walkthrough](#in-depth-command-walkthrough)
+  - [`cat-n-and-b-line-numbers-demo.sh`](#cat-n-and-b-line-numbers-demosh)
+    - [In-depth command walkthrough](#in-depth-command-walkthrough-1)
+  - [`cat-view-file-demo.sh`](#cat-view-file-demosh)
+    - [In-depth command walkthrough](#in-depth-command-walkthrough-2)
+  - [`head-top-lines-demo.sh`](#head-top-lines-demosh)
+    - [In-depth command walkthrough](#in-depth-command-walkthrough-3)
+  - [`more-less-pager-hint-demo.sh`](#more-less-pager-hint-demosh)
+    - [In-depth command walkthrough](#in-depth-command-walkthrough-4)
+  - [`rev-reverse-line-chars-demo.sh`](#rev-reverse-line-chars-demosh)
+    - [In-depth command walkthrough](#in-depth-command-walkthrough-5)
+  - [`rev-tac-display-only-demo.sh`](#rev-tac-display-only-demosh)
+    - [In-depth command walkthrough](#in-depth-command-walkthrough-6)
+  - [`small-vs-large-file-view-demo.sh`](#small-vs-large-file-view-demosh)
+    - [In-depth command walkthrough](#in-depth-command-walkthrough-7)
+  - [`tac-reverse-lines-demo.sh`](#tac-reverse-lines-demosh)
+    - [In-depth command walkthrough](#in-depth-command-walkthrough-8)
+  - [`tail-bottom-lines-demo.sh`](#tail-bottom-lines-demosh)
+    - [In-depth command walkthrough](#in-depth-command-walkthrough-9)
+  - [Script index (all `.sh` in this summary)](#script-index-all-sh-in-this-summary)
 
 ---
 
@@ -381,9 +415,9 @@ head -n 5 abc.txt      # first 5 lines
 
 ### Important: `head -n -5` (negative n)
 
-| Command         | Meaning                |
-| :-------------- | :--------------------- |
-| **`head -n 5`** | Only **first 5** lines |
+| Command          | Meaning                                           |
+| :--------------- | :------------------------------------------------ |
+| **`head -n 5`**  | Only **first 5** lines                            |
 | **`head -n -5`** | **All lines except the last 5** (do not confuse!) |
 
 **Formula (negative `n` on `head`):** if the file has **L** lines, `head -n -K` prints the **first (L − K)** lines — everything **except the last K** lines.
@@ -413,10 +447,10 @@ head -c 100 abc.txt
 > It will display the first **100 characters** of the file.  
 > In Linux every character will take **one byte**. Hence it will display first **100 bytes** of file content.
 
-| Idea | Meaning |
-| :--- | :--- |
-| **`head abc.txt`** | First **10 lines** (default) |
-| **`head -n 5 abc.txt`** | First **5 lines** |
+| Idea                      | Meaning                                                   |
+| :------------------------ | :-------------------------------------------------------- |
+| **`head abc.txt`**        | First **10 lines** (default)                              |
+| **`head -n 5 abc.txt`**   | First **5 lines**                                         |
 | **`head -c 100 abc.txt`** | First **100 characters** (= **100 bytes** in normal text) |
 
 **Lab (same `-c` idea on a real script):** from `scripts/linux-basics-practice/`, Durga Sir’s class often uses a file like **`printString.sh`**:
@@ -442,11 +476,11 @@ Output stops after **100 bytes** — so you may see only **part** of a line (e.g
 
 Durga Sir: **`head` and `tail` are opposites** — `head` from the **start**, `tail` from the **end**.
 
-| Command | Meaning |
-| :--- | :--- |
-| **`tail abc.txt`** | Last **10 lines** (default) |
-| **`tail -n 5 abc.txt`** / **`tail -5 abc.txt`** | Last **5 lines** |
-| **`tail -c 100 abc.txt`** | Last **100 characters** from the **end** of the file |
+| Command                                         | Meaning                                              |
+| :---------------------------------------------- | :--------------------------------------------------- |
+| **`tail abc.txt`**                              | Last **10 lines** (default)                          |
+| **`tail -n 5 abc.txt`** / **`tail -5 abc.txt`** | Last **5 lines**                                     |
+| **`tail -c 100 abc.txt`**                       | Last **100 characters** from the **end** of the file |
 
 ### Default — last 10 lines
 
@@ -498,9 +532,9 @@ tail -c 100 abc.txt
 > It will display the last **100 characters** of the file.  
 > In Linux every character will take **one byte**. Hence it will display last **100 bytes** of file content.
 
-| Idea | Meaning |
-| :--- | :--- |
-| **`head -c 100 file`** | First **100 bytes** from the **top** |
+| Idea                   | Meaning                                |
+| :--------------------- | :------------------------------------- |
+| **`head -c 100 file`** | First **100 bytes** from the **top**   |
 | **`tail -c 100 file`** | Last **100 bytes** from the **bottom** |
 
 **Lab (`printString.sh`):**
@@ -523,10 +557,10 @@ Use **`|`** to chain **`head`** then **`tail`**: first cut from the **top**, the
 head -5 printString.sh | tail -5
 ```
 
-| Step | Meaning |
-| :--- | :--- |
-| **`head -5 file`** | First **5 lines** of the file |
-| **`\| tail -5`** | From that output, the **last 5 lines** of the chunk |
+| Step               | Meaning                                             |
+| :----------------- | :-------------------------------------------------- |
+| **`head -5 file`** | First **5 lines** of the file                       |
+| **`\| tail -5`**   | From that output, the **last 5 lines** of the chunk |
 
 On a short file, `head -5 | tail -5` often shows the **same first 5 lines**. On a **long** file, increase `head` then use `tail` to grab a **middle window** (example: `head -20 file | tail -5` ≈ lines **16–20**).
 
@@ -552,13 +586,13 @@ cat printString.sh
 
 ### When to use which (summary)
 
-| Situation | Durga Sir choice |
-| :-------- | :--------------- |
-| Small file (few lines) | **`cat`** |
-| Large file, only need start/end sample | **`head`** / **`tail`** |
-| Large file, **read interactively** page by page | **`less`** (preferred) or **`more`** |
-| Huge command output | **`command \| less`** or **`command \| more`** |
-| **`man`** pages | Opens **`less`** by default (pager) |
+| Situation                                       | Durga Sir choice                               |
+| :---------------------------------------------- | :--------------------------------------------- |
+| Small file (few lines)                          | **`cat`**                                      |
+| Large file, only need start/end sample          | **`head`** / **`tail`**                        |
+| Large file, **read interactively** page by page | **`less`** (preferred) or **`more`**           |
+| Huge command output                             | **`command \| less`** or **`command \| more`** |
+| **`man`** pages                                 | Opens **`less`** by default (pager)            |
 
 ```mermaid
 %%{init: {'theme': 'base', 'themeVariables': {'pie1': '#FF9800', 'pie2': '#1E88E5', 'pie3': '#FFFFFF', 'pie4': '#FF9800', 'pie5': '#1E88E5', 'pieTitleTextColor': '#212121', 'pieSectionTextColor': '#212121', 'pieStrokeColor': '#424242'}}}%%
@@ -587,13 +621,13 @@ more +/pattern filename          # start at first match of pattern
 ls -l /etc | more                # pipe long listing through pager
 ```
 
-| Keys (typical in `more`) | Action |
-| :----------------------- | :----- |
-| **Space** | Next **page** (screen) |
-| **Enter** | Next **line** |
-| **b** | Back one **page** (often **files only**, not always with **pipes**) |
-| **q** | **Quit** — return to shell prompt |
-| **h** | Help (if available) |
+| Keys (typical in `more`) | Action                                                              |
+| :----------------------- | :------------------------------------------------------------------ |
+| **Space**                | Next **page** (screen)                                              |
+| **Enter**                | Next **line**                                                       |
+| **b**                    | Back one **page** (often **files only**, not always with **pipes**) |
+| **q**                    | **Quit** — return to shell prompt                                   |
+| **h**                    | Help (if available)                                                 |
 
 **What you see on screen (Durga demo on a big file):**
 
@@ -638,18 +672,18 @@ ls -l /etc | less                # pipe — can scroll back in less
 man cat                          # man uses less (or $PAGER)
 ```
 
-| Keys (Durga Sir teaches — remember for lab) | Action |
-| :------------------------------------------ | :----- |
-| **Space** / **Page Down** / **f** | Forward **one page** |
-| **Enter** / **j** | Forward **one line** |
-| **b** / **Page Up** | Backward **one page** |
-| **k** | Backward **one line** |
-| **g** | Jump to **beginning** of file |
-| **G** | Jump to **end** of file |
-| **/** *text* **Enter** | **Search forward** for *text* |
-| **n** | **Next** search match |
-| **N** | Previous search match |
-| **q** | **Quit** |
+| Keys (Durga Sir teaches — remember for lab) | Action                        |
+| :------------------------------------------ | :---------------------------- |
+| **Space** / **Page Down** / **f**           | Forward **one page**          |
+| **Enter** / **j**                           | Forward **one line**          |
+| **b** / **Page Up**                         | Backward **one page**         |
+| **k**                                       | Backward **one line**         |
+| **g**                                       | Jump to **beginning** of file |
+| **G**                                       | Jump to **end** of file       |
+| **/** *text* **Enter**                      | **Search forward** for *text* |
+| **n**                                       | **Next** search match         |
+| **N**                                       | Previous search match         |
+| **q**                                       | **Quit**                      |
 
 **Durga Sir points:**
 
@@ -676,15 +710,15 @@ less /etc/passwd    # forward + backward; filename shown at bottom prompt
 
 ### `more` vs `less` — Durga Sir table
 
-| Feature | **`more`** | **`less`** |
-| :------ | :--------- | :--------- |
-| Age | Older pager | Newer; **replaces** `more` in practice |
-| Forward paging | Yes | Yes |
-| Backward paging | Limited; **often no** on **pipes** | Yes (files **and** pipes) |
-| Start at line **N** | **`more +N file`** | **`less +N file`** (GNU) |
-| Search in file | **`more +/word file`** | **`/word`** inside less |
-| **`man`** | — | Default pager on Ubuntu |
-| Changes file on disk? | **No** | **No** |
+| Feature               | **`more`**                         | **`less`**                             |
+| :-------------------- | :--------------------------------- | :------------------------------------- |
+| Age                   | Older pager                        | Newer; **replaces** `more` in practice |
+| Forward paging        | Yes                                | Yes                                    |
+| Backward paging       | Limited; **often no** on **pipes** | Yes (files **and** pipes)              |
+| Start at line **N**   | **`more +N file`**                 | **`less +N file`** (GNU)               |
+| Search in file        | **`more +/word file`**             | **`/word`** inside less                |
+| **`man`**             | —                                  | Default pager on Ubuntu                |
+| Changes file on disk? | **No**                             | **No**                                 |
 
 ```mermaid
 %%{init: {'theme': 'base', 'themeVariables': {'pie1': '#FF9800', 'pie2': '#1E88E5', 'pie3': '#FFFFFF', 'pie4': '#FF9800', 'pie5': '#1E88E5', 'pieTitleTextColor': '#212121', 'pieSectionTextColor': '#212121', 'pieStrokeColor': '#424242'}}}%%
@@ -776,8 +810,8 @@ You should be able to:
 
 ## 15. Script index
 
-| Script                                                                                                    | Topic                                |
-| :-------------------------------------------------------------------------------------------------------- | :----------------------------------- |
+| Script                                                                                                       | Topic                                |
+| :----------------------------------------------------------------------------------------------------------- | :----------------------------------- |
 | [`cat-view-file-demo.sh`](../../scripts/view-content-of-files/cat-view-file-demo.sh)                         | `cat`, optional `<`                  |
 | [`cat-n-and-b-line-numbers-demo.sh`](../../scripts/view-content-of-files/cat-n-and-b-line-numbers-demo.sh)   | `-n`, `-b`, blank lines              |
 | [`cat-multiple-files-concat-demo.sh`](../../scripts/view-content-of-files/cat-multiple-files-concat-demo.sh) | `cat f1 f2`                          |
@@ -811,23 +845,23 @@ bash scripts/file-system-navigation-and-hierarchy/extract-screencast-frames.sh \
 
 **One-line job:** *Display* what is stored in a normal file — **without** changing the file (unless you redirect or edit).
 
-| Command | Direction / idea | Default if no option |
-| :------ | :--------------- | :------------------- |
-| **`cat`** | Full file (small files) | All lines to stdout |
-| **`cat -n`** | Line numbers on every line | — |
-| **`cat -b`** | Line numbers on non-blank lines only | — |
-| **`tac`** | **Line order** reversed (last line first) | — |
-| **`rev`** | **Characters** reversed on each line | — |
-| **`head`** | From **top** of file | **First 10 lines** |
-| **`tail`** | From **bottom** of file | **Last 10 lines** |
-| **`more`** | Pager — mainly **forward** | One **screen** at a time |
-| **`less`** | Pager — forward **and** back | One **screen** at a time; used by **`man`** |
+| Command      | Direction / idea                          | Default if no option                        |
+| :----------- | :---------------------------------------- | :------------------------------------------ |
+| **`cat`**    | Full file (small files)                   | All lines to stdout                         |
+| **`cat -n`** | Line numbers on every line                | —                                           |
+| **`cat -b`** | Line numbers on non-blank lines only      | —                                           |
+| **`tac`**    | **Line order** reversed (last line first) | —                                           |
+| **`rev`**    | **Characters** reversed on each line      | —                                           |
+| **`head`**   | From **top** of file                      | **First 10 lines**                          |
+| **`tail`**   | From **bottom** of file                   | **Last 10 lines**                           |
+| **`more`**   | Pager — mainly **forward**                | One **screen** at a time                    |
+| **`less`**   | Pager — forward **and** back              | One **screen** at a time; used by **`man`** |
 
 **Byte vs line (Durga Sir):**
 
-| Option family | Counts | Applies to |
-| :------------ | :----- | :--------- |
-| **`-n N`** (head/tail) | **Lines** | Top or bottom |
+| Option family          | Counts                           | Applies to    |
+| :--------------------- | :------------------------------- | :------------ |
+| **`-n N`** (head/tail) | **Lines**                        | Top or bottom |
 | **`-c N`** (head/tail) | **Bytes** (chars in plain ASCII) | Top or bottom |
 
 **Relationship:**
@@ -858,10 +892,10 @@ cat < file                  # optional; same idea (stdin from file)
 cat file1 file2 file3       # concatenate onto stdout
 ```
 
-| Rule | Detail |
-| :--- | :--- |
-| **Purpose** | Send file content to **stdout** (screen) |
-| **Empty lines** | Shown as blank lines |
+| Rule              | Detail                                                                            |
+| :---------------- | :-------------------------------------------------------------------------------- |
+| **Purpose**       | Send file content to **stdout** (screen)                                          |
+| **Empty lines**   | Shown as blank lines                                                              |
 | **Does not copy** | Printing ≠ `cp` — see [§12](#12-cat-vs-cp-durga-sir) and [P3.12](#p312-cat-vs-cp) |
 
 ```bash
@@ -887,10 +921,10 @@ cat notes.txt
 
 ### P3.3 `cat -n` / `cat -b`
 
-| Option | Formula / rule |
-| :----- | :------------- |
+| Option            | Formula / rule                                                 |
+| :---------------- | :------------------------------------------------------------- |
 | **`cat -n file`** | Prefix **every** line with line number (including blank lines) |
-| **`cat -b file`** | Number **non-empty** lines only; blank lines **not** numbered |
+| **`cat -b file`** | Number **non-empty** lines only; blank lines **not** numbered  |
 
 ```bash
 cat -n abc.txt
@@ -968,9 +1002,9 @@ tac abc.txt
 rev abc.txt    # on screen: inihc
 ```
 
-| Mistake in exam | Correct |
-| :-------------- | :------ |
-| `rev` reverses **line order** | **No** — that is **`tac`** |
+| Mistake in exam                         | Correct                    |
+| :-------------------------------------- | :------------------------- |
+| `rev` reverses **line order**           | **No** — that is **`tac`** |
 | `tac` reverses **spelling on one line** | **No** — that is **`rev`** |
 
 **Durga Sir class lab screenshot:**
@@ -991,12 +1025,12 @@ rev abc.txt    # on screen: inihc
 
 **Opposite of `tail`** — read from **start** of file.
 
-| Command | Meaning |
-| :------ | :------ |
-| **`head file`** | First **10** lines (default) |
-| **`head -n N file`** / **`head -N file`** | First **N** lines |
-| **`head -n -K file`** | All lines **except the last K** (negative N) |
-| **`head -c N file`** | First **N** bytes from **top** |
+| Command                                   | Meaning                                      |
+| :---------------------------------------- | :------------------------------------------- |
+| **`head file`**                           | First **10** lines (default)                 |
+| **`head -n N file`** / **`head -N file`** | First **N** lines                            |
+| **`head -n -K file`**                     | All lines **except the last K** (negative N) |
+| **`head -c N file`**                      | First **N** bytes from **top**               |
 
 **Durga Sir (bytes):**
 
@@ -1031,11 +1065,11 @@ head -n -5 abc.txt   # lines 1–15 only
 
 ### P3.8 `tail` — all forms (Durga formulas)
 
-| Command | Meaning |
-| :------ | :------ |
-| **`tail file`** | Last **10** lines (default) |
-| **`tail -n N file`** / **`tail -N file`** | Last **N** lines |
-| **`tail -c N file`** | Last **N** bytes from **end** of file |
+| Command                                   | Meaning                               |
+| :---------------------------------------- | :------------------------------------ |
+| **`tail file`**                           | Last **10** lines (default)           |
+| **`tail -n N file`** / **`tail -N file`** | Last **N** lines                      |
+| **`tail -c N file`**                      | Last **N** bytes from **end** of file |
 
 **Durga Sir (bytes):**
 
@@ -1077,10 +1111,10 @@ cat testThree.sh
 
 **Pattern:** take **first B** lines, then keep **last W** lines of that chunk → approximates a **window** near the top.
 
-| Goal | Pipeline | When file has ≥ B lines |
-| :--- | :------- | :------------------------ |
-| First 5 lines only | `head -5 file` | Same as `head -5 file \| tail -5` on short files |
-| Lines **16–20** of a long file | `head -20 file \| tail -5` | Last 5 of first 20 = lines 16–20 |
+| Goal                           | Pipeline                   | When file has ≥ B lines                          |
+| :----------------------------- | :------------------------- | :----------------------------------------------- |
+| First 5 lines only             | `head -5 file`             | Same as `head -5 file \| tail -5` on short files |
+| Lines **16–20** of a long file | `head -20 file \| tail -5` | Last 5 of first 20 = lines 16–20                 |
 
 ```bash
 head -5 printString.sh | tail -5
@@ -1129,12 +1163,12 @@ ls -l /etc | more         # pipe long output
 3. **`xx%`** = how much of the file you have **already passed**.  
 4. **Not** the same as “percentage remaining” in all versions — treat it as **progress indicator**.
 
-| Key | Durga Sir action |
-| :-- | :--------------- |
-| **Space** | Next **page** |
-| **Enter** | Next **line** |
-| **b** | Previous **page** (especially on **files**) |
-| **q** | **Quit** pager |
+| Key       | Durga Sir action                            |
+| :-------- | :------------------------------------------ |
+| **Space** | Next **page**                               |
+| **Enter** | Next **line**                               |
+| **b**     | Previous **page** (especially on **files**) |
+| **q**     | **Quit** pager                              |
 
 **Class examples (run on VM):**
 
@@ -1159,15 +1193,28 @@ more /etc/services   # controlled paging
 3. Press **Space** — next screen; **%** increases.  
 4. Press **`q`** — normal `$` prompt returns.
 
-**Durga Sir class lab screenshot:**
-
-> **Pending:** `../assets/viewSession15-more-passwd-class.png`
-
 **My observation:**
 
-> **Pending:** `../assets/viewSession15-more-passwd-my.png`
+***Without `more` command **** 
+When we try to read the data inside the file without using `more` command then we will get in the below format 
 
-**Pipe limitation (exam):** `ls -l | more` — **backward** scroll is **weak or missing** compared to **`less`**.
+In the below example we are using `man ls > data.txt` 
+
+1. We are sending all the man sheet for the `ls` commands to data.txt file 
+2. When we use the `cat data.txt` command we will get like this 
+   ![without more command](../assets/withoutMorecommand.png)
+3. which means we don't have any control apart from scroll down and scroll up 
+4. By using `more` command we can read the data in the below format 
+   ![with more command](../assets/moreCommand1.png)
+5. By clicking on `Enter` button we can slowly navigate to other pages and we can see how much percentage is completed also i.e`21-22-23...`
+   ![with more command](../assets/moreCommand2.png)
+6. By clicking on `Space` button we can directly navigate to other pages and we can see how much percentage is completed also i.e `21-40-60...`
+   ![with more command](../assets/moreCommand3.png)
+7. By clicking `q` we can quit from more command 
+   ![with more command](../assets/moreCommand4.png)
+8. If we want to see more detailed info we have provide the below command 
+9. `more -d data.txt` .By using this command we can see various options to control while reading the large data.
+   ![with more command](../assets/moreAnd-dCommand.png)
 
 ---
 
@@ -1176,6 +1223,21 @@ more /etc/services   # controlled paging
 **Job:** Same as **`more`**, but **more powerful** — Durga: *“**less** is **more**”* (more features).
 
 **Syntax:**
+
+By using `more` command we can view file content page only in forward direction but by using `less` command we can view the file content page in both forward and backward 
+direction also.
+
+**My observation:**
+
+1. When we try to view the file content by entering this command 
+   `less data.txt` and then click on `b` .
+2.  we will get the data in the forward direction format 
+![with more command](../assets/dWithLessCommand.png)
+3.  When we click on `d` button we can view the file content in the backward direction
+4. we will get the data in the forward direction format 
+![with more command](../assets/bWithLessCommand.png)
+
+
 
 ```bash
 less file
@@ -1188,25 +1250,25 @@ man head                  # manual → pager (usually less)
 
 **Durga Sir — keys to practice on lab:**
 
-| Key | Action |
-| :-- | :----- |
-| **Space** / **Page Down** | Forward **page** |
-| **Enter** / **j** | Forward **line** |
-| **b** / **Page Up** | Back **page** |
-| **k** | Back **line** |
-| **g** | Top of file |
-| **G** | End of file |
-| **/** *word* | Search forward |
-| **n** / **N** | Next / previous match |
-| **q** | Quit |
+| Key                       | Action                |
+| :------------------------ | :-------------------- |
+| **Space** / **Page Down** | Forward **page**      |
+| **Enter** / **j**         | Forward **line**      |
+| **b** / **Page Up**       | Back **page**         |
+| **k**                     | Back **line**         |
+| **g**                     | Top of file           |
+| **G**                     | End of file           |
+| **/** *word*              | Search forward        |
+| **n** / **N**             | Next / previous match |
+| **q**                     | Quit                  |
 
 **Why Durga prefers `less`:**
 
-| Point | Detail |
-| :---- | :----- |
-| **Backward** | Re-read earlier lines (**`more`** weak on **pipes**) |
-| **Large files** | Does not need full file in memory before display |
-| **`man`** | Student already uses **`less`** daily |
+| Point           | Detail                                               |
+| :-------------- | :--------------------------------------------------- |
+| **Backward**    | Re-read earlier lines (**`more`** weak on **pipes**) |
+| **Large files** | Does not need full file in memory before display     |
+| **`man`**       | Student already uses **`less`** daily                |
 
 **Class demo sequence (do in order):**
 
@@ -1216,30 +1278,24 @@ less /etc/passwd
 
 man ls
 # same keys; q to exit man
-```
 
-**What `man cat` teaches (ties to §13):** manual text is **paged** — Durga may redirect **`man cat > file`** in redirection session; viewing uses **`less`**.
 
-**Durga Sir class lab screenshot:**
 
-> **Pending:** `../assets/viewSession15-less-passwd-class.png`
 
-**My observation:**
 
-> **Pending:** `../assets/viewSession15-less-passwd-my.png`  
-> **Pending:** `../assets/viewSession15-man-cat-pager-my.png`
+
 
 ---
 
 ### P3.12 `more` vs `less` vs `cat` — Durga Sir
 
-| Need | Command |
-| :--- | :------ |
-| Small file, full dump once | **`cat file`** |
-| Large file, **interactive** read | **`less file`** (best) |
-| Large file, **forward-only** paging | **`more file`** |
-| One-shot **sample** in script | **`head`** / **`tail`** |
-| Long **`ls`** listing | **`ls -l dir \| less`** |
+| Need                                | Command                 |
+| :---------------------------------- | :---------------------- |
+| Small file, full dump once          | **`cat file`**          |
+| Large file, **interactive** read    | **`less file`** (best)  |
+| Large file, **forward-only** paging | **`more file`**         |
+| One-shot **sample** in script       | **`head`** / **`tail`** |
+| Long **`ls`** listing               | **`ls -l dir \| less`** |
 
 **Memory sentence (class):** *Use **`cat`** for **small**; use **`head`/`tail`** for **ends**; use **`less`** (or **`more`**) when the file is **too big** for one screen.*
 
@@ -1255,12 +1311,12 @@ man ls
 
 ### P3.13 Read-only viewing (exam table)
 
-| Command | Changes file on disk? |
-| :------ | :-------------------: |
-| `cat`, `tac`, `rev`, `head`, `tail`, `more`, `less` | **No** (display only) |
-| `cat file > other` | **Yes** — writes **other** |
-| `rev file > file` | **Yes** — **dangerous** (can corrupt same file) |
-| `gedit` / `nano` / `vi` save | **Yes** |
+| Command                                             |              Changes file on disk?              |
+| :-------------------------------------------------- | :---------------------------------------------: |
+| `cat`, `tac`, `rev`, `head`, `tail`, `more`, `less` |              **No** (display only)              |
+| `cat file > other`                                  |           **Yes** — writes **other**            |
+| `rev file > file`                                   | **Yes** — **dangerous** (can corrupt same file) |
+| `gedit` / `nano` / `vi` save                        |                     **Yes**                     |
 
 **Why `cat` after `rev` shows “normal” text:** `rev` only changed the **screen**; **disk** unchanged ([§7A](#7a-display-only-viewing--cat--rev--tac-do-not-change-the-file)).
 
@@ -1274,9 +1330,9 @@ man ls
 
 ### P3.14 Small vs large file — rule
 
-| File size | Durga Sir choice |
-| :-------- | :--------------- |
-| **Small** (fits one screen) | **`cat`** |
+| File size                       | Durga Sir choice                                                          |
+| :------------------------------ | :------------------------------------------------------------------------ |
+| **Small** (fits one screen)     | **`cat`**                                                                 |
 | **Large** (logs, `man`, `/etc`) | **`head`**, **`tail`**, **`less`** / **`more`** — avoid flooding terminal |
 
 **Demo:** [`small-vs-large-file-view-demo.sh`](../../scripts/view-content-of-files/small-vs-large-file-view-demo.sh)
@@ -1293,11 +1349,11 @@ man ls
 
 ### P3.15 `cat` vs `cp`
 
-| Need | Use |
-| :--- | :-- |
-| **Show** content on terminal | **`cat`** |
-| **Duplicate** file to another path/name | **`cp`** |
-| **Create** empty file | **`touch`** (creation session) |
+| Need                                    | Use                            |
+| :-------------------------------------- | :----------------------------- |
+| **Show** content on terminal            | **`cat`**                      |
+| **Duplicate** file to another path/name | **`cp`**                       |
+| **Create** empty file                   | **`touch`** (creation session) |
 
 Same spelling in conversation — **different purpose**. See [§12](#12-cat-vs-cp-durga-sir).
 
@@ -1363,20 +1419,20 @@ Same spelling in conversation — **different purpose**. See [§12](#12-cat-vs-c
 
 After you watch once, map frames → `docs/assets/` and link here (replace **Pending** above).
 
-| Approx. time | PNG name | Section |
-| :----------- | :------- | :------ |
-| ~00:00–02:00 | `viewSession15-editplus-overview-class.png` | P3.1 |
-| ~05:00 | `viewSession15-cat-basic-class.png` | P3.2 |
-| ~10:00 | `viewSession15-cat-n-b-class.png` | P3.3 |
-| ~15:00 | `viewSession15-tac-class.png` | P3.5 |
-| ~18:00 | `viewSession15-rev-class.png` | P3.6 |
-| ~25:00 | `viewSession15-head-n-negative-class.png` | P3.7 |
-| ~32:00 | `viewSession15-tail-class.png` | P3.8 |
-| ~38:00 | `viewSession15-head-pipe-tail-class.png` | P3.9 |
-| ~40:00 | `viewSession15-more-passwd-class.png` | P3.10 |
-| ~44:00 | `viewSession15-less-passwd-class.png` | P3.11 |
-| ~46:00 | `viewSession15-more-vs-less-class.png` | P3.12 |
-| ~48:00 | `viewSession15-mcq-class.png` | P3.16 |
+| Approx. time | PNG name                                    | Section |
+| :----------- | :------------------------------------------ | :------ |
+| ~00:00–02:00 | `viewSession15-editplus-overview-class.png` | P3.1    |
+| ~05:00       | `viewSession15-cat-basic-class.png`         | P3.2    |
+| ~10:00       | `viewSession15-cat-n-b-class.png`           | P3.3    |
+| ~15:00       | `viewSession15-tac-class.png`               | P3.5    |
+| ~18:00       | `viewSession15-rev-class.png`               | P3.6    |
+| ~25:00       | `viewSession15-head-n-negative-class.png`   | P3.7    |
+| ~32:00       | `viewSession15-tail-class.png`              | P3.8    |
+| ~38:00       | `viewSession15-head-pipe-tail-class.png`    | P3.9    |
+| ~40:00       | `viewSession15-more-passwd-class.png`       | P3.10   |
+| ~44:00       | `viewSession15-less-passwd-class.png`       | P3.11   |
+| ~46:00       | `viewSession15-more-vs-less-class.png`      | P3.12   |
+| ~48:00       | `viewSession15-mcq-class.png`               | P3.16   |
 
 ```bash
 git add docs/topics/viewContentOfFiles.md docs/assets/viewSession15-*.png
@@ -1418,12 +1474,12 @@ pie title View-content commands in demos
 
 Each script section uses the same **four-part** model:
 
-| # | Column in tables | Meaning |
-| :---: | :--- | :--- |
-| 1 | **What it is** | Command or shell feature (e.g. `echo` = print text). |
-| 2 | **Added / configured** | How it appears in Linux (PATH, builtin, flag on CLI, variable in script). |
-| 3 | **Execution intent** | What you are trying to do when the line runs. |
-| 4 | **Output** | What you see on the **terminal (stdout/stderr)**, in a **file**, or through a **pipeline** (`|`). |
+|   #   | Column in tables       | Meaning                                                                                       |
+| :---: | :--------------------- | :-------------------------------------------------------------------------------------------- |
+|   1   | **What it is**         | Command or shell feature (e.g. `echo` = print text).                                          |
+|   2   | **Added / configured** | How it appears in Linux (PATH, builtin, flag on CLI, variable in script).                     |
+|   3   | **Execution intent**   | What you are trying to do when the line runs.                                                 |
+|   4   | **Output**             | What you see on the **terminal (stdout/stderr)**, in a **file**, or through a **pipeline** (` | `). |
 
 ---
 
@@ -1433,19 +1489,19 @@ Each script section uses the same **four-part** model:
 
 ### In-depth command walkthrough
 
-| Command (as in script) | 1. What it is | 2. Added / configured | 3. Execution intent | 4. Output (terminal / file / pipeline) |
-| :--- | :--- | :--- | :--- | :--- |
-| `set -euo pipefail` | Bash strict-mode option bundle. | Written at top of script; not installed separately. | Tell Bash to stop on errors, treat unset variables as errors, and fail pipelines if any stage fails. | No visible output; changes how later commands affect exit status. |
-| `WORK="${TMPDIR:-/tmp}/linux-view-content-demo"` | Shell variable assignment. | Name=`value` in script; often under `${TMPDIR:-/tmp}`. | Store path or stamp for later commands (setup, not a user command). | No output; variable used by `cd`, `rm`, file paths. |
-| `rm -rf "$WORK"` | Remove files/directories recursively, force. | Coreutils; `-r` recursive, `-f` no prompt. | Clean old demo data under `/tmp` before recreating. | Silent on success. |
-| `mkdir -p "$WORK"` | Make directories. | Coreutils; `-p` creates parents as needed. | Try to **create** folder(s) for the demo tree. | Silent on success; errors on stderr if path invalid. |
-| `cd "$WORK"` | Change directory — move shell’s current working directory. | Builtin; takes relative or absolute path, `~`, `-`, or no args (home). | Navigate the tree (trying to **enter** a folder); relative paths start from cwd. | Normally silent on success; failure prints `cd: ...: No such file or directory` on **stderr**. |
-| `echo "part-A" > file1.txt` | Bash builtin that prints arguments to standard output. | Always available in Bash; no package install. | Show section titles, tips, or messages to the terminal (trying to **print** text for the user). | Lines appear on **stdout** in your terminal (or in CI logs). Not used in a pipeline unless followed by `|`. |
-| `echo "part-B" > file2.txt` | Bash builtin that prints arguments to standard output. | Always available in Bash; no package install. | Show section titles, tips, or messages to the terminal (trying to **print** text for the user). | Lines appear on **stdout** in your terminal (or in CI logs). Not used in a pipeline unless followed by `|`. |
-| `echo "=== cat file1.txt file2.txt ==="` | Section header for humans. | Literal string in script | **Print** section title | Title line on **stdout** before commands |
-| `cat file1.txt file2.txt` | Concatenate and print files. | Coreutils. | Try to **display file contents** on terminal. | File bytes on stdout. |
-| `echo ""` | Bash builtin that prints arguments to standard output. | Always available in Bash; no package install. | Show section titles, tips, or messages to the terminal (trying to **print** text for the user). | Lines appear on **stdout** in your terminal (or in CI logs). Not used in a pipeline unless followed by `|`. |
-| `echo "Tip: cat concatenates and displays; cp copies files (different …` | Bash builtin that prints arguments to standard output. | Always available in Bash; no package install. | Show section titles, tips, or messages to the terminal (trying to **print** text for the user). | Lines appear on **stdout** in your terminal (or in CI logs). Not used in a pipeline unless followed by `|`. |
+| Command (as in script)                                                   | 1. What it is                                              | 2. Added / configured                                                  | 3. Execution intent                                                                                  | 4. Output (terminal / file / pipeline)                                                                   |
+| :----------------------------------------------------------------------- | :--------------------------------------------------------- | :--------------------------------------------------------------------- | :--------------------------------------------------------------------------------------------------- | :------------------------------------------------------------------------------------------------------- |
+| `set -euo pipefail`                                                      | Bash strict-mode option bundle.                            | Written at top of script; not installed separately.                    | Tell Bash to stop on errors, treat unset variables as errors, and fail pipelines if any stage fails. | No visible output; changes how later commands affect exit status.                                        |
+| `WORK="${TMPDIR:-/tmp}/linux-view-content-demo"`                         | Shell variable assignment.                                 | Name=`value` in script; often under `${TMPDIR:-/tmp}`.                 | Store path or stamp for later commands (setup, not a user command).                                  | No output; variable used by `cd`, `rm`, file paths.                                                      |
+| `rm -rf "$WORK"`                                                         | Remove files/directories recursively, force.               | Coreutils; `-r` recursive, `-f` no prompt.                             | Clean old demo data under `/tmp` before recreating.                                                  | Silent on success.                                                                                       |
+| `mkdir -p "$WORK"`                                                       | Make directories.                                          | Coreutils; `-p` creates parents as needed.                             | Try to **create** folder(s) for the demo tree.                                                       | Silent on success; errors on stderr if path invalid.                                                     |
+| `cd "$WORK"`                                                             | Change directory — move shell’s current working directory. | Builtin; takes relative or absolute path, `~`, `-`, or no args (home). | Navigate the tree (trying to **enter** a folder); relative paths start from cwd.                     | Normally silent on success; failure prints `cd: ...: No such file or directory` on **stderr**.           |
+| `echo "part-A" > file1.txt`                                              | Bash builtin that prints arguments to standard output.     | Always available in Bash; no package install.                          | Show section titles, tips, or messages to the terminal (trying to **print** text for the user).      | Lines appear on **stdout** in your terminal (or in CI logs). Not used in a pipeline unless followed by ` | `. |
+| `echo "part-B" > file2.txt`                                              | Bash builtin that prints arguments to standard output.     | Always available in Bash; no package install.                          | Show section titles, tips, or messages to the terminal (trying to **print** text for the user).      | Lines appear on **stdout** in your terminal (or in CI logs). Not used in a pipeline unless followed by ` | `. |
+| `echo "=== cat file1.txt file2.txt ==="`                                 | Section header for humans.                                 | Literal string in script                                               | **Print** section title                                                                              | Title line on **stdout** before commands                                                                 |
+| `cat file1.txt file2.txt`                                                | Concatenate and print files.                               | Coreutils.                                                             | Try to **display file contents** on terminal.                                                        | File bytes on stdout.                                                                                    |
+| `echo ""`                                                                | Bash builtin that prints arguments to standard output.     | Always available in Bash; no package install.                          | Show section titles, tips, or messages to the terminal (trying to **print** text for the user).      | Lines appear on **stdout** in your terminal (or in CI logs). Not used in a pipeline unless followed by ` | `. |
+| `echo "Tip: cat concatenates and displays; cp copies files (different …` | Bash builtin that prints arguments to standard output.     | Always available in Bash; no package install.                          | Show section titles, tips, or messages to the terminal (trying to **print** text for the user).      | Lines appear on **stdout** in your terminal (or in CI logs). Not used in a pipeline unless followed by ` | `. |
 
 ---
 
@@ -1455,29 +1511,29 @@ Each script section uses the same **four-part** model:
 
 ### In-depth command walkthrough
 
-| Command (as in script) | 1. What it is | 2. Added / configured | 3. Execution intent | 4. Output (terminal / file / pipeline) |
-| :--- | :--- | :--- | :--- | :--- |
-| `set -euo pipefail` | Bash strict-mode option bundle. | Written at top of script; not installed separately. | Tell Bash to stop on errors, treat unset variables as errors, and fail pipelines if any stage fails. | No visible output; changes how later commands affect exit status. |
-| `WORK="${TMPDIR:-/tmp}/linux-view-content-demo"` | Shell variable assignment. | Name=`value` in script; often under `${TMPDIR:-/tmp}`. | Store path or stamp for later commands (setup, not a user command). | No output; variable used by `cd`, `rm`, file paths. |
-| `rm -rf "$WORK"` | Remove files/directories recursively, force. | Coreutils; `-r` recursive, `-f` no prompt. | Clean old demo data under `/tmp` before recreating. | Silent on success. |
-| `mkdir -p "$WORK"` | Make directories. | Coreutils; `-p` creates parents as needed. | Try to **create** folder(s) for the demo tree. | Silent on success; errors on stderr if path invalid. |
-| `cd "$WORK"` | Change directory — move shell’s current working directory. | Builtin; takes relative or absolute path, `~`, `-`, or no args (home). | Navigate the tree (trying to **enter** a folder); relative paths start from cwd. | Normally silent on success; failure prints `cd: ...: No such file or directory` on **stderr**. |
-| `cat > abc.txt <<'EOF'` | Concatenate and print files. | Coreutils. | Try to **display file contents** on terminal. | File bytes on stdout. |
-| `mango` | Shell syntax (variable, test, subshell, or function). | Defined in this script only. | Prepare path, branch on failure, or wrap commands. | Depends on line: may be silent or print via embedded commands. |
-| `apple` | Shell syntax (variable, test, subshell, or function). | Defined in this script only. | Prepare path, branch on failure, or wrap commands. | Depends on line: may be silent or print via embedded commands. |
-| `orange` | Shell syntax (variable, test, subshell, or function). | Defined in this script only. | Prepare path, branch on failure, or wrap commands. | Depends on line: may be silent or print via embedded commands. |
-| `banana` | Shell syntax (variable, test, subshell, or function). | Defined in this script only. | Prepare path, branch on failure, or wrap commands. | Depends on line: may be silent or print via embedded commands. |
-| `java` | Shell syntax (variable, test, subshell, or function). | Defined in this script only. | Prepare path, branch on failure, or wrap commands. | Depends on line: may be silent or print via embedded commands. |
-| `python` | Shell syntax (variable, test, subshell, or function). | Defined in this script only. | Prepare path, branch on failure, or wrap commands. | Depends on line: may be silent or print via embedded commands. |
-| `EOF` | Shell syntax (variable, test, subshell, or function). | Defined in this script only. | Prepare path, branch on failure, or wrap commands. | Depends on line: may be silent or print via embedded commands. |
-| `echo "=== cat abc.txt (shows blank lines too) ==="` | Section header for humans. | Literal string in script | **Print** section title | Title line on **stdout** before commands |
-| `cat abc.txt` | Concatenate and print files. | Coreutils. | Try to **display file contents** on terminal. | File bytes on stdout. |
-| `echo ""` | Bash builtin that prints arguments to standard output. | Always available in Bash; no package install. | Show section titles, tips, or messages to the terminal (trying to **print** text for the user). | Lines appear on **stdout** in your terminal (or in CI logs). Not used in a pipeline unless followed by `|`. |
-| `echo "=== cat -n abc.txt (number all lines, including blanks) ==="` | Section header for humans. | Literal string in script | **Print** section title | Title line on **stdout** before commands |
-| `cat -n abc.txt` | Concatenate and print files. | Coreutils. | Try to **display file contents** on terminal. | File bytes on stdout. |
-| `echo ""` | Bash builtin that prints arguments to standard output. | Always available in Bash; no package install. | Show section titles, tips, or messages to the terminal (trying to **print** text for the user). | Lines appear on **stdout** in your terminal (or in CI logs). Not used in a pipeline unless followed by `|`. |
-| `echo "=== cat -b abc.txt (number non-blank lines only) ==="` | Section header for humans. | Literal string in script | **Print** section title | Title line on **stdout** before commands |
-| `cat -b abc.txt` | Concatenate and print files. | Coreutils. | Try to **display file contents** on terminal. | File bytes on stdout. |
+| Command (as in script)                                               | 1. What it is                                              | 2. Added / configured                                                  | 3. Execution intent                                                                                  | 4. Output (terminal / file / pipeline)                                                                   |
+| :------------------------------------------------------------------- | :--------------------------------------------------------- | :--------------------------------------------------------------------- | :--------------------------------------------------------------------------------------------------- | :------------------------------------------------------------------------------------------------------- |
+| `set -euo pipefail`                                                  | Bash strict-mode option bundle.                            | Written at top of script; not installed separately.                    | Tell Bash to stop on errors, treat unset variables as errors, and fail pipelines if any stage fails. | No visible output; changes how later commands affect exit status.                                        |
+| `WORK="${TMPDIR:-/tmp}/linux-view-content-demo"`                     | Shell variable assignment.                                 | Name=`value` in script; often under `${TMPDIR:-/tmp}`.                 | Store path or stamp for later commands (setup, not a user command).                                  | No output; variable used by `cd`, `rm`, file paths.                                                      |
+| `rm -rf "$WORK"`                                                     | Remove files/directories recursively, force.               | Coreutils; `-r` recursive, `-f` no prompt.                             | Clean old demo data under `/tmp` before recreating.                                                  | Silent on success.                                                                                       |
+| `mkdir -p "$WORK"`                                                   | Make directories.                                          | Coreutils; `-p` creates parents as needed.                             | Try to **create** folder(s) for the demo tree.                                                       | Silent on success; errors on stderr if path invalid.                                                     |
+| `cd "$WORK"`                                                         | Change directory — move shell’s current working directory. | Builtin; takes relative or absolute path, `~`, `-`, or no args (home). | Navigate the tree (trying to **enter** a folder); relative paths start from cwd.                     | Normally silent on success; failure prints `cd: ...: No such file or directory` on **stderr**.           |
+| `cat > abc.txt <<'EOF'`                                              | Concatenate and print files.                               | Coreutils.                                                             | Try to **display file contents** on terminal.                                                        | File bytes on stdout.                                                                                    |
+| `mango`                                                              | Shell syntax (variable, test, subshell, or function).      | Defined in this script only.                                           | Prepare path, branch on failure, or wrap commands.                                                   | Depends on line: may be silent or print via embedded commands.                                           |
+| `apple`                                                              | Shell syntax (variable, test, subshell, or function).      | Defined in this script only.                                           | Prepare path, branch on failure, or wrap commands.                                                   | Depends on line: may be silent or print via embedded commands.                                           |
+| `orange`                                                             | Shell syntax (variable, test, subshell, or function).      | Defined in this script only.                                           | Prepare path, branch on failure, or wrap commands.                                                   | Depends on line: may be silent or print via embedded commands.                                           |
+| `banana`                                                             | Shell syntax (variable, test, subshell, or function).      | Defined in this script only.                                           | Prepare path, branch on failure, or wrap commands.                                                   | Depends on line: may be silent or print via embedded commands.                                           |
+| `java`                                                               | Shell syntax (variable, test, subshell, or function).      | Defined in this script only.                                           | Prepare path, branch on failure, or wrap commands.                                                   | Depends on line: may be silent or print via embedded commands.                                           |
+| `python`                                                             | Shell syntax (variable, test, subshell, or function).      | Defined in this script only.                                           | Prepare path, branch on failure, or wrap commands.                                                   | Depends on line: may be silent or print via embedded commands.                                           |
+| `EOF`                                                                | Shell syntax (variable, test, subshell, or function).      | Defined in this script only.                                           | Prepare path, branch on failure, or wrap commands.                                                   | Depends on line: may be silent or print via embedded commands.                                           |
+| `echo "=== cat abc.txt (shows blank lines too) ==="`                 | Section header for humans.                                 | Literal string in script                                               | **Print** section title                                                                              | Title line on **stdout** before commands                                                                 |
+| `cat abc.txt`                                                        | Concatenate and print files.                               | Coreutils.                                                             | Try to **display file contents** on terminal.                                                        | File bytes on stdout.                                                                                    |
+| `echo ""`                                                            | Bash builtin that prints arguments to standard output.     | Always available in Bash; no package install.                          | Show section titles, tips, or messages to the terminal (trying to **print** text for the user).      | Lines appear on **stdout** in your terminal (or in CI logs). Not used in a pipeline unless followed by ` | `. |
+| `echo "=== cat -n abc.txt (number all lines, including blanks) ==="` | Section header for humans.                                 | Literal string in script                                               | **Print** section title                                                                              | Title line on **stdout** before commands                                                                 |
+| `cat -n abc.txt`                                                     | Concatenate and print files.                               | Coreutils.                                                             | Try to **display file contents** on terminal.                                                        | File bytes on stdout.                                                                                    |
+| `echo ""`                                                            | Bash builtin that prints arguments to standard output.     | Always available in Bash; no package install.                          | Show section titles, tips, or messages to the terminal (trying to **print** text for the user).      | Lines appear on **stdout** in your terminal (or in CI logs). Not used in a pipeline unless followed by ` | `. |
+| `echo "=== cat -b abc.txt (number non-blank lines only) ==="`        | Section header for humans.                                 | Literal string in script                                               | **Print** section title                                                                              | Title line on **stdout** before commands                                                                 |
+| `cat -b abc.txt`                                                     | Concatenate and print files.                               | Coreutils.                                                             | Try to **display file contents** on terminal.                                                        | File bytes on stdout.                                                                                    |
 
 ---
 
@@ -1487,23 +1543,23 @@ Each script section uses the same **four-part** model:
 
 ### In-depth command walkthrough
 
-| Command (as in script) | 1. What it is | 2. Added / configured | 3. Execution intent | 4. Output (terminal / file / pipeline) |
-| :--- | :--- | :--- | :--- | :--- |
-| `set -euo pipefail` | Bash strict-mode option bundle. | Written at top of script; not installed separately. | Tell Bash to stop on errors, treat unset variables as errors, and fail pipelines if any stage fails. | No visible output; changes how later commands affect exit status. |
-| `WORK="${TMPDIR:-/tmp}/linux-view-content-demo"` | Shell variable assignment. | Name=`value` in script; often under `${TMPDIR:-/tmp}`. | Store path or stamp for later commands (setup, not a user command). | No output; variable used by `cd`, `rm`, file paths. |
-| `rm -rf "$WORK"` | Remove files/directories recursively, force. | Coreutils; `-r` recursive, `-f` no prompt. | Clean old demo data under `/tmp` before recreating. | Silent on success. |
-| `mkdir -p "$WORK"` | Make directories. | Coreutils; `-p` creates parents as needed. | Try to **create** folder(s) for the demo tree. | Silent on success; errors on stderr if path invalid. |
-| `cd "$WORK"` | Change directory — move shell’s current working directory. | Builtin; takes relative or absolute path, `~`, `-`, or no args (home). | Navigate the tree (trying to **enter** a folder); relative paths start from cwd. | Normally silent on success; failure prints `cd: ...: No such file or directory` on **stderr**. |
-| `cat > file1.txt <<'EOF'` | Concatenate and print files. | Coreutils. | Try to **display file contents** on terminal. | File bytes on stdout. |
-| `mango` | Shell syntax (variable, test, subshell, or function). | Defined in this script only. | Prepare path, branch on failure, or wrap commands. | Depends on line: may be silent or print via embedded commands. |
-| `apple` | Shell syntax (variable, test, subshell, or function). | Defined in this script only. | Prepare path, branch on failure, or wrap commands. | Depends on line: may be silent or print via embedded commands. |
-| `orange` | Shell syntax (variable, test, subshell, or function). | Defined in this script only. | Prepare path, branch on failure, or wrap commands. | Depends on line: may be silent or print via embedded commands. |
-| `EOF` | Shell syntax (variable, test, subshell, or function). | Defined in this script only. | Prepare path, branch on failure, or wrap commands. | Depends on line: may be silent or print via embedded commands. |
-| `echo "=== cat file1.txt (view full small file) ==="` | Section header for humans. | Literal string in script | **Print** section title | Title line on **stdout** before commands |
-| `cat file1.txt` | Concatenate and print files. | Coreutils. | Try to **display file contents** on terminal. | File bytes on stdout. |
-| `echo ""` | Bash builtin that prints arguments to standard output. | Always available in Bash; no package install. | Show section titles, tips, or messages to the terminal (trying to **print** text for the user). | Lines appear on **stdout** in your terminal (or in CI logs). Not used in a pipeline unless followed by `|`. |
-| `echo "=== cat < file1.txt (optional input redirect — same idea) ==="` | Section header for humans. | Literal string in script | **Print** section title | Title line on **stdout** before commands |
-| `cat < file1.txt` | Concatenate and print files. | Coreutils. | Try to **display file contents** on terminal. | File bytes on stdout. |
+| Command (as in script)                                                 | 1. What it is                                              | 2. Added / configured                                                  | 3. Execution intent                                                                                  | 4. Output (terminal / file / pipeline)                                                                   |
+| :--------------------------------------------------------------------- | :--------------------------------------------------------- | :--------------------------------------------------------------------- | :--------------------------------------------------------------------------------------------------- | :------------------------------------------------------------------------------------------------------- |
+| `set -euo pipefail`                                                    | Bash strict-mode option bundle.                            | Written at top of script; not installed separately.                    | Tell Bash to stop on errors, treat unset variables as errors, and fail pipelines if any stage fails. | No visible output; changes how later commands affect exit status.                                        |
+| `WORK="${TMPDIR:-/tmp}/linux-view-content-demo"`                       | Shell variable assignment.                                 | Name=`value` in script; often under `${TMPDIR:-/tmp}`.                 | Store path or stamp for later commands (setup, not a user command).                                  | No output; variable used by `cd`, `rm`, file paths.                                                      |
+| `rm -rf "$WORK"`                                                       | Remove files/directories recursively, force.               | Coreutils; `-r` recursive, `-f` no prompt.                             | Clean old demo data under `/tmp` before recreating.                                                  | Silent on success.                                                                                       |
+| `mkdir -p "$WORK"`                                                     | Make directories.                                          | Coreutils; `-p` creates parents as needed.                             | Try to **create** folder(s) for the demo tree.                                                       | Silent on success; errors on stderr if path invalid.                                                     |
+| `cd "$WORK"`                                                           | Change directory — move shell’s current working directory. | Builtin; takes relative or absolute path, `~`, `-`, or no args (home). | Navigate the tree (trying to **enter** a folder); relative paths start from cwd.                     | Normally silent on success; failure prints `cd: ...: No such file or directory` on **stderr**.           |
+| `cat > file1.txt <<'EOF'`                                              | Concatenate and print files.                               | Coreutils.                                                             | Try to **display file contents** on terminal.                                                        | File bytes on stdout.                                                                                    |
+| `mango`                                                                | Shell syntax (variable, test, subshell, or function).      | Defined in this script only.                                           | Prepare path, branch on failure, or wrap commands.                                                   | Depends on line: may be silent or print via embedded commands.                                           |
+| `apple`                                                                | Shell syntax (variable, test, subshell, or function).      | Defined in this script only.                                           | Prepare path, branch on failure, or wrap commands.                                                   | Depends on line: may be silent or print via embedded commands.                                           |
+| `orange`                                                               | Shell syntax (variable, test, subshell, or function).      | Defined in this script only.                                           | Prepare path, branch on failure, or wrap commands.                                                   | Depends on line: may be silent or print via embedded commands.                                           |
+| `EOF`                                                                  | Shell syntax (variable, test, subshell, or function).      | Defined in this script only.                                           | Prepare path, branch on failure, or wrap commands.                                                   | Depends on line: may be silent or print via embedded commands.                                           |
+| `echo "=== cat file1.txt (view full small file) ==="`                  | Section header for humans.                                 | Literal string in script                                               | **Print** section title                                                                              | Title line on **stdout** before commands                                                                 |
+| `cat file1.txt`                                                        | Concatenate and print files.                               | Coreutils.                                                             | Try to **display file contents** on terminal.                                                        | File bytes on stdout.                                                                                    |
+| `echo ""`                                                              | Bash builtin that prints arguments to standard output.     | Always available in Bash; no package install.                          | Show section titles, tips, or messages to the terminal (trying to **print** text for the user).      | Lines appear on **stdout** in your terminal (or in CI logs). Not used in a pipeline unless followed by ` | `. |
+| `echo "=== cat < file1.txt (optional input redirect — same idea) ==="` | Section header for humans.                                 | Literal string in script                                               | **Print** section title                                                                              | Title line on **stdout** before commands                                                                 |
+| `cat < file1.txt`                                                      | Concatenate and print files.                               | Coreutils.                                                             | Try to **display file contents** on terminal.                                                        | File bytes on stdout.                                                                                    |
 
 ---
 
@@ -1513,25 +1569,25 @@ Each script section uses the same **four-part** model:
 
 ### In-depth command walkthrough
 
-| Command (as in script) | 1. What it is | 2. Added / configured | 3. Execution intent | 4. Output (terminal / file / pipeline) |
-| :--- | :--- | :--- | :--- | :--- |
-| `set -euo pipefail` | Bash strict-mode option bundle. | Written at top of script; not installed separately. | Tell Bash to stop on errors, treat unset variables as errors, and fail pipelines if any stage fails. | No visible output; changes how later commands affect exit status. |
-| `WORK="${TMPDIR:-/tmp}/linux-view-content-demo"` | Shell variable assignment. | Name=`value` in script; often under `${TMPDIR:-/tmp}`. | Store path or stamp for later commands (setup, not a user command). | No output; variable used by `cd`, `rm`, file paths. |
-| `rm -rf "$WORK"` | Remove files/directories recursively, force. | Coreutils; `-r` recursive, `-f` no prompt. | Clean old demo data under `/tmp` before recreating. | Silent on success. |
-| `mkdir -p "$WORK"` | Make directories. | Coreutils; `-p` creates parents as needed. | Try to **create** folder(s) for the demo tree. | Silent on success; errors on stderr if path invalid. |
-| `cd "$WORK"` | Change directory — move shell’s current working directory. | Builtin; takes relative or absolute path, `~`, `-`, or no args (home). | Navigate the tree (trying to **enter** a folder); relative paths start from cwd. | Normally silent on success; failure prints `cd: ...: No such file or directory` on **stderr**. |
-| `seq 1 20 > abc.txt` | Shell syntax (variable, test, subshell, or function). | Defined in this script only. | Prepare path, branch on failure, or wrap commands. | Depends on line: may be silent or print via embedded commands. |
-| `echo "=== head abc.txt (default: first 10 lines) ==="` | Section header for humans. | Literal string in script | **Print** section title | Title line on **stdout** before commands |
-| `head abc.txt` | Print first N lines of file or pipe. | Coreutils; often `head -n` or `head -20`. | Truncate long output in demos. | First lines on stdout; in pipeline: `cal -y | head -20` only first 20 lines reach terminal. |
-| `echo ""` | Bash builtin that prints arguments to standard output. | Always available in Bash; no package install. | Show section titles, tips, or messages to the terminal (trying to **print** text for the user). | Lines appear on **stdout** in your terminal (or in CI logs). Not used in a pipeline unless followed by `|`. |
-| `echo "=== head -15 abc.txt (first 15 lines) ==="` | Section header for humans. | Literal string in script | **Print** section title | Title line on **stdout** before commands |
-| `head -15 abc.txt` | Print first N lines of file or pipe. | Coreutils; often `head -n` or `head -20`. | Truncate long output in demos. | First lines on stdout; in pipeline: `cal -y | head -20` only first 20 lines reach terminal. |
-| `echo ""` | Bash builtin that prints arguments to standard output. | Always available in Bash; no package install. | Show section titles, tips, or messages to the terminal (trying to **print** text for the user). | Lines appear on **stdout** in your terminal (or in CI logs). Not used in a pipeline unless followed by `|`. |
-| `echo "=== head -n 5 abc.txt (first 5 lines) ==="` | Section header for humans. | Literal string in script | **Print** section title | Title line on **stdout** before commands |
-| `head -n 5 abc.txt` | Print first N lines of file or pipe. | Coreutils; often `head -n` or `head -20`. | Truncate long output in demos. | First lines on stdout; in pipeline: `cal -y | head -20` only first 20 lines reach terminal. |
-| `echo ""` | Bash builtin that prints arguments to standard output. | Always available in Bash; no package install. | Show section titles, tips, or messages to the terminal (trying to **print** text for the user). | Lines appear on **stdout** in your terminal (or in CI logs). Not used in a pipeline unless followed by `|`. |
-| `echo "=== head -n -5 abc.txt (ALL lines EXCEPT last 5) ==="` | Section header for humans. | Literal string in script | **Print** section title | Title line on **stdout** before commands |
-| `head -n -5 abc.txt` | Print first N lines of file or pipe. | Coreutils; often `head -n` or `head -20`. | Truncate long output in demos. | First lines on stdout; in pipeline: `cal -y | head -20` only first 20 lines reach terminal. |
+| Command (as in script)                                        | 1. What it is                                              | 2. Added / configured                                                  | 3. Execution intent                                                                                  | 4. Output (terminal / file / pipeline)                                                                   |
+| :------------------------------------------------------------ | :--------------------------------------------------------- | :--------------------------------------------------------------------- | :--------------------------------------------------------------------------------------------------- | :------------------------------------------------------------------------------------------------------- |
+| `set -euo pipefail`                                           | Bash strict-mode option bundle.                            | Written at top of script; not installed separately.                    | Tell Bash to stop on errors, treat unset variables as errors, and fail pipelines if any stage fails. | No visible output; changes how later commands affect exit status.                                        |
+| `WORK="${TMPDIR:-/tmp}/linux-view-content-demo"`              | Shell variable assignment.                                 | Name=`value` in script; often under `${TMPDIR:-/tmp}`.                 | Store path or stamp for later commands (setup, not a user command).                                  | No output; variable used by `cd`, `rm`, file paths.                                                      |
+| `rm -rf "$WORK"`                                              | Remove files/directories recursively, force.               | Coreutils; `-r` recursive, `-f` no prompt.                             | Clean old demo data under `/tmp` before recreating.                                                  | Silent on success.                                                                                       |
+| `mkdir -p "$WORK"`                                            | Make directories.                                          | Coreutils; `-p` creates parents as needed.                             | Try to **create** folder(s) for the demo tree.                                                       | Silent on success; errors on stderr if path invalid.                                                     |
+| `cd "$WORK"`                                                  | Change directory — move shell’s current working directory. | Builtin; takes relative or absolute path, `~`, `-`, or no args (home). | Navigate the tree (trying to **enter** a folder); relative paths start from cwd.                     | Normally silent on success; failure prints `cd: ...: No such file or directory` on **stderr**.           |
+| `seq 1 20 > abc.txt`                                          | Shell syntax (variable, test, subshell, or function).      | Defined in this script only.                                           | Prepare path, branch on failure, or wrap commands.                                                   | Depends on line: may be silent or print via embedded commands.                                           |
+| `echo "=== head abc.txt (default: first 10 lines) ==="`       | Section header for humans.                                 | Literal string in script                                               | **Print** section title                                                                              | Title line on **stdout** before commands                                                                 |
+| `head abc.txt`                                                | Print first N lines of file or pipe.                       | Coreutils; often `head -n` or `head -20`.                              | Truncate long output in demos.                                                                       | First lines on stdout; in pipeline: `cal -y                                                              | head -20` only first 20 lines reach terminal. |
+| `echo ""`                                                     | Bash builtin that prints arguments to standard output.     | Always available in Bash; no package install.                          | Show section titles, tips, or messages to the terminal (trying to **print** text for the user).      | Lines appear on **stdout** in your terminal (or in CI logs). Not used in a pipeline unless followed by ` | `.                                            |
+| `echo "=== head -15 abc.txt (first 15 lines) ==="`            | Section header for humans.                                 | Literal string in script                                               | **Print** section title                                                                              | Title line on **stdout** before commands                                                                 |
+| `head -15 abc.txt`                                            | Print first N lines of file or pipe.                       | Coreutils; often `head -n` or `head -20`.                              | Truncate long output in demos.                                                                       | First lines on stdout; in pipeline: `cal -y                                                              | head -20` only first 20 lines reach terminal. |
+| `echo ""`                                                     | Bash builtin that prints arguments to standard output.     | Always available in Bash; no package install.                          | Show section titles, tips, or messages to the terminal (trying to **print** text for the user).      | Lines appear on **stdout** in your terminal (or in CI logs). Not used in a pipeline unless followed by ` | `.                                            |
+| `echo "=== head -n 5 abc.txt (first 5 lines) ==="`            | Section header for humans.                                 | Literal string in script                                               | **Print** section title                                                                              | Title line on **stdout** before commands                                                                 |
+| `head -n 5 abc.txt`                                           | Print first N lines of file or pipe.                       | Coreutils; often `head -n` or `head -20`.                              | Truncate long output in demos.                                                                       | First lines on stdout; in pipeline: `cal -y                                                              | head -20` only first 20 lines reach terminal. |
+| `echo ""`                                                     | Bash builtin that prints arguments to standard output.     | Always available in Bash; no package install.                          | Show section titles, tips, or messages to the terminal (trying to **print** text for the user).      | Lines appear on **stdout** in your terminal (or in CI logs). Not used in a pipeline unless followed by ` | `.                                            |
+| `echo "=== head -n -5 abc.txt (ALL lines EXCEPT last 5) ==="` | Section header for humans.                                 | Literal string in script                                               | **Print** section title                                                                              | Title line on **stdout** before commands                                                                 |
+| `head -n -5 abc.txt`                                          | Print first N lines of file or pipe.                       | Coreutils; often `head -n` or `head -20`.                              | Truncate long output in demos.                                                                       | First lines on stdout; in pipeline: `cal -y                                                              | head -20` only first 20 lines reach terminal. |
 
 ---
 
@@ -1541,21 +1597,21 @@ Each script section uses the same **four-part** model:
 
 ### In-depth command walkthrough
 
-| Command (as in script) | 1. What it is | 2. Added / configured | 3. Execution intent | 4. Output (terminal / file / pipeline) |
-| :--- | :--- | :--- | :--- | :--- |
-| `set -euo pipefail` | Bash strict-mode option bundle. | Written at top of script; not installed separately. | Tell Bash to stop on errors, treat unset variables as errors, and fail pipelines if any stage fails. | No visible output; changes how later commands affect exit status. |
-| `TARGET="${1:-/etc/passwd}"` | Shell syntax (variable, test, subshell, or function). | Defined in this script only. | Prepare path, branch on failure, or wrap commands. | Depends on line: may be silent or print via embedded commands. |
-| `if [[ ! -f "$TARGET" ]]; then` | Conditional test `[[ ... ]]` or `if`. | Bash syntax. | Branch: run block only when directory exists / command succeeds. | Either block runs (messages on stdout) or `else` branch. |
-| `echo "Usage: $0 [file]   (default: /etc/passwd)"` | Bash builtin that prints arguments to standard output. | Always available in Bash; no package install. | Show section titles, tips, or messages to the terminal (trying to **print** text for the user). | Lines appear on **stdout** in your terminal (or in CI logs). Not used in a pipeline unless followed by `|`. |
-| `exit 0` | Shell syntax (variable, test, subshell, or function). | Defined in this script only. | Prepare path, branch on failure, or wrap commands. | Depends on line: may be silent or print via embedded commands. |
-| `echo "=== more and less are INTERACTIVE pagers (q to quit) ==="` | Section header for humans. | Literal string in script | **Print** section title | Title line on **stdout** before commands |
-| `echo "On your laptop try:  less $TARGET"` | Bash builtin that prints arguments to standard output. | Always available in Bash; no package install. | Show section titles, tips, or messages to the terminal (trying to **print** text for the user). | Lines appear on **stdout** in your terminal (or in CI logs). Not used in a pipeline unless followed by `|`. |
-| `echo "                     more $TARGET"` | Bash builtin that prints arguments to standard output. | Always available in Bash; no package install. | Show section titles, tips, or messages to the terminal (trying to **print** text for the user). | Lines appear on **stdout** in your terminal (or in CI logs). Not used in a pipeline unless followed by `|`. |
-| `echo ""` | Bash builtin that prints arguments to standard output. | Always available in Bash; no package install. | Show section titles, tips, or messages to the terminal (trying to **print** text for the user). | Lines appear on **stdout** in your terminal (or in CI logs). Not used in a pipeline unless followed by `|`. |
-| `echo "=== Non-interactive preview (first 12 lines, like opening a page…` | Section header for humans. | Literal string in script | **Print** section title | Title line on **stdout** before commands |
-| `head -12 "$TARGET"` | Print first N lines of file or pipe. | Coreutils; often `head -n` or `head -20`. | Truncate long output in demos. | First lines on stdout; in pipeline: `cal -y | head -20` only first 20 lines reach terminal. |
-| `echo ""` | Bash builtin that prints arguments to standard output. | Always available in Bash; no package install. | Show section titles, tips, or messages to the terminal (trying to **print** text for the user). | Lines appear on **stdout** in your terminal (or in CI logs). Not used in a pipeline unless followed by `|`. |
-| `echo "less is stronger than more: scroll forward AND backward (Page U…` | Bash builtin that prints arguments to standard output. | Always available in Bash; no package install. | Show section titles, tips, or messages to the terminal (trying to **print** text for the user). | Lines appear on **stdout** in your terminal (or in CI logs). Not used in a pipeline unless followed by `|`. |
+| Command (as in script)                                                    | 1. What it is                                          | 2. Added / configured                               | 3. Execution intent                                                                                  | 4. Output (terminal / file / pipeline)                                                                   |
+| :------------------------------------------------------------------------ | :----------------------------------------------------- | :-------------------------------------------------- | :--------------------------------------------------------------------------------------------------- | :------------------------------------------------------------------------------------------------------- |
+| `set -euo pipefail`                                                       | Bash strict-mode option bundle.                        | Written at top of script; not installed separately. | Tell Bash to stop on errors, treat unset variables as errors, and fail pipelines if any stage fails. | No visible output; changes how later commands affect exit status.                                        |
+| `TARGET="${1:-/etc/passwd}"`                                              | Shell syntax (variable, test, subshell, or function).  | Defined in this script only.                        | Prepare path, branch on failure, or wrap commands.                                                   | Depends on line: may be silent or print via embedded commands.                                           |
+| `if [[ ! -f "$TARGET" ]]; then`                                           | Conditional test `[[ ... ]]` or `if`.                  | Bash syntax.                                        | Branch: run block only when directory exists / command succeeds.                                     | Either block runs (messages on stdout) or `else` branch.                                                 |
+| `echo "Usage: $0 [file]   (default: /etc/passwd)"`                        | Bash builtin that prints arguments to standard output. | Always available in Bash; no package install.       | Show section titles, tips, or messages to the terminal (trying to **print** text for the user).      | Lines appear on **stdout** in your terminal (or in CI logs). Not used in a pipeline unless followed by ` | `.                                            |
+| `exit 0`                                                                  | Shell syntax (variable, test, subshell, or function).  | Defined in this script only.                        | Prepare path, branch on failure, or wrap commands.                                                   | Depends on line: may be silent or print via embedded commands.                                           |
+| `echo "=== more and less are INTERACTIVE pagers (q to quit) ==="`         | Section header for humans.                             | Literal string in script                            | **Print** section title                                                                              | Title line on **stdout** before commands                                                                 |
+| `echo "On your laptop try:  less $TARGET"`                                | Bash builtin that prints arguments to standard output. | Always available in Bash; no package install.       | Show section titles, tips, or messages to the terminal (trying to **print** text for the user).      | Lines appear on **stdout** in your terminal (or in CI logs). Not used in a pipeline unless followed by ` | `.                                            |
+| `echo "                     more $TARGET"`                                | Bash builtin that prints arguments to standard output. | Always available in Bash; no package install.       | Show section titles, tips, or messages to the terminal (trying to **print** text for the user).      | Lines appear on **stdout** in your terminal (or in CI logs). Not used in a pipeline unless followed by ` | `.                                            |
+| `echo ""`                                                                 | Bash builtin that prints arguments to standard output. | Always available in Bash; no package install.       | Show section titles, tips, or messages to the terminal (trying to **print** text for the user).      | Lines appear on **stdout** in your terminal (or in CI logs). Not used in a pipeline unless followed by ` | `.                                            |
+| `echo "=== Non-interactive preview (first 12 lines, like opening a page…` | Section header for humans.                             | Literal string in script                            | **Print** section title                                                                              | Title line on **stdout** before commands                                                                 |
+| `head -12 "$TARGET"`                                                      | Print first N lines of file or pipe.                   | Coreutils; often `head -n` or `head -20`.           | Truncate long output in demos.                                                                       | First lines on stdout; in pipeline: `cal -y                                                              | head -20` only first 20 lines reach terminal. |
+| `echo ""`                                                                 | Bash builtin that prints arguments to standard output. | Always available in Bash; no package install.       | Show section titles, tips, or messages to the terminal (trying to **print** text for the user).      | Lines appear on **stdout** in your terminal (or in CI logs). Not used in a pipeline unless followed by ` | `.                                            |
+| `echo "less is stronger than more: scroll forward AND backward (Page U…`  | Bash builtin that prints arguments to standard output. | Always available in Bash; no package install.       | Show section titles, tips, or messages to the terminal (trying to **print** text for the user).      | Lines appear on **stdout** in your terminal (or in CI logs). Not used in a pipeline unless followed by ` | `.                                            |
 
 ---
 
@@ -1565,21 +1621,21 @@ Each script section uses the same **four-part** model:
 
 ### In-depth command walkthrough
 
-| Command (as in script) | 1. What it is | 2. Added / configured | 3. Execution intent | 4. Output (terminal / file / pipeline) |
-| :--- | :--- | :--- | :--- | :--- |
-| `set -euo pipefail` | Bash strict-mode option bundle. | Written at top of script; not installed separately. | Tell Bash to stop on errors, treat unset variables as errors, and fail pipelines if any stage fails. | No visible output; changes how later commands affect exit status. |
-| `WORK="${TMPDIR:-/tmp}/linux-view-content-demo"` | Shell variable assignment. | Name=`value` in script; often under `${TMPDIR:-/tmp}`. | Store path or stamp for later commands (setup, not a user command). | No output; variable used by `cd`, `rm`, file paths. |
-| `rm -rf "$WORK"` | Remove files/directories recursively, force. | Coreutils; `-r` recursive, `-f` no prompt. | Clean old demo data under `/tmp` before recreating. | Silent on success. |
-| `mkdir -p "$WORK"` | Make directories. | Coreutils; `-p` creates parents as needed. | Try to **create** folder(s) for the demo tree. | Silent on success; errors on stderr if path invalid. |
-| `cd "$WORK"` | Change directory — move shell’s current working directory. | Builtin; takes relative or absolute path, `~`, `-`, or no args (home). | Navigate the tree (trying to **enter** a folder); relative paths start from cwd. | Normally silent on success; failure prints `cd: ...: No such file or directory` on **stderr**. |
-| `echo "chini" > abc.txt` | Bash builtin that prints arguments to standard output. | Always available in Bash; no package install. | Show section titles, tips, or messages to the terminal (trying to **print** text for the user). | Lines appear on **stdout** in your terminal (or in CI logs). Not used in a pipeline unless followed by `|`. |
-| `echo "=== cat abc.txt ==="` | Section header for humans. | Literal string in script | **Print** section title | Title line on **stdout** before commands |
-| `cat abc.txt` | Concatenate and print files. | Coreutils. | Try to **display file contents** on terminal. | File bytes on stdout. |
-| `echo ""` | Bash builtin that prints arguments to standard output. | Always available in Bash; no package install. | Show section titles, tips, or messages to the terminal (trying to **print** text for the user). | Lines appear on **stdout** in your terminal (or in CI logs). Not used in a pipeline unless followed by `|`. |
-| `echo "=== rev abc.txt (chini -> inihc) ==="` | Section header for humans. | Literal string in script | **Print** section title | Title line on **stdout** before commands |
-| `rev abc.txt` | Reverse characters on each line. | Coreutils. | Horizontal reverse per line. | Each line mirrored on stdout. |
-| `echo ""` | Bash builtin that prints arguments to standard output. | Always available in Bash; no package install. | Show section titles, tips, or messages to the terminal (trying to **print** text for the user). | Lines appear on **stdout** in your terminal (or in CI logs). Not used in a pipeline unless followed by `|`. |
-| `echo "Tip: tac = reverse line order; rev = reverse each line left-to-…` | Bash builtin that prints arguments to standard output. | Always available in Bash; no package install. | Show section titles, tips, or messages to the terminal (trying to **print** text for the user). | Lines appear on **stdout** in your terminal (or in CI logs). Not used in a pipeline unless followed by `|`. |
+| Command (as in script)                                                   | 1. What it is                                              | 2. Added / configured                                                  | 3. Execution intent                                                                                  | 4. Output (terminal / file / pipeline)                                                                   |
+| :----------------------------------------------------------------------- | :--------------------------------------------------------- | :--------------------------------------------------------------------- | :--------------------------------------------------------------------------------------------------- | :------------------------------------------------------------------------------------------------------- |
+| `set -euo pipefail`                                                      | Bash strict-mode option bundle.                            | Written at top of script; not installed separately.                    | Tell Bash to stop on errors, treat unset variables as errors, and fail pipelines if any stage fails. | No visible output; changes how later commands affect exit status.                                        |
+| `WORK="${TMPDIR:-/tmp}/linux-view-content-demo"`                         | Shell variable assignment.                                 | Name=`value` in script; often under `${TMPDIR:-/tmp}`.                 | Store path or stamp for later commands (setup, not a user command).                                  | No output; variable used by `cd`, `rm`, file paths.                                                      |
+| `rm -rf "$WORK"`                                                         | Remove files/directories recursively, force.               | Coreutils; `-r` recursive, `-f` no prompt.                             | Clean old demo data under `/tmp` before recreating.                                                  | Silent on success.                                                                                       |
+| `mkdir -p "$WORK"`                                                       | Make directories.                                          | Coreutils; `-p` creates parents as needed.                             | Try to **create** folder(s) for the demo tree.                                                       | Silent on success; errors on stderr if path invalid.                                                     |
+| `cd "$WORK"`                                                             | Change directory — move shell’s current working directory. | Builtin; takes relative or absolute path, `~`, `-`, or no args (home). | Navigate the tree (trying to **enter** a folder); relative paths start from cwd.                     | Normally silent on success; failure prints `cd: ...: No such file or directory` on **stderr**.           |
+| `echo "chini" > abc.txt`                                                 | Bash builtin that prints arguments to standard output.     | Always available in Bash; no package install.                          | Show section titles, tips, or messages to the terminal (trying to **print** text for the user).      | Lines appear on **stdout** in your terminal (or in CI logs). Not used in a pipeline unless followed by ` | `. |
+| `echo "=== cat abc.txt ==="`                                             | Section header for humans.                                 | Literal string in script                                               | **Print** section title                                                                              | Title line on **stdout** before commands                                                                 |
+| `cat abc.txt`                                                            | Concatenate and print files.                               | Coreutils.                                                             | Try to **display file contents** on terminal.                                                        | File bytes on stdout.                                                                                    |
+| `echo ""`                                                                | Bash builtin that prints arguments to standard output.     | Always available in Bash; no package install.                          | Show section titles, tips, or messages to the terminal (trying to **print** text for the user).      | Lines appear on **stdout** in your terminal (or in CI logs). Not used in a pipeline unless followed by ` | `. |
+| `echo "=== rev abc.txt (chini -> inihc) ==="`                            | Section header for humans.                                 | Literal string in script                                               | **Print** section title                                                                              | Title line on **stdout** before commands                                                                 |
+| `rev abc.txt`                                                            | Reverse characters on each line.                           | Coreutils.                                                             | Horizontal reverse per line.                                                                         | Each line mirrored on stdout.                                                                            |
+| `echo ""`                                                                | Bash builtin that prints arguments to standard output.     | Always available in Bash; no package install.                          | Show section titles, tips, or messages to the terminal (trying to **print** text for the user).      | Lines appear on **stdout** in your terminal (or in CI logs). Not used in a pipeline unless followed by ` | `. |
+| `echo "Tip: tac = reverse line order; rev = reverse each line left-to-…` | Bash builtin that prints arguments to standard output.     | Always available in Bash; no package install.                          | Show section titles, tips, or messages to the terminal (trying to **print** text for the user).      | Lines appear on **stdout** in your terminal (or in CI logs). Not used in a pipeline unless followed by ` | `. |
 
 ---
 
@@ -1589,33 +1645,33 @@ Each script section uses the same **four-part** model:
 
 ### In-depth command walkthrough
 
-| Command (as in script) | 1. What it is | 2. Added / configured | 3. Execution intent | 4. Output (terminal / file / pipeline) |
-| :--- | :--- | :--- | :--- | :--- |
-| `set -euo pipefail` | Bash strict-mode option bundle. | Written at top of script; not installed separately. | Tell Bash to stop on errors, treat unset variables as errors, and fail pipelines if any stage fails. | No visible output; changes how later commands affect exit status. |
-| `WORK="${TMPDIR:-/tmp}/linux-view-readonly-demo"` | Shell variable assignment. | Name=`value` in script; often under `${TMPDIR:-/tmp}`. | Store path or stamp for later commands (setup, not a user command). | No output; variable used by `cd`, `rm`, file paths. |
-| `rm -rf "$WORK"` | Remove files/directories recursively, force. | Coreutils; `-r` recursive, `-f` no prompt. | Clean old demo data under `/tmp` before recreating. | Silent on success. |
-| `mkdir -p "$WORK"` | Make directories. | Coreutils; `-p` creates parents as needed. | Try to **create** folder(s) for the demo tree. | Silent on success; errors on stderr if path invalid. |
-| `FILE="$WORK/sample.sh"` | Shell variable assignment. | Name=`value` in script; often under `${TMPDIR:-/tmp}`. | Store path or stamp for later commands (setup, not a user command). | No output; variable used by `cd`, `rm`, file paths. |
-| `cat > "$FILE" <<'EOF'` | Concatenate and print files. | Coreutils. | Try to **display file contents** on terminal. | File bytes on stdout. |
-| `echo "All arguments with @ : $@"` | Bash builtin that prints arguments to standard output. | Always available in Bash; no package install. | Show section titles, tips, or messages to the terminal (trying to **print** text for the user). | Lines appear on **stdout** in your terminal (or in CI logs). Not used in a pipeline unless followed by `|`. |
-| `EOF` | Shell syntax (variable, test, subshell, or function). | Defined in this script only. | Prepare path, branch on failure, or wrap commands. | Depends on line: may be silent or print via embedded commands. |
-| `echo "=== 1) Original file on disk (cat) ==="` | Section header for humans. | Literal string in script | **Print** section title | Title line on **stdout** before commands |
-| `cat "$FILE"` | Concatenate and print files. | Coreutils. | Try to **display file contents** on terminal. | File bytes on stdout. |
-| `echo ""` | Bash builtin that prints arguments to standard output. | Always available in Bash; no package install. | Show section titles, tips, or messages to the terminal (trying to **print** text for the user). | Lines appear on **stdout** in your terminal (or in CI logs). Not used in a pipeline unless followed by `|`. |
-| `echo "=== 2) rev — reversed CHARACTERS on screen only (file unchanged)…` | Section header for humans. | Literal string in script | **Print** section title | Title line on **stdout** before commands |
-| `rev "$FILE"` | Reverse characters on each line. | Coreutils. | Horizontal reverse per line. | Each line mirrored on stdout. |
-| `echo ""` | Bash builtin that prints arguments to standard output. | Always available in Bash; no package install. | Show section titles, tips, or messages to the terminal (trying to **print** text for the user). | Lines appear on **stdout** in your terminal (or in CI logs). Not used in a pipeline unless followed by `|`. |
-| `echo "=== 3) cat again — same original order (proof file not modified)…` | Section header for humans. | Literal string in script | **Print** section title | Title line on **stdout** before commands |
-| `cat "$FILE"` | Concatenate and print files. | Coreutils. | Try to **display file contents** on terminal. | File bytes on stdout. |
-| `echo ""` | Bash builtin that prints arguments to standard output. | Always available in Bash; no package install. | Show section titles, tips, or messages to the terminal (trying to **print** text for the user). | Lines appear on **stdout** in your terminal (or in CI logs). Not used in a pipeline unless followed by `|`. |
-| `echo "=== 4) tac — reversed LINE order on screen (add second line firs…` | Section header for humans. | Literal string in script | **Print** section title | Title line on **stdout** before commands |
-| `printf 'line-one\nline-two\n' > "$WORK/two.txt"` | Formatted print (builtin). | Bash builtin. | Print with format specifiers like C. | Formatted bytes on stdout. |
-| `tac "$WORK/two.txt"` | Print file with lines in reverse order. | Coreutils; cat spelled backward. | Vertical reverse: last line first. | Lines on stdout in reversed order. |
-| `echo ""` | Bash builtin that prints arguments to standard output. | Always available in Bash; no package install. | Show section titles, tips, or messages to the terminal (trying to **print** text for the user). | Lines appear on **stdout** in your terminal (or in CI logs). Not used in a pipeline unless followed by `|`. |
-| `echo "=== 5) cat two.txt — still line-one then line-two on disk ==="` | Section header for humans. | Literal string in script | **Print** section title | Title line on **stdout** before commands |
-| `cat "$WORK/two.txt"` | Concatenate and print files. | Coreutils. | Try to **display file contents** on terminal. | File bytes on stdout. |
-| `echo ""` | Bash builtin that prints arguments to standard output. | Always available in Bash; no package install. | Show section titles, tips, or messages to the terminal (trying to **print** text for the user). | Lines appear on **stdout** in your terminal (or in CI logs). Not used in a pipeline unless followed by `|`. |
-| `echo "Tip: file changes only when you WRITE (>, >>, editor). Not from…` | Bash builtin that prints arguments to standard output. | Always available in Bash; no package install. | Show section titles, tips, or messages to the terminal (trying to **print** text for the user). | Lines appear on **stdout** in your terminal (or in CI logs). Not used in a pipeline unless followed by `|`. |
+| Command (as in script)                                                    | 1. What it is                                          | 2. Added / configured                                  | 3. Execution intent                                                                                  | 4. Output (terminal / file / pipeline)                                                                   |
+| :------------------------------------------------------------------------ | :----------------------------------------------------- | :----------------------------------------------------- | :--------------------------------------------------------------------------------------------------- | :------------------------------------------------------------------------------------------------------- |
+| `set -euo pipefail`                                                       | Bash strict-mode option bundle.                        | Written at top of script; not installed separately.    | Tell Bash to stop on errors, treat unset variables as errors, and fail pipelines if any stage fails. | No visible output; changes how later commands affect exit status.                                        |
+| `WORK="${TMPDIR:-/tmp}/linux-view-readonly-demo"`                         | Shell variable assignment.                             | Name=`value` in script; often under `${TMPDIR:-/tmp}`. | Store path or stamp for later commands (setup, not a user command).                                  | No output; variable used by `cd`, `rm`, file paths.                                                      |
+| `rm -rf "$WORK"`                                                          | Remove files/directories recursively, force.           | Coreutils; `-r` recursive, `-f` no prompt.             | Clean old demo data under `/tmp` before recreating.                                                  | Silent on success.                                                                                       |
+| `mkdir -p "$WORK"`                                                        | Make directories.                                      | Coreutils; `-p` creates parents as needed.             | Try to **create** folder(s) for the demo tree.                                                       | Silent on success; errors on stderr if path invalid.                                                     |
+| `FILE="$WORK/sample.sh"`                                                  | Shell variable assignment.                             | Name=`value` in script; often under `${TMPDIR:-/tmp}`. | Store path or stamp for later commands (setup, not a user command).                                  | No output; variable used by `cd`, `rm`, file paths.                                                      |
+| `cat > "$FILE" <<'EOF'`                                                   | Concatenate and print files.                           | Coreutils.                                             | Try to **display file contents** on terminal.                                                        | File bytes on stdout.                                                                                    |
+| `echo "All arguments with @ : $@"`                                        | Bash builtin that prints arguments to standard output. | Always available in Bash; no package install.          | Show section titles, tips, or messages to the terminal (trying to **print** text for the user).      | Lines appear on **stdout** in your terminal (or in CI logs). Not used in a pipeline unless followed by ` | `. |
+| `EOF`                                                                     | Shell syntax (variable, test, subshell, or function).  | Defined in this script only.                           | Prepare path, branch on failure, or wrap commands.                                                   | Depends on line: may be silent or print via embedded commands.                                           |
+| `echo "=== 1) Original file on disk (cat) ==="`                           | Section header for humans.                             | Literal string in script                               | **Print** section title                                                                              | Title line on **stdout** before commands                                                                 |
+| `cat "$FILE"`                                                             | Concatenate and print files.                           | Coreutils.                                             | Try to **display file contents** on terminal.                                                        | File bytes on stdout.                                                                                    |
+| `echo ""`                                                                 | Bash builtin that prints arguments to standard output. | Always available in Bash; no package install.          | Show section titles, tips, or messages to the terminal (trying to **print** text for the user).      | Lines appear on **stdout** in your terminal (or in CI logs). Not used in a pipeline unless followed by ` | `. |
+| `echo "=== 2) rev — reversed CHARACTERS on screen only (file unchanged)…` | Section header for humans.                             | Literal string in script                               | **Print** section title                                                                              | Title line on **stdout** before commands                                                                 |
+| `rev "$FILE"`                                                             | Reverse characters on each line.                       | Coreutils.                                             | Horizontal reverse per line.                                                                         | Each line mirrored on stdout.                                                                            |
+| `echo ""`                                                                 | Bash builtin that prints arguments to standard output. | Always available in Bash; no package install.          | Show section titles, tips, or messages to the terminal (trying to **print** text for the user).      | Lines appear on **stdout** in your terminal (or in CI logs). Not used in a pipeline unless followed by ` | `. |
+| `echo "=== 3) cat again — same original order (proof file not modified)…` | Section header for humans.                             | Literal string in script                               | **Print** section title                                                                              | Title line on **stdout** before commands                                                                 |
+| `cat "$FILE"`                                                             | Concatenate and print files.                           | Coreutils.                                             | Try to **display file contents** on terminal.                                                        | File bytes on stdout.                                                                                    |
+| `echo ""`                                                                 | Bash builtin that prints arguments to standard output. | Always available in Bash; no package install.          | Show section titles, tips, or messages to the terminal (trying to **print** text for the user).      | Lines appear on **stdout** in your terminal (or in CI logs). Not used in a pipeline unless followed by ` | `. |
+| `echo "=== 4) tac — reversed LINE order on screen (add second line firs…` | Section header for humans.                             | Literal string in script                               | **Print** section title                                                                              | Title line on **stdout** before commands                                                                 |
+| `printf 'line-one\nline-two\n' > "$WORK/two.txt"`                         | Formatted print (builtin).                             | Bash builtin.                                          | Print with format specifiers like C.                                                                 | Formatted bytes on stdout.                                                                               |
+| `tac "$WORK/two.txt"`                                                     | Print file with lines in reverse order.                | Coreutils; cat spelled backward.                       | Vertical reverse: last line first.                                                                   | Lines on stdout in reversed order.                                                                       |
+| `echo ""`                                                                 | Bash builtin that prints arguments to standard output. | Always available in Bash; no package install.          | Show section titles, tips, or messages to the terminal (trying to **print** text for the user).      | Lines appear on **stdout** in your terminal (or in CI logs). Not used in a pipeline unless followed by ` | `. |
+| `echo "=== 5) cat two.txt — still line-one then line-two on disk ==="`    | Section header for humans.                             | Literal string in script                               | **Print** section title                                                                              | Title line on **stdout** before commands                                                                 |
+| `cat "$WORK/two.txt"`                                                     | Concatenate and print files.                           | Coreutils.                                             | Try to **display file contents** on terminal.                                                        | File bytes on stdout.                                                                                    |
+| `echo ""`                                                                 | Bash builtin that prints arguments to standard output. | Always available in Bash; no package install.          | Show section titles, tips, or messages to the terminal (trying to **print** text for the user).      | Lines appear on **stdout** in your terminal (or in CI logs). Not used in a pipeline unless followed by ` | `. |
+| `echo "Tip: file changes only when you WRITE (>, >>, editor). Not from…`  | Bash builtin that prints arguments to standard output. | Always available in Bash; no package install.          | Show section titles, tips, or messages to the terminal (trying to **print** text for the user).      | Lines appear on **stdout** in your terminal (or in CI logs). Not used in a pipeline unless followed by ` | `. |
 
 ---
 
@@ -1625,25 +1681,25 @@ Each script section uses the same **four-part** model:
 
 ### In-depth command walkthrough
 
-| Command (as in script) | 1. What it is | 2. Added / configured | 3. Execution intent | 4. Output (terminal / file / pipeline) |
-| :--- | :--- | :--- | :--- | :--- |
-| `set -euo pipefail` | Bash strict-mode option bundle. | Written at top of script; not installed separately. | Tell Bash to stop on errors, treat unset variables as errors, and fail pipelines if any stage fails. | No visible output; changes how later commands affect exit status. |
-| `echo "=== Small file: cat is fine (full dump at once) ==="` | Section header for humans. | Literal string in script | **Print** section title | Title line on **stdout** before commands |
-| `WORK="${TMPDIR:-/tmp}/linux-view-content-demo"` | Shell variable assignment. | Name=`value` in script; often under `${TMPDIR:-/tmp}`. | Store path or stamp for later commands (setup, not a user command). | No output; variable used by `cd`, `rm`, file paths. |
-| `rm -rf "$WORK"` | Remove files/directories recursively, force. | Coreutils; `-r` recursive, `-f` no prompt. | Clean old demo data under `/tmp` before recreating. | Silent on success. |
-| `mkdir -p "$WORK"` | Make directories. | Coreutils; `-p` creates parents as needed. | Try to **create** folder(s) for the demo tree. | Silent on success; errors on stderr if path invalid. |
-| `echo "hello friends" > "$WORK/small.txt"` | Bash builtin that prints arguments to standard output. | Always available in Bash; no package install. | Show section titles, tips, or messages to the terminal (trying to **print** text for the user). | Lines appear on **stdout** in your terminal (or in CI logs). Not used in a pipeline unless followed by `|`. |
-| `cat "$WORK/small.txt"` | Concatenate and print files. | Coreutils. | Try to **display file contents** on terminal. | File bytes on stdout. |
-| `echo ""` | Bash builtin that prints arguments to standard output. | Always available in Bash; no package install. | Show section titles, tips, or messages to the terminal (trying to **print** text for the user). | Lines appear on **stdout** in your terminal (or in CI logs). Not used in a pipeline unless followed by `|`. |
-| `echo "=== Large file: prefer head/tail (not whole cat) ==="` | Section header for humans. | Literal string in script | **Print** section title | Title line on **stdout** before commands |
-| `if [[ -f /etc/passwd ]]; then` | Conditional test `[[ ... ]]` or `if`. | Bash syntax. | Branch: run block only when directory exists / command succeeds. | Either block runs (messages on stdout) or `else` branch. |
-| `echo "--- head -5 /etc/passwd ---"` | Bash builtin that prints arguments to standard output. | Always available in Bash; no package install. | Show section titles, tips, or messages to the terminal (trying to **print** text for the user). | Lines appear on **stdout** in your terminal (or in CI logs). Not used in a pipeline unless followed by `|`. |
-| `head -5 /etc/passwd` | Print first N lines of file or pipe. | Coreutils; often `head -n` or `head -20`. | Truncate long output in demos. | First lines on stdout; in pipeline: `cal -y | head -20` only first 20 lines reach terminal. |
-| `echo "--- tail -3 /etc/passwd ---"` | Bash builtin that prints arguments to standard output. | Always available in Bash; no package install. | Show section titles, tips, or messages to the terminal (trying to **print** text for the user). | Lines appear on **stdout** in your terminal (or in CI logs). Not used in a pipeline unless followed by `|`. |
-| `tail -3 /etc/passwd` | Print last N lines. | Coreutils. | Show end of listing or log. | Last lines on stdout; works in pipelines like `ls | tail`. |
-| `echo "/etc/passwd not found on this system"` | Bash builtin that prints arguments to standard output. | Always available in Bash; no package install. | Show section titles, tips, or messages to the terminal (trying to **print** text for the user). | Lines appear on **stdout** in your terminal (or in CI logs). Not used in a pipeline unless followed by `|`. |
-| `echo ""` | Bash builtin that prints arguments to standard output. | Always available in Bash; no package install. | Show section titles, tips, or messages to the terminal (trying to **print** text for the user). | Lines appear on **stdout** in your terminal (or in CI logs). Not used in a pipeline unless followed by `|`. |
-| `echo "Durga Sir: small file -> cat; huge content -> head, tail, more,…` | Bash builtin that prints arguments to standard output. | Always available in Bash; no package install. | Show section titles, tips, or messages to the terminal (trying to **print** text for the user). | Lines appear on **stdout** in your terminal (or in CI logs). Not used in a pipeline unless followed by `|`. |
+| Command (as in script)                                                   | 1. What it is                                          | 2. Added / configured                                  | 3. Execution intent                                                                                  | 4. Output (terminal / file / pipeline)                                                                   |
+| :----------------------------------------------------------------------- | :----------------------------------------------------- | :----------------------------------------------------- | :--------------------------------------------------------------------------------------------------- | :------------------------------------------------------------------------------------------------------- |
+| `set -euo pipefail`                                                      | Bash strict-mode option bundle.                        | Written at top of script; not installed separately.    | Tell Bash to stop on errors, treat unset variables as errors, and fail pipelines if any stage fails. | No visible output; changes how later commands affect exit status.                                        |
+| `echo "=== Small file: cat is fine (full dump at once) ==="`             | Section header for humans.                             | Literal string in script                               | **Print** section title                                                                              | Title line on **stdout** before commands                                                                 |
+| `WORK="${TMPDIR:-/tmp}/linux-view-content-demo"`                         | Shell variable assignment.                             | Name=`value` in script; often under `${TMPDIR:-/tmp}`. | Store path or stamp for later commands (setup, not a user command).                                  | No output; variable used by `cd`, `rm`, file paths.                                                      |
+| `rm -rf "$WORK"`                                                         | Remove files/directories recursively, force.           | Coreutils; `-r` recursive, `-f` no prompt.             | Clean old demo data under `/tmp` before recreating.                                                  | Silent on success.                                                                                       |
+| `mkdir -p "$WORK"`                                                       | Make directories.                                      | Coreutils; `-p` creates parents as needed.             | Try to **create** folder(s) for the demo tree.                                                       | Silent on success; errors on stderr if path invalid.                                                     |
+| `echo "hello friends" > "$WORK/small.txt"`                               | Bash builtin that prints arguments to standard output. | Always available in Bash; no package install.          | Show section titles, tips, or messages to the terminal (trying to **print** text for the user).      | Lines appear on **stdout** in your terminal (or in CI logs). Not used in a pipeline unless followed by ` | `.                                            |
+| `cat "$WORK/small.txt"`                                                  | Concatenate and print files.                           | Coreutils.                                             | Try to **display file contents** on terminal.                                                        | File bytes on stdout.                                                                                    |
+| `echo ""`                                                                | Bash builtin that prints arguments to standard output. | Always available in Bash; no package install.          | Show section titles, tips, or messages to the terminal (trying to **print** text for the user).      | Lines appear on **stdout** in your terminal (or in CI logs). Not used in a pipeline unless followed by ` | `.                                            |
+| `echo "=== Large file: prefer head/tail (not whole cat) ==="`            | Section header for humans.                             | Literal string in script                               | **Print** section title                                                                              | Title line on **stdout** before commands                                                                 |
+| `if [[ -f /etc/passwd ]]; then`                                          | Conditional test `[[ ... ]]` or `if`.                  | Bash syntax.                                           | Branch: run block only when directory exists / command succeeds.                                     | Either block runs (messages on stdout) or `else` branch.                                                 |
+| `echo "--- head -5 /etc/passwd ---"`                                     | Bash builtin that prints arguments to standard output. | Always available in Bash; no package install.          | Show section titles, tips, or messages to the terminal (trying to **print** text for the user).      | Lines appear on **stdout** in your terminal (or in CI logs). Not used in a pipeline unless followed by ` | `.                                            |
+| `head -5 /etc/passwd`                                                    | Print first N lines of file or pipe.                   | Coreutils; often `head -n` or `head -20`.              | Truncate long output in demos.                                                                       | First lines on stdout; in pipeline: `cal -y                                                              | head -20` only first 20 lines reach terminal. |
+| `echo "--- tail -3 /etc/passwd ---"`                                     | Bash builtin that prints arguments to standard output. | Always available in Bash; no package install.          | Show section titles, tips, or messages to the terminal (trying to **print** text for the user).      | Lines appear on **stdout** in your terminal (or in CI logs). Not used in a pipeline unless followed by ` | `.                                            |
+| `tail -3 /etc/passwd`                                                    | Print last N lines.                                    | Coreutils.                                             | Show end of listing or log.                                                                          | Last lines on stdout; works in pipelines like `ls                                                        | tail`.                                        |
+| `echo "/etc/passwd not found on this system"`                            | Bash builtin that prints arguments to standard output. | Always available in Bash; no package install.          | Show section titles, tips, or messages to the terminal (trying to **print** text for the user).      | Lines appear on **stdout** in your terminal (or in CI logs). Not used in a pipeline unless followed by ` | `.                                            |
+| `echo ""`                                                                | Bash builtin that prints arguments to standard output. | Always available in Bash; no package install.          | Show section titles, tips, or messages to the terminal (trying to **print** text for the user).      | Lines appear on **stdout** in your terminal (or in CI logs). Not used in a pipeline unless followed by ` | `.                                            |
+| `echo "Durga Sir: small file -> cat; huge content -> head, tail, more,…` | Bash builtin that prints arguments to standard output. | Always available in Bash; no package install.          | Show section titles, tips, or messages to the terminal (trying to **print** text for the user).      | Lines appear on **stdout** in your terminal (or in CI logs). Not used in a pipeline unless followed by ` | `.                                            |
 
 ---
 
@@ -1653,25 +1709,25 @@ Each script section uses the same **four-part** model:
 
 ### In-depth command walkthrough
 
-| Command (as in script) | 1. What it is | 2. Added / configured | 3. Execution intent | 4. Output (terminal / file / pipeline) |
-| :--- | :--- | :--- | :--- | :--- |
-| `set -euo pipefail` | Bash strict-mode option bundle. | Written at top of script; not installed separately. | Tell Bash to stop on errors, treat unset variables as errors, and fail pipelines if any stage fails. | No visible output; changes how later commands affect exit status. |
-| `WORK="${TMPDIR:-/tmp}/linux-view-content-demo"` | Shell variable assignment. | Name=`value` in script; often under `${TMPDIR:-/tmp}`. | Store path or stamp for later commands (setup, not a user command). | No output; variable used by `cd`, `rm`, file paths. |
-| `rm -rf "$WORK"` | Remove files/directories recursively, force. | Coreutils; `-r` recursive, `-f` no prompt. | Clean old demo data under `/tmp` before recreating. | Silent on success. |
-| `mkdir -p "$WORK"` | Make directories. | Coreutils; `-p` creates parents as needed. | Try to **create** folder(s) for the demo tree. | Silent on success; errors on stderr if path invalid. |
-| `cd "$WORK"` | Change directory — move shell’s current working directory. | Builtin; takes relative or absolute path, `~`, `-`, or no args (home). | Navigate the tree (trying to **enter** a folder); relative paths start from cwd. | Normally silent on success; failure prints `cd: ...: No such file or directory` on **stderr**. |
-| `cat > abc.txt <<'EOF'` | Concatenate and print files. | Coreutils. | Try to **display file contents** on terminal. | File bytes on stdout. |
-| `sunny` | Shell syntax (variable, test, subshell, or function). | Defined in this script only. | Prepare path, branch on failure, or wrap commands. | Depends on line: may be silent or print via embedded commands. |
-| `bunny` | Shell syntax (variable, test, subshell, or function). | Defined in this script only. | Prepare path, branch on failure, or wrap commands. | Depends on line: may be silent or print via embedded commands. |
-| `chini` | Shell syntax (variable, test, subshell, or function). | Defined in this script only. | Prepare path, branch on failure, or wrap commands. | Depends on line: may be silent or print via embedded commands. |
-| `vinnie` | Shell syntax (variable, test, subshell, or function). | Defined in this script only. | Prepare path, branch on failure, or wrap commands. | Depends on line: may be silent or print via embedded commands. |
-| `pini` | Shell syntax (variable, test, subshell, or function). | Defined in this script only. | Prepare path, branch on failure, or wrap commands. | Depends on line: may be silent or print via embedded commands. |
-| `EOF` | Shell syntax (variable, test, subshell, or function). | Defined in this script only. | Prepare path, branch on failure, or wrap commands. | Depends on line: may be silent or print via embedded commands. |
-| `echo "=== cat abc.txt (normal top-to-bottom) ==="` | Section header for humans. | Literal string in script | **Print** section title | Title line on **stdout** before commands |
-| `cat abc.txt` | Concatenate and print files. | Coreutils. | Try to **display file contents** on terminal. | File bytes on stdout. |
-| `echo ""` | Bash builtin that prints arguments to standard output. | Always available in Bash; no package install. | Show section titles, tips, or messages to the terminal (trying to **print** text for the user). | Lines appear on **stdout** in your terminal (or in CI logs). Not used in a pipeline unless followed by `|`. |
-| `echo "=== tac abc.txt (last line becomes first) ==="` | Section header for humans. | Literal string in script | **Print** section title | Title line on **stdout** before commands |
-| `tac abc.txt` | Print file with lines in reverse order. | Coreutils; cat spelled backward. | Vertical reverse: last line first. | Lines on stdout in reversed order. |
+| Command (as in script)                                 | 1. What it is                                              | 2. Added / configured                                                  | 3. Execution intent                                                                                  | 4. Output (terminal / file / pipeline)                                                                   |
+| :----------------------------------------------------- | :--------------------------------------------------------- | :--------------------------------------------------------------------- | :--------------------------------------------------------------------------------------------------- | :------------------------------------------------------------------------------------------------------- |
+| `set -euo pipefail`                                    | Bash strict-mode option bundle.                            | Written at top of script; not installed separately.                    | Tell Bash to stop on errors, treat unset variables as errors, and fail pipelines if any stage fails. | No visible output; changes how later commands affect exit status.                                        |
+| `WORK="${TMPDIR:-/tmp}/linux-view-content-demo"`       | Shell variable assignment.                                 | Name=`value` in script; often under `${TMPDIR:-/tmp}`.                 | Store path or stamp for later commands (setup, not a user command).                                  | No output; variable used by `cd`, `rm`, file paths.                                                      |
+| `rm -rf "$WORK"`                                       | Remove files/directories recursively, force.               | Coreutils; `-r` recursive, `-f` no prompt.                             | Clean old demo data under `/tmp` before recreating.                                                  | Silent on success.                                                                                       |
+| `mkdir -p "$WORK"`                                     | Make directories.                                          | Coreutils; `-p` creates parents as needed.                             | Try to **create** folder(s) for the demo tree.                                                       | Silent on success; errors on stderr if path invalid.                                                     |
+| `cd "$WORK"`                                           | Change directory — move shell’s current working directory. | Builtin; takes relative or absolute path, `~`, `-`, or no args (home). | Navigate the tree (trying to **enter** a folder); relative paths start from cwd.                     | Normally silent on success; failure prints `cd: ...: No such file or directory` on **stderr**.           |
+| `cat > abc.txt <<'EOF'`                                | Concatenate and print files.                               | Coreutils.                                                             | Try to **display file contents** on terminal.                                                        | File bytes on stdout.                                                                                    |
+| `sunny`                                                | Shell syntax (variable, test, subshell, or function).      | Defined in this script only.                                           | Prepare path, branch on failure, or wrap commands.                                                   | Depends on line: may be silent or print via embedded commands.                                           |
+| `bunny`                                                | Shell syntax (variable, test, subshell, or function).      | Defined in this script only.                                           | Prepare path, branch on failure, or wrap commands.                                                   | Depends on line: may be silent or print via embedded commands.                                           |
+| `chini`                                                | Shell syntax (variable, test, subshell, or function).      | Defined in this script only.                                           | Prepare path, branch on failure, or wrap commands.                                                   | Depends on line: may be silent or print via embedded commands.                                           |
+| `vinnie`                                               | Shell syntax (variable, test, subshell, or function).      | Defined in this script only.                                           | Prepare path, branch on failure, or wrap commands.                                                   | Depends on line: may be silent or print via embedded commands.                                           |
+| `pini`                                                 | Shell syntax (variable, test, subshell, or function).      | Defined in this script only.                                           | Prepare path, branch on failure, or wrap commands.                                                   | Depends on line: may be silent or print via embedded commands.                                           |
+| `EOF`                                                  | Shell syntax (variable, test, subshell, or function).      | Defined in this script only.                                           | Prepare path, branch on failure, or wrap commands.                                                   | Depends on line: may be silent or print via embedded commands.                                           |
+| `echo "=== cat abc.txt (normal top-to-bottom) ==="`    | Section header for humans.                                 | Literal string in script                                               | **Print** section title                                                                              | Title line on **stdout** before commands                                                                 |
+| `cat abc.txt`                                          | Concatenate and print files.                               | Coreutils.                                                             | Try to **display file contents** on terminal.                                                        | File bytes on stdout.                                                                                    |
+| `echo ""`                                              | Bash builtin that prints arguments to standard output.     | Always available in Bash; no package install.                          | Show section titles, tips, or messages to the terminal (trying to **print** text for the user).      | Lines appear on **stdout** in your terminal (or in CI logs). Not used in a pipeline unless followed by ` | `. |
+| `echo "=== tac abc.txt (last line becomes first) ==="` | Section header for humans.                                 | Literal string in script                                               | **Print** section title                                                                              | Title line on **stdout** before commands                                                                 |
+| `tac abc.txt`                                          | Print file with lines in reverse order.                    | Coreutils; cat spelled backward.                                       | Vertical reverse: last line first.                                                                   | Lines on stdout in reversed order.                                                                       |
 
 ---
 
@@ -1681,39 +1737,39 @@ Each script section uses the same **four-part** model:
 
 ### In-depth command walkthrough
 
-| Command (as in script) | 1. What it is | 2. Added / configured | 3. Execution intent | 4. Output (terminal / file / pipeline) |
-| :--- | :--- | :--- | :--- | :--- |
-| `set -euo pipefail` | Bash strict-mode option bundle. | Written at top of script; not installed separately. | Tell Bash to stop on errors, treat unset variables as errors, and fail pipelines if any stage fails. | No visible output; changes how later commands affect exit status. |
-| `WORK="${TMPDIR:-/tmp}/linux-view-content-demo"` | Shell variable assignment. | Name=`value` in script; often under `${TMPDIR:-/tmp}`. | Store path or stamp for later commands (setup, not a user command). | No output; variable used by `cd`, `rm`, file paths. |
-| `rm -rf "$WORK"` | Remove files/directories recursively, force. | Coreutils; `-r` recursive, `-f` no prompt. | Clean old demo data under `/tmp` before recreating. | Silent on success. |
-| `mkdir -p "$WORK"` | Make directories. | Coreutils; `-p` creates parents as needed. | Try to **create** folder(s) for the demo tree. | Silent on success; errors on stderr if path invalid. |
-| `cd "$WORK"` | Change directory — move shell’s current working directory. | Builtin; takes relative or absolute path, `~`, `-`, or no args (home). | Navigate the tree (trying to **enter** a folder); relative paths start from cwd. | Normally silent on success; failure prints `cd: ...: No such file or directory` on **stderr**. |
-| `seq 1 20 > abc.txt` | Shell syntax (variable, test, subshell, or function). | Defined in this script only. | Prepare path, branch on failure, or wrap commands. | Depends on line: may be silent or print via embedded commands. |
-| `echo "=== tail abc.txt (default: last 10 lines) ==="` | Section header for humans. | Literal string in script | **Print** section title | Title line on **stdout** before commands |
-| `tail abc.txt` | Print last N lines. | Coreutils. | Show end of listing or log. | Last lines on stdout; works in pipelines like `ls | tail`. |
-| `echo ""` | Bash builtin that prints arguments to standard output. | Always available in Bash; no package install. | Show section titles, tips, or messages to the terminal (trying to **print** text for the user). | Lines appear on **stdout** in your terminal (or in CI logs). Not used in a pipeline unless followed by `|`. |
-| `echo "=== tail -n 5 abc.txt (last 5 lines) ==="` | Section header for humans. | Literal string in script | **Print** section title | Title line on **stdout** before commands |
-| `tail -n 5 abc.txt` | Print last N lines. | Coreutils. | Show end of listing or log. | Last lines on stdout; works in pipelines like `ls | tail`. |
-| `echo ""` | Bash builtin that prints arguments to standard output. | Always available in Bash; no package install. | Show section titles, tips, or messages to the terminal (trying to **print** text for the user). | Lines appear on **stdout** in your terminal (or in CI logs). Not used in a pipeline unless followed by `|`. |
-| `echo "=== tail -5 abc.txt (same idea: last 5) ==="` | Section header for humans. | Literal string in script | **Print** section title | Title line on **stdout** before commands |
-| `tail -5 abc.txt` | Print last N lines. | Coreutils. | Show end of listing or log. | Last lines on stdout; works in pipelines like `ls | tail`. |
+| Command (as in script)                                 | 1. What it is                                              | 2. Added / configured                                                  | 3. Execution intent                                                                                  | 4. Output (terminal / file / pipeline)                                                                   |
+| :----------------------------------------------------- | :--------------------------------------------------------- | :--------------------------------------------------------------------- | :--------------------------------------------------------------------------------------------------- | :------------------------------------------------------------------------------------------------------- |
+| `set -euo pipefail`                                    | Bash strict-mode option bundle.                            | Written at top of script; not installed separately.                    | Tell Bash to stop on errors, treat unset variables as errors, and fail pipelines if any stage fails. | No visible output; changes how later commands affect exit status.                                        |
+| `WORK="${TMPDIR:-/tmp}/linux-view-content-demo"`       | Shell variable assignment.                                 | Name=`value` in script; often under `${TMPDIR:-/tmp}`.                 | Store path or stamp for later commands (setup, not a user command).                                  | No output; variable used by `cd`, `rm`, file paths.                                                      |
+| `rm -rf "$WORK"`                                       | Remove files/directories recursively, force.               | Coreutils; `-r` recursive, `-f` no prompt.                             | Clean old demo data under `/tmp` before recreating.                                                  | Silent on success.                                                                                       |
+| `mkdir -p "$WORK"`                                     | Make directories.                                          | Coreutils; `-p` creates parents as needed.                             | Try to **create** folder(s) for the demo tree.                                                       | Silent on success; errors on stderr if path invalid.                                                     |
+| `cd "$WORK"`                                           | Change directory — move shell’s current working directory. | Builtin; takes relative or absolute path, `~`, `-`, or no args (home). | Navigate the tree (trying to **enter** a folder); relative paths start from cwd.                     | Normally silent on success; failure prints `cd: ...: No such file or directory` on **stderr**.           |
+| `seq 1 20 > abc.txt`                                   | Shell syntax (variable, test, subshell, or function).      | Defined in this script only.                                           | Prepare path, branch on failure, or wrap commands.                                                   | Depends on line: may be silent or print via embedded commands.                                           |
+| `echo "=== tail abc.txt (default: last 10 lines) ==="` | Section header for humans.                                 | Literal string in script                                               | **Print** section title                                                                              | Title line on **stdout** before commands                                                                 |
+| `tail abc.txt`                                         | Print last N lines.                                        | Coreutils.                                                             | Show end of listing or log.                                                                          | Last lines on stdout; works in pipelines like `ls                                                        | tail`. |
+| `echo ""`                                              | Bash builtin that prints arguments to standard output.     | Always available in Bash; no package install.                          | Show section titles, tips, or messages to the terminal (trying to **print** text for the user).      | Lines appear on **stdout** in your terminal (or in CI logs). Not used in a pipeline unless followed by ` | `.     |
+| `echo "=== tail -n 5 abc.txt (last 5 lines) ==="`      | Section header for humans.                                 | Literal string in script                                               | **Print** section title                                                                              | Title line on **stdout** before commands                                                                 |
+| `tail -n 5 abc.txt`                                    | Print last N lines.                                        | Coreutils.                                                             | Show end of listing or log.                                                                          | Last lines on stdout; works in pipelines like `ls                                                        | tail`. |
+| `echo ""`                                              | Bash builtin that prints arguments to standard output.     | Always available in Bash; no package install.                          | Show section titles, tips, or messages to the terminal (trying to **print** text for the user).      | Lines appear on **stdout** in your terminal (or in CI logs). Not used in a pipeline unless followed by ` | `.     |
+| `echo "=== tail -5 abc.txt (same idea: last 5) ==="`   | Section header for humans.                                 | Literal string in script                                               | **Print** section title                                                                              | Title line on **stdout** before commands                                                                 |
+| `tail -5 abc.txt`                                      | Print last N lines.                                        | Coreutils.                                                             | Show end of listing or log.                                                                          | Last lines on stdout; works in pipelines like `ls                                                        | tail`. |
 
 ---
 
 ## Script index (all `.sh` in this summary)
 
-| Script | Run |
-| :--- | :--- |
+| Script                                                                                                       | Run                                                                    |
+| :----------------------------------------------------------------------------------------------------------- | :--------------------------------------------------------------------- |
 | [`cat-multiple-files-concat-demo.sh`](../../scripts/view-content-of-files/cat-multiple-files-concat-demo.sh) | `bash scripts/view-content-of-files/cat-multiple-files-concat-demo.sh` |
-| [`cat-n-and-b-line-numbers-demo.sh`](../../scripts/view-content-of-files/cat-n-and-b-line-numbers-demo.sh) | `bash scripts/view-content-of-files/cat-n-and-b-line-numbers-demo.sh` |
-| [`cat-view-file-demo.sh`](../../scripts/view-content-of-files/cat-view-file-demo.sh) | `bash scripts/view-content-of-files/cat-view-file-demo.sh` |
-| [`head-top-lines-demo.sh`](../../scripts/view-content-of-files/head-top-lines-demo.sh) | `bash scripts/view-content-of-files/head-top-lines-demo.sh` |
-| [`more-less-pager-hint-demo.sh`](../../scripts/view-content-of-files/more-less-pager-hint-demo.sh) | `bash scripts/view-content-of-files/more-less-pager-hint-demo.sh` |
-| [`rev-reverse-line-chars-demo.sh`](../../scripts/view-content-of-files/rev-reverse-line-chars-demo.sh) | `bash scripts/view-content-of-files/rev-reverse-line-chars-demo.sh` |
-| [`rev-tac-display-only-demo.sh`](../../scripts/view-content-of-files/rev-tac-display-only-demo.sh) | `bash scripts/view-content-of-files/rev-tac-display-only-demo.sh` |
-| [`small-vs-large-file-view-demo.sh`](../../scripts/view-content-of-files/small-vs-large-file-view-demo.sh) | `bash scripts/view-content-of-files/small-vs-large-file-view-demo.sh` |
-| [`tac-reverse-lines-demo.sh`](../../scripts/view-content-of-files/tac-reverse-lines-demo.sh) | `bash scripts/view-content-of-files/tac-reverse-lines-demo.sh` |
-| [`tail-bottom-lines-demo.sh`](../../scripts/view-content-of-files/tail-bottom-lines-demo.sh) | `bash scripts/view-content-of-files/tail-bottom-lines-demo.sh` |
+| [`cat-n-and-b-line-numbers-demo.sh`](../../scripts/view-content-of-files/cat-n-and-b-line-numbers-demo.sh)   | `bash scripts/view-content-of-files/cat-n-and-b-line-numbers-demo.sh`  |
+| [`cat-view-file-demo.sh`](../../scripts/view-content-of-files/cat-view-file-demo.sh)                         | `bash scripts/view-content-of-files/cat-view-file-demo.sh`             |
+| [`head-top-lines-demo.sh`](../../scripts/view-content-of-files/head-top-lines-demo.sh)                       | `bash scripts/view-content-of-files/head-top-lines-demo.sh`            |
+| [`more-less-pager-hint-demo.sh`](../../scripts/view-content-of-files/more-less-pager-hint-demo.sh)           | `bash scripts/view-content-of-files/more-less-pager-hint-demo.sh`      |
+| [`rev-reverse-line-chars-demo.sh`](../../scripts/view-content-of-files/rev-reverse-line-chars-demo.sh)       | `bash scripts/view-content-of-files/rev-reverse-line-chars-demo.sh`    |
+| [`rev-tac-display-only-demo.sh`](../../scripts/view-content-of-files/rev-tac-display-only-demo.sh)           | `bash scripts/view-content-of-files/rev-tac-display-only-demo.sh`      |
+| [`small-vs-large-file-view-demo.sh`](../../scripts/view-content-of-files/small-vs-large-file-view-demo.sh)   | `bash scripts/view-content-of-files/small-vs-large-file-view-demo.sh`  |
+| [`tac-reverse-lines-demo.sh`](../../scripts/view-content-of-files/tac-reverse-lines-demo.sh)                 | `bash scripts/view-content-of-files/tac-reverse-lines-demo.sh`         |
+| [`tail-bottom-lines-demo.sh`](../../scripts/view-content-of-files/tail-bottom-lines-demo.sh)                 | `bash scripts/view-content-of-files/tail-bottom-lines-demo.sh`         |
 
 
 **Run every script in this topic (from repo root):**
