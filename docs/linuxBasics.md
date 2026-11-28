@@ -42,6 +42,7 @@ Each topic has its own **`.md` file** under [`topics/`](topics/). Runnable **`.s
 | [**redirection.md**](topics/redirection.md) | Streams 0/1/2; `>`, `2>`, `<`, `&>`; `tty` / `/dev/pts` (Video 11) |
 | [**PipingTeeXargs.md**](topics/PipingTeeXargs.md) | Pipe `\|`, filters, `tee`, `xargs` (Video 12) |
 | [**EOF and Redirection.md**](topics/EOF%20and%20Redirection.md) | `>`, `>>`, `<`, heredoc `<<EOF` (overwrite vs append) |
+| [**createHideenFilesAndDirectories.md**](topics/createHideenFilesAndDirectories.md) | Hidden files/dirs — `touch .name`, `mkdir .dir`, `ls -a`, `ls -A`, `mv` (Working with Files §7) |
 
 ---
 
