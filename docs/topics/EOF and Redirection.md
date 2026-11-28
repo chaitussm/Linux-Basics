@@ -6,13 +6,13 @@
 
 **Session 11 (streams 0/1/2, `2>`, `&>`):** [redirection.md](redirection.md)
 
-**Practice scripts:** [`scripts/Redirection/`](../../scripts/Redirection/) (demos for `>`, `>>`, `<<EOF`, `<`) · [`scripts/redirection.sh`](../../scripts/redirection.sh)  
+**Practice scripts:** [`scripts/redirection/`](../../scripts/redirection/) (demos for `>`, `>>`, `<<EOF`, `<`) · [`scripts/redirection/run-all.sh`](../../scripts/redirection/run-all.sh)  
 **Execution summary:** [`scripts-execution-summary/Redirection.md`](../../scripts-execution-summary/Redirection.md) · [`redirectionScriptSummary.md`](../../scripts-execution-summary/redirectionScriptSummary.md)
 
 ```bash
 cd /path/to/Linux-Basics
-bash scripts/Redirection/overwrite-greater-than-demo.sh
-bash scripts/Redirection/heredoc-eof-demo.sh
+bash scripts/redirection/overwrite-greater-than-demo.sh
+bash scripts/redirection/heredoc-eof-demo.sh
 ```
 
 ---
@@ -155,9 +155,9 @@ pie title Choosing > vs >>
 
 **Override vs append (repo names):**
 
-- [`overwrite-greater-than-demo.sh`](../../scripts/Redirection/overwrite-greater-than-demo.sh) — **`>`** replaces content (Rama/Sita)  
-- [`append-greater-greater-demo.sh`](../../scripts/Redirection/append-greater-greater-demo.sh) — **`>>`** builds file line by line  
-- [`heredoc-eof-demo.sh`](../../scripts/Redirection/heredoc-eof-demo.sh) — **`<<EOF`** multi-line  
+- [`overwrite-greater-than-demo.sh`](../../scripts/redirection/overwrite-greater-than-demo.sh) — **`>`** replaces content (Rama/Sita)  
+- [`append-greater-greater-demo.sh`](../../scripts/redirection/append-greater-greater-demo.sh) — **`>>`** builds file line by line  
+- [`heredoc-eof-demo.sh`](../../scripts/redirection/heredoc-eof-demo.sh) — **`<<EOF`** multi-line  
 
 ---
 

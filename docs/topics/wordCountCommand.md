@@ -5,12 +5,12 @@
 
 **Prerequisites:** [viewContentOfFiles.md](viewContentOfFiles.md) (`cat`, `head`, `tail` — you already **view** files) · [pipeCommands.md](pipeCommands.md) (`|` sends output to another command) · [EOF and Redirection.md](EOF%20and%20Redirection.md) (`echo`, `>`)
 
-**Scripts folder:** [`wordCountCommand/`](../../scripts/wordCountCommand/)  
+**Scripts folder:** [`wordCountCommand/`](../../scripts/word-count-command/)  
 **Execution summary:** [`wordCountCommand.md`](../../scripts-execution-summary/wordCountCommand.md)
 
 ```bash
 cd /path/to/Linux-Basics
-bash scripts/wordCountCommand/wc-default-four-columns-demo.sh
+bash scripts/word-count-command/wc-default-four-columns-demo.sh
 ```
 
 ---
@@ -85,7 +85,7 @@ wc fruits.txt
 wc /path/to/myfile.txt
 ```
 
-**Demo:** [`wc-default-four-columns-demo.sh`](../../scripts/wordCountCommand/wc-default-four-columns-demo.sh)
+**Demo:** [`wc-default-four-columns-demo.sh`](../../scripts/word-count-command/wc-default-four-columns-demo.sh)
 
 ---
 
@@ -123,7 +123,7 @@ Read as: **3 lines**, **3 words**, **19 bytes**, file **`fruits.txt`** (exact by
 **Lab (`fileinfo.txt` — Durga Sir class):**
 
 ```bash
-cd ~/Study/Linux-Basics/scripts/linuxbasics
+cd ~/Study/Linux-Basics/scripts/linux-basics-practice
 touch fileinfo.txt
 gedit fileinfo.txt          # add text, save, close
 cat fileinfo.txt
@@ -169,7 +169,7 @@ wc -l abc.txt
 | **`wc file`** | Lines + words + bytes + name |
 | **`wc -l file`** | **Only** lines (+ file name) |
 
-**Demo:** [`wc-lines-only-demo.sh`](../../scripts/wordCountCommand/wc-lines-only-demo.sh)
+**Demo:** [`wc-lines-only-demo.sh`](../../scripts/word-count-command/wc-lines-only-demo.sh)
 
 ---
 
@@ -183,7 +183,7 @@ wc -w fruits.txt
 
 A **word** is text separated by **spaces** (whitespace). Durga Sir uses this when the question is “how many words?” not “how many lines?”.
 
-**Demo:** [`wc-words-only-demo.sh`](../../scripts/wordCountCommand/wc-words-only-demo.sh)
+**Demo:** [`wc-words-only-demo.sh`](../../scripts/word-count-command/wc-words-only-demo.sh)
 
 ---
 
@@ -204,7 +204,7 @@ On the same **`fileinfo.txt`** from [§4](#4-default-output--four-columns), Durg
 **Order when combined:** **lines** → **words** → **bytes** (same order as default `wc` without options).
 
 ```bash
-cd ~/Study/Linux-Basics/scripts/linuxbasics
+cd ~/Study/Linux-Basics/scripts/linux-basics-practice
 wc -l fileinfo.txt
 wc -c fileinfo.txt
 wc -w fileinfo.txt
@@ -229,7 +229,7 @@ Flag letters can be written together (**`-lw`**) or separately (**`-l -w`**); th
 
 **Note:** GNU `wc` also has **`-m`** (characters, multibyte-aware). Durga Sir’s class examples at this stage focus on **`-c`** and **pipes with `echo`**.
 
-**Demo:** [`wc-bytes-chars-newline-demo.sh`](../../scripts/wordCountCommand/wc-bytes-chars-newline-demo.sh)
+**Demo:** [`wc-bytes-chars-newline-demo.sh`](../../scripts/word-count-command/wc-bytes-chars-newline-demo.sh)
 
 ---
 
@@ -251,7 +251,7 @@ wc -L fileinfo.txt
 **Durga Sir lab (`fileinfo.txt`):**
 
 ```bash
-cd ~/Study/Linux-Basics/scripts/linuxbasics
+cd ~/Study/Linux-Basics/scripts/linux-basics-practice
 wc -L fileinfo.txt
 ```
 
@@ -267,13 +267,13 @@ To see **which** line is longest, use **`cat -n fileinfo.txt`** and compare — 
 
 ![Terminal: wc -L fileinfo.txt — 37 fileinfo.txt](../assets/wc-capital-L-longest-line-fileinfo-terminal.png)
 
-**Demo:** [`wc-longest-line-capital-L-demo.sh`](../../scripts/wordCountCommand/wc-longest-line-capital-L-demo.sh)
+**Demo:** [`wc-longest-line-capital-L-demo.sh`](../../scripts/word-count-command/wc-longest-line-capital-L-demo.sh)
 
 ---
 
 ## 9. Newline and `echo -n` (Durga Sir lab)
 
-Same idea as [`printString.sh`](../../scripts/linuxbasics/printString.sh) in **`scripts/linuxbasics/`**:
+Same idea as [`printString.sh`](../../scripts/linux-basics-practice/printString.sh) in **`scripts/linux-basics-practice/`**:
 
 ```bash
 echo "vishnu" | wc -c
@@ -287,7 +287,7 @@ echo -n "vishnu" | wc -c
 
 Durga Sir: the **newline** after `echo` is also **one character** (one byte). That is why output is **7**, not 6.
 
-**Demo:** [`wc-bytes-chars-newline-demo.sh`](../../scripts/wordCountCommand/wc-bytes-chars-newline-demo.sh)
+**Demo:** [`wc-bytes-chars-newline-demo.sh`](../../scripts/word-count-command/wc-bytes-chars-newline-demo.sh)
 
 ---
 
@@ -310,10 +310,10 @@ The **`total`** line does **not** include a fourth file name — the word **`tot
 
 ### Lab — `fileinfo.txt`, `filedata.txt`, `datfile.txt` (Durga Sir)
 
-Prepare three files under **`scripts/linuxbasics/`**:
+Prepare three files under **`scripts/linux-basics-practice/`**:
 
 ```bash
-cd ~/Study/Linux-Basics/scripts/linuxbasics
+cd ~/Study/Linux-Basics/scripts/linux-basics-practice
 cp fileinfo.txt filedata.txt    # copy — same counts as fileinfo.txt
 touch datfile.txt
 gedit datfile.txt               # add your own lines, save, close
@@ -347,7 +347,7 @@ Durga Sir: the **`total`** row is the **grand total** for the whole command — 
 
 ![Terminal: cp fileinfo to filedata, gedit datfile, wc on three files — total 14 87 492](../assets/wc-multiple-files-total-linuxbasics-terminal.png)
 
-**Demo (minimal two-file example in `/tmp`):** [`wc-multiple-files-total-demo.sh`](../../scripts/wordCountCommand/wc-multiple-files-total-demo.sh)
+**Demo (minimal two-file example in `/tmp`):** [`wc-multiple-files-total-demo.sh`](../../scripts/word-count-command/wc-multiple-files-total-demo.sh)
 
 ---
 
@@ -356,7 +356,7 @@ Durga Sir: the **`total`** row is the **grand total** for the whole command — 
 Same three files as [§10](#10-multiple-files-and-the-total-line). Durga Sir: when you list **several files**, you can add **one flag** (`-l`, `-w`, or `-c`). **`wc`** still prints **each file** on its own line, then a **`total`** row that **adds only that column** across all files.
 
 ```bash
-cd ~/Study/Linux-Basics/scripts/linuxbasics
+cd ~/Study/Linux-Basics/scripts/linux-basics-practice
 wc -l fileinfo.txt filedata.txt datfile.txt
 wc -w fileinfo.txt filedata.txt datfile.txt
 wc -c fileinfo.txt filedata.txt datfile.txt
@@ -410,7 +410,7 @@ Same idea as default **`wc`** on multiple files ([§10](#10-multiple-files-and-t
 You can **combine** flags on the **same three files**. Each row still shows **only the columns you asked for** (in order **lines → words → bytes**), then **`total`** adds **each column** across files — same rule as [§7](#7-wc--c--bytes--characters) for a single file.
 
 ```bash
-cd ~/Study/Linux-Basics/scripts/linuxbasics
+cd ~/Study/Linux-Basics/scripts/linux-basics-practice
 wc -lc fileinfo.txt filedata.txt datfile.txt
 wc -lw fileinfo.txt filedata.txt datfile.txt
 wc -wc fileinfo.txt filedata.txt datfile.txt
@@ -451,7 +451,7 @@ wc -wc fileinfo.txt filedata.txt datfile.txt
 
 ![Terminal: wc -lc, -lw, -wc on three files — each with total row](../assets/wc-multiple-files-combo-flags-terminal.png)
 
-**Demo:** [`wc-multiple-files-lwc-flags-demo.sh`](../../scripts/wordCountCommand/wc-multiple-files-lwc-flags-demo.sh)
+**Demo:** [`wc-multiple-files-lwc-flags-demo.sh`](../../scripts/word-count-command/wc-multiple-files-lwc-flags-demo.sh)
 
 ---
 
@@ -472,7 +472,7 @@ printf 'one\ntwo\nthree\n' | wc -l
 
 Durga Sir: **`wc`** is very often used **after** **`|`** in real scripts and exams.
 
-**Demo:** [`wc-pipe-count-demo.sh`](../../scripts/wordCountCommand/wc-pipe-count-demo.sh)
+**Demo:** [`wc-pipe-count-demo.sh`](../../scripts/word-count-command/wc-pipe-count-demo.sh)
 
 ---
 
@@ -507,13 +507,13 @@ You should be able to:
 
 | Script | Topic |
 | :--- | :--- |
-| [`wc-default-four-columns-demo.sh`](../../scripts/wordCountCommand/wc-default-four-columns-demo.sh) | Default `wc` — four columns |
-| [`wc-lines-only-demo.sh`](../../scripts/wordCountCommand/wc-lines-only-demo.sh) | `wc -l` |
-| [`wc-words-only-demo.sh`](../../scripts/wordCountCommand/wc-words-only-demo.sh) | `wc -w` |
-| [`wc-bytes-chars-newline-demo.sh`](../../scripts/wordCountCommand/wc-bytes-chars-newline-demo.sh) | `wc -c`, `echo` vs `echo -n` |
-| [`wc-longest-line-capital-L-demo.sh`](../../scripts/wordCountCommand/wc-longest-line-capital-L-demo.sh) | `wc -L` longest line |
-| [`wc-multiple-files-total-demo.sh`](../../scripts/wordCountCommand/wc-multiple-files-total-demo.sh) | Multiple files + `total` |
-| [`wc-multiple-files-lwc-flags-demo.sh`](../../scripts/wordCountCommand/wc-multiple-files-lwc-flags-demo.sh) | Multi-file `-l` / `-w` / `-c` + `total` |
-| [`wc-pipe-count-demo.sh`](../../scripts/wordCountCommand/wc-pipe-count-demo.sh) | `wc` after `\|` |
+| [`wc-default-four-columns-demo.sh`](../../scripts/word-count-command/wc-default-four-columns-demo.sh) | Default `wc` — four columns |
+| [`wc-lines-only-demo.sh`](../../scripts/word-count-command/wc-lines-only-demo.sh) | `wc -l` |
+| [`wc-words-only-demo.sh`](../../scripts/word-count-command/wc-words-only-demo.sh) | `wc -w` |
+| [`wc-bytes-chars-newline-demo.sh`](../../scripts/word-count-command/wc-bytes-chars-newline-demo.sh) | `wc -c`, `echo` vs `echo -n` |
+| [`wc-longest-line-capital-L-demo.sh`](../../scripts/word-count-command/wc-longest-line-capital-L-demo.sh) | `wc -L` longest line |
+| [`wc-multiple-files-total-demo.sh`](../../scripts/word-count-command/wc-multiple-files-total-demo.sh) | Multiple files + `total` |
+| [`wc-multiple-files-lwc-flags-demo.sh`](../../scripts/word-count-command/wc-multiple-files-lwc-flags-demo.sh) | Multi-file `-l` / `-w` / `-c` + `total` |
+| [`wc-pipe-count-demo.sh`](../../scripts/word-count-command/wc-pipe-count-demo.sh) | `wc` after `\|` |
 
 **Next in playlist:** continue from [`linuxBasics.md`](../linuxBasics.md).

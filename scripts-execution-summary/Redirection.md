@@ -1,7 +1,7 @@
 # Execution summary — `Redirection/`
 
 **Topic:** [EOF and Redirection.md](../../docs/topics/EOF%20and%20Redirection.md)  
-**Scripts directory:** [`../../scripts/Redirection/`](../../scripts/Redirection/)
+**Scripts directory:** [`../../scripts/redirection/`](../../scripts/redirection/)
 
 ```mermaid
 %%{init: {'theme': 'base', 'themeVariables': {'pie1': '#FF9800', 'pie2': '#1E88E5', 'pie3': '#FFFFFF', 'pie4': '#FF9800', 'pie5': '#1E88E5', 'pieTitleTextColor': '#212121', 'pieSectionTextColor': '#212121', 'pieStrokeColor': '#424242'}}}%%
@@ -23,9 +23,9 @@ Each script section uses the same **four-part** model:
 
 ---
 
-## [`append-greater-greater-demo.sh`](../scripts/Redirection/append-greater-greater-demo.sh)
+## [`append-greater-greater-demo.sh`](../scripts/redirection/append-greater-greater-demo.sh)
 
-**Run:** `bash scripts/Redirection/append-greater-greater-demo.sh`
+**Run:** `bash scripts/redirection/append-greater-greater-demo.sh`
 
 ### In-depth command walkthrough
 
@@ -44,9 +44,9 @@ Each script section uses the same **four-part** model:
 
 ---
 
-## [`heredoc-eof-demo.sh`](../scripts/Redirection/heredoc-eof-demo.sh)
+## [`heredoc-eof-demo.sh`](../scripts/redirection/heredoc-eof-demo.sh)
 
-**Run:** `bash scripts/Redirection/heredoc-eof-demo.sh`
+**Run:** `bash scripts/redirection/heredoc-eof-demo.sh`
 
 ### In-depth command walkthrough
 
@@ -72,9 +72,9 @@ Each script section uses the same **four-part** model:
 
 ---
 
-## [`input-less-than-demo.sh`](../scripts/Redirection/input-less-than-demo.sh)
+## [`input-less-than-demo.sh`](../scripts/redirection/input-less-than-demo.sh)
 
-**Run:** `bash scripts/Redirection/input-less-than-demo.sh`
+**Run:** `bash scripts/redirection/input-less-than-demo.sh`
 
 ### In-depth command walkthrough
 
@@ -94,9 +94,9 @@ Each script section uses the same **four-part** model:
 
 ---
 
-## [`overwrite-greater-than-demo.sh`](../scripts/Redirection/overwrite-greater-than-demo.sh)
+## [`overwrite-greater-than-demo.sh`](../scripts/redirection/overwrite-greater-than-demo.sh)
 
-**Run:** `bash scripts/Redirection/overwrite-greater-than-demo.sh`
+**Run:** `bash scripts/redirection/overwrite-greater-than-demo.sh`
 
 ### In-depth command walkthrough
 
@@ -118,9 +118,9 @@ Each script section uses the same **four-part** model:
 
 ---
 
-## [`pipe-vs-redirect-hint-demo.sh`](../scripts/Redirection/pipe-vs-redirect-hint-demo.sh)
+## [`pipe-vs-redirect-hint-demo.sh`](../scripts/redirection/pipe-vs-redirect-hint-demo.sh)
 
-**Run:** `bash scripts/Redirection/pipe-vs-redirect-hint-demo.sh`
+**Run:** `bash scripts/redirection/pipe-vs-redirect-hint-demo.sh`
 
 ### In-depth command walkthrough
 
@@ -144,19 +144,19 @@ Each script section uses the same **four-part** model:
 
 | Script | Run |
 | :--- | :--- |
-| [`append-greater-greater-demo.sh`](../scripts/Redirection/append-greater-greater-demo.sh) | `bash scripts/Redirection/append-greater-greater-demo.sh` |
-| [`heredoc-eof-demo.sh`](../scripts/Redirection/heredoc-eof-demo.sh) | `bash scripts/Redirection/heredoc-eof-demo.sh` |
-| [`input-less-than-demo.sh`](../scripts/Redirection/input-less-than-demo.sh) | `bash scripts/Redirection/input-less-than-demo.sh` |
-| [`overwrite-greater-than-demo.sh`](../scripts/Redirection/overwrite-greater-than-demo.sh) | `bash scripts/Redirection/overwrite-greater-than-demo.sh` |
-| [`pipe-vs-redirect-hint-demo.sh`](../scripts/Redirection/pipe-vs-redirect-hint-demo.sh) | `bash scripts/Redirection/pipe-vs-redirect-hint-demo.sh` |
+| [`append-greater-greater-demo.sh`](../scripts/redirection/append-greater-greater-demo.sh) | `bash scripts/redirection/append-greater-greater-demo.sh` |
+| [`heredoc-eof-demo.sh`](../scripts/redirection/heredoc-eof-demo.sh) | `bash scripts/redirection/heredoc-eof-demo.sh` |
+| [`input-less-than-demo.sh`](../scripts/redirection/input-less-than-demo.sh) | `bash scripts/redirection/input-less-than-demo.sh` |
+| [`overwrite-greater-than-demo.sh`](../scripts/redirection/overwrite-greater-than-demo.sh) | `bash scripts/redirection/overwrite-greater-than-demo.sh` |
+| [`pipe-vs-redirect-hint-demo.sh`](../scripts/redirection/pipe-vs-redirect-hint-demo.sh) | `bash scripts/redirection/pipe-vs-redirect-hint-demo.sh` |
 
 
 **Run every script in this topic (from repo root):**
 
 ```bash
-bash scripts/Redirection/append-greater-greater-demo.sh
-bash scripts/Redirection/heredoc-eof-demo.sh
-bash scripts/Redirection/input-less-than-demo.sh
-bash scripts/Redirection/overwrite-greater-than-demo.sh
-bash scripts/Redirection/pipe-vs-redirect-hint-demo.sh
+bash scripts/redirection/append-greater-greater-demo.sh
+bash scripts/redirection/heredoc-eof-demo.sh
+bash scripts/redirection/input-less-than-demo.sh
+bash scripts/redirection/overwrite-greater-than-demo.sh
+bash scripts/redirection/pipe-vs-redirect-hint-demo.sh
 ```

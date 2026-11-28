@@ -1,7 +1,7 @@
 # Execution summary — `wordCountCommand/`
 
 **Topic:** [wordCountCommand.md](../docs/topics/wordCountCommand.md) (Video 10)  
-**Scripts directory:** [`../scripts/wordCountCommand/`](../scripts/wordCountCommand/)
+**Scripts directory:** [`../scripts/word-count-command/`](../scripts/word-count-command/)
 
 ```mermaid
 %%{init: {'theme': 'base', 'themeVariables': {'pie1': '#5c5c5c', 'pie2': '#6e6e6e', 'pie3': '#4a4a4a', 'pieTitleTextColor': '#ffffff', 'pieSectionTextColor': '#ffffff'}}}%%
@@ -23,9 +23,9 @@ Each script section uses the same **four-part** model:
 
 ---
 
-## [`wc-bytes-chars-newline-demo.sh`](../scripts/wordCountCommand/wc-bytes-chars-newline-demo.sh)
+## [`wc-bytes-chars-newline-demo.sh`](../scripts/word-count-command/wc-bytes-chars-newline-demo.sh)
 
-**Run:** `bash scripts/wordCountCommand/wc-bytes-chars-newline-demo.sh`
+**Run:** `bash scripts/word-count-command/wc-bytes-chars-newline-demo.sh`
 
 ### In-depth command walkthrough
 
@@ -42,9 +42,9 @@ Each script section uses the same **four-part** model:
 
 ---
 
-## [`wc-default-four-columns-demo.sh`](../scripts/wordCountCommand/wc-default-four-columns-demo.sh)
+## [`wc-default-four-columns-demo.sh`](../scripts/word-count-command/wc-default-four-columns-demo.sh)
 
-**Run:** `bash scripts/wordCountCommand/wc-default-four-columns-demo.sh`
+**Run:** `bash scripts/word-count-command/wc-default-four-columns-demo.sh`
 
 ### In-depth command walkthrough
 
@@ -67,9 +67,9 @@ Each script section uses the same **four-part** model:
 
 ---
 
-## [`wc-lines-only-demo.sh`](../scripts/wordCountCommand/wc-lines-only-demo.sh)
+## [`wc-lines-only-demo.sh`](../scripts/word-count-command/wc-lines-only-demo.sh)
 
-**Run:** `bash scripts/wordCountCommand/wc-lines-only-demo.sh`
+**Run:** `bash scripts/word-count-command/wc-lines-only-demo.sh`
 
 ### In-depth command walkthrough
 
@@ -91,9 +91,9 @@ Each script section uses the same **four-part** model:
 
 ---
 
-## [`wc-longest-line-capital-L-demo.sh`](../scripts/wordCountCommand/wc-longest-line-capital-L-demo.sh)
+## [`wc-longest-line-capital-L-demo.sh`](../scripts/word-count-command/wc-longest-line-capital-L-demo.sh)
 
-**Run:** `bash scripts/wordCountCommand/wc-longest-line-capital-L-demo.sh`
+**Run:** `bash scripts/word-count-command/wc-longest-line-capital-L-demo.sh`
 
 ### In-depth command walkthrough
 
@@ -101,7 +101,7 @@ Each script section uses the same **four-part** model:
 | :--- | :--- | :--- | :--- | :--- |
 | `set -euo pipefail` | Bash strict-mode option bundle. | Written at top of script; not installed separately. | Tell Bash to stop on errors, treat unset variables as errors, and fail pipelines if any stage fails. | No visible output; changes how later commands affect exit status. |
 | `REPO="$(cd "$(dirname "$0")/../.." && pwd)"` | Shell syntax (variable, test, subshell, or function). | Defined in this script only. | Prepare path, branch on failure, or wrap commands. | Depends on line: may be silent or print via embedded commands. |
-| `FILE="$REPO/scripts/linuxbasics/fileinfo.txt"` | Shell variable assignment. | Name=`value` in script; often under `${TMPDIR:-/tmp}`. | Store path or stamp for later commands (setup, not a user command). | No output; variable used by `cd`, `rm`, file paths. |
+| `FILE="$REPO/scripts/linux-basics-practice/fileinfo.txt"` | Shell variable assignment. | Name=`value` in script; often under `${TMPDIR:-/tmp}`. | Store path or stamp for later commands (setup, not a user command). | No output; variable used by `cd`, `rm`, file paths. |
 | `if [[ ! -f "$FILE" ]]; then` | Conditional test `[[ ... ]]` or `if`. | Bash syntax. | Branch: run block only when directory exists / command succeeds. | Either block runs (messages on stdout) or `else` branch. |
 | `echo "Missing lab file: $FILE"` | Bash builtin that prints arguments to standard output. | Always available in Bash; no package install. | Show section titles, tips, or messages to the terminal (trying to **print** text for the user). | Lines appear on **stdout** in your terminal (or in CI logs). Not used in a pipeline unless followed by `|`. |
 | `exit 1` | Shell syntax (variable, test, subshell, or function). | Defined in this script only. | Prepare path, branch on failure, or wrap commands. | Depends on line: may be silent or print via embedded commands. |
@@ -115,9 +115,9 @@ Each script section uses the same **four-part** model:
 
 ---
 
-## [`wc-multiple-files-lwc-flags-demo.sh`](../scripts/wordCountCommand/wc-multiple-files-lwc-flags-demo.sh)
+## [`wc-multiple-files-lwc-flags-demo.sh`](../scripts/word-count-command/wc-multiple-files-lwc-flags-demo.sh)
 
-**Run:** `bash scripts/wordCountCommand/wc-multiple-files-lwc-flags-demo.sh`
+**Run:** `bash scripts/word-count-command/wc-multiple-files-lwc-flags-demo.sh`
 
 ### In-depth command walkthrough
 
@@ -125,7 +125,7 @@ Each script section uses the same **four-part** model:
 | :--- | :--- | :--- | :--- | :--- |
 | `set -euo pipefail` | Bash strict-mode option bundle. | Written at top of script; not installed separately. | Tell Bash to stop on errors, treat unset variables as errors, and fail pipelines if any stage fails. | No visible output; changes how later commands affect exit status. |
 | `REPO="$(cd "$(dirname "$0")/../.." && pwd)"` | Shell syntax (variable, test, subshell, or function). | Defined in this script only. | Prepare path, branch on failure, or wrap commands. | Depends on line: may be silent or print via embedded commands. |
-| `LAB="$REPO/scripts/linuxbasics"` | Shell syntax (variable, test, subshell, or function). | Defined in this script only. | Prepare path, branch on failure, or wrap commands. | Depends on line: may be silent or print via embedded commands. |
+| `LAB="$REPO/scripts/linux-basics-practice"` | Shell syntax (variable, test, subshell, or function). | Defined in this script only. | Prepare path, branch on failure, or wrap commands. | Depends on line: may be silent or print via embedded commands. |
 | `for f in fileinfo.txt filedata.txt datfile.txt; do` | `for` loop over words. | Bash syntax; list after `in`. | Repeat command for each item (e.g. each utility name). | One output line per iteration on stdout. |
 | `if [[ ! -f "$LAB/$f" ]]; then` | Conditional test `[[ ... ]]` or `if`. | Bash syntax. | Branch: run block only when directory exists / command succeeds. | Either block runs (messages on stdout) or `else` branch. |
 | `echo "Missing $LAB/$f — see wordCountCommand.md section 10 lab"` | Bash builtin that prints arguments to standard output. | Always available in Bash; no package install. | Show section titles, tips, or messages to the terminal (trying to **print** text for the user). | Lines appear on **stdout** in your terminal (or in CI logs). Not used in a pipeline unless followed by `|`. |
@@ -141,9 +141,9 @@ Each script section uses the same **four-part** model:
 
 ---
 
-## [`wc-multiple-files-total-demo.sh`](../scripts/wordCountCommand/wc-multiple-files-total-demo.sh)
+## [`wc-multiple-files-total-demo.sh`](../scripts/word-count-command/wc-multiple-files-total-demo.sh)
 
-**Run:** `bash scripts/wordCountCommand/wc-multiple-files-total-demo.sh`
+**Run:** `bash scripts/word-count-command/wc-multiple-files-total-demo.sh`
 
 ### In-depth command walkthrough
 
@@ -161,9 +161,9 @@ Each script section uses the same **four-part** model:
 
 ---
 
-## [`wc-pipe-count-demo.sh`](../scripts/wordCountCommand/wc-pipe-count-demo.sh)
+## [`wc-pipe-count-demo.sh`](../scripts/word-count-command/wc-pipe-count-demo.sh)
 
-**Run:** `bash scripts/wordCountCommand/wc-pipe-count-demo.sh`
+**Run:** `bash scripts/word-count-command/wc-pipe-count-demo.sh`
 
 ### In-depth command walkthrough
 
@@ -180,9 +180,9 @@ Each script section uses the same **four-part** model:
 
 ---
 
-## [`wc-words-only-demo.sh`](../scripts/wordCountCommand/wc-words-only-demo.sh)
+## [`wc-words-only-demo.sh`](../scripts/word-count-command/wc-words-only-demo.sh)
 
-**Run:** `bash scripts/wordCountCommand/wc-words-only-demo.sh`
+**Run:** `bash scripts/word-count-command/wc-words-only-demo.sh`
 
 ### In-depth command walkthrough
 
@@ -208,25 +208,25 @@ Each script section uses the same **four-part** model:
 
 | Script | Run |
 | :--- | :--- |
-| [`wc-bytes-chars-newline-demo.sh`](../scripts/wordCountCommand/wc-bytes-chars-newline-demo.sh) | `bash scripts/wordCountCommand/wc-bytes-chars-newline-demo.sh` |
-| [`wc-default-four-columns-demo.sh`](../scripts/wordCountCommand/wc-default-four-columns-demo.sh) | `bash scripts/wordCountCommand/wc-default-four-columns-demo.sh` |
-| [`wc-lines-only-demo.sh`](../scripts/wordCountCommand/wc-lines-only-demo.sh) | `bash scripts/wordCountCommand/wc-lines-only-demo.sh` |
-| [`wc-longest-line-capital-L-demo.sh`](../scripts/wordCountCommand/wc-longest-line-capital-L-demo.sh) | `bash scripts/wordCountCommand/wc-longest-line-capital-L-demo.sh` |
-| [`wc-multiple-files-lwc-flags-demo.sh`](../scripts/wordCountCommand/wc-multiple-files-lwc-flags-demo.sh) | `bash scripts/wordCountCommand/wc-multiple-files-lwc-flags-demo.sh` |
-| [`wc-multiple-files-total-demo.sh`](../scripts/wordCountCommand/wc-multiple-files-total-demo.sh) | `bash scripts/wordCountCommand/wc-multiple-files-total-demo.sh` |
-| [`wc-pipe-count-demo.sh`](../scripts/wordCountCommand/wc-pipe-count-demo.sh) | `bash scripts/wordCountCommand/wc-pipe-count-demo.sh` |
-| [`wc-words-only-demo.sh`](../scripts/wordCountCommand/wc-words-only-demo.sh) | `bash scripts/wordCountCommand/wc-words-only-demo.sh` |
+| [`wc-bytes-chars-newline-demo.sh`](../scripts/word-count-command/wc-bytes-chars-newline-demo.sh) | `bash scripts/word-count-command/wc-bytes-chars-newline-demo.sh` |
+| [`wc-default-four-columns-demo.sh`](../scripts/word-count-command/wc-default-four-columns-demo.sh) | `bash scripts/word-count-command/wc-default-four-columns-demo.sh` |
+| [`wc-lines-only-demo.sh`](../scripts/word-count-command/wc-lines-only-demo.sh) | `bash scripts/word-count-command/wc-lines-only-demo.sh` |
+| [`wc-longest-line-capital-L-demo.sh`](../scripts/word-count-command/wc-longest-line-capital-L-demo.sh) | `bash scripts/word-count-command/wc-longest-line-capital-L-demo.sh` |
+| [`wc-multiple-files-lwc-flags-demo.sh`](../scripts/word-count-command/wc-multiple-files-lwc-flags-demo.sh) | `bash scripts/word-count-command/wc-multiple-files-lwc-flags-demo.sh` |
+| [`wc-multiple-files-total-demo.sh`](../scripts/word-count-command/wc-multiple-files-total-demo.sh) | `bash scripts/word-count-command/wc-multiple-files-total-demo.sh` |
+| [`wc-pipe-count-demo.sh`](../scripts/word-count-command/wc-pipe-count-demo.sh) | `bash scripts/word-count-command/wc-pipe-count-demo.sh` |
+| [`wc-words-only-demo.sh`](../scripts/word-count-command/wc-words-only-demo.sh) | `bash scripts/word-count-command/wc-words-only-demo.sh` |
 
 
 **Run every script in this topic (from repo root):**
 
 ```bash
-bash scripts/wordCountCommand/wc-bytes-chars-newline-demo.sh
-bash scripts/wordCountCommand/wc-default-four-columns-demo.sh
-bash scripts/wordCountCommand/wc-lines-only-demo.sh
-bash scripts/wordCountCommand/wc-longest-line-capital-L-demo.sh
-bash scripts/wordCountCommand/wc-multiple-files-lwc-flags-demo.sh
-bash scripts/wordCountCommand/wc-multiple-files-total-demo.sh
-bash scripts/wordCountCommand/wc-pipe-count-demo.sh
-bash scripts/wordCountCommand/wc-words-only-demo.sh
+bash scripts/word-count-command/wc-bytes-chars-newline-demo.sh
+bash scripts/word-count-command/wc-default-four-columns-demo.sh
+bash scripts/word-count-command/wc-lines-only-demo.sh
+bash scripts/word-count-command/wc-longest-line-capital-L-demo.sh
+bash scripts/word-count-command/wc-multiple-files-lwc-flags-demo.sh
+bash scripts/word-count-command/wc-multiple-files-total-demo.sh
+bash scripts/word-count-command/wc-pipe-count-demo.sh
+bash scripts/word-count-command/wc-words-only-demo.sh
 ```

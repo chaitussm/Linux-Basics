@@ -1,0 +1,14 @@
+# Editor / OS
+.vscode/
+.idea/
+*.swp
+*~
+.DS_Store
+
+# Python tooling
+__pycache__/
+*.pyc
+
+# Local scratch output from practice scripts
+*.tmp
+*.bak

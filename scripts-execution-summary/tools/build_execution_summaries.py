@@ -241,8 +241,8 @@ flowchart TD
         "execution_end": "<!-- END EXECUTION_SUMMARY (generated) -->",
         "title": "# Execution summary — `viewContentOfFiles/`",
         "topic": "**Topic:** [viewContentOfFiles.md](../../docs/topics/viewContentOfFiles.md) (Video 9)  ",
-        "dir_line": "**Scripts directory:** [`../../scripts/viewContentOfFiles/`](../../scripts/viewContentOfFiles/)",
-        "dirs": ["scripts/viewContentOfFiles"],
+        "dir_line": "**Scripts directory:** [`../../scripts/view-content-of-files/`](../../scripts/view-content-of-files/)",
+        "dirs": ["scripts/view-content-of-files"],
         "extra": None,
         "scripts_link_prefix": "../../scripts/",
         "pie": """```mermaid
@@ -259,8 +259,8 @@ pie title View-content commands in demos
         "file": "wordCountCommand.md",
         "title": "# Execution summary — `wordCountCommand/`",
         "topic": "**Topic:** [wordCountCommand.md](../docs/topics/wordCountCommand.md) (Video 10)  ",
-        "dir_line": "**Scripts directory:** [`../scripts/wordCountCommand/`](../scripts/wordCountCommand/)",
-        "dirs": ["scripts/wordCountCommand"],
+        "dir_line": "**Scripts directory:** [`../scripts/word-count-command/`](../scripts/word-count-command/)",
+        "dirs": ["scripts/word-count-command"],
         "extra": None,
         "pie": """```mermaid
 %%{init: {'theme': 'base', 'themeVariables': {'pie1': '#FF9800', 'pie2': '#1E88E5', 'pie3': '#FFFFFF', 'pie4': '#FF9800', 'pie5': '#1E88E5', 'pieTitleTextColor': '#212121', 'pieSectionTextColor': '#212121', 'pieStrokeColor': '#424242'}}}%%
@@ -276,8 +276,8 @@ pie title wc demos
         "file": "Redirection.md",
         "title": "# Execution summary — `Redirection/`",
         "topic": "**Topic:** [EOF and Redirection.md](../../docs/topics/EOF%20and%20Redirection.md)  ",
-        "dir_line": "**Scripts directory:** [`../../scripts/Redirection/`](../../scripts/Redirection/)",
-        "dirs": ["scripts/Redirection"],
+        "dir_line": "**Scripts directory:** [`../../scripts/redirection/`](../../scripts/redirection/)",
+        "dirs": ["scripts/redirection"],
         "extra": None,
         "pie": """```mermaid
 %%{init: {'theme': 'base', 'themeVariables': {'pie1': '#FF9800', 'pie2': '#1E88E5', 'pie3': '#FFFFFF', 'pie4': '#FF9800', 'pie5': '#1E88E5', 'pieTitleTextColor': '#212121', 'pieSectionTextColor': '#212121', 'pieStrokeColor': '#424242'}}}%%
@@ -293,9 +293,9 @@ pie title Redirection demos
         "file": "redirectionScriptSummary.md",
         "title": "# Execution summary — Session 11 redirection",
         "topic": "**Topic:** [redirection.md](../docs/topics/redirection.md) (Video 11)  ",
-        "dir_line": "**Scripts:** [`../scripts/redirection.sh`](../scripts/redirection.sh) · [`../scripts/redirection/`](../scripts/redirection/) · [`../scripts/Redirection/`](../scripts/Redirection/)",
-        "dirs": ["scripts/redirection", "scripts/Redirection"],
-        "extra": ["scripts/redirection.sh"],
+        "dir_line": "**Scripts:** [`../scripts/redirection/run-all.sh`](../scripts/redirection/run-all.sh) · [`../scripts/redirection/`](../scripts/redirection/) · [`../scripts/redirection/`](../scripts/redirection/)",
+        "dirs": ["scripts/redirection", "scripts/redirection"],
+        "extra": ["scripts/redirection/run-all.sh"],
         "pie": """```mermaid
 %%{init: {'theme': 'base', 'themeVariables': {'pie1': '#FF9800', 'pie2': '#1E88E5', 'pie3': '#FFFFFF', 'pie4': '#FF9800', 'pie5': '#1E88E5', 'pieTitleTextColor': '#212121', 'pieSectionTextColor': '#212121', 'pieStrokeColor': '#424242'}}}%%
 pie title Session 11 redirection demos
@@ -325,9 +325,9 @@ flowchart LR
         "file": "PipingTeeXargs.md",
         "title": "# Execution summary — Session 12 piping, tee, xargs",
         "topic": "**Topic:** [PipingTeeXargs.md](../docs/topics/PipingTeeXargs.md) (Video 12)  ",
-        "dir_line": "**Scripts:** [`../scripts/PipingTeeXargs.sh`](../scripts/PipingTeeXargs.sh) · [`../scripts/PipingTeeXargs/`](../scripts/PipingTeeXargs/)",
-        "dirs": ["scripts/PipingTeeXargs"],
-        "extra": ["scripts/PipingTeeXargs.sh"],
+        "dir_line": "**Scripts:** [`../scripts/piping-tee-xargs/run-all.sh`](../scripts/piping-tee-xargs/run-all.sh) · [`../scripts/piping-tee-xargs/`](../scripts/piping-tee-xargs/)",
+        "dirs": ["scripts/piping-tee-xargs"],
+        "extra": ["scripts/piping-tee-xargs/run-all.sh"],
         "pie": """```mermaid
 %%{init: {'theme': 'base', 'themeVariables': {'pie1': '#FF9800', 'pie2': '#1E88E5', 'pie3': '#FFFFFF', 'pie4': '#FF9800', 'pie5': '#1E88E5', 'pieTitleTextColor': '#212121', 'pieSectionTextColor': '#212121', 'pieStrokeColor': '#424242'}}}%%
 pie title Session 12 demos
@@ -353,9 +353,9 @@ flowchart LR
         "file": "commandAliasing.md",
         "title": "# Execution summary — Session 13 command aliasing",
         "topic": "**Topic:** [commandAliasing.md](../docs/topics/commandAliasing.md) (Video 13)  ",
-        "dir_line": "**Scripts:** [`../scripts/commandAliasing.sh`](../scripts/commandAliasing.sh) · [`../scripts/commandAliasing/`](../scripts/commandAliasing/)",
-        "dirs": ["scripts/commandAliasing"],
-        "extra": ["scripts/commandAliasing.sh"],
+        "dir_line": "**Scripts:** [`../scripts/command-aliasing/run-all.sh`](../scripts/command-aliasing/run-all.sh) · [`../scripts/command-aliasing/`](../scripts/command-aliasing/)",
+        "dirs": ["scripts/command-aliasing"],
+        "extra": ["scripts/command-aliasing/run-all.sh"],
         "pie": f"""```mermaid
 {PIE_CHART_INIT}
 pie title Session 13 alias demos

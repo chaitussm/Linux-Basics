@@ -1,0 +1,2 @@
+# Video files under ScreenRecordings/ are local-only (.gitignore there).
+# Do not add LFS rules for *.webm / *.mp4 — they should not be committed.

@@ -1,7 +1,7 @@
 # Execution summary — Session 13 command aliasing
 
 **Topic:** [commandAliasing.md](../docs/topics/commandAliasing.md) (Video 13)  
-**Scripts:** [`../scripts/commandAliasing.sh`](../scripts/commandAliasing.sh) · [`../scripts/commandAliasing/`](../scripts/commandAliasing/)
+**Scripts:** [`../scripts/command-aliasing/run-all.sh`](../scripts/command-aliasing/run-all.sh) · [`../scripts/command-aliasing/`](../scripts/command-aliasing/)
 
 ```mermaid
 %%{init: {'theme': 'base', 'themeVariables': {'pie1': '#FF9800', 'pie2': '#1E88E5', 'pie3': '#FFFFFF', 'pie4': '#FF9800', 'pie5': '#1E88E5', 'pieTitleTextColor': '#212121', 'pieSectionTextColor': '#212121', 'pieStrokeColor': '#424242'}}}%%
@@ -35,9 +35,9 @@ Each script section uses the same **four-part** model:
 
 ---
 
-## [`commandAliasing.sh`](../scripts/commandAliasing.sh)
+## [`commandAliasing.sh`](../scripts/command-aliasing/run-all.sh)
 
-**Run:** `bash scripts/commandAliasing.sh`
+**Run:** `bash scripts/command-aliasing/run-all.sh`
 
 ### In-depth command walkthrough
 
@@ -56,9 +56,9 @@ Each script section uses the same **four-part** model:
 
 ---
 
-## [`alias-chain-demo.sh`](../scripts/commandAliasing/alias-chain-demo.sh)
+## [`alias-chain-demo.sh`](../scripts/command-aliasing/alias-chain-demo.sh)
 
-**Run:** `bash scripts/commandAliasing/alias-chain-demo.sh`
+**Run:** `bash scripts/command-aliasing/alias-chain-demo.sh`
 
 ### In-depth command walkthrough
 
@@ -75,9 +75,9 @@ Each script section uses the same **four-part** model:
 
 ---
 
-## [`alias-current-pipeline-demo.sh`](../scripts/commandAliasing/alias-current-pipeline-demo.sh)
+## [`alias-current-pipeline-demo.sh`](../scripts/command-aliasing/alias-current-pipeline-demo.sh)
 
-**Run:** `bash scripts/commandAliasing/alias-current-pipeline-demo.sh`
+**Run:** `bash scripts/command-aliasing/alias-current-pipeline-demo.sh`
 
 ### In-depth command walkthrough
 
@@ -101,9 +101,9 @@ Each script section uses the same **four-part** model:
 
 ---
 
-## [`alias-define-list-demo.sh`](../scripts/commandAliasing/alias-define-list-demo.sh)
+## [`alias-define-list-demo.sh`](../scripts/command-aliasing/alias-define-list-demo.sh)
 
-**Run:** `bash scripts/commandAliasing/alias-define-list-demo.sh`
+**Run:** `bash scripts/command-aliasing/alias-define-list-demo.sh`
 
 ### In-depth command walkthrough
 
@@ -131,9 +131,9 @@ Each script section uses the same **four-part** model:
 
 ---
 
-## [`alias-long-d20f-demo.sh`](../scripts/commandAliasing/alias-long-d20f-demo.sh)
+## [`alias-long-d20f-demo.sh`](../scripts/command-aliasing/alias-long-d20f-demo.sh)
 
-**Run:** `bash scripts/commandAliasing/alias-long-d20f-demo.sh`
+**Run:** `bash scripts/command-aliasing/alias-long-d20f-demo.sh`
 
 ### In-depth command walkthrough
 
@@ -159,9 +159,9 @@ Each script section uses the same **four-part** model:
 
 ---
 
-## [`alias-persistence-hint-demo.sh`](../scripts/commandAliasing/alias-persistence-hint-demo.sh)
+## [`alias-persistence-hint-demo.sh`](../scripts/command-aliasing/alias-persistence-hint-demo.sh)
 
-**Run:** `bash scripts/commandAliasing/alias-persistence-hint-demo.sh`
+**Run:** `bash scripts/command-aliasing/alias-persistence-hint-demo.sh`
 
 ### In-depth command walkthrough
 
@@ -183,9 +183,9 @@ Each script section uses the same **four-part** model:
 
 ---
 
-## [`alias-syntax-spacing-demo.sh`](../scripts/commandAliasing/alias-syntax-spacing-demo.sh)
+## [`alias-syntax-spacing-demo.sh`](../scripts/command-aliasing/alias-syntax-spacing-demo.sh)
 
-**Run:** `bash scripts/commandAliasing/alias-syntax-spacing-demo.sh`
+**Run:** `bash scripts/command-aliasing/alias-syntax-spacing-demo.sh`
 
 ### In-depth command walkthrough
 
@@ -205,9 +205,9 @@ Each script section uses the same **four-part** model:
 
 ---
 
-## [`alias-type-unalias-demo.sh`](../scripts/commandAliasing/alias-type-unalias-demo.sh)
+## [`alias-type-unalias-demo.sh`](../scripts/command-aliasing/alias-type-unalias-demo.sh)
 
-**Run:** `bash scripts/commandAliasing/alias-type-unalias-demo.sh`
+**Run:** `bash scripts/command-aliasing/alias-type-unalias-demo.sh`
 
 ### In-depth command walkthrough
 
@@ -240,9 +240,9 @@ Each script section uses the same **four-part** model:
 
 ---
 
-## [`alias-typo-and-os-demo.sh`](../scripts/commandAliasing/alias-typo-and-os-demo.sh)
+## [`alias-typo-and-os-demo.sh`](../scripts/command-aliasing/alias-typo-and-os-demo.sh)
 
-**Run:** `bash scripts/commandAliasing/alias-typo-and-os-demo.sh`
+**Run:** `bash scripts/command-aliasing/alias-typo-and-os-demo.sh`
 
 ### In-depth command walkthrough
 
@@ -272,27 +272,27 @@ Each script section uses the same **four-part** model:
 
 | Script | Run |
 | :--- | :--- |
-| [`commandAliasing.sh`](../scripts/commandAliasing.sh) | `bash scripts/commandAliasing.sh` |
-| [`alias-chain-demo.sh`](../scripts/commandAliasing/alias-chain-demo.sh) | `bash scripts/commandAliasing/alias-chain-demo.sh` |
-| [`alias-current-pipeline-demo.sh`](../scripts/commandAliasing/alias-current-pipeline-demo.sh) | `bash scripts/commandAliasing/alias-current-pipeline-demo.sh` |
-| [`alias-define-list-demo.sh`](../scripts/commandAliasing/alias-define-list-demo.sh) | `bash scripts/commandAliasing/alias-define-list-demo.sh` |
-| [`alias-long-d20f-demo.sh`](../scripts/commandAliasing/alias-long-d20f-demo.sh) | `bash scripts/commandAliasing/alias-long-d20f-demo.sh` |
-| [`alias-persistence-hint-demo.sh`](../scripts/commandAliasing/alias-persistence-hint-demo.sh) | `bash scripts/commandAliasing/alias-persistence-hint-demo.sh` |
-| [`alias-syntax-spacing-demo.sh`](../scripts/commandAliasing/alias-syntax-spacing-demo.sh) | `bash scripts/commandAliasing/alias-syntax-spacing-demo.sh` |
-| [`alias-type-unalias-demo.sh`](../scripts/commandAliasing/alias-type-unalias-demo.sh) | `bash scripts/commandAliasing/alias-type-unalias-demo.sh` |
-| [`alias-typo-and-os-demo.sh`](../scripts/commandAliasing/alias-typo-and-os-demo.sh) | `bash scripts/commandAliasing/alias-typo-and-os-demo.sh` |
+| [`commandAliasing.sh`](../scripts/command-aliasing/run-all.sh) | `bash scripts/command-aliasing/run-all.sh` |
+| [`alias-chain-demo.sh`](../scripts/command-aliasing/alias-chain-demo.sh) | `bash scripts/command-aliasing/alias-chain-demo.sh` |
+| [`alias-current-pipeline-demo.sh`](../scripts/command-aliasing/alias-current-pipeline-demo.sh) | `bash scripts/command-aliasing/alias-current-pipeline-demo.sh` |
+| [`alias-define-list-demo.sh`](../scripts/command-aliasing/alias-define-list-demo.sh) | `bash scripts/command-aliasing/alias-define-list-demo.sh` |
+| [`alias-long-d20f-demo.sh`](../scripts/command-aliasing/alias-long-d20f-demo.sh) | `bash scripts/command-aliasing/alias-long-d20f-demo.sh` |
+| [`alias-persistence-hint-demo.sh`](../scripts/command-aliasing/alias-persistence-hint-demo.sh) | `bash scripts/command-aliasing/alias-persistence-hint-demo.sh` |
+| [`alias-syntax-spacing-demo.sh`](../scripts/command-aliasing/alias-syntax-spacing-demo.sh) | `bash scripts/command-aliasing/alias-syntax-spacing-demo.sh` |
+| [`alias-type-unalias-demo.sh`](../scripts/command-aliasing/alias-type-unalias-demo.sh) | `bash scripts/command-aliasing/alias-type-unalias-demo.sh` |
+| [`alias-typo-and-os-demo.sh`](../scripts/command-aliasing/alias-typo-and-os-demo.sh) | `bash scripts/command-aliasing/alias-typo-and-os-demo.sh` |
 
 
 **Run every script in this topic (from repo root):**
 
 ```bash
-bash scripts/commandAliasing.sh
-bash scripts/commandAliasing/alias-chain-demo.sh
-bash scripts/commandAliasing/alias-current-pipeline-demo.sh
-bash scripts/commandAliasing/alias-define-list-demo.sh
-bash scripts/commandAliasing/alias-long-d20f-demo.sh
-bash scripts/commandAliasing/alias-persistence-hint-demo.sh
-bash scripts/commandAliasing/alias-syntax-spacing-demo.sh
-bash scripts/commandAliasing/alias-type-unalias-demo.sh
-bash scripts/commandAliasing/alias-typo-and-os-demo.sh
+bash scripts/command-aliasing/run-all.sh
+bash scripts/command-aliasing/alias-chain-demo.sh
+bash scripts/command-aliasing/alias-current-pipeline-demo.sh
+bash scripts/command-aliasing/alias-define-list-demo.sh
+bash scripts/command-aliasing/alias-long-d20f-demo.sh
+bash scripts/command-aliasing/alias-persistence-hint-demo.sh
+bash scripts/command-aliasing/alias-syntax-spacing-demo.sh
+bash scripts/command-aliasing/alias-type-unalias-demo.sh
+bash scripts/command-aliasing/alias-typo-and-os-demo.sh
 ```
