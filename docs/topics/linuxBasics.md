@@ -18,8 +18,8 @@ Each topic has its own **`.md` file** under [`topics/`](topics/). Runnable **`.s
 | 2 | [**Components of Unix.md**](topics/Components%20of%20Unix.md) | [Session 2](https://www.youtube.com/watch?v=2zfh8eC7cY0&list=PLd3UqWTnYXOloH0vWBs4BtSbP84WcC2NY&index=2) |
 | 3 | [**TypesOfFilesInLinux.md**](topics/TypesOfFilesInLinux.md) | [Session 3](https://www.youtube.com/watch?v=-Y4bjL-fBMY&list=PLd3UqWTnYXOloH0vWBs4BtSbP84WcC2NY&index=3) |
 | 4 | [**File System Navigation Commands And Hierarchy.md**](topics/File%20System%20Navigation%20Commands%20And%20Hierarchy.md) | [Session 4](https://www.youtube.com/watch?v=Aqx97d4NSbg&list=PLd3UqWTnYXOloH0vWBs4BtSbP84WcC2NY&index=4) |
-| 5 | [**fileSystemsPartTwo.md**](topics/fileSystem/fileSystemsPartTwo.md) | [Durga Soft Session 5](https://www.durgasoftonline.com/s/courses/5e7ae04f0cf29f148a043786/take) · repo [`ScreenRecordings/`](ScreenRecordings/) |
-| 6 | [**creationOfDirectories.md**](topics/creationOfDirectories.md) | [Durga Soft — `mkdir`](https://www.durgasoftonline.com/s/courses/5e7ae04f0cf29f148a043786/take) · repo [`ScreenRecordings/`](ScreenRecordings/) |
+| 5 | [**fileSystemsPartTwo.md**](topics/fileSystem/fileSystemsPartTwo.md) | [Durga Soft Session 5](https://www.durgasoftonline.com/s/courses/5e7ae04f0cf29f148a043786/take) · local screencasts (see [`screencastWorkflow.md`](topics/screencastWorkflow.md)) |
+| 6 | [**creationOfDirectories.md**](topics/creationOfDirectories.md) | [Durga Soft — `mkdir`](https://www.durgasoftonline.com/s/courses/5e7ae04f0cf29f148a043786/take) · local screencast (`/home/surya/Videos/Screencasts/`) |
 | 6b | [**removeDirectories.md**](topics/removeDirectories.md) | [Durga Soft — `rmdir` / `rm -r`](https://www.durgasoftonline.com/s/courses/5e7ae04f0cf29f148a043786/take) · local screencast `2026-11-10 08-56-09` |
 | 6c | [**absolutePathvsRelativePath.md**](topics/absolutePathvsRelativePath.md) | [Durga Soft — paths](https://www.durgasoftonline.com/s/courses/5e7ae04f0cf29f148a043786/take) · local screencast (see `ScreenRecordings/README.md`) |
 | 6d | [**copyMoveRenamingDirectories.md**](topics/copyMoveRenamingDirectories.md) | [Durga Soft — `cp` / `mv`](https://www.durgasoftonline.com/s/courses/5e7ae04f0cf29f148a043786/take) · local screencast |
@@ -42,7 +42,7 @@ Each topic has its own **`.md` file** under [`topics/`](topics/). Runnable **`.s
 | [**Bash Built-in Commands.md**](topics/Bash%20Built-in%20Commands.md) | Full `help` list — each builtin with example |
 | [**TypesOfFilesInLinux.md**](topics/TypesOfFilesInLinux.md) | Normal, directory, device files; `ls -l`, `file`, `tty` |
 | [**File System Navigation Commands And Hierarchy.md**](topics/File%20System%20Navigation%20Commands%20And%20Hierarchy.md) | `pwd`, `cd`, paths, `.` / `..`, FHS under `/` (Session 4) |
-| [**fileSystemsPartTwo.md**](topics/fileSystem/fileSystemsPartTwo.md) | Session 5 FHS continued (`/tmp` … `/usr`) — notes from [`ScreenRecordings/`](ScreenRecordings/) |
+| [**fileSystemsPartTwo.md**](topics/fileSystem/fileSystemsPartTwo.md) | Session 5 FHS continued (`/tmp` … `/usr`) — notes from local screencasts |
 | [**creationOfDirectories.md**](topics/creationOfDirectories.md) | `mkdir`, `mkdir -p`, brace expansion, `tree`, case studies — lab screenshots in topic file |
 | [**removeDirectories.md**](topics/removeDirectories.md) | `rmdir`, `rm -r`, `-i` / `-f` / `-v`, safety, MCQs — from `Screencast … 2026-11-10 08-56-09.webm` |
 | [**absolutePathvsRelativePath.md**](topics/absolutePathvsRelativePath.md) | Absolute vs relative paths, `cd` / `mkdir` examples on x/y tree — local screencast |
