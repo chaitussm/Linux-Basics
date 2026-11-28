@@ -2,8 +2,8 @@
 
 **Course:** [Linux with Shell Programming — Session 5 (paid portal)](https://www.durgasoftonline.com/s/courses/5e7ae04f0cf29f148a043786/take)  
 **Instructor:** Durga Sir  
-**Source recordings (repo):** [`ScreenRecordings/fileSystem1.webm`](../../../ScreenRecordings/fileSystem1.webm) · [`ScreenRecordings/fileSystem2.webm`](../../../ScreenRecordings/fileSystem2.webm) · [`ScreenRecordings/Screencast From 2026-11-04 15-06-45.webm`](../../../ScreenRecordings/Screencast%20From%202026-11-04%2015-06-45.webm)  
-*(Screen capture only — no audio track; notes match on-screen `linux_online_running_notes.txt` and live demos.)*
+**Source recordings (local — not in git):** `/home/surya/Videos/Screencasts/fileSystem1.webm` · `fileSystem2.webm` · `Screencast From 2026-11-04 15-06-45.webm`  
+*(Screen capture only — no audio track; notes match on-screen `linux_online_running_notes.txt` and live demos. See [`ScreenRecordings/README.md`](../../../ScreenRecordings/README.md) and [`screencastWorkflow.md`](../screencastWorkflow.md).)*
 
 **Part one (Session 4):** [File System Navigation Commands And Hierarchy.md](../File%20System%20Navigation%20Commands%20And%20Hierarchy.md) — **`/bin`**, **`/sbin`**, **`/etc`**, navigation, FHS intro.
 
@@ -821,7 +821,7 @@ Students repeat directories already covered in Session 4 / earlier in Session 5 
 | :--------- | :----------------------------------------------------------------------------------- |
 | **`/usr`** | **usr means user** — contains **user-related software** / programs and related files |
 
-The **Note** lines typed after **`/boot`** in [`Screencast From 2026-11-04 15-06-45.webm`](../../../ScreenRecordings/Screencast%20From%202026-11-04%2015-06-45.webm) are the session summary:
+The **Note** lines typed after **`/boot`** in **`Screencast From 2026-11-04 15-06-45.webm`** (local screencast) are the session summary:
 
 | #    | Wording (on screen)                                         |
 | :--- | :---------------------------------------------------------- |

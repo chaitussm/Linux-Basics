@@ -134,7 +134,7 @@ bash scripts/shell-scripting/hello.sh "Linux"
 1. Add **`docs/topics/<TopicName>.md`** (notes, flowcharts, examples).
 2. Create **`scripts/<topic-folder>/`** (kebab-case, same theme as the `.md` file).
 3. Add **`.sh`** demos only in that folder; link them from the `.md` with Ctrl+click paths.
-4. Update this README table and [`docs/linuxBasics.md`](../docs/linuxBasics.md) video index.
+4. Update this README table and [`docs/topics/linuxBasics.md`](../docs/topics/linuxBasics.md) video index.
 5. Open a PR.
 
 **Topic folder naming:** lowercase, hyphens, e.g. `types-of-files-in-linux` for `TypesOfFilesInLinux.md`.
@@ -193,6 +193,7 @@ bash scripts/shell-scripting/hello.sh "Linux"
 | `nav-tree-create-and-descend-demo.sh` | create tree, `cd` down |
 | `nav-tree-parent-vs-cd-dash-demo.sh` | `cd ..` vs `cd -` |
 | `ls-dot-parent-demo.sh` | `ls -a` and `.` / `..` |
+| `create-hidden-files-and-dirs-demo.sh` | `touch .file`, `mkdir .dir`, `ls` vs `ls -a` / `ls -A`, `mv` to hide |
 | `parent-directory-chain-demo.sh` | Orchestrator — parent chain up to `/` |
 | `parent-chain-walk-up-demo.sh` | `cd ..` from dir2 to `/` |
 | `parent-chain-at-root-demo.sh` | `cd ..` at `/` |

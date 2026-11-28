@@ -496,7 +496,7 @@ You should be able to explain:
 8. Tree hierarchy; user folders under **`/home`**.  
 9. **`/bin`** (binary, normal user), **`/sbin`** (system/root), **`/etc`** (configuration, `passwd`, `group`, `hosts`).  
 
-**Next (Session 5 — paid course):** [**fileSystemsPartTwo.md**](fileSystem/fileSystemsPartTwo.md) — from [`ScreenRecordings/`](../../../ScreenRecordings/) **`fileSystem1.webm`** + **`fileSystem2.webm`** (on-screen notes).
+**Next (Session 5 — paid course):** [**fileSystemsPartTwo.md**](fileSystem/fileSystemsPartTwo.md) — from local screencasts **`fileSystem1.webm`** + **`fileSystem2.webm`** (see [`screencastWorkflow.md`](screencastWorkflow.md)).
 
 ---
 
