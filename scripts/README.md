@@ -193,6 +193,7 @@ bash scripts/shell-scripting/hello.sh "Linux"
 | `nav-tree-create-and-descend-demo.sh` | create tree, `cd` down |
 | `nav-tree-parent-vs-cd-dash-demo.sh` | `cd ..` vs `cd -` |
 | `ls-dot-parent-demo.sh` | `ls -a` and `.` / `..` |
+| `create-hidden-files-and-dirs-demo.sh` | `touch .file`, `mkdir .dir`, `ls` vs `ls -a` / `ls -A`, `mv` to hide |
 | `parent-directory-chain-demo.sh` | Orchestrator — parent chain up to `/` |
 | `parent-chain-walk-up-demo.sh` | `cd ..` from dir2 to `/` |
 | `parent-chain-at-root-demo.sh` | `cd ..` at `/` |
